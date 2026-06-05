@@ -91,6 +91,15 @@
   .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:2.8rem;flex-wrap:wrap}
   .sec-head h2{font-family:var(--display);font-weight:700;font-size:clamp(2rem,4vw,2.9rem);letter-spacing:-.02em;line-height:1.06;color:var(--navy)}
   .sec-head p{color:var(--ink-soft);max-width:42ch}
+  .sec-group{margin-bottom:3.6rem}
+  .sec-group:last-child{margin-bottom:0}
+  .section-head{margin-bottom:1.9rem}
+  .bracketed{font-family:var(--display);font-weight:600;font-size:clamp(1.7rem,3.4vw,2.4rem);color:var(--navy);letter-spacing:-.015em;line-height:1.1;display:flex;align-items:baseline;gap:.45rem;flex-wrap:wrap}
+  .bracketed .b{color:var(--gold);font-weight:400;font-size:.95em;line-height:1}
+  .section-sub{color:var(--ink-soft);font-size:1rem;margin-top:.45rem;max-width:56ch}
+  .card.proximo .card-img{background:linear-gradient(135deg,#1E3566,#0F1D38);background-image:radial-gradient(circle at 30% 35%, rgba(233,162,60,.15), transparent 55%), linear-gradient(135deg,#1E3566,#0F1D38)}
+  .card.proximo .card-img .tag{background:var(--gold);color:var(--navy)}
+  .card.proximo .price b{color:var(--ink-soft);font-weight:600}
 
   /* ---------- Cards ---------- */
   .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem}
@@ -193,28 +202,12 @@
 <!-- ====================== EXCURSIONES ====================== -->
 <section class="sec excursiones" id="excursiones">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <div class="sec-eyebrow">Temporada 2026</div>
-        <h2>Nuestras excursiones</h2>
+    <div class="sec-group">
+      <div class="section-head reveal">
+        <h2 class="bracketed"><span class="b">[</span> Destacados <span class="b">]</span></h2>
+        <p class="section-sub">Nuestras recomendaciones para esta temporada</p>
       </div>
-      <p>Experiencias seleccionadas en Bariloche y alrededores. Precios de referencia por persona &mdash; editalos cuando quieras.</p>
-    </div>
-
-    <div class="cards">
-      <article class="card">
-        <div class="card-img" style="background-image:url('fotos/la-cueva.jpg')"><span class="tag">Motos de nieve</span></div>
-        <div class="card-body">
-          <h3>La Cueva &middot; Cerro Catedral</h3>
-          <p class="desc">Travesias en moto de nieve en el Cerro Catedral. Elegi la diurna, el After Ski con fondue o el Nocturno con cena de 4 pasos.</p>
-          <div class="meta"><span>&#9201; Desde 45 min</span><span>&#9733; Para todos</span></div>
-          <div class="card-foot">
-            <div class="price"><small>Desde</small><b>$270.000</b></div>
-            <a class="btn btn-primary" href="excursion.html?exc=la-cueva">Reservar</a>
-          </div>
-        </div>
-      </article>
-
+      <div class="cards">
       <article class="card">
         <div class="card-img" style="background-image:url('fotos/eas.jpg')"><span class="tag">Clases</span></div>
         <div class="card-body">
@@ -224,58 +217,6 @@
           <div class="card-foot">
             <div class="price"><small>Desde</small><b>$143.750</b></div>
             <a class="btn btn-primary" href="excursion.html?exc=eas">Reservar</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-img" style="background-image:url('fotos/san-ramon.jpg')"><span class="tag">Cabalgata</span></div>
-        <div class="card-body">
-          <h3>Cabalgata San Ramon</h3>
-          <p class="desc">Medio dia a caballo en la estancia San Ramon, con desayuno criollo y asado completo a la parrilla.</p>
-          <div class="meta"><span>&#9201; Medio dia</span><span>&#9733; Con asado</span></div>
-          <div class="card-foot">
-            <div class="price"><small>Desde</small><b>$230.000</b></div>
-            <a class="btn btn-primary" href="excursion.html?exc=san-ramon">Reservar</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-img" style="background-image:url('fotos/roca-negra.jpg')"><span class="tag">Raquetas &amp; Fondue</span></div>
-        <div class="card-body">
-          <h3>Roca Negra &middot; Refugio</h3>
-          <p class="desc">Caminata con raquetas hasta un refugio de montana y fondue de queso o chocolate. Apta para toda la familia.</p>
-          <div class="meta"><span>&#9201; Medio dia</span><span>&#9733; Dificultad baja</span></div>
-          <div class="card-foot">
-            <div class="price"><small>Desde</small><b>$250.000</b></div>
-            <a class="btn btn-primary" href="excursion.html?exc=roca-negra">Reservar</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-img" style="background-image:url('fotos/neumeyer.jpg')"><span class="tag">Naturaleza</span></div>
-        <div class="card-body">
-          <h3>Refugio Neumeyer</h3>
-          <p class="desc">Dia de naturaleza en el Valle del Challhuaco: caminata guiada y gastronomia regional, con almuerzo o merienda.</p>
-          <div class="meta"><span>&#9201; Dia completo</span><span>&#9733; Apta familia</span></div>
-          <div class="card-foot">
-            <div class="price"><small>Desde</small><b>$250.000</b></div>
-            <a class="btn btn-primary" href="excursion.html?exc=neumeyer">Reservar</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-img" style="background-image:url('fotos/circuito-chico.jpg')"><span class="tag">Clasico</span></div>
-        <div class="card-body">
-          <h3>Circuito Chico y Colonia Suiza</h3>
-          <p class="desc">El paseo imperdible de Bariloche: Llao Llao, Punto Panoramico, Bahia Lopez y la historica Colonia Suiza.</p>
-          <div class="meta"><span>&#9201; Medio dia</span><span>&#9733; Facil</span></div>
-          <div class="card-foot">
-            <div class="price"><small>Desde</small><b>$35.000</b></div>
-            <a class="btn btn-primary" href="excursion.html?exc=circuito-chico">Reservar</a>
           </div>
         </div>
       </article>
@@ -294,14 +235,35 @@
       </article>
 
       <article class="card">
-        <div class="card-img" style="background-image:url('fotos/san-martin.jpg')"><span class="tag">Ruta</span></div>
+        <div class="card-img" style="background-image:url('fotos/neumeyer.jpg')"><span class="tag">Naturaleza</span></div>
         <div class="card-body">
-          <h3>San Martin de los Andes &middot; 7 Lagos</h3>
-          <p class="desc">El mitico Camino de los Siete Lagos hasta San Martin de los Andes, entre lagos, bosques y miradores.</p>
-          <div class="meta"><span>&#9201; Dia completo</span><span>&#9733; Facil</span></div>
+          <h3>Refugio Neumeyer</h3>
+          <p class="desc">Dia de naturaleza en el Valle del Challhuaco: caminata guiada y gastronomia regional, con almuerzo o merienda.</p>
+          <div class="meta"><span>&#9201; Dia completo</span><span>&#9733; Apta familia</span></div>
           <div class="card-foot">
-            <div class="price"><small>Desde</small><b>$75.000</b></div>
-            <a class="btn btn-primary" href="excursion.html?exc=san-martin">Reservar</a>
+            <div class="price"><small>Desde</small><b>$250.000</b></div>
+            <a class="btn btn-primary" href="excursion.html?exc=neumeyer">Reservar</a>
+          </div>
+        </div>
+      </article>
+      </div>
+    </div>
+
+    <div class="sec-group">
+      <div class="section-head reveal">
+        <h2 class="bracketed"><span class="b">[</span> Bariloche Clasico <span class="b">]</span></h2>
+        <p class="section-sub">Los paseos que no te podes perder</p>
+      </div>
+      <div class="cards">
+      <article class="card">
+        <div class="card-img" style="background-image:url('fotos/circuito-chico.jpg')"><span class="tag">Clasico</span></div>
+        <div class="card-body">
+          <h3>Circuito Chico y Colonia Suiza</h3>
+          <p class="desc">El paseo imperdible de Bariloche: Llao Llao, Punto Panoramico, Bahia Lopez y la historica Colonia Suiza.</p>
+          <div class="meta"><span>&#9201; Medio dia</span><span>&#9733; Facil</span></div>
+          <div class="card-foot">
+            <div class="price"><small>Desde</small><b>$35.000</b></div>
+            <a class="btn btn-primary" href="excursion.html?exc=circuito-chico">Reservar</a>
           </div>
         </div>
       </article>
@@ -318,6 +280,88 @@
           </div>
         </div>
       </article>
+
+      <article class="card">
+        <div class="card-img" style="background-image:url('fotos/san-martin.jpg')"><span class="tag">Ruta</span></div>
+        <div class="card-body">
+          <h3>San Martin de los Andes &middot; 7 Lagos</h3>
+          <p class="desc">El mitico Camino de los Siete Lagos hasta San Martin de los Andes, entre lagos, bosques y miradores.</p>
+          <div class="meta"><span>&#9201; Dia completo</span><span>&#9733; Facil</span></div>
+          <div class="card-foot">
+            <div class="price"><small>Desde</small><b>$75.000</b></div>
+            <a class="btn btn-primary" href="excursion.html?exc=san-martin">Reservar</a>
+          </div>
+        </div>
+      </article>
+      </div>
+    </div>
+
+    <div class="sec-group">
+      <div class="section-head reveal">
+        <h2 class="bracketed"><span class="b">[</span> Bariloche Invierno <span class="b">]</span></h2>
+        <p class="section-sub">Aventura sobre la nieve</p>
+      </div>
+      <div class="cards">
+      <article class="card">
+        <div class="card-img" style="background-image:url('fotos/roca-negra.jpg')"><span class="tag">Raquetas &amp; Fondue</span></div>
+        <div class="card-body">
+          <h3>Roca Negra &middot; Refugio</h3>
+          <p class="desc">Caminata con raquetas hasta un refugio de montana y fondue de queso o chocolate. Apta para toda la familia.</p>
+          <div class="meta"><span>&#9201; Medio dia</span><span>&#9733; Dificultad baja</span></div>
+          <div class="card-foot">
+            <div class="price"><small>Desde</small><b>$250.000</b></div>
+            <a class="btn btn-primary" href="excursion.html?exc=roca-negra">Reservar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-img" style="background-image:url('fotos/la-cueva.jpg')"><span class="tag">Motos de nieve</span></div>
+        <div class="card-body">
+          <h3>La Cueva &middot; Cerro Catedral</h3>
+          <p class="desc">Travesias en moto de nieve en el Cerro Catedral. Elegi la diurna, el After Ski con fondue o el Nocturno con cena de 4 pasos.</p>
+          <div class="meta"><span>&#9201; Desde 45 min</span><span>&#9733; Para todos</span></div>
+          <div class="card-foot">
+            <div class="price"><small>Desde</small><b>$270.000</b></div>
+            <a class="btn btn-primary" href="excursion.html?exc=la-cueva">Reservar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card proximo">
+        <div class="card-img"><span class="tag">Proximamente</span></div>
+        <div class="card-body">
+          <h3>Extremo Encantado</h3>
+          <p class="desc">Una nueva propuesta que estamos preparando. Anotate para ser de los primeros en enterarte cuando este disponible.</p>
+          <div class="meta"><span>&#9201; Pronto</span></div>
+          <div class="card-foot">
+            <div class="price"><small>Disponible pronto</small><b style="font-size:1.05rem">Anotate</b></div>
+            <a class="btn btn-primary" target="_blank" rel="noopener" href="https://wa.me/5492944539672?text=Hola%21%20Quiero%20que%20me%20avisen%20cuando%20este%20disponible%20Extremo%20Encantado">Avisame</a>
+          </div>
+        </div>
+      </article>
+      </div>
+    </div>
+
+    <div class="sec-group">
+      <div class="section-head reveal">
+        <h2 class="bracketed"><span class="b">[</span> Bariloche Aventura <span class="b">]</span></h2>
+        <p class="section-sub">Para los que quieren mover el cuerpo</p>
+      </div>
+      <div class="cards">
+      <article class="card">
+        <div class="card-img" style="background-image:url('fotos/san-ramon.jpg')"><span class="tag">Cabalgata</span></div>
+        <div class="card-body">
+          <h3>Cabalgata San Ramon</h3>
+          <p class="desc">Medio dia a caballo en la estancia San Ramon, con desayuno criollo y asado completo a la parrilla.</p>
+          <div class="meta"><span>&#9201; Medio dia</span><span>&#9733; Con asado</span></div>
+          <div class="card-foot">
+            <div class="price"><small>Desde</small><b>$230.000</b></div>
+            <a class="btn btn-primary" href="excursion.html?exc=san-ramon">Reservar</a>
+          </div>
+        </div>
+      </article>
+      </div>
     </div>
   </div>
 </section>
