@@ -476,8 +476,8 @@ const EXC = {
  "roca-negra":{
    nombre:"Roca Negra · Refugio", subt:"Raquetas + fondue · Colonia Suiza", tag:"Raquetas & Fondue",
    desc:"Una aventura en la nieve: caminata con raquetas hasta un refugio de montania y una fondue para entrar en calor.",
-   incluye:["Ascenso y descenso en Land Rover 4x4","Caminata con raquetas guiada","Fondue a eleccion (queso o chocolate)","Traslados a la base del cerro (Colonia Suiza)"],
-   notas:["Lunes a sabado. Domingo cerrado.","Dificultad baja, apta para toda la familia.","Cancelacion: mínimo 72 hs de anticipación.","Reservas con mínimo 24 hs de anticipación."],
+   incluye:["Ascenso y descenso en Land Rover 4x4","Caminata con raquetas guiada","Fondue a eleccion — 1 por reserva (queso o chocolate)","Traslados desde los puntos de Pick Up (centro)"],
+   notas:["Lunes a sabado. Domingo cerrado.","Pick up en Galería del Sol / NH Edelweiss (centro).","Dificultad baja, apta para toda la familia.","Cancelacion: mínimo 72 hs de anticipación.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:true, traslado:false,
    leyenda:"Mayo y junio: tarifa base · Julio y agosto: temporada alta",
    temporadas:[
@@ -485,13 +485,13 @@ const EXC = {
      {key:"julago",nombre:"Julio / Agosto",cls:"alta",rangos:[["07-01","08-31"]]},
    ],
    opciones:[
-     {key:"queso",label:"Fondue de Queso",
-      incluye:["Traslados a la base (Colonia Suiza)","Ascenso y descenso en Land Rover 4x4","Caminata con raquetas guiada","Fondue de queso en el refugio"],
+     {key:"queso",label:"Fondue de Queso · Pick Up 10:00 · Regreso 16:00",
+      incluye:["Pick Up 10:00 hs · Regreso 16:00 hs","Punto de encuentro: Galería del Sol / NH Edelweiss","Ascenso y descenso en Land Rover 4x4","Caminata con raquetas guiada","Fondue de queso en el refugio","Traslados desde los puntos de Pick Up"],
       notas:["Lunes a sabado. Domingo cerrado.","Dificultad baja, apta para toda la familia.","Ninos 0-3 sin costo.","Cancelacion: mínimo 72 hs de anticipación.","Reservas con mínimo 24 hs de anticipación."],
       cats:[A(),M({label:'Menores 4-12'}),{key:'bebe',label:'Ninos 0-3',sub:'sin costo',min:0}],
       precios:{mayjun:{adulto:250000,menor:200000,bebe:0},julago:{adulto:300000,menor:250000,bebe:0}}},
-     {key:"choco",label:"Fondue de Chocolate",
-      incluye:["Traslados a la base (Colonia Suiza)","Ascenso y descenso en Land Rover 4x4","Caminata con raquetas guiada","Fondue de chocolate en el refugio"],
+     {key:"choco",label:"Fondue de Chocolate · Pick Up 14:00 · Regreso 20:00",
+      incluye:["Pick Up 14:00 hs · Regreso 20:00 hs","Punto de encuentro: Galería del Sol / NH Edelweiss","Ascenso y descenso en Land Rover 4x4","Caminata con raquetas guiada","Fondue de chocolate en el refugio","Traslados desde los puntos de Pick Up"],
       notas:["Lunes a sabado. Domingo cerrado.","Dificultad baja, apta para toda la familia.","Ninos 0-3 sin costo.","Cancelacion: mínimo 72 hs de anticipación.","Reservas con mínimo 24 hs de anticipación."],
       cats:[A(),M({label:'Menores 4-12'}),{key:'bebe',label:'Ninos 0-3',sub:'sin costo',min:0}],
       precios:{mayjun:{adulto:250000,menor:200000,bebe:0},julago:{adulto:300000,menor:250000,bebe:0}}},
