@@ -67,17 +67,31 @@
   .cal-head .cal-month{font-family:var(--display);font-weight:600;font-size:1rem}
   .cal-nav{background:transparent;border:none;color:rgba(255,255,255,.8);font-size:1.3rem;cursor:pointer;padding:.2rem .5rem;border-radius:7px;transition:.15s;line-height:1}
   .cal-nav:hover{background:rgba(255,255,255,.15);color:#fff}
-  .cal-grid{padding:.7rem .8rem .9rem}
-  .cal-dow{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:.4rem}
-  .cal-dow span{text-align:center;font-size:.72rem;font-weight:700;color:var(--ink-soft);letter-spacing:.04em;text-transform:uppercase;padding:.3rem 0}
-  .cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
-  .cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:9px;font-size:.9rem;cursor:pointer;border:none;background:transparent;font-family:var(--body);color:var(--ink);transition:.15s;font-weight:500}
-  .cal-day:hover:not(:disabled):not(.cal-selected){background:var(--panel);color:var(--navy)}
-  .cal-day.cal-selected{background:var(--gold);color:var(--navy);font-weight:700;box-shadow:0 4px 12px -4px rgba(233,162,60,.6)}
+  .cal-grid{padding:.6rem .7rem .8rem}
+  .cal-dow{display:grid;grid-template-columns:repeat(7,32px);justify-content:center;gap:3px;margin-bottom:.3rem}
+  .cal-dow span{width:32px;text-align:center;font-size:.68rem;font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase;padding:.25rem 0}
+  .cal-days{display:grid;grid-template-columns:repeat(7,32px);justify-content:center;gap:3px}
+  .cal-day{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:.88rem;cursor:pointer;border:none;background:transparent;font-family:var(--body);color:var(--ink);transition:.15s;font-weight:500}
+  .cal-day:hover:not(:disabled):not(.cal-selected):not(.cal-tomorrow){background:var(--panel);color:var(--navy)}
+  .cal-day.cal-selected{background:var(--gold);color:var(--navy);font-weight:700;box-shadow:0 4px 10px -4px rgba(233,162,60,.6)}
   .cal-day.cal-today{box-shadow:inset 0 0 0 1.5px var(--gold)}
-  .cal-day:disabled{color:#c8d0dc;cursor:not-allowed}
-  .cal-day.cal-other{color:#c8d0dc}
-  .cal-day.cal-off{color:#d8a8a8;text-decoration:line-through;cursor:not-allowed;opacity:.5}
+  .cal-day:disabled{color:#d0d8e4;cursor:not-allowed}
+  .cal-day.cal-other{color:#d0d8e4}
+  .cal-day.cal-tomorrow{color:var(--ink-soft);background:var(--paper);cursor:pointer}
+  .cal-day.cal-tomorrow:hover{background:#f0e8d6}
+
+  /* 24hs modal */
+  .modal-overlay{position:fixed;inset:0;background:rgba(15,29,56,.5);z-index:200;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .2s}
+  .modal-overlay.show{opacity:1;pointer-events:all}
+  .modal-box{background:#fff;border-radius:20px;padding:2rem 1.8rem;max-width:360px;width:100%;box-shadow:0 30px 60px -10px rgba(15,29,56,.35);transform:translateY(16px);transition:transform .2s}
+  .modal-overlay.show .modal-box{transform:none}
+  .modal-icon{font-size:2rem;margin-bottom:.8rem;text-align:center}
+  .modal-title{font-family:var(--display);font-weight:700;font-size:1.15rem;color:var(--navy);text-align:center;margin-bottom:.6rem}
+  .modal-body{color:var(--ink-soft);font-size:.95rem;text-align:center;line-height:1.55;margin-bottom:1.4rem}
+  .modal-btn{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;font-family:var(--body);font-weight:700;font-size:.98rem;background:var(--gold);color:var(--navy);border:none;border-radius:12px;padding:.85rem;cursor:pointer;transition:.18s;text-decoration:none}
+  .modal-btn:hover{background:var(--gold-dark)}
+  .modal-close{display:block;text-align:center;margin-top:.9rem;font-size:.85rem;color:var(--ink-soft);cursor:pointer;background:none;border:none;font-family:var(--body)}
+  .modal-close:hover{color:var(--navy)}
 
   /* Toggle traslado */
   .toggle{display:flex;background:var(--paper);border:1.5px solid var(--line);border-radius:11px;padding:4px;gap:4px}
@@ -211,6 +225,20 @@
   </div>
 </footer>
 
+<!-- Modal 24hs -->
+<div class="modal-overlay" id="modal-24hs">
+  <div class="modal-box">
+    <div class="modal-icon">⏰</div>
+    <div class="modal-title">Reserva con menos de 24 hs</div>
+    <div class="modal-body">Para reservas de último momento comunicate directamente con nosotros por WhatsApp y te respondemos al instante.</div>
+    <a class="modal-btn" id="modal-wa" href="#" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.1.1.3 0 .5l-.4.5c-.2.2-.3.4-.1.6.6 1 1.3 1.6 2.2 2.1.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.5 0 .8z"/></svg>
+      Escribir por WhatsApp
+    </a>
+    <button class="modal-close" id="modal-close">Elegir otra fecha</button>
+  </div>
+</div>
+
 <script>
 // EDITAR-WHATSAPP
 const WHATSAPP = "5492944539672";
@@ -241,11 +269,11 @@ const EXC = {
       cats:[{key:'veh',label:'Por vehiculo',sub:'1 o 2 personas',min:1,max:6}],precios:{veh:270000}},
      {key:"afterski",label:"After Ski · 2:30 hs (con fondue)",
       incluye:["Traslado ida y vuelta al Cerro Catedral","Paseo en moto de nieve","Fondue incluida al finalizar el paseo","Cascos incluidos"],
-      notas:["Minimo de edad: 6 anios.","No incluye ropa de nieve.","Reservas con minimo 24 hs de anticipacion."],
+      notas:["Minimo de edad: 6 años.","No incluye ropa de nieve.","Reservas con minimo 24 hs de anticipacion."],
       cats:[A(),M({label:'Menores 6-12'}),{key:'nino',label:'Ninos 3-5',sub:'solo con adulto',min:0}],precios:{adulto:400000,menor:360000,nino:150000}},
      {key:"nocturno",label:"Nocturno & Cena · 4 pasos",
       incluye:["Traslado ida y vuelta al Cerro Catedral","Paseo nocturno en moto de nieve","Cena de 4 pasos en el refugio","Cascos incluidos"],
-      notas:["Minimo de edad: 6 anios.","No incluye ropa de nieve.","Reservas con minimo 24 hs de anticipacion."],
+      notas:["Minimo de edad: 6 años.","No incluye ropa de nieve.","Reservas con minimo 24 hs de anticipacion."],
       cats:[A(),M({label:'Menores 6-12'})],precios:{adulto:450000,menor:400000}},
    ]
  },
@@ -259,14 +287,14 @@ const EXC = {
    seasonal:false, traslado:true,
    startDate:"2026-06-12",
    opciones:[
-     {key:"bautismo",label:"Bautismo · clase grupal (hasta 12 pax)",
+     {key:"bautismo",label:"Bautismo · clase grupal",
       incluye:[
         "Traslado ida y vuelta con pick up en el hotel (dentro del radio centro–Cerro Catedral)",
         "2 horas de clase grupal para principiantes con instructor certificado",
         "Equipo completo: esquis, botas y bastones",
       ],
       notas:[
-        "Edad minima 15 anios.",
+        "Edad mínima 15 años.",
         "Grupos de hasta 12 personas.",
         "Es obligatorio contar con el pase esquiador para tomar la clase (se adquiere aparte).",
         "El pick up se realiza dentro del radio centro – Cerro Catedral.",
@@ -403,7 +431,7 @@ const EXC = {
    opciones:[
      {key:"cab",label:null,
       incluye:["Desayuno criollo: tortas fritas, dulces e infusiones","2 horas de cabalgata guiada","Asado criollo completo con ensaladas y postre","Bebidas: vino, gaseosa y agua"],
-      notas:["Menu vegetariano a pedido con anticipacion.","Menores de 5 anios no incluye cabalgata (pueden concurrir).","Traslado opcional — activar arriba.","Reservas con minimo 24 hs de anticipacion."],
+      notas:["Menu vegetariano a pedido con anticipacion.","Menores de 5 años no incluye cabalgata (pueden concurrir).","Traslado opcional — activar arriba.","Reservas con minimo 24 hs de anticipacion."],
       cats:[{key:'mayor',label:'Mayores',min:1},{key:'menor',label:'Menores 5-12',min:0}],
       precios:{mayor:{sin:230000,con:240000},menor:{sin:220000,con:230000}}},
    ]
@@ -425,12 +453,12 @@ const EXC = {
      {key:"lag",label:"Laguna Congelada · dia completo (almuerzo)",
       incluye:["Traslado ida y vuelta desde hoteles del centro","Caminata guiada al lago congelado","Almuerzo con gastronomia regional en el refugio","Uso de culipatines y pista de nieve"],
       notas:["Dia completo. Operativo junio a septiembre.","Sujeto a condiciones de nieve.","Cancelacion: 48 hs antes sin cargo.","Reservas con minimo 24 hs de anticipacion."],
-      cats:[A({label:'Mayores',sub:'13+ anios'}),M({label:'Menores',sub:'4 a 12'})],
+      cats:[A({label:'Mayores',sub:'13+ años'}),M({label:'Menores',sub:'4 a 12'})],
       precios:{media:{adulto:250000,menor:230000},alta:{adulto:280000,menor:250000}}},
      {key:"viv",label:"Vivencias · tarde (merienda)",
       incluye:["Traslado ida y vuelta desde hoteles del centro","Caminata guiada por el valle","Merienda con gastronomia regional en el refugio","Uso de culipatines y pista de nieve"],
       notas:["Salida vespertina. Operativo junio a septiembre.","Sujeto a condiciones de nieve.","Cancelacion: 48 hs antes sin cargo.","Reservas con minimo 24 hs de anticipacion."],
-      cats:[A({label:'Mayores',sub:'13+ anios'}),M({label:'Menores',sub:'4 a 12'})],
+      cats:[A({label:'Mayores',sub:'13+ años'}),M({label:'Menores',sub:'4 a 12'})],
       precios:{media:{adulto:250000,menor:230000},alta:{adulto:280000,menor:250000}}},
    ]
  },
@@ -558,8 +586,15 @@ function renderCal(){
   grid.innerHTML = "";
   const exc = EXC[id];
 
-  // Minimum date: today + 1 day (24hs anticipation)
-  const minD = new Date(); minD.setDate(minD.getDate()+1);
+  const now = new Date();
+  const todayStr = now.toISOString().slice(0,10);
+
+  // "tomorrow" = today + 1 day
+  const tomorrowD = new Date(now); tomorrowD.setDate(tomorrowD.getDate()+1);
+  const tomorrowStr = tomorrowD.toISOString().slice(0,10);
+
+  // Minimum selectable without popup: today + 2 days
+  const minD = new Date(now); minD.setDate(minD.getDate()+2);
   const minStr = minD.toISOString().slice(0,10);
 
   // startDate restriction (e.g. EAS)
@@ -567,7 +602,7 @@ function renderCal(){
 
   const first = new Date(calYear, calMonth, 1);
   const last  = new Date(calYear, calMonth+1, 0);
-  const startDow = first.getDay(); // 0=Sun
+  const startDow = first.getDay();
 
   // padding days from previous month
   for(let i=0;i<startDow;i++){
@@ -579,20 +614,23 @@ function renderCal(){
     grid.appendChild(btn);
   }
 
-  const todayStr = new Date().toISOString().slice(0,10);
-
   for(let d=1;d<=last.getDate();d++){
     const dateStr = calYear+"-"+String(calMonth+1).padStart(2,"0")+"-"+String(d).padStart(2,"0");
     const btn = document.createElement("button");
     btn.className = "cal-day";
     btn.textContent = d;
 
-    const tooEarly = dateStr < minStr;
+    const isPast = dateStr <= todayStr;
+    const isTomorrow = dateStr === tomorrowStr;
     const beforeStart = startStr && dateStr < startStr;
 
-    if(tooEarly || beforeStart){ btn.disabled = true; }
-    else {
-      if(dateStr === todayStr) btn.classList.add("cal-today");
+    if(isPast || beforeStart){
+      btn.disabled = true;
+    } else if(isTomorrow){
+      btn.classList.add("cal-tomorrow");
+      if(dateStr === state.fecha) btn.classList.add("cal-selected");
+      btn.onclick = () => { showModal24hs(); };
+    } else {
       if(dateStr === state.fecha) btn.classList.add("cal-selected");
       btn.onclick = () => {
         state.fecha = dateStr;
@@ -605,6 +643,24 @@ function renderCal(){
     grid.appendChild(btn);
   }
 }
+
+function showModal24hs(){
+  closeCal();
+  const exc = EXC[id];
+  const msg = encodeURIComponent("Hola Vivir Viajes! Quiero reservar "+exc.nombre+" para mañana. ¿Hay disponibilidad?");
+  document.getElementById("modal-wa").href = "https://wa.me/"+WHATSAPP+"?text="+msg;
+  document.getElementById("modal-24hs").classList.add("show");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("modal-close").onclick = () => {
+    document.getElementById("modal-24hs").classList.remove("show");
+  };
+  document.getElementById("modal-24hs").addEventListener("click", e => {
+    if(e.target === document.getElementById("modal-24hs"))
+      document.getElementById("modal-24hs").classList.remove("show");
+  });
+});
 
 /* =================== BUILD UI ================================= */
 function buildSwitch(){
