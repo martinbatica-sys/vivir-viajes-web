@@ -44,6 +44,19 @@
   .list li svg{flex:0 0 auto;margin-top:3px}
   .notas li{color:var(--ink-soft);font-size:.92rem}
 
+  /* Schedule / menu blocks */
+  .schedule-block{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1rem 1.2rem;margin-bottom:.8rem}
+  .schedule-block h4{font-family:var(--display);font-weight:600;font-size:.88rem;color:var(--navy);margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+  .schedule-opts{display:flex;flex-direction:column;gap:.45rem}
+  .schedule-row{display:flex;align-items:center;gap:.6rem;font-size:.93rem;color:var(--ink)}
+  .schedule-row .s-label{font-weight:700;color:var(--navy);min-width:70px}
+  .schedule-nota{font-size:.8rem;color:var(--ink-soft);margin-top:.5rem}
+  .menu-block{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1rem 1.2rem}
+  .menu-block h4{font-family:var(--display);font-weight:600;font-size:.88rem;color:var(--navy);margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+  .menu-items{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+  .menu-items li{font-size:.92rem;color:#33425e;display:flex;gap:.5rem;align-items:baseline}
+  .menu-items li::before{content:"·";color:var(--gold-dark);font-weight:900;flex-shrink:0}
+
   /* ---- Reserva card ---- */
   .resv{position:sticky;top:92px;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
   .resv-head{background:linear-gradient(120deg,var(--navy),#1E3566);color:#fff;padding:1rem 1.4rem;font-family:var(--display);font-weight:600;display:flex;align-items:center;gap:.5rem}
@@ -158,6 +171,7 @@
         <h3>&#10003; Que incluye</h3>
         <ul class="list" id="c-incluye"></ul>
       </div>
+      <div id="block-schedule"></div>
       <div class="block" id="block-notas">
         <h3>Informacion importante</h3>
         <ul class="list notas" id="c-notas"></ul>
@@ -518,7 +532,12 @@ const EXC = {
  "neumeyer":{
    nombre:"Refugio Neumeyer", subt:"Valle del Challhuaco · Bariloche", tag:"Naturaleza",
    desc:"Un dia de naturaleza en el Valle del Challhuaco: caminata guiada y gastronomia regional, con almuerzo (Laguna Congelada) o merienda (Vivencias).",
-   incluye:["Traslado ida y vuelta desde hoteles del centro","Caminata guiada (dificultad baja, apta familia)","Uso del refugio, pista y culipatines","Almuerzo o merienda segun la experiencia"],
+   incluye:[
+     "Traslado ida y vuelta desde hoteles del centro",
+     "Caminata guiada · dificultad baja (apta familia)",
+     "Uso del refugio",
+     "Pista y culipatines",
+   ],
    notas:["Operativo en invierno (junio a septiembre).","Sujeto a condiciones de nieve.","Cancelación: 48 hs antes sin cargo.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:true, traslado:false,
    leyenda:"Junio y septiembre: temporada media · Julio y agosto: temporada alta",
@@ -527,14 +546,65 @@ const EXC = {
      {key:"alta",nombre:"Alta",cls:"alta",rangos:[["07-01","08-31"]]},
    ],
    opciones:[
-     {key:"lag",label:"Laguna Congelada · dia completo (almuerzo)",
-      incluye:["Traslado ida y vuelta desde hoteles del centro","Caminata guiada al lago congelado","Almuerzo con gastronomia regional en el refugio","Uso de culipatines y pista de nieve"],
-      notas:["Dia completo. Operativo junio a septiembre.","Sujeto a condiciones de nieve.","Cancelación: 48 hs antes sin cargo.","Reservas con mínimo 24 hs de anticipación."],
+     {key:"lag",label:"Laguna Congelada · dia completo con almuerzo",
+      incluye:[
+        "Traslado ida y vuelta desde hoteles del centro",
+        "Caminata guiada al lago congelado",
+        "Almuerzo con gastronomia regional en el refugio",
+        "Uso del refugio · pista y culipatines",
+      ],
+      notas:[
+        "Dia completo. Operativo junio a septiembre.",
+        "Sujeto a condiciones de nieve.",
+        "Cancelación: 48 hs antes sin cargo.",
+        "Reservas con mínimo 24 hs de anticipación.",
+      ],
+      schedule:{
+        titulo:"Horarios · 2 opciones",
+        opciones:[
+          {label:"Opción A", horario:"09:00 a 16:00 hs"},
+          {label:"Opción B", horario:"11:00 a 18:00 hs"},
+        ],
+        nota:"Indicanos tu preferencia al reservar.",
+      },
+      menu:{
+        titulo:"Almuerzo incluido",
+        items:[
+          "Entrada: sopa de calabaza + empanadas",
+          "Principal: goulash",
+          "Postre: mousse de frutilla",
+        ],
+      },
       cats:[A({label:'Mayores',sub:'13+ años'}),M({label:'Menores',sub:'4 a 12'})],
       precios:{media:{adulto:250000,menor:230000},alta:{adulto:280000,menor:250000}}},
-     {key:"viv",label:"Vivencias · tarde (merienda)",
-      incluye:["Traslado ida y vuelta desde hoteles del centro","Caminata guiada por el valle","Merienda con gastronomia regional en el refugio","Uso de culipatines y pista de nieve"],
-      notas:["Salida vespertina. Operativo junio a septiembre.","Sujeto a condiciones de nieve.","Cancelación: 48 hs antes sin cargo.","Reservas con mínimo 24 hs de anticipación."],
+     {key:"viv",label:"Vivencias · tarde con merienda",
+      incluye:[
+        "Traslado ida y vuelta desde hoteles del centro",
+        "Caminata guiada por el valle",
+        "Merienda con gastronomia regional en el refugio",
+        "Uso del refugio · pista y culipatines",
+      ],
+      notas:[
+        "Salida vespertina. Operativo junio a septiembre.",
+        "Sujeto a condiciones de nieve.",
+        "Cancelación: 48 hs antes sin cargo.",
+        "Reservas con mínimo 24 hs de anticipación.",
+      ],
+      schedule:{
+        titulo:"Horario · 1 opción",
+        opciones:[
+          {label:"Único", horario:"14:00 a 19:00 hs"},
+        ],
+      },
+      menu:{
+        titulo:"Merienda incluida",
+        items:[
+          "Picada con fiambres, quesos y ahumados",
+          "Panificación casera",
+          "Vino y cerveza artesanal",
+          "Cognac, whisky y bebidas sin alcohol",
+        ],
+      },
       cats:[A({label:'Mayores',sub:'13+ años'}),M({label:'Menores',sub:'4 a 12'})],
       precios:{media:{adulto:250000,menor:230000},alta:{adulto:280000,menor:250000}}},
    ]
@@ -776,6 +846,42 @@ function renderContent(optIdx){
   notas.forEach(t=>{
     const li=document.createElement("li"); li.innerHTML=dot+"<span>"+t+"</span>"; notasEl.appendChild(li);
   });
+
+  // Bloque de horarios + menú (solo si la opción los tiene)
+  const schedBlock = document.getElementById("block-schedule");
+  schedBlock.innerHTML="";
+  if(opt.schedule || opt.menu){
+    const wrapper = document.createElement("div");
+    wrapper.className = "block";
+    wrapper.style.cssText = "display:flex;flex-direction:column;gap:.9rem;";
+
+    if(opt.schedule){
+      const s = opt.schedule;
+      const div = document.createElement("div");
+      div.className = "schedule-block";
+      let html = '<h4>&#128336; '+s.titulo+'</h4><div class="schedule-opts">';
+      s.opciones.forEach(o=>{
+        html += '<div class="schedule-row"><span class="s-label">'+o.label+'</span><span>'+o.horario+'</span></div>';
+      });
+      html += '</div>';
+      if(s.nota) html += '<div class="schedule-nota">'+s.nota+'</div>';
+      div.innerHTML = html;
+      wrapper.appendChild(div);
+    }
+
+    if(opt.menu){
+      const m = opt.menu;
+      const div = document.createElement("div");
+      div.className = "menu-block";
+      let html = '<h4>&#127374; '+m.titulo+'</h4><ul class="menu-items">';
+      m.items.forEach(item=>{ html += '<li>'+item+'</li>'; });
+      html += '</ul>';
+      div.innerHTML = html;
+      wrapper.appendChild(div);
+    }
+
+    schedBlock.appendChild(wrapper);
+  }
 }
 
 function renderStatic(){
