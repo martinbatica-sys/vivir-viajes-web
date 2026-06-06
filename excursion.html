@@ -260,20 +260,20 @@ const EXC = {
    nombre:"La Cueva · Motos de nieve", subt:"Cerro Catedral · Bariloche", tag:"Motos de nieve",
    desc:"Vivi la nieve del Cerro Catedral arriba de una moto. Elegi la travesia diurna, el After Ski con fondue o el Nocturno con cena de 4 pasos.",
    incluye:["Paseo en moto de nieve por el Cerro Catedral","Charla tecnica y paradas para fotos","After Ski y Nocturno: incluyen traslados y experiencia gastronomica"],
-   notas:["Conduccion exclusiva para mayores de 18 (o 17 con registro).","Cascos incluidos. No incluye ropa de nieve.","La Travesia Diurna no incluye traslados al cerro.","Reservas con minimo 24 hs de anticipacion."],
+   notas:["Conduccion exclusiva para mayores de 18 (o 17 con registro).","Cascos incluidos. No incluye ropa de nieve.","La Travesia Diurna no incluye traslados al cerro.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:false,
    opciones:[
      {key:"travesia",label:"Travesia Diurna · 45 min",
       incluye:["Paseo en moto de nieve de 45 minutos","Charla tecnica de manejo","Paradas para fotos en el cerro","Cascos incluidos"],
-      notas:["Conduccion exclusiva para mayores de 18 (o 17 con registro).","No incluye traslados al cerro.","No incluye ropa de nieve.","Reservas con minimo 24 hs de anticipacion."],
+      notas:["Conduccion exclusiva para mayores de 18 (o 17 con registro).","No incluye traslados al cerro.","No incluye ropa de nieve.","Reservas con mínimo 24 hs de anticipación."],
       cats:[{key:'veh',label:'Por vehiculo',sub:'1 o 2 personas',min:1,max:6}],precios:{veh:270000}},
      {key:"afterski",label:"After Ski · 2:30 hs (con fondue)",
       incluye:["Traslado ida y vuelta al Cerro Catedral","Paseo en moto de nieve","Fondue incluida al finalizar el paseo","Cascos incluidos"],
-      notas:["Minimo de edad: 6 años.","No incluye ropa de nieve.","Reservas con minimo 24 hs de anticipacion."],
+      notas:["Mínimo de edad: 6 años.","No incluye ropa de nieve.","Reservas con mínimo 24 hs de anticipación."],
       cats:[A(),M({label:'Menores 6-12'}),{key:'nino',label:'Ninos 3-5',sub:'solo con adulto',min:0}],precios:{adulto:400000,menor:360000,nino:150000}},
      {key:"nocturno",label:"Nocturno & Cena · 4 pasos",
       incluye:["Traslado ida y vuelta al Cerro Catedral","Paseo nocturno en moto de nieve","Cena de 4 pasos en el refugio","Cascos incluidos"],
-      notas:["Minimo de edad: 6 años.","No incluye ropa de nieve.","Reservas con minimo 24 hs de anticipacion."],
+      notas:["Mínimo de edad: 6 años.","No incluye ropa de nieve.","Reservas con mínimo 24 hs de anticipación."],
       cats:[A(),M({label:'Menores 6-12'})],precios:{adulto:450000,menor:400000}},
    ]
  },
@@ -282,113 +282,190 @@ const EXC = {
  "eas":{
    nombre:"Clases de Ski & Snowboard", subt:"Escuela en el Cerro Catedral", tag:"Clases",
    desc:"Clases de ski y snowboard en el Cerro Catedral con instructores certificados. Bautismo grupal para principiantes, clases exclusivas y semi exclusivas.",
-   incluye:["2 horas de clase con instructor certificado","Equipo completo: esquis, botas y bastones"],
-   notas:["No incluye pase de medios de elevacion (se compra aparte).","Reservas con minimo 24 hs de anticipacion."],
+   incluye:["2 horas de clase con instructor certificado","Equipo completo: esquís, botas y bastones"],
+   notas:["No incluye pase de medios de elevación (se compra aparte).","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:true,
    startDate:"2026-06-12",
    opciones:[
      {key:"bautismo",label:"Bautismo · clase grupal",
-      incluye:[
+      incluye_sin:[
+        "2 horas de clase grupal para principiantes con instructor certificado",
+        "Equipo completo: esquís, botas y bastones",
+      ],
+      incluye_con:[
         "Traslado ida y vuelta con pick up en el hotel (dentro del radio centro–Cerro Catedral)",
         "2 horas de clase grupal para principiantes con instructor certificado",
-        "Equipo completo: esquis, botas y bastones",
+        "Equipo completo: esquís, botas y bastones",
       ],
-      notas:[
+      notas_sin:[
+        "Edad mínima 15 años.",
+        "Grupos de hasta 12 personas.",
+        "Es obligatorio contar con el pase esquiador para tomar la clase (se adquiere aparte).",
+        "Traslado no incluido — se puede agregar arriba.",
+        "Reservas con mínimo 24 hs de anticipación.",
+      ],
+      notas_con:[
         "Edad mínima 15 años.",
         "Grupos de hasta 12 personas.",
         "Es obligatorio contar con el pase esquiador para tomar la clase (se adquiere aparte).",
         "El pick up se realiza dentro del radio centro – Cerro Catedral.",
-        "Reservas con minimo 24 hs de anticipacion.",
+        "Reservas con mínimo 24 hs de anticipación.",
       ],
       showCU:true,
       cats:[{key:'pp',label:'Por persona',min:1}],precios:{pp:{sin:143750,con:193750}}},
 
      {key:"excl1",label:"Exclusiva · 1 persona",
-      incluye:[
+      incluye_sin:[
         "Clase privada con instructor certificado (2 hs)",
-        "Equipo completo: esquis, botas y bastones",
+        "Equipo completo: esquís, botas y bastones",
         "Precio total por la clase (no es por persona)",
       ],
-      notas:[
+      incluye_con:[
+        "Traslado ida y vuelta al Cerro Catedral",
+        "Clase privada con instructor certificado (2 hs)",
+        "Equipo completo: esquís, botas y bastones",
+        "Precio total por la clase (no es por persona)",
+      ],
+      notas_sin:[
         "Clase privada, solo para vos.",
         "Es obligatorio contar con el pase esquiador (se adquiere aparte).",
-        "El traslado es opcional y se puede agregar.",
-        "Reservas con minimo 24 hs de anticipacion.",
+        "Traslado no incluido — se puede agregar arriba.",
+        "Reservas con mínimo 24 hs de anticipación.",
+      ],
+      notas_con:[
+        "Clase privada, solo para vos.",
+        "Es obligatorio contar con el pase esquiador (se adquiere aparte).",
+        "Reservas con mínimo 24 hs de anticipación.",
       ],
       showCU:false,
       cats:[{key:'grupo',label:'Clase privada · 1 persona',min:1,max:1}],precios:{grupo:{sin:391000,con:441000}}},
 
      {key:"excl2",label:"Exclusiva · 2 personas",
-      incluye:[
+      incluye_sin:[
         "Clase privada con instructor certificado (2 hs)",
         "Equipo completo para 2 personas",
         "Precio total por la clase (no es por persona)",
       ],
-      notas:[
+      incluye_con:[
+        "Traslado ida y vuelta al Cerro Catedral",
+        "Clase privada con instructor certificado (2 hs)",
+        "Equipo completo para 2 personas",
+        "Precio total por la clase (no es por persona)",
+      ],
+      notas_sin:[
         "Clase privada para 2 personas.",
         "Es obligatorio contar con el pase esquiador (se adquiere aparte).",
-        "El traslado es opcional y se puede agregar.",
-        "Reservas con minimo 24 hs de anticipacion.",
+        "Traslado no incluido — se puede agregar arriba.",
+        "Reservas con mínimo 24 hs de anticipación.",
+      ],
+      notas_con:[
+        "Clase privada para 2 personas.",
+        "Es obligatorio contar con el pase esquiador (se adquiere aparte).",
+        "Reservas con mínimo 24 hs de anticipación.",
       ],
       showCU:false,
       cats:[{key:'grupo',label:'Clase privada · 2 personas',min:1,max:1}],precios:{grupo:{sin:460000,con:560000}}},
 
      {key:"excl3",label:"Exclusiva · 3 personas",
-      incluye:[
+      incluye_sin:[
         "Clase privada con instructor certificado (2 hs)",
         "Equipo completo para 3 personas",
         "Precio total por la clase (no es por persona)",
       ],
-      notas:[
+      incluye_con:[
+        "Traslado ida y vuelta al Cerro Catedral",
+        "Clase privada con instructor certificado (2 hs)",
+        "Equipo completo para 3 personas",
+        "Precio total por la clase (no es por persona)",
+      ],
+      notas_sin:[
         "Clase privada para 3 personas.",
         "Es obligatorio contar con el pase esquiador (se adquiere aparte).",
-        "El traslado es opcional y se puede agregar.",
-        "Reservas con minimo 24 hs de anticipacion.",
+        "Traslado no incluido — se puede agregar arriba.",
+        "Reservas con mínimo 24 hs de anticipación.",
+      ],
+      notas_con:[
+        "Clase privada para 3 personas.",
+        "Es obligatorio contar con el pase esquiador (se adquiere aparte).",
+        "Reservas con mínimo 24 hs de anticipación.",
       ],
       showCU:false,
       cats:[{key:'grupo',label:'Clase privada · 3 personas',min:1,max:1}],precios:{grupo:{sin:529000,con:679000}}},
 
      {key:"semi4",label:"Semi exclusiva · grupo de 4",
-      incluye:[
+      incluye_sin:[
         "Clase semi privada con instructor certificado (2 hs)",
         "Equipo completo para 4 personas",
         "Precio total por la clase (no es por persona)",
       ],
-      notas:[
+      incluye_con:[
+        "Traslado ida y vuelta al Cerro Catedral",
+        "Clase semi privada con instructor certificado (2 hs)",
+        "Equipo completo para 4 personas",
+        "Precio total por la clase (no es por persona)",
+      ],
+      notas_sin:[
         "Clase semi exclusiva: exactamente 4 personas.",
         "Es obligatorio contar con el pase esquiador (se adquiere aparte).",
-        "El traslado es opcional y se puede agregar.",
-        "Reservas con minimo 24 hs de anticipacion.",
+        "Traslado no incluido — se puede agregar arriba.",
+        "Reservas con mínimo 24 hs de anticipación.",
+      ],
+      notas_con:[
+        "Clase semi exclusiva: exactamente 4 personas.",
+        "Es obligatorio contar con el pase esquiador (se adquiere aparte).",
+        "Reservas con mínimo 24 hs de anticipación.",
       ],
       showCU:false,
       cats:[{key:'pp',label:'Grupo de 4 personas',sub:'precio total del grupo',min:4,max:4}],precios:{pp:{sin:644000,con:844000}}},
 
      {key:"semi5",label:"Semi exclusiva · grupo de 5",
-      incluye:[
+      incluye_sin:[
         "Clase semi privada con instructor certificado (2 hs)",
         "Equipo completo para 5 personas",
         "Precio total por la clase (no es por persona)",
       ],
-      notas:[
+      incluye_con:[
+        "Traslado ida y vuelta al Cerro Catedral",
+        "Clase semi privada con instructor certificado (2 hs)",
+        "Equipo completo para 5 personas",
+        "Precio total por la clase (no es por persona)",
+      ],
+      notas_sin:[
         "Clase semi exclusiva: exactamente 5 personas.",
         "Es obligatorio contar con el pase esquiador (se adquiere aparte).",
-        "El traslado es opcional y se puede agregar.",
-        "Reservas con minimo 24 hs de anticipacion.",
+        "Traslado no incluido — se puede agregar arriba.",
+        "Reservas con mínimo 24 hs de anticipación.",
+      ],
+      notas_con:[
+        "Clase semi exclusiva: exactamente 5 personas.",
+        "Es obligatorio contar con el pase esquiador (se adquiere aparte).",
+        "Reservas con mínimo 24 hs de anticipación.",
       ],
       showCU:false,
       cats:[{key:'pp',label:'Grupo de 5 personas',sub:'precio total del grupo',min:5,max:5}],precios:{pp:{sin:713000,con:963000}}},
 
      {key:"semi6",label:"Semi exclusiva · grupo de 6",
-      incluye:[
+      incluye_sin:[
         "Clase semi privada con instructor certificado (2 hs)",
         "Equipo completo para 6 personas",
         "Precio total por la clase (no es por persona)",
       ],
-      notas:[
+      incluye_con:[
+        "Traslado ida y vuelta al Cerro Catedral",
+        "Clase semi privada con instructor certificado (2 hs)",
+        "Equipo completo para 6 personas",
+        "Precio total por la clase (no es por persona)",
+      ],
+      notas_sin:[
         "Clase semi exclusiva: exactamente 6 personas.",
         "Es obligatorio contar con el pase esquiador (se adquiere aparte).",
-        "El traslado es opcional y se puede agregar.",
-        "Reservas con minimo 24 hs de anticipacion.",
+        "Traslado no incluido — se puede agregar arriba.",
+        "Reservas con mínimo 24 hs de anticipación.",
+      ],
+      notas_con:[
+        "Clase semi exclusiva: exactamente 6 personas.",
+        "Es obligatorio contar con el pase esquiador (se adquiere aparte).",
+        "Reservas con mínimo 24 hs de anticipación.",
       ],
       showCU:false,
       cats:[{key:'pp',label:'Grupo de 6 personas',sub:'precio total del grupo',min:6,max:6}],precios:{pp:{sin:782000,con:1082000}}},
@@ -400,7 +477,7 @@ const EXC = {
    nombre:"Roca Negra · Refugio", subt:"Raquetas + fondue · Colonia Suiza", tag:"Raquetas & Fondue",
    desc:"Una aventura en la nieve: caminata con raquetas hasta un refugio de montania y una fondue para entrar en calor.",
    incluye:["Ascenso y descenso en Land Rover 4x4","Caminata con raquetas guiada","Fondue a eleccion (queso o chocolate)","Traslados a la base del cerro (Colonia Suiza)"],
-   notas:["Lunes a sabado. Domingo cerrado.","Dificultad baja, apta para toda la familia.","Cancelacion: minimo 72 hs de anticipacion.","Reservas con minimo 24 hs de anticipacion."],
+   notas:["Lunes a sabado. Domingo cerrado.","Dificultad baja, apta para toda la familia.","Cancelacion: mínimo 72 hs de anticipación.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:true, traslado:false,
    leyenda:"Mayo y junio: tarifa base · Julio y agosto: temporada alta",
    temporadas:[
@@ -410,12 +487,12 @@ const EXC = {
    opciones:[
      {key:"queso",label:"Fondue de Queso",
       incluye:["Traslados a la base (Colonia Suiza)","Ascenso y descenso en Land Rover 4x4","Caminata con raquetas guiada","Fondue de queso en el refugio"],
-      notas:["Lunes a sabado. Domingo cerrado.","Dificultad baja, apta para toda la familia.","Ninos 0-3 sin costo.","Cancelacion: minimo 72 hs de anticipacion.","Reservas con minimo 24 hs de anticipacion."],
+      notas:["Lunes a sabado. Domingo cerrado.","Dificultad baja, apta para toda la familia.","Ninos 0-3 sin costo.","Cancelacion: mínimo 72 hs de anticipación.","Reservas con mínimo 24 hs de anticipación."],
       cats:[A(),M({label:'Menores 4-12'}),{key:'bebe',label:'Ninos 0-3',sub:'sin costo',min:0}],
       precios:{mayjun:{adulto:250000,menor:200000,bebe:0},julago:{adulto:300000,menor:250000,bebe:0}}},
      {key:"choco",label:"Fondue de Chocolate",
       incluye:["Traslados a la base (Colonia Suiza)","Ascenso y descenso en Land Rover 4x4","Caminata con raquetas guiada","Fondue de chocolate en el refugio"],
-      notas:["Lunes a sabado. Domingo cerrado.","Dificultad baja, apta para toda la familia.","Ninos 0-3 sin costo.","Cancelacion: minimo 72 hs de anticipacion.","Reservas con minimo 24 hs de anticipacion."],
+      notas:["Lunes a sabado. Domingo cerrado.","Dificultad baja, apta para toda la familia.","Ninos 0-3 sin costo.","Cancelacion: mínimo 72 hs de anticipación.","Reservas con mínimo 24 hs de anticipación."],
       cats:[A(),M({label:'Menores 4-12'}),{key:'bebe',label:'Ninos 0-3',sub:'sin costo',min:0}],
       precios:{mayjun:{adulto:250000,menor:200000,bebe:0},julago:{adulto:300000,menor:250000,bebe:0}}},
    ]
@@ -426,12 +503,12 @@ const EXC = {
    nombre:"Cabalgata San Ramon", subt:"Medio dia con asado criollo", tag:"Cabalgata",
    desc:"Medio dia a caballo por la estancia San Ramon, cerrando con un asado criollo a la parrilla.",
    incluye:["Desayuno criollo: tortas fritas, dulces e infusiones","2 horas de cabalgata (aprox.)","Asado criollo completo con ensaladas y postre","Bebidas: vino, gaseosa y agua"],
-   notas:["Traslado al campo opcional.","Menu vegetariano a pedido con anticipacion.","Cancelacion: 24 hs de anticipacion.","Reservas con minimo 24 hs de anticipacion."],
+   notas:["Traslado al campo opcional.","Menú vegetariano a pedido con anticipación.","Cancelación: 24 hs de anticipación.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:true,
    opciones:[
      {key:"cab",label:null,
       incluye:["Desayuno criollo: tortas fritas, dulces e infusiones","2 horas de cabalgata guiada","Asado criollo completo con ensaladas y postre","Bebidas: vino, gaseosa y agua"],
-      notas:["Menu vegetariano a pedido con anticipacion.","Menores de 5 años no incluye cabalgata (pueden concurrir).","Traslado opcional — activar arriba.","Reservas con minimo 24 hs de anticipacion."],
+      notas:["Menú vegetariano a pedido con anticipación.","Menores de 5 años no incluye cabalgata (pueden concurrir).","Traslado opcional — activar arriba.","Reservas con mínimo 24 hs de anticipación."],
       cats:[{key:'mayor',label:'Mayores',min:1},{key:'menor',label:'Menores 5-12',min:0}],
       precios:{mayor:{sin:230000,con:240000},menor:{sin:220000,con:230000}}},
    ]
@@ -442,7 +519,7 @@ const EXC = {
    nombre:"Refugio Neumeyer", subt:"Valle del Challhuaco · Bariloche", tag:"Naturaleza",
    desc:"Un dia de naturaleza en el Valle del Challhuaco: caminata guiada y gastronomia regional, con almuerzo (Laguna Congelada) o merienda (Vivencias).",
    incluye:["Traslado ida y vuelta desde hoteles del centro","Caminata guiada (dificultad baja, apta familia)","Uso del refugio, pista y culipatines","Almuerzo o merienda segun la experiencia"],
-   notas:["Operativo en invierno (junio a septiembre).","Sujeto a condiciones de nieve.","Cancelacion: 48 hs antes sin cargo.","Reservas con minimo 24 hs de anticipacion."],
+   notas:["Operativo en invierno (junio a septiembre).","Sujeto a condiciones de nieve.","Cancelación: 48 hs antes sin cargo.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:true, traslado:false,
    leyenda:"Junio y septiembre: temporada media · Julio y agosto: temporada alta",
    temporadas:[
@@ -452,12 +529,12 @@ const EXC = {
    opciones:[
      {key:"lag",label:"Laguna Congelada · dia completo (almuerzo)",
       incluye:["Traslado ida y vuelta desde hoteles del centro","Caminata guiada al lago congelado","Almuerzo con gastronomia regional en el refugio","Uso de culipatines y pista de nieve"],
-      notas:["Dia completo. Operativo junio a septiembre.","Sujeto a condiciones de nieve.","Cancelacion: 48 hs antes sin cargo.","Reservas con minimo 24 hs de anticipacion."],
+      notas:["Dia completo. Operativo junio a septiembre.","Sujeto a condiciones de nieve.","Cancelación: 48 hs antes sin cargo.","Reservas con mínimo 24 hs de anticipación."],
       cats:[A({label:'Mayores',sub:'13+ años'}),M({label:'Menores',sub:'4 a 12'})],
       precios:{media:{adulto:250000,menor:230000},alta:{adulto:280000,menor:250000}}},
      {key:"viv",label:"Vivencias · tarde (merienda)",
       incluye:["Traslado ida y vuelta desde hoteles del centro","Caminata guiada por el valle","Merienda con gastronomia regional en el refugio","Uso de culipatines y pista de nieve"],
-      notas:["Salida vespertina. Operativo junio a septiembre.","Sujeto a condiciones de nieve.","Cancelacion: 48 hs antes sin cargo.","Reservas con minimo 24 hs de anticipacion."],
+      notas:["Salida vespertina. Operativo junio a septiembre.","Sujeto a condiciones de nieve.","Cancelación: 48 hs antes sin cargo.","Reservas con mínimo 24 hs de anticipación."],
       cats:[A({label:'Mayores',sub:'13+ años'}),M({label:'Menores',sub:'4 a 12'})],
       precios:{media:{adulto:250000,menor:230000},alta:{adulto:280000,menor:250000}}},
    ]
@@ -468,7 +545,7 @@ const EXC = {
    nombre:"Circuito Chico y Colonia Suiza", subt:"El clasico de Bariloche", tag:"Clasico",
    desc:"El paseo imperdible: Llao Llao, Punto Panoramico, Bahia Lopez, Cerro Campanario y la historica Colonia Suiza.",
    incluye:["Recorrido por los miradores del circuito","Parada en la historica Colonia Suiza","Guia acompanante"],
-   notas:["Medio dia.","Reservas con minimo 24 hs de anticipacion."],
+   notas:["Medio dia.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:true, traslado:false,
    leyenda:"Hasta el 30/06: $35.000 por persona · Desde el 01/07: $45.000",
    temporadas:[
@@ -477,7 +554,7 @@ const EXC = {
    ],
    opciones:[{key:"tour",label:null,
     incluye:["Recorrido completo por los miradores del circuito","Parada en Llao Llao y Punto Panoramico","Parada en la historica Colonia Suiza","Guia acompanante"],
-    notas:["Medio dia.","Reservas con minimo 24 hs de anticipacion."],
+    notas:["Medio dia.","Reservas con mínimo 24 hs de anticipación."],
     cats:[{key:'pp',label:'Por persona',min:1}],precios:{base:{pp:35000},alta:{pp:45000}}}]
  },
 
@@ -486,7 +563,7 @@ const EXC = {
    nombre:"Villa La Angostura y Cerro Bayo", subt:"Dia completo", tag:"Lagos",
    desc:"Dia completo a Villa La Angostura: su costanera, el bosque andino y las vistas del Cerro Bayo.",
    incluye:["Traslado ida y vuelta","Tiempo libre en Villa La Angostura","Vistas del Cerro Bayo"],
-   notas:["Disponible a partir del 06/06/2026.","Dia completo.","Reservas con minimo 24 hs de anticipacion."],
+   notas:["Disponible a partir del 06/06/2026.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:true, traslado:false,
    leyenda:"Disponible desde el 06/06/2026",
    temporadas:[
@@ -494,7 +571,7 @@ const EXC = {
    ],
    opciones:[{key:"tour",label:null,
     incluye:["Traslado ida y vuelta","Tiempo libre en Villa La Angostura","Recorrido por la costanera y el bosque andino","Vistas del Cerro Bayo"],
-    notas:["Disponible a partir del 06/06/2026.","Dia completo.","Reservas con minimo 24 hs de anticipacion."],
+    notas:["Disponible a partir del 06/06/2026.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
     cats:[{key:'pp',label:'Por persona',min:1}],precios:{unica:{pp:93000}}}]
  },
 
@@ -503,7 +580,7 @@ const EXC = {
    nombre:"San Martin de los Andes - 7 Lagos", subt:"Camino de los Siete Lagos", tag:"Ruta",
    desc:"El mitico Camino de los Siete Lagos hasta San Martin de los Andes, entre lagos, bosques y miradores.",
    incluye:["Recorrido escenico de los Siete Lagos","Tiempo en San Martin de los Andes","Guia acompanante"],
-   notas:["Dia completo.","Reservas con minimo 24 hs de anticipacion."],
+   notas:["Dia completo.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:true, traslado:false,
    leyenda:"Hasta el 30/06: $75.000 por persona · Desde el 01/07: $110.000",
    temporadas:[
@@ -512,7 +589,7 @@ const EXC = {
    ],
    opciones:[{key:"tour",label:null,
     incluye:["Recorrido completo por los Siete Lagos","Paradas en miradores panoramicos","Tiempo libre en San Martin de los Andes","Guia acompanante"],
-    notas:["Dia completo.","Reservas con minimo 24 hs de anticipacion."],
+    notas:["Dia completo.","Reservas con mínimo 24 hs de anticipación."],
     cats:[{key:'pp',label:'Por persona',min:1}],precios:{base:{pp:75000},alta:{pp:110000}}}]
  },
 
@@ -521,7 +598,7 @@ const EXC = {
    nombre:"Cerro Tronador y Ventisquero Negro", subt:"Dia completo", tag:"Glaciar",
    desc:"Dia completo al cerro mas alto de la region: el glaciar, la cascada Garganta del Diablo y el Ventisquero Negro.",
    incluye:["Recorrido hasta Pampa Linda","Vista del glaciar y el Ventisquero Negro","Guia acompanante"],
-   notas:["Dia completo, camino de ripio.","Reservas con minimo 24 hs de anticipacion."],
+   notas:["Dia completo, camino de ripio.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:true, traslado:false,
    leyenda:"Hasta el 30/06: $67.000 por persona · Desde el 01/07: $100.000",
    temporadas:[
@@ -530,7 +607,7 @@ const EXC = {
    ],
    opciones:[{key:"tour",label:null,
     incluye:["Recorrido hasta Pampa Linda","Vista del glaciar Tronador","Cascada Garganta del Diablo","Ventisquero Negro","Guia acompanante"],
-    notas:["Dia completo. Camino de ripio.","Reservas con minimo 24 hs de anticipacion."],
+    notas:["Dia completo. Camino de ripio.","Reservas con mínimo 24 hs de anticipación."],
     cats:[{key:'pp',label:'Por persona',min:1}],precios:{base:{pp:67000},alta:{pp:100000}}}]
  },
 };
@@ -675,9 +752,15 @@ function buildSwitch(){
 function renderContent(optIdx){
   const e = EXC[id];
   const opt = e.opciones[optIdx];
-  // Use option-specific content if available, else fallback to excursion-level
-  const inc = opt.incluye || e.incluye;
-  const notas = opt.notas || e.notas;
+  // If option has traslado-aware arrays, use them; otherwise fallback to generic
+  let inc, notas;
+  if(opt.incluye_sin || opt.incluye_con){
+    inc   = state.con ? (opt.incluye_con || opt.incluye_sin) : (opt.incluye_sin || opt.incluye_con);
+    notas = state.con ? (opt.notas_con   || opt.notas_sin)  : (opt.notas_sin   || opt.notas_con);
+  } else {
+    inc   = opt.incluye || e.incluye;
+    notas = opt.notas   || e.notas;
+  }
 
   const chk='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D4F" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>';
   const dot='<svg width="16" height="16" viewBox="0 0 24 24" fill="#E9A23C"><circle cx="12" cy="12" r="4"/></svg>';
@@ -725,6 +808,7 @@ function renderStatic(){
         state.con = b.dataset.t==="1";
         ft.querySelectorAll("button").forEach(x=>x.classList.remove("on"));
         b.classList.add("on");
+        renderContent(state.opt);
         render();
       };
     });
