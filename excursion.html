@@ -179,6 +179,13 @@
               <button type="button" data-t="1">Con traslado</button>
             </div>
           </div>
+          <div class="field" id="f-lagofrias" hidden>
+            <label>Extension Lago Frias</label>
+            <div class="toggle" id="toggle-lf">
+              <button type="button" data-lf="0" class="on">Sin Lago Frias</button>
+              <button type="button" data-lf="1">Con Lago Frias</button>
+            </div>
+          </div>
           <div class="field">
             <label>Fecha de la excursion</label>
             <div class="cal-wrap">
@@ -246,7 +253,8 @@ const IMG = {
   "la-cueva":"fotos/la-cueva.jpg","eas":"fotos/eas.jpg","san-ramon":"fotos/san-ramon.jpg",
   "roca-negra":"fotos/roca-negra.jpg","neumeyer":"fotos/neumeyer.jpg",
   "circuito-chico":"fotos/circuito-chico.jpg","villa-bayo":"fotos/villa-bayo.jpg",
-  "san-martin":"fotos/san-martin.jpg","tronador":"fotos/tronador.jpg"
+  "san-martin":"fotos/san-martin.jpg","tronador":"fotos/tronador.jpg",
+  "isla-victoria":"fotos/isla-victoria.jpg","puerto-blest":"fotos/puerto-blest.jpg"
 };
 
 /* =================== DATOS ===================================== */
@@ -630,6 +638,146 @@ const EXC = {
     notas:["Dia completo. Camino de ripio.","Reservas con mínimo 24 hs de anticipación."],
     cats:[{key:'pp',label:'Por persona',min:1}],precios:{base:{pp:67000},alta:{pp:100000}}}]
  },
+
+ /* ---------- ISLA VICTORIA & BOSQUE DE ARRAYANES ---------- */
+ "isla-victoria":{
+   nombre:"Isla Victoria y Bosque de Arrayanes", subt:"Navegando el Nahuel Huapi · 14:00 a 18:30", tag:"Navegacion",
+   desc:"Tras una hora de navegacion, partiendo desde Puerto Panuelo en la impresionante Peninsula de Llao Llao, se arriba a la peninsula de Quetrihue, asiento del Bosque de Arrayanes. El Arrayan (Quetrihue en lengua mapuche) es un arbusto de exquisito color azafran y flores blancas que en este lugar unico en el mundo toma la envergadura de arbol formando un magico e inusual bosque. Luego se navega hacia Puerto Anchorena, Isla Victoria, donde es posible disfrutar de flora autoctona y llegar hasta Playa del Toro para descubrir pinturas rupestres en una esplandida playa de arena volcanica. La compannia de Guias del Parque Nacional acompana con informacion precisa en cada paso del recorrido.",
+   notas_gen:["Salidas de lunes a domingo.","Horario: 14:00 a 18:30 hs.","Punto de embarque: Puerto Panuelo, Peninsula Llao Llao.","Reservas con minimo 24 hs de anticipacion."],
+   seasonal:false, traslado:true,
+   pickupPoints:[
+     "Oficina Turisur (Mitre 150)","Tres Reyes (12 de octubre 135)","NH Edelweiss (San Martin 202)",
+     "Sheraton (San Martin 536)","Patagonia (Av. Bustillo 1231)","Design Suites (km 2.5)",
+     "Villa Huinid (km 2.5)","Aguila Mora (puerta) (km 4.8)","La Cascada (km 6)",
+     "Rochester (km 7)","Lirolay (km 7)","Nido del Condor (km 7)","Charming (km 7,5)","El Casco (km 11,5)"
+   ],
+   opciones:[{key:"tour",label:null,
+     incluye_sin:[
+       "Navegacion de 4:30 hs por el Lago Nahuel Huapi",
+       "Visita al Bosque de Arrayanes (Quetrihue)",
+       "Desembarco en Puerto Anchorena · Isla Victoria",
+       "Senderos hasta Playa del Toro y pinturas rupestres",
+       "Audio guia en espanol e ingles",
+     ],
+     incluye_con:[
+       "Traslado opcional con pick up en el hotel",
+       "Navegacion de 4:30 hs por el Lago Nahuel Huapi",
+       "Visita al Bosque de Arrayanes (Quetrihue)",
+       "Desembarco en Puerto Anchorena · Isla Victoria",
+       "Senderos hasta Playa del Toro y pinturas rupestres",
+       "Audio guia en espanol e ingles",
+     ],
+     notas_sin:[
+       "Horario: 14:00 a 18:30 hs · Lunes a Domingo.",
+       "Embarque en Puerto Panuelo, Peninsula Llao Llao.",
+       "No incluye tasa de embarque ni ingreso al Parque Nacional.",
+       "No incluye comidas.",
+       "Traslado no incluido — se puede agregar arriba.",
+       "Jubilados argentinos con carnet: sin cargo.",
+       "Infantes (0 a 4 anos): sin cargo.",
+       "Reservas con minimo 24 hs de anticipacion.",
+     ],
+     notas_con:[
+       "Horario: 14:00 a 18:30 hs · Lunes a Domingo.",
+       "Embarque en Puerto Panuelo, Peninsula Llao Llao.",
+       "No incluye tasa de embarque ni ingreso al Parque Nacional.",
+       "No incluye comidas.",
+       "Jubilados argentinos con carnet: sin cargo.",
+       "Infantes (0 a 4 anos): sin cargo.",
+       "Reservas con minimo 24 hs de anticipacion.",
+     ],
+     cats:[
+       {key:'adulto',label:'Adultos',sub:'13 anos en adelante',min:1},
+       {key:'menor',label:'Menores',sub:'5 a 12 anos',min:0},
+       {key:'jubilado',label:'Jubilado',sub:'argentino con carnet',min:0},
+       {key:'infante',label:'Infantes',sub:'0 a 4 anos · sin cargo',min:0},
+     ],
+     precios:{adulto:{sin:140000,con:162000},menor:{sin:70000,con:92000},jubilado:{sin:0,con:22000},infante:{sin:0,con:0}},
+   }]
+ },
+
+ /* ---------- PUERTO BLEST & CASCADA LOS CANTAROS ---------- */
+ "puerto-blest":{
+   nombre:"Puerto Blest y Cascada Los Cantaros", subt:"Navegando el Nahuel Huapi · 10:00 a 17:00", tag:"Navegacion",
+   desc:"Zarpando de Puerto Panuelo, en la peninsula del Llao Llao, la excursion propone conocer el islote Centinela, donde descansan los restos del Perito Francisco Pascasio Moreno, padre de los Parques Nacionales en la Argentina, para arribar a la Cascada de los Cantaros. Luego, por la frondosa selva Valdiviana, se llega al Lago Cantaros donde nace la cascada y habita un alerce con mas de 1.500 anos. Se navegan cinco minutos mas para llegar a Puerto Blest, que ha maravillado a viajeros de todo el mundo. Desde alli es posible visitar la bahia y conocer el Lago Frias, cuyas aguas verdes provienen del glaciar del Cerro Tronador, limite natural entre Argentina y Chile.",
+   notas_gen:["Salidas de lunes a domingo.","Horario: 10:00 a 17:00 hs.","Punto de embarque: Puerto Panuelo, Peninsula Llao Llao.","Reservas con minimo 24 hs de anticipacion."],
+   seasonal:false, traslado:true, lagoFrias:true,
+   pickupPoints:[
+     "Oficina Turisur (Mitre 150)","Tres Reyes (12 de octubre 135)","NH Edelweiss (San Martin 202)",
+     "Sheraton (San Martin 536)","Patagonia (Av. Bustillo 1231)","Design Suites (km 2.5)",
+     "Villa Huinid (km 2.5)","Aguila Mora (puerta) (km 4.8)","La Cascada (km 6)",
+     "Rochester (km 7)","Lirolay (km 7)","Nido del Condor (km 7)","Charming (km 7,5)","El Casco (km 11,5)"
+   ],
+   opciones:[{key:"tour",label:null,
+     incluye_sin:[
+       "Navegacion por el Lago Nahuel Huapi",
+       "Visita al islote Centinela (Perito Moreno)",
+       "Cascada de los Cantaros",
+       "Caminata por la selva Valdiviana hasta el Lago Cantaros",
+       "Alerce milenario de mas de 1.500 anos",
+       "Puerto Blest",
+       "Audio guia en espanol e ingles",
+     ],
+     incluye_con:[
+       "Traslado opcional con pick up en el hotel",
+       "Navegacion por el Lago Nahuel Huapi",
+       "Visita al islote Centinela (Perito Moreno)",
+       "Cascada de los Cantaros",
+       "Caminata por la selva Valdiviana hasta el Lago Cantaros",
+       "Alerce milenario de mas de 1.500 anos",
+       "Puerto Blest",
+       "Audio guia en espanol e ingles",
+     ],
+     incluye_lagofrias:[
+       "Traslado en omnibus Puerto Blest → Puerto Alegre (3 km)",
+       "Navegacion por el Lago Frias (aguas verde glaciar)",
+       "Llegada a Puerto Frias (proximo al limite con Chile)",
+       "Retorno a Puerto Panuelo",
+     ],
+     incluye_todo:[
+       "Traslado opcional con pick up en el hotel",
+       "Navegacion por el Lago Nahuel Huapi",
+       "Visita al islote Centinela (Perito Moreno)",
+       "Cascada de los Cantaros",
+       "Caminata por la selva Valdiviana hasta el Lago Cantaros",
+       "Alerce milenario de mas de 1.500 anos",
+       "Puerto Blest",
+       "Traslado en omnibus Puerto Blest → Puerto Alegre (3 km)",
+       "Navegacion por el Lago Frias (aguas verde glaciar)",
+       "Llegada a Puerto Frias (proximo al limite con Chile)",
+       "Audio guia en espanol e ingles",
+     ],
+     notas_sin:[
+       "Horario: 10:00 a 17:00 hs · Lunes a Domingo.",
+       "Embarque en Puerto Panuelo, Peninsula Llao Llao.",
+       "No incluye tasa de embarque ni ingreso al Parque Nacional.",
+       "No incluye comidas.",
+       "Traslado no incluido — se puede agregar arriba.",
+       "Extension Lago Frias disponible como opcional.",
+       "Jubilados argentinos con carnet: sin cargo en excursion base.",
+       "Infantes (0 a 4 anos): sin cargo.",
+       "Reservas con minimo 24 hs de anticipacion.",
+     ],
+     notas_con:[
+       "Horario: 10:00 a 17:00 hs · Lunes a Domingo.",
+       "Embarque en Puerto Panuelo, Peninsula Llao Llao.",
+       "No incluye tasa de embarque ni ingreso al Parque Nacional.",
+       "No incluye comidas.",
+       "Extension Lago Frias disponible como opcional.",
+       "Jubilados argentinos con carnet: sin cargo en excursion base.",
+       "Infantes (0 a 4 anos): sin cargo.",
+       "Reservas con minimo 24 hs de anticipacion.",
+     ],
+     cats:[
+       {key:'adulto',label:'Adultos',sub:'13 anos en adelante',min:1},
+       {key:'menor',label:'Menores',sub:'5 a 12 anos',min:0},
+       {key:'jubilado',label:'Jubilado',sub:'argentino con carnet',min:0},
+       {key:'infante',label:'Infantes',sub:'0 a 4 anos · sin cargo',min:0},
+     ],
+     precios:{adulto:{sin:140000,con:162000},menor:{sin:70000,con:92000},jubilado:{sin:0,con:22000},infante:{sin:0,con:0}},
+     preciosLF:{adulto:54000,menor:27000,jubilado:27000,infante:0},
+   }]
+ },
 };
 
 /* =================== HELPERS ================================== */
@@ -637,7 +785,7 @@ const fmt = n => "$"+new Intl.NumberFormat("es-AR").format(n);
 const params = new URLSearchParams(location.search);
 let id = params.get("exc"); if(!EXC[id]) id = "neumeyer";
 
-let state = {opt:0, con:false, fecha:"", counts:{}};
+let state = {opt:0, con:false, lf:false, fecha:"", counts:{}};
 
 function seasonKeyFor(exc, dateStr){
   if(!exc.seasonal || !dateStr) return null;
@@ -650,7 +798,15 @@ function seasonKeyFor(exc, dateStr){
 }
 function seasonObj(exc,key){ return (exc.temporadas||[]).find(t=>t.key===key); }
 function leaf(opt,catKey,sk){ let p=opt.precios; if(sk && sk!=="__off__") p=p[sk]; return p?p[catKey]:undefined; }
-function priceFor(opt,catKey,sk,con){ let v=leaf(opt,catKey,sk); if(v&&typeof v==="object") return con?v.con:v.sin; return v||0; }
+function priceFor(opt,catKey,sk,con){
+  let v=leaf(opt,catKey,sk);
+  let base = (v&&typeof v==="object") ? (con?v.con:v.sin) : (v||0);
+  // add lago frias extra if applicable
+  if(state.lf && opt.preciosLF && opt.preciosLF[catKey]!==undefined){
+    base += opt.preciosLF[catKey]||0;
+  }
+  return base;
+}
 
 /* =================== CALENDAR ================================= */
 const MESES=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
@@ -772,15 +928,30 @@ function buildSwitch(){
 function renderContent(optIdx){
   const e = EXC[id];
   const opt = e.opciones[optIdx];
-  // If option has traslado-aware arrays, use them; otherwise fallback to generic
   let inc, notas;
-  if(opt.incluye_sin || opt.incluye_con){
+
+  // Navigation excursions with lagoFrias logic
+  if(e.lagoFrias && opt.incluye_lagofrias){
+    if(state.con && state.lf){ inc = opt.incluye_todo; }
+    else if(state.con && !state.lf){ inc = opt.incluye_con; }
+    else if(!state.con && state.lf){
+      inc = [...(opt.incluye_sin||[]), ...(opt.incluye_lagofrias||[])];
+    } else { inc = opt.incluye_sin; }
+    notas = state.con ? (opt.notas_con||opt.notas_sin) : (opt.notas_sin||opt.notas_con);
+  } else if(opt.incluye_sin || opt.incluye_con){
     inc   = state.con ? (opt.incluye_con || opt.incluye_sin) : (opt.incluye_sin || opt.incluye_con);
     notas = state.con ? (opt.notas_con   || opt.notas_sin)  : (opt.notas_sin   || opt.notas_con);
   } else {
     inc   = opt.incluye || e.incluye;
     notas = opt.notas   || e.notas;
   }
+
+  // Add pickup points info if excursion has them
+  let notasExtra = [];
+  if(e.pickupPoints && e.pickupPoints.length){
+    notasExtra.push("Puntos de pick up: "+e.pickupPoints.join(" · "));
+  }
+  const finalNotas = [...(notas||[]), ...notasExtra];
 
   const chk='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D4F" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>';
   const dot='<svg width="16" height="16" viewBox="0 0 24 24" fill="#E9A23C"><circle cx="12" cy="12" r="4"/></svg>';
@@ -793,7 +964,7 @@ function renderContent(optIdx){
 
   const notasEl = document.getElementById("c-notas");
   notasEl.innerHTML="";
-  notas.forEach(t=>{
+  finalNotas.forEach(t=>{
     const li=document.createElement("li"); li.innerHTML=dot+"<span>"+t+"</span>"; notasEl.appendChild(li);
   });
 }
@@ -833,6 +1004,21 @@ function renderStatic(){
       };
     });
   } else ft.hidden=true;
+
+  // lago frias toggle
+  const flf=document.getElementById("f-lagofrias");
+  if(e.lagoFrias){
+    flf.hidden=false;
+    flf.querySelectorAll("button").forEach(b=>{
+      b.onclick=()=>{
+        state.lf = b.dataset.lf==="1";
+        flf.querySelectorAll("button").forEach(x=>x.classList.remove("on"));
+        b.classList.add("on");
+        renderContent(state.opt);
+        render();
+      };
+    });
+  } else { flf.hidden=true; }
 
   document.getElementById("go").onclick = reservar;
   resetCounts();
@@ -928,6 +1114,7 @@ function reservar(){
   lines.push("• "+e.nombre);
   if(opt.label) lines.push("• Opcion: "+opt.label);
   if(e.traslado) lines.push("• "+(state.con?"Con traslado":"Sin traslado"));
+  if(e.lagoFrias) lines.push("• Extension Lago Frias: "+(state.lf?"Si":"No"));
   lines.push("• Fecha: "+fechaTxt);
   const detalle=[]; opt.cats.forEach(c=>{ if(state.counts[c.key]>0) detalle.push(state.counts[c.key]+" "+c.label); });
   if(detalle.length) lines.push("• Pasajeros: "+detalle.join(", "));
