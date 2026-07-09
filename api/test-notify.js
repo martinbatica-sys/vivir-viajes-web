@@ -5,8 +5,10 @@
 export default async function handler(req, res) {
   const { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_WHATSAPP_FROM, OPS_WHATSAPP_TO } = process.env;
 
-  if (!TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN || !TWILIO_WHATSAPP_FROM || !OPS_WHATSAPP_TO) {
-    return res.status(500).json({ error: 'Faltan variables de entorno de Twilio en Vercel' });
+  const required = { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_WHATSAPP_FROM, OPS_WHATSAPP_TO };
+  const missing = Object.keys(required).filter(k => !required[k]);
+  if (missing.length) {
+    return res.status(500).json({ error: 'Faltan variables de entorno de Twilio en Vercel', missing });
   }
 
   const body = [
