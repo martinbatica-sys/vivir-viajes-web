@@ -29,10 +29,25 @@
   .back:hover{color:var(--navy)}
   .switch{font-family:var(--body);font-weight:600;font-size:.9rem;color:var(--navy);border:1.5px solid var(--line);border-radius:10px;padding:.5rem .7rem;background:#fff;cursor:pointer}
 
-  .banner{background:linear-gradient(120deg,#1A2F58,#0F1D38);color:#fff;padding:3.2rem 0 3.4rem;background-size:cover}
+  .banner{background:linear-gradient(120deg,#1A2F58,#0F1D38);color:#fff;padding:2.6rem 0 3rem}
+  .banner-layout{display:flex;flex-direction:column;align-items:flex-start;gap:1.4rem}
+  .banner-info{flex:1;min-width:240px}
   .banner .tag{display:inline-block;background:rgba(233,162,60,.18);color:var(--gold);font-weight:700;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;padding:.32rem .7rem;border-radius:7px;margin-bottom:.9rem}
   .banner h1{font-family:var(--display);font-weight:700;font-size:clamp(1.8rem,4.2vw,2.8rem);letter-spacing:-.02em;line-height:1.06}
   .banner .subt{color:rgba(255,255,255,.7);margin-top:.4rem;font-size:1.02rem}
+
+  .carousel{position:relative;width:460px;max-width:100%;aspect-ratio:1/1;border-radius:18px;overflow:hidden;flex:0 0 auto;box-shadow:0 24px 50px -20px rgba(0,0,0,.55);background:#0c1730}
+  .carousel-track{display:flex;height:100%;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+  .carousel-track img{height:100%;object-fit:cover;display:block;flex-shrink:0}
+  .car-nav{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.88);color:var(--navy);border:none;font-size:1.3rem;cursor:pointer;display:grid;place-items:center;transition:.18s;line-height:1;z-index:2}
+  .car-nav:hover{background:#fff;transform:translateY(-50%) scale(1.06)}
+  .car-nav.prev{left:10px}
+  .car-nav.next{right:10px}
+  .carousel-dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:2}
+  .carousel-dots button{width:7px;height:7px;border-radius:50%;border:none;background:rgba(255,255,255,.5);cursor:pointer;padding:0;transition:.2s}
+  .carousel-dots button.on{background:var(--gold);width:18px;border-radius:5px}
+
+  @media(max-width:860px){.carousel{width:100%;max-width:460px}}
 
   .layout{display:grid;grid-template-columns:1.5fr 1fr;gap:2.2rem;padding:2.6rem 0 4rem;align-items:start}
   .content h2{font-family:var(--display);font-weight:600;font-size:1.3rem;color:var(--navy);margin:0 0 .7rem}
@@ -144,9 +159,19 @@
 
 <section class="banner">
   <div class="wrap">
-    <span class="tag" id="b-tag"></span>
-    <h1 id="b-nombre"></h1>
-    <div class="subt" id="b-subt"></div>
+    <div class="banner-layout">
+      <div class="carousel" id="carousel">
+        <div class="carousel-track" id="carousel-track"></div>
+        <button type="button" class="car-nav prev" id="car-prev" aria-label="Anterior">&#8249;</button>
+        <button type="button" class="car-nav next" id="car-next" aria-label="Siguiente">&#8250;</button>
+        <div class="carousel-dots" id="carousel-dots"></div>
+      </div>
+      <div class="banner-info">
+        <span class="tag" id="b-tag"></span>
+        <h1 id="b-nombre"></h1>
+        <div class="subt" id="b-subt"></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -255,12 +280,21 @@
 <script>
 // EDITAR-WHATSAPP
 const WHATSAPP = "5492944539672";
-const IMG = {
-  "la-cueva":"fotos/la-cueva.jpg","eas":"fotos/eas.jpg","san-ramon":"fotos/san-ramon.jpg",
-  "roca-negra":"fotos/roca-negra.jpg","neumeyer":"fotos/neumeyer.jpg",
-  "circuito-chico":"fotos/circuito-chico.jpg","villa-bayo":"fotos/villa-bayo.jpg",
-  "san-martin":"fotos/san-martin.jpg","tronador":"fotos/tronador.jpg",
-  "isla-victoria":"fotos/isla-victoria.jpg","puerto-blest":"fotos/puerto-blest.jpg"
+
+// EDITAR-GALERIA: agregá las fotos que quieras por excursión, en el orden que se muestran en el carrousel.
+// Ejemplo con varias fotos: "la-cueva":["fotos/la-cueva.jpg","fotos/la-cueva-2.jpg","fotos/la-cueva-3.jpg"]
+const GALLERY = {
+  "la-cueva":["fotos/la-cueva.jpg"],
+  "eas":["fotos/eas.jpg"],
+  "san-ramon":["fotos/san-ramon.jpg"],
+  "roca-negra":["fotos/roca-negra.jpg"],
+  "neumeyer":["fotos/neumeyer.jpg","fotos/neumeyer-2.jpg","fotos/neumeyer-3.jpg","fotos/neumeyer-4.jpg","fotos/neumeyer-5.jpg"],
+  "circuito-chico":["fotos/circuito-chico.jpg"],
+  "villa-bayo":["fotos/villa-bayo.jpg"],
+  "san-martin":["fotos/san-martin.jpg"],
+  "tronador":["fotos/tronador.jpg"],
+  "isla-victoria":["fotos/isla-victoria.jpg"],
+  "puerto-blest":["fotos/puerto-blest.jpg"]
 };
 
 /* =================== DATOS ===================================== */
@@ -809,6 +843,67 @@ function priceFor(opt,catKey,sk,con){
   return base;
 }
 
+/* =================== CAROUSEL ================================= */
+let carImages = [], carIdx = 0, carTimer = null;
+
+function buildCarousel(){
+  carImages = (GALLERY[id] && GALLERY[id].length) ? GALLERY[id] : [];
+  carIdx = 0;
+  const track = document.getElementById("carousel-track");
+  const dots = document.getElementById("carousel-dots");
+  const n = carImages.length || 1;
+
+  track.style.width = (n*100)+"%";
+  track.innerHTML = carImages.map(src=>
+    '<img src="'+src+'" style="width:'+(100/n)+'%" alt="'+EXC[id].nombre+'">'
+  ).join("");
+
+  document.querySelectorAll("#carousel .car-nav").forEach(b=>{
+    b.style.display = carImages.length>1 ? "grid" : "none";
+  });
+
+  dots.innerHTML = "";
+  if(carImages.length>1){
+    carImages.forEach((_,i)=>{
+      const b=document.createElement("button");
+      if(i===0) b.classList.add("on");
+      b.onclick=()=>{ goToSlide(i); stopAutoplay(); startAutoplay(); };
+      dots.appendChild(b);
+    });
+  }
+  updateCarousel();
+}
+
+function updateCarousel(){
+  const track = document.getElementById("carousel-track");
+  const n = carImages.length || 1;
+  track.style.transform = "translateX(-"+(carIdx*(100/n))+"%)";
+  document.querySelectorAll("#carousel-dots button").forEach((b,i)=>b.classList.toggle("on", i===carIdx));
+}
+function goToSlide(i){ carIdx=i; updateCarousel(); }
+function nextSlide(){ if(!carImages.length) return; carIdx=(carIdx+1)%carImages.length; updateCarousel(); }
+function prevSlide(){ if(!carImages.length) return; carIdx=(carIdx-1+carImages.length)%carImages.length; updateCarousel(); }
+function startAutoplay(){ stopAutoplay(); if(carImages.length>1) carTimer=setInterval(nextSlide,5000); }
+function stopAutoplay(){ if(carTimer) clearInterval(carTimer); }
+
+function carouselInit(){
+  document.getElementById("car-next").onclick=()=>{ nextSlide(); stopAutoplay(); startAutoplay(); };
+  document.getElementById("car-prev").onclick=()=>{ prevSlide(); stopAutoplay(); startAutoplay(); };
+  document.getElementById("carousel").addEventListener("mouseenter", stopAutoplay);
+  document.getElementById("carousel").addEventListener("mouseleave", startAutoplay);
+
+  let touchStartX=null;
+  const track = document.getElementById("carousel-track");
+  track.addEventListener("touchstart", e=>{ touchStartX = e.touches[0].clientX; });
+  track.addEventListener("touchend", e=>{
+    if(touchStartX===null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if(dx>40){ prevSlide(); stopAutoplay(); startAutoplay(); }
+    else if(dx<-40){ nextSlide(); stopAutoplay(); startAutoplay(); }
+    touchStartX=null;
+  });
+}
+
 /* =================== CALENDAR ================================= */
 const MESES=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 let calYear, calMonth;
@@ -972,8 +1067,9 @@ function renderStatic(){
   document.getElementById("b-subt").textContent=e.subt;
   document.getElementById("c-desc").textContent=e.desc;
   document.title="Reservar "+e.nombre+" · Vivir Viajes";
-  if(IMG[id]) document.querySelector('.banner').style.background=
-    "linear-gradient(120deg,rgba(15,29,56,.9),rgba(15,29,56,.5)), url('"+IMG[id]+"') center/cover";
+
+  buildCarousel();
+  startAutoplay();
 
   // opcion selector
   const fo=document.getElementById("f-opcion"), sel=document.getElementById("opcion");
@@ -1140,6 +1236,7 @@ function reservar(){
 
 buildSwitch();
 calInit();
+carouselInit();
 renderStatic();
 render();
 </script>
