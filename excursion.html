@@ -36,18 +36,22 @@
   .banner h1{font-family:var(--display);font-weight:700;font-size:clamp(1.8rem,4.2vw,2.8rem);letter-spacing:-.02em;line-height:1.06}
   .banner .subt{color:rgba(255,255,255,.7);margin-top:.4rem;font-size:1.02rem}
 
-  .carousel{position:relative;width:460px;max-width:100%;aspect-ratio:1/1;border-radius:18px;overflow:hidden;flex:0 0 auto;box-shadow:0 24px 50px -20px rgba(0,0,0,.55);background:#0c1730}
-  .carousel-track{display:flex;height:100%;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
-  .carousel-track img{height:100%;object-fit:cover;display:block;flex-shrink:0}
-  .car-nav{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.88);color:var(--navy);border:none;font-size:1.3rem;cursor:pointer;display:grid;place-items:center;transition:.18s;line-height:1;z-index:2}
+  .carousel{position:relative;width:100%;max-width:760px;height:360px;margin:0 auto;overflow:hidden;background:transparent}
+  .carousel-track{position:relative;display:flex;align-items:center;height:100%;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+  .car-slide{position:relative;flex:0 0 76%;height:88%;margin-right:16px;border-radius:18px;overflow:hidden;background:#0c1730;transform:scale(.92);opacity:.5;filter:brightness(.7);transition:transform .5s cubic-bezier(.2,.7,.2,1),opacity .5s,filter .5s,box-shadow .5s;cursor:pointer}
+  .car-slide:last-child{margin-right:0}
+  .car-slide img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+  .car-slide.active{transform:scale(1);opacity:1;filter:none;box-shadow:0 24px 50px -20px rgba(0,0,0,.6);cursor:default;z-index:2}
+  .carousel-track.single .car-slide{flex:0 0 100%;margin-right:0;transform:none;opacity:1;filter:none;cursor:default}
+  .car-nav{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.88);color:var(--navy);border:none;font-size:1.3rem;cursor:pointer;display:grid;place-items:center;transition:.18s;line-height:1;z-index:3}
   .car-nav:hover{background:#fff;transform:translateY(-50%) scale(1.06)}
   .car-nav.prev{left:10px}
   .car-nav.next{right:10px}
-  .carousel-dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:2}
+  .carousel-dots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:3}
   .carousel-dots button{width:7px;height:7px;border-radius:50%;border:none;background:rgba(255,255,255,.5);cursor:pointer;padding:0;transition:.2s}
   .carousel-dots button.on{background:var(--gold);width:18px;border-radius:5px}
 
-  @media(max-width:860px){.carousel{width:100%;max-width:460px}}
+  @media(max-width:860px){.carousel{height:260px}.car-slide{flex-basis:82%}}
 
   .layout{display:grid;grid-template-columns:1.5fr 1fr;gap:2.2rem;padding:2.6rem 0 4rem;align-items:start}
   .content h2{font-family:var(--display);font-weight:600;font-size:1.3rem;color:var(--navy);margin:0 0 .7rem}
@@ -851,12 +855,18 @@ function buildCarousel(){
   carIdx = 0;
   const track = document.getElementById("carousel-track");
   const dots = document.getElementById("carousel-dots");
-  const n = carImages.length || 1;
 
-  track.style.width = (n*100)+"%";
-  track.innerHTML = carImages.map(src=>
-    '<img src="'+src+'" style="width:'+(100/n)+'%" alt="'+EXC[id].nombre+'">'
+  track.classList.toggle("single", carImages.length<=1);
+  track.innerHTML = carImages.map((src,i)=>
+    '<div class="car-slide" data-i="'+i+'"><img src="'+src+'" alt="'+EXC[id].nombre+'"></div>'
   ).join("");
+
+  track.querySelectorAll(".car-slide").forEach(el=>{
+    el.addEventListener("click", ()=>{
+      const i = +el.dataset.i;
+      if(i!==carIdx){ goToSlide(i); stopAutoplay(); startAutoplay(); }
+    });
+  });
 
   document.querySelectorAll("#carousel .car-nav").forEach(b=>{
     b.style.display = carImages.length>1 ? "grid" : "none";
@@ -876,8 +886,15 @@ function buildCarousel(){
 
 function updateCarousel(){
   const track = document.getElementById("carousel-track");
-  const n = carImages.length || 1;
-  track.style.transform = "translateX(-"+(carIdx*(100/n))+"%)";
+  const container = document.getElementById("carousel");
+  const slides = track.children;
+  Array.from(slides).forEach((el,i)=> el.classList.toggle("active", i===carIdx));
+
+  const active = slides[carIdx];
+  if(active){
+    const x = container.clientWidth/2 - (active.offsetLeft + active.offsetWidth/2);
+    track.style.transform = "translateX("+x+"px)";
+  }
   document.querySelectorAll("#carousel-dots button").forEach((b,i)=>b.classList.toggle("on", i===carIdx));
 }
 function goToSlide(i){ carIdx=i; updateCarousel(); }
@@ -891,6 +908,7 @@ function carouselInit(){
   document.getElementById("car-prev").onclick=()=>{ prevSlide(); stopAutoplay(); startAutoplay(); };
   document.getElementById("carousel").addEventListener("mouseenter", stopAutoplay);
   document.getElementById("carousel").addEventListener("mouseleave", startAutoplay);
+  window.addEventListener("resize", updateCarousel);
 
   let touchStartX=null;
   const track = document.getElementById("carousel-track");
