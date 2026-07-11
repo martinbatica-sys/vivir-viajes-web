@@ -1325,7 +1325,7 @@ async function pagarConMercadoPago(){
     if(!resp.ok || !data.init_point) throw new Error(data.error || "No se pudo iniciar el pago");
     window.location.href = data.init_point;
   }catch(err){
-    alert("Hubo un problema iniciando el pago. Probá de nuevo o escribinos por WhatsApp.");
+    alert("Hubo un problema iniciando el pago:\n\n"+(err && err.message ? err.message : err));
     go.disabled=false;
     go.textContent=prevText;
   }
