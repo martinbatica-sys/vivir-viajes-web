@@ -2,15 +2,9 @@
 // Visitar esta URL desde el navegador (GET) dispara el envio.
 // Variables de entorno necesarias en Vercel: TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_WHATSAPP_FROM, OPS_WHATSAPP_TO
 
+import { sendWhatsApp } from '../lib/notify.js';
+
 export default async function handler(req, res) {
-  const { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_WHATSAPP_FROM, OPS_WHATSAPP_TO } = process.env;
-
-  const required = { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_WHATSAPP_FROM, OPS_WHATSAPP_TO };
-  const missing = Object.keys(required).filter(k => !required[k]);
-  if (missing.length) {
-    return res.status(500).json({ error: 'Faltan variables de entorno de Twilio en Vercel', missing });
-  }
-
   const body = [
     '🏔️ *Nueva reserva - Vivir Viajes* (PRUEBA)',
     'Excursion: Refugio Neumeyer',
@@ -23,27 +17,10 @@ export default async function handler(req, res) {
     'Este es un mensaje de prueba del sistema de avisos.',
   ].join('\n');
 
-  const auth = Buffer.from(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`).toString('base64');
-  const params = new URLSearchParams({
-    To: `whatsapp:${OPS_WHATSAPP_TO}`,
-    From: `whatsapp:${TWILIO_WHATSAPP_FROM}`,
-    Body: body,
-  });
-
-  const twilioResp = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Basic ${auth}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: params.toString(),
-  });
-
-  const data = await twilioResp.json();
-
-  if (!twilioResp.ok) {
-    return res.status(twilioResp.status).json({ error: 'Twilio rechazo el envio', detail: data });
+  try {
+    const data = await sendWhatsApp(body);
+    return res.status(200).json({ ok: true, sid: data.sid, status: data.status });
+  } catch (err) {
+    return res.status(500).json({ error: String(err.message || err) });
   }
-
-  return res.status(200).json({ ok: true, sid: data.sid, status: data.status });
 }

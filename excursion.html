@@ -71,6 +71,8 @@
   .field>label{display:block;font-weight:700;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.5rem}
   select{width:100%;font-family:var(--body);font-size:1rem;color:var(--navy);border:1.5px solid var(--line);border-radius:11px;padding:.7rem .8rem;background:#fff;cursor:pointer}
   select:focus{outline:none;border-color:var(--gold)}
+  input[type=text],input[type=tel]{width:100%;font-family:var(--body);font-size:1rem;color:var(--navy);border:1.5px solid var(--line);border-radius:11px;padding:.7rem .8rem;background:#fff}
+  input[type=text]:focus,input[type=tel]:focus{outline:none;border-color:var(--gold)}
 
   /* Custom date picker trigger */
   .date-trigger{width:100%;font-family:var(--body);font-size:1rem;color:var(--navy);border:1.5px solid var(--line);border-radius:11px;padding:.7rem .8rem;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:border-color .2s}
@@ -250,10 +252,22 @@
             <label>Pasajeros</label>
             <div id="pax"></div>
           </div>
+          <div class="field">
+            <label>Nombre y apellido</label>
+            <input type="text" id="c-nombre" placeholder="Nombre de quien reserva">
+          </div>
+          <div class="field">
+            <label>Telefono de contacto</label>
+            <input type="tel" id="c-tel" placeholder="Ej: 2944 123456">
+          </div>
+          <div class="field">
+            <label>Lugar de hospedaje</label>
+            <input type="text" id="c-hosp" placeholder="Hotel / cabaña / alojamiento en Bariloche">
+          </div>
           <div class="total"><small>Total estimado</small><b id="total">&mdash;</b></div>
           <div class="hint" id="hint"></div>
           <button class="btn btn-go" id="go" disabled>Reservar</button>
-          <div class="mp-note">Pago seguro proximamente &middot; hoy coordinamos por WhatsApp</div>
+          <div class="mp-note" id="mp-note">Pago 100% seguro con Mercado Pago</div>
         </div>
       </div>
     </aside>
@@ -824,7 +838,7 @@ const fmt = n => "$"+new Intl.NumberFormat("es-AR").format(n);
 const params = new URLSearchParams(location.search);
 let id = params.get("exc"); if(!EXC[id]) id = "neumeyer";
 
-let state = {opt:0, con:false, lf:false, pickup:"", fecha:"", counts:{}};
+let state = {opt:0, con:false, lf:false, pickup:"", fecha:"", counts:{}, nombre:"", tel:"", hosp:""};
 
 function seasonKeyFor(exc, dateStr){
   if(!exc.seasonal || !dateStr) return null;
@@ -1145,6 +1159,14 @@ function renderStatic(){
   } else { flf.hidden=true; }
 
   document.getElementById("go").onclick = reservar;
+  ["c-nombre","c-tel","c-hosp"].forEach(fid=>{
+    document.getElementById(fid).addEventListener("input", ()=>{
+      state.nombre = document.getElementById("c-nombre").value.trim();
+      state.tel = document.getElementById("c-tel").value.trim();
+      state.hosp = document.getElementById("c-hosp").value.trim();
+      render();
+    });
+  });
   resetCounts();
   renderContent(0);
 }
@@ -1225,15 +1247,29 @@ function render(){
 
   const needsPickup = state.con && EXC[id].pickupPoints && EXC[id].pickupPoints.length && !state.pickup;
 
-  if(noDate){ hint.textContent="Elegí una fecha para continuar."; go.disabled=true; go.textContent="Reservar"; }
-  else if(beforeStart){ hint.textContent="Las clases arrancan el "+e.startDate.split("-").reverse().join("/")+". Elegí una fecha posterior."; go.disabled=true; go.textContent="Reservar"; }
+  const missingContact = !state.nombre || !state.tel || !state.hosp;
+
+  if(noDate){ hint.textContent="Elegí una fecha para continuar."; go.disabled=true; go.textContent="Pagar y reservar"; }
+  else if(beforeStart){ hint.textContent="Las clases arrancan el "+e.startDate.split("-").reverse().join("/")+". Elegí una fecha posterior."; go.disabled=true; go.textContent="Pagar y reservar"; }
   else if(offSeason){ hint.textContent="Esa fecha está fuera de temporada. Escribinos para ver disponibilidad."; go.disabled=false; go.textContent="Consultar por WhatsApp"; }
-  else if(pax<=0){ hint.textContent="Agregá al menos un pasajero."; go.disabled=true; go.textContent="Reservar"; }
-  else if(needsPickup){ hint.textContent="Seleccioná tu punto de pick up."; go.disabled=true; go.textContent="Reservar"; }
-  else { hint.textContent=""; go.disabled=false; go.textContent="Reservar por WhatsApp"; }
+  else if(pax<=0){ hint.textContent="Agregá al menos un pasajero."; go.disabled=true; go.textContent="Pagar y reservar"; }
+  else if(needsPickup){ hint.textContent="Seleccioná tu punto de pick up."; go.disabled=true; go.textContent="Pagar y reservar"; }
+  else if(missingContact){ hint.textContent="Completá tus datos de contacto para reservar."; go.disabled=true; go.textContent="Pagar y reservar"; }
+  else { hint.textContent=""; go.disabled=false; go.textContent="Pagar y reservar"; }
 }
 
 function reservar(){
+  const e=EXC[id];
+  const sk=seasonKeyFor(e,state.fecha);
+  const offSeason = e.seasonal && state.fecha && sk==="__off__";
+  if(e.cotizar || offSeason){
+    reservarPorWhatsApp();
+  } else {
+    pagarConMercadoPago();
+  }
+}
+
+function reservarPorWhatsApp(){
   const e=EXC[id], opt=curOpt();
   const sk=seasonKeyFor(e,state.fecha);
   const fechaTxt = state.fecha ? state.fecha.split("-").reverse().join("/") : "(a definir)";
@@ -1250,6 +1286,49 @@ function reservar(){
   if(canPrice){ let total=0; opt.cats.forEach(c=>total+=state.counts[c.key]*priceFor(opt,c.key,sk,state.con)); if(total>0) lines.push("• Total estimado: "+fmt(total)); }
   const url="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(lines.join("\n"));
   window.open(url,"_blank");
+}
+
+async function pagarConMercadoPago(){
+  const go=document.getElementById("go");
+  const prevText=go.textContent;
+  go.disabled=true;
+  go.textContent="Redirigiendo a Mercado Pago...";
+
+  const e=EXC[id], opt=curOpt();
+  const sk=seasonKeyFor(e,state.fecha);
+  const fechaTxt = state.fecha.split("-").reverse().join("/");
+  let total=0; opt.cats.forEach(c=>total+=state.counts[c.key]*priceFor(opt,c.key,sk,state.con));
+  const detalle=[]; opt.cats.forEach(c=>{ if(state.counts[c.key]>0) detalle.push(state.counts[c.key]+" "+c.label); });
+
+  const payload = {
+    excursionId: id,
+    excursion: e.nombre,
+    opcion: opt.label || null,
+    fecha: fechaTxt,
+    traslado: e.traslado ? (state.con?"Con traslado":"Sin traslado") : null,
+    pickup: state.con ? (state.pickup||null) : null,
+    lagoFrias: e.lagoFrias ? (state.lf?"Si":"No") : null,
+    pasajeros: detalle.join(", "),
+    total: total,
+    nombre: state.nombre,
+    telefono: state.tel,
+    hospedaje: state.hosp,
+  };
+
+  try{
+    const resp = await fetch("/api/create-preference", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify(payload),
+    });
+    const data = await resp.json();
+    if(!resp.ok || !data.init_point) throw new Error(data.error || "No se pudo iniciar el pago");
+    window.location.href = data.init_point;
+  }catch(err){
+    alert("Hubo un problema iniciando el pago. Probá de nuevo o escribinos por WhatsApp.");
+    go.disabled=false;
+    go.textContent=prevText;
+  }
 }
 
 buildSwitch();

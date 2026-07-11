@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reserva · Vivir Viajes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,600&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16284C;--navy-deep:#0F1D38;--gold:#E9A23C;--gold-dark:#C9852A;
+    --paper:#F5F7FB;--ink:#16284C;--ink-soft:#5A6A86;--line:rgba(22,40,76,.12);
+    --display:"Poppins",sans-serif;--body:"Mulish",-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+  a{color:inherit;text-decoration:none}
+  header{padding:1.6rem 0;text-align:center}
+  header img{height:42px}
+  main{flex:1;display:flex;align-items:center;justify-content:center;padding:2rem 1.2rem}
+  .card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:2.6rem 2rem;max-width:440px;width:100%;text-align:center;box-shadow:0 24px 50px -20px rgba(15,29,56,.25)}
+  .icon{font-size:2.6rem;margin-bottom:1rem}
+  h1{font-family:var(--display);font-weight:700;font-size:1.5rem;color:var(--navy);margin-bottom:.7rem}
+  p{color:var(--ink-soft);margin-bottom:1.6rem}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-family:var(--body);font-weight:700;font-size:.98rem;background:var(--gold);color:var(--navy);border:none;border-radius:12px;padding:.85rem 1.6rem;cursor:pointer;transition:.18s}
+  .btn:hover{background:var(--gold-dark)}
+  footer{text-align:center;padding:1.6rem;color:var(--ink-soft);font-size:.82rem}
+</style>
+</head>
+<body>
+<header>
+  <a href="index.html"><img src="logo-color.png" alt="Vivir Viajes"></a>
+</header>
+<main>
+  <div class="card" id="card">
+    <div class="icon" id="icon">⏳</div>
+    <h1 id="title">Un momento...</h1>
+    <p id="msg">Estamos confirmando tu reserva.</p>
+    <a class="btn" id="cta" href="index.html">Volver al inicio</a>
+  </div>
+</main>
+<footer>&copy; 2026 Vivir Viajes &middot; Bariloche, Patagonia</footer>
+
+<script>
+  const params = new URLSearchParams(location.search);
+  const status = params.get("status");
+  const exc = params.get("exc");
+
+  const icon = document.getElementById("icon");
+  const title = document.getElementById("title");
+  const msg = document.getElementById("msg");
+  const cta = document.getElementById("cta");
+
+  if(status === "success"){
+    icon.textContent = "✅";
+    title.textContent = "¡Reserva confirmada!";
+    msg.textContent = "Tu pago se acreditó correctamente. En breve nuestro equipo se va a contactar para coordinar los detalles.";
+  } else if(status === "pending"){
+    icon.textContent = "🕒";
+    title.textContent = "Pago en proceso";
+    msg.textContent = "Tu pago está siendo procesado. Te vamos a avisar apenas se confirme.";
+  } else {
+    icon.textContent = "⚠️";
+    title.textContent = "El pago no se completó";
+    msg.textContent = "Algo falló al procesar el pago. Podés intentar de nuevo o escribirnos por WhatsApp.";
+  }
+
+  if(exc){
+    cta.textContent = "Volver a la excursión";
+    cta.href = "excursion.html?exc=" + encodeURIComponent(exc);
+  }
+</script>
+</body>
+</html>
