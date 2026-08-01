@@ -73,8 +73,10 @@ export default async function handler(req, res) {
     return res.status(mpResp.status).json({ error: 'Mercado Pago rechazo la preferencia', detail: data });
   }
 
-  // Checkout Pro no corre en un sandbox aislado: el flujo de prueba usa
-  // usuarios de prueba sobre la misma infraestructura, por eso siempre hay
-  // que abrir init_point (nunca sandbox_init_point, incluso con credenciales TEST-).
-  return res.status(200).json({ ok: true, init_point: data.init_point, id: data.id });
+  // Con credenciales TEST- hay que abrir sandbox_init_point; con credenciales
+  // de produccion (APP_USR-) se abre init_point.
+  const isTest = MP_ACCESS_TOKEN.startsWith('TEST-');
+  const initPoint = isTest ? data.sandbox_init_point : data.init_point;
+
+  return res.status(200).json({ ok: true, init_point: initPoint, id: data.id });
 }
