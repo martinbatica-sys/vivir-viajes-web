@@ -74,9 +74,20 @@ export default async function handler(req, res) {
   }
 
   // Con credenciales TEST- hay que abrir sandbox_init_point; con credenciales
-  // de produccion (APP_USR-) se abre init_point.
+  // de produccion (APP_USR-) se abre init_point. Soporte de MP dio indicaciones
+  // contradictorias sobre esto en sandbox, asi que se puede forzar un modo
+  // especifico con MP_INIT_POINT_MODE=init|sandbox en Vercel sin tocar codigo.
+  const { MP_INIT_POINT_MODE } = process.env;
   const isTest = MP_ACCESS_TOKEN.startsWith('TEST-');
-  const initPoint = isTest ? data.sandbox_init_point : data.init_point;
+  const initPoint = MP_INIT_POINT_MODE === 'init' ? data.init_point
+    : MP_INIT_POINT_MODE === 'sandbox' ? data.sandbox_init_point
+    : isTest ? data.sandbox_init_point : data.init_point;
 
-  return res.status(200).json({ ok: true, init_point: initPoint, id: data.id });
+  return res.status(200).json({
+    ok: true,
+    init_point: initPoint,
+    id: data.id,
+    init_point_prod: data.init_point,
+    init_point_sandbox: data.sandbox_init_point,
+  });
 }

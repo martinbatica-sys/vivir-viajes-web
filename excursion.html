@@ -1323,6 +1323,7 @@ async function pagarConMercadoPago(){
     });
     const data = await resp.json();
     if(!resp.ok || !data.init_point) throw new Error(data.error || "No se pudo iniciar el pago");
+    console.log("Mercado Pago init points (para debug manual):", {usado: data.init_point, produccion: data.init_point_prod, sandbox: data.init_point_sandbox});
     window.location.href = data.init_point;
   }catch(err){
     alert("Hubo un problema iniciando el pago:\n\n"+(err && err.message ? err.message : err));
