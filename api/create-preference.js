@@ -25,12 +25,19 @@ export default async function handler(req, res) {
   const origin = `${proto}://${req.headers.host}`;
   const externalReference = `VV-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 
+  // Permite forzar un monto bajo para probar la integracion real con una
+  // tarjeta verdadera sin cobrar el precio completo. Se activa solo si
+  // MP_TEST_OVERRIDE_TOTAL esta seteada en Vercel; hay que sacarla despues.
+  const { MP_TEST_OVERRIDE_TOTAL } = process.env;
+  const isOverride = MP_TEST_OVERRIDE_TOTAL && Number(MP_TEST_OVERRIDE_TOTAL) > 0;
+  const unitPrice = isOverride ? Number(MP_TEST_OVERRIDE_TOTAL) : Number(total);
+
   const preference = {
     items: [
       {
-        title: `${excursion}${opcion ? ' - ' + opcion : ''}`,
+        title: `${isOverride ? '[PRUEBA] ' : ''}${excursion}${opcion ? ' - ' + opcion : ''}`,
         quantity: 1,
-        unit_price: Number(total),
+        unit_price: unitPrice,
         currency_id: 'ARS',
       },
     ],
