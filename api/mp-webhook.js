@@ -1,9 +1,9 @@
 // Webhook de Mercado Pago: se llama solo cuando cambia el estado de un pago.
-// Si el pago esta aprobado, arma el aviso de reserva y lo manda por WhatsApp
+// Si el pago esta aprobado, arma el aviso de reserva y lo manda por correo
 // a la mesa de operaciones.
-// Variables de entorno necesarias en Vercel: MP_ACCESS_TOKEN (+ las de Twilio)
+// Variables de entorno necesarias en Vercel: MP_ACCESS_TOKEN (+ las de Resend)
 
-import { sendWhatsApp } from '../lib/notify.js';
+import { sendEmail } from '../lib/notify-email.js';
 
 export default async function handler(req, res) {
   try {
@@ -36,7 +36,7 @@ export default async function handler(req, res) {
 
     const m = payment.metadata || {};
     const body = [
-      '🏔️ *Nueva reserva pagada - Vivir Viajes*',
+      '🏔️ Nueva reserva pagada - Vivir Viajes',
       `Excursion: ${m.excursion || '-'}`,
       m.opcion ? `Opcion: ${m.opcion}` : null,
       `Fecha: ${m.fecha || '-'}`,
@@ -51,7 +51,7 @@ export default async function handler(req, res) {
       `Referencia: ${payment.external_reference || '-'}`,
     ].filter(Boolean).join('\n');
 
-    await sendWhatsApp(body);
+    await sendEmail(`Nueva reserva pagada: ${m.excursion || '-'}`, body);
 
     return res.status(200).json({ ok: true });
   } catch (err) {
