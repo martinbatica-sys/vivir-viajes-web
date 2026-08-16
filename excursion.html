@@ -58,6 +58,7 @@
   .content p.lead{font-size:1.05rem;color:var(--ink-soft);margin-bottom:2rem}
   .block{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.4rem 1.5rem;margin-bottom:1.2rem;transition:opacity .25s}
   .block h3{font-family:var(--display);font-weight:600;font-size:1.02rem;color:var(--navy);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+  .block p{font-size:.95rem;color:#33425e;line-height:1.65;margin:0}
   .list{list-style:none;display:flex;flex-direction:column;gap:.55rem}
   .list li{display:flex;gap:.6rem;font-size:.95rem;color:#33425e}
   .list li svg{flex:0 0 auto;margin-top:3px}
@@ -185,6 +186,10 @@
   <div class="layout">
     <div class="content">
       <p class="lead" id="c-desc"></p>
+      <div class="block" id="block-detalle" hidden>
+        <h3>El paseo</h3>
+        <p id="c-detalle"></p>
+      </div>
       <div class="block" id="block-incluye">
         <h3>&#10003; Que incluye</h3>
         <ul class="list" id="c-incluye"></ul>
@@ -648,6 +653,7 @@ const EXC = {
  "villa-bayo":{
    nombre:"Villa La Angostura y Cerro Bayo", subt:"Dia completo", tag:"Lagos",
    desc:"Dia completo a Villa La Angostura: su costanera, el bosque andino y las vistas del Cerro Bayo.",
+   detalle:"Iniciamos nuestro recorrido desde Bariloche con dirección a la ciudad de Villa La Angostura, que se encuentra a unos 83 kilómetros de distancia aproximadamente. Unos 5 kilómetros antes de llegar al centro de la ciudad, nos desviamos para comenzar el ascenso hacia la base del Cerro Bayo. Uno de los objetivos de este paseo es que nuestros pasajeros puedan disfrutar de este centro de ski y de todas las actividades que ofrece, desde clases de ski hasta pistas de culipatín. Al mediodía comenzamos el descenso del cerro hacia la ciudad para poder aprovechar las propuestas gastronómicas que la villa tiene para sus visitantes, donde nos quedaremos aproximadamente unas 2 horas. A las 16:30 horas emprendemos el regreso hacia San Carlos de Bariloche.",
    incluye:["Traslado ida y vuelta","Tiempo libre en Villa La Angostura","Vistas del Cerro Bayo"],
    notas:["Disponible a partir del 06/06/2026.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:true, traslado:false,
@@ -1098,6 +1104,8 @@ function renderStatic(){
   document.getElementById("b-nombre").textContent=e.nombre;
   document.getElementById("b-subt").textContent=e.subt;
   document.getElementById("c-desc").textContent=e.desc;
+  document.getElementById("block-detalle").hidden = !e.detalle;
+  if(e.detalle) document.getElementById("c-detalle").textContent=e.detalle;
   document.title="Reservar "+e.nombre+" · Vivir Viajes";
 
   buildCarousel();
