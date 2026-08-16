@@ -651,7 +651,7 @@ const EXC = {
 
  /* ---------- VILLA BAYO ---------- */
  "villa-bayo":{
-   nombre:"Villa La Angostura y Cerro Bayo", subt:"Dia completo", tag:"Lagos",
+   nombre:"Villa La Angostura y Cerro Bayo", subt:"", tag:"Invierno",
    desc:"Dia completo a Villa La Angostura: su costanera, el bosque andino y las vistas del Cerro Bayo.",
    detalle:"Iniciamos nuestro recorrido desde Bariloche con dirección a la ciudad de Villa La Angostura, que se encuentra a unos 83 kilómetros de distancia aproximadamente. Unos 5 kilómetros antes de llegar al centro de la ciudad, nos desviamos para comenzar el ascenso hacia la base del Cerro Bayo. Uno de los objetivos de este paseo es que nuestros pasajeros puedan disfrutar de este centro de ski y de todas las actividades que ofrece, desde clases de ski hasta pistas de culipatín. Al mediodía comenzamos el descenso del cerro hacia la ciudad para poder aprovechar las propuestas gastronómicas que la villa tiene para sus visitantes, donde nos quedaremos aproximadamente unas 2 horas. A las 16:30 horas emprendemos el regreso hacia San Carlos de Bariloche.",
    incluye:["Traslado ida y vuelta","Tiempo libre en Villa La Angostura","Guía en español"],
@@ -1102,7 +1102,8 @@ function renderStatic(){
   const e=EXC[id];
   document.getElementById("b-tag").textContent=e.tag;
   document.getElementById("b-nombre").textContent=e.nombre;
-  document.getElementById("b-subt").textContent=e.subt;
+  document.getElementById("b-subt").textContent=e.subt||"";
+  document.getElementById("b-subt").hidden=!e.subt;
   document.getElementById("c-desc").textContent=e.desc;
   document.getElementById("block-detalle").hidden = !e.detalle;
   if(e.detalle) document.getElementById("c-detalle").textContent=e.detalle;
