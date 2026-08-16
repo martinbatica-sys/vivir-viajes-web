@@ -181,10 +181,7 @@
 
 <!-- ====================== HERO ====================== -->
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="fotos/hero-video-poster.jpg">
-    <source src="fotos/hero-video.webm" type="video/webm">
-    <source src="fotos/hero-video.mp4" type="video/mp4">
-  </video>
+  <video class="hero-video" id="hero-video" muted loop playsinline preload="none" poster="fotos/hero-video-poster.jpg"></video>
   <div class="hero-overlay"></div>
   <div class="wrap">
     <div class="hero-inner reveal">
@@ -450,6 +447,16 @@
     <span>&copy; 2026 Vivir Viajes &middot; Bariloche, Patagonia Argentina</span>
   </div>
 </footer>
+
+<script>
+if(window.matchMedia("(min-width:761px)").matches){
+  const v = document.getElementById("hero-video");
+  v.innerHTML = '<source src="fotos/hero-video.webm" type="video/webm">'
+    + '<source src="fotos/hero-video.mp4" type="video/mp4">';
+  v.load();
+  v.play().catch(()=>{});
+}
+</script>
 
 </body>
 </html>
