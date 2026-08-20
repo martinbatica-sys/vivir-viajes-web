@@ -58,7 +58,7 @@
   .content p.lead{font-size:1.05rem;color:var(--ink-soft);margin-bottom:2rem}
   .block{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.4rem 1.5rem;margin-bottom:1.2rem;transition:opacity .25s}
   .block h3{font-family:var(--display);font-weight:600;font-size:1.02rem;color:var(--navy);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
-  .block p{font-size:.95rem;color:#33425e;line-height:1.65;margin:0}
+  .block p{font-size:.95rem;color:#33425e;line-height:1.65;margin:0;white-space:pre-line}
   .list{list-style:none;display:flex;flex-direction:column;gap:.55rem}
   .list li{display:flex;gap:.6rem;font-size:.95rem;color:#33425e}
   .list li svg{flex:0 0 auto;margin-top:3px}
@@ -636,8 +636,9 @@ const EXC = {
  "circuito-chico":{
    nombre:"Circuito Chico y Colonia Suiza", subt:"El clasico de Bariloche", tag:"Clasico",
    desc:"El paseo imperdible: Llao Llao, Punto Panoramico, Bahia Lopez, Cerro Campanario y la historica Colonia Suiza.",
+   detalle:"El paseo comienza desde el centro de Bariloche, recorriendo la Av. Bustillo, una de nuestras avenidas principales. La primera parada la realizamos a 17 km del centro, en el Cerro Campanario. Allí tendrán tiempo libre para contratar el ascenso en aerosilla y subir a la parte alta del cerro, donde encontrarán cinco miradores y una confitería vidriada ideal para tomar algo caliente. Pueden llevar dinero en efectivo para la aerosilla: la guía se encarga de comprar los tickets en boletería rápida mientras ustedes hacen la fila para subir, así aprovechan mejor el tiempo en la cima.\n\nLuego nos volvemos a encontrar en el vehículo y continuamos hacia la segunda parada: la Capilla San Eduardo, construida por el mismo arquitecto del Hotel Llao Llao, donde podrán tomar fotografías tanto de la capilla como del entorno, y el mirador de Punto Panorámico, con vistas al lago Moreno, al Hotel Llao Llao y al lago Nahuel Huapi, una de las postales más famosas de Bariloche.\n\nFinalmente, vamos a nuestra tercera y última parada: Colonia Suiza, donde estaremos una hora para que puedan recorrer la calle principal y la feria de gastronomía y artesanías. El punto de encuentro va a ser la tradicional casa de té Zurich.",
    incluye:["Recorrido por los miradores del circuito","Parada en la historica Colonia Suiza","Guia acompanante"],
-   notas:["Medio dia.","Reservas con mínimo 24 hs de anticipación."],
+   notas:["Horario de Pick Up (estimado): 13:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Medio dia.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:true, traslado:false,
    leyenda:"Hasta el 30/06: $35.000 por persona · Desde el 01/07: $45.000",
    temporadas:[
@@ -646,7 +647,7 @@ const EXC = {
    ],
    opciones:[{key:"tour",label:null,
     incluye:["Recorrido completo por los miradores del circuito","Parada en Llao Llao y Punto Panoramico","Parada en la historica Colonia Suiza","Guia acompanante"],
-    notas:["Medio dia.","Reservas con mínimo 24 hs de anticipación."],
+    notas:["Horario de Pick Up (estimado): 13:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Medio dia.","Reservas con mínimo 24 hs de anticipación."],
     cats:[{key:'pp',label:'Por persona',min:1}],precios:{base:{pp:35000},alta:{pp:45000}}}]
  },
 
