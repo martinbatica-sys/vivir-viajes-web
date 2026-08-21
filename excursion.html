@@ -312,7 +312,7 @@ const GALLERY = {
   "san-ramon":["fotos/san-ramon.jpg"],
   "roca-negra":["fotos/roca-negra.jpg"],
   "neumeyer":["fotos/neumeyer.jpg","fotos/neumeyer-2.jpg","fotos/neumeyer-3.jpg","fotos/neumeyer-4.jpg","fotos/neumeyer-5.jpg"],
-  "circuito-chico":["fotos/chico-01.jpg","fotos/chico-02.jpg","fotos/chico-03.jpg","fotos/chico-04.jpg","fotos/chico-05.jpg"],
+  "circuito-chico":["fotos/chico-01.jpg","fotos/chico-02.jpg","fotos/chico-03.jpg","fotos/chico-04.jpg",{src:"fotos/chico-05.jpg",pos:"center 85%"}],
   "villa-bayo":["fotos/02.jpg","fotos/03.jpg","fotos/06.jpg","fotos/10.jpg","fotos/11.jpg"],
   "san-martin":["fotos/san-martin.jpg"],
   "tronador":["fotos/tronador.jpg"],
@@ -879,9 +879,11 @@ function buildCarousel(){
   const dots = document.getElementById("carousel-dots");
 
   track.classList.toggle("single", carImages.length<=1);
-  track.innerHTML = carImages.map((src,i)=>
-    '<div class="car-slide" data-i="'+i+'"><img src="'+src+'" alt="'+EXC[id].nombre+'"></div>'
-  ).join("");
+  track.innerHTML = carImages.map((item,i)=>{
+    const src = typeof item==="string" ? item : item.src;
+    const pos = typeof item==="string" ? "" : ' style="object-position:'+item.pos+'"';
+    return '<div class="car-slide" data-i="'+i+'"><img src="'+src+'" alt="'+EXC[id].nombre+'"'+pos+'></div>';
+  }).join("");
 
   track.querySelectorAll(".car-slide").forEach(el=>{
     el.addEventListener("click", ()=>{
