@@ -313,7 +313,7 @@ const WHATSAPP = "5492944539672";
 const GALLERY = {
   "la-cueva":["fotos/la-cueva-01.jpg","fotos/la-cueva-02.jpg","fotos/la-cueva-03.jpg","fotos/la-cueva-04.jpg","fotos/la-cueva-05.jpg","fotos/la-cueva-06.jpg"],
   "eas":["fotos/eas-01.jpg",{src:"fotos/eas-02.jpg",pos:"center 90%"},"fotos/eas-03.jpg","fotos/eas-04.jpg"],
-  "san-ramon":["fotos/san-ramon.jpg"],
+  "san-ramon":["fotos/cabalgata-01.jpg","fotos/cabalgata-02.jpg","fotos/cabalgata-03.jpg","fotos/cabalgata-04.jpg"],
   "roca-negra":["fotos/roca-negra-01.jpg","fotos/roca-negra-02.jpg","fotos/roca-negra-03.jpg","fotos/roca-negra-04.jpg","fotos/roca-negra-05.jpg","fotos/roca-negra-06.jpg"],
   "neumeyer":["fotos/neumeyer.jpg","fotos/neumeyer-2.jpg","fotos/neumeyer-3.jpg","fotos/neumeyer-4.jpg","fotos/neumeyer-5.jpg"],
   "circuito-chico":["fotos/chico-01.jpg","fotos/chico-02.jpg","fotos/chico-03.jpg","fotos/chico-04.jpg",{src:"fotos/chico-05.jpg",pos:"center 85%"},"fotos/chico-06.jpg","fotos/chico-07.jpg","fotos/chico-08.jpg","fotos/chico-09.jpg"],
@@ -577,19 +577,20 @@ const EXC = {
    ]
  },
 
- /* ---------- SAN RAMON ---------- */
+ /* ---------- LA FRAGUA (ex San Ramon) ---------- */
  "san-ramon":{
-   nombre:"Cabalgata San Ramon", subt:"Medio dia con asado criollo", tag:"Cabalgata",
-   desc:"Medio dia a caballo por la estancia San Ramon, cerrando con un asado criollo a la parrilla.",
-   incluye:["Desayuno criollo: tortas fritas, dulces e infusiones","2 horas de cabalgata (aprox.)","Asado criollo completo con ensaladas y postre","Bebidas: vino, gaseosa y agua"],
-   notas:["Traslado al campo opcional.","Menú vegetariano a pedido con anticipación.","Cancelación: 24 hs de anticipación.","Reservas con mínimo 24 hs de anticipación."],
+   nombre:"Cabalgata La Fragua", subt:"Medio dia con asado patagonico", tag:"Cabalgata",
+   desc:"Medio dia a caballo por el Valle de La Fragua, cerrando con un asado patagonico a las brasas.",
+   detalle:"El paseo comienza con el traslado desde Bariloche (aprox. 45 min). Al llegar, nos reciben con un desayuno criollo: infusiones calientes acompañadas de exquisitas tortas fritas caseras.\n\nAntes de iniciar la cabalgata, recibirás una charla introductoria sobre el lugar, los caballos, técnicas de monta y medidas de seguridad.\n\nLa cabalgata dura aproximadamente 2 horas, recorreremos el Valle de La Fragua, transitando entre bosques de transición y la estepa patagónica, cruzando arroyos, vados y suaves lomas. Nuestros caballos, propios de la estancia, están muy bien cuidados y amansados, ideales para una experiencia segura y confiable.\n\nEn el trayecto es posible avistar fauna autóctona en estado natural, como ciervos y el majestuoso cóndor andino, una de las aves voladoras más grandes del mundo.\n\nAl regresar, nos espera un delicioso asado patagónico en la estancia que consta de asado a las brasas, ensaladas frescas y panqueques con dulce de leche de postre. Bebidas incluidas (vino, gaseosa y agua).",
+   incluye:["Desayuno criollo (tortas fritas + mate)","2 horas de cabalgata guiada","Asado campestre patagónico","Vino, gaseosas y agua","Guía experto de la zona","Traslado desde Bariloche"],
+   notas:["Menú vegetariano a pedido con anticipación.","Menores de 5 años no incluye cabalgata (pueden concurrir).","Traslado opcional — activar arriba.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:true,
    opciones:[
      {key:"cab",label:null,
-      incluye:["Desayuno criollo: tortas fritas, dulces e infusiones","2 horas de cabalgata guiada","Asado criollo completo con ensaladas y postre","Bebidas: vino, gaseosa y agua"],
+      incluye:["Desayuno criollo (tortas fritas + mate)","2 horas de cabalgata guiada","Asado campestre patagónico","Vino, gaseosas y agua","Guía experto de la zona","Traslado desde Bariloche"],
       notas:["Menú vegetariano a pedido con anticipación.","Menores de 5 años no incluye cabalgata (pueden concurrir).","Traslado opcional — activar arriba.","Reservas con mínimo 24 hs de anticipación."],
       cats:[{key:'mayor',label:'Mayores',min:1},{key:'menor',label:'Menores 5-12',min:0}],
-      precios:{mayor:{sin:230000,con:240000},menor:{sin:220000,con:230000}}},
+      precios:{mayor:{sin:240000,con:240000},menor:{sin:230000,con:230000}}},
    ]
  },
 
