@@ -307,7 +307,7 @@ const WHATSAPP = "5492944539672";
 // EDITAR-GALERIA: agregá las fotos que quieras por excursión, en el orden que se muestran en el carrousel.
 // Ejemplo con varias fotos: "la-cueva":["fotos/la-cueva.jpg","fotos/la-cueva-2.jpg","fotos/la-cueva-3.jpg"]
 const GALLERY = {
-  "la-cueva":["fotos/la-cueva.jpg"],
+  "la-cueva":["fotos/la-cueva-01.jpg","fotos/la-cueva-02.jpg","fotos/la-cueva-03.jpg","fotos/la-cueva-04.jpg","fotos/la-cueva-05.jpg","fotos/la-cueva-06.jpg"],
   "eas":["fotos/eas-01.jpg",{src:"fotos/eas-02.jpg",pos:"center 90%"},"fotos/eas-03.jpg","fotos/eas-04.jpg"],
   "san-ramon":["fotos/san-ramon.jpg"],
   "roca-negra":["fotos/roca-negra-01.jpg","fotos/roca-negra-02.jpg","fotos/roca-negra-03.jpg","fotos/roca-negra-04.jpg","fotos/roca-negra-05.jpg","fotos/roca-negra-06.jpg"],
@@ -330,21 +330,24 @@ const EXC = {
  "la-cueva":{
    nombre:"La Cueva · Motos de nieve", subt:"Cerro Catedral · Bariloche", tag:"Motos de nieve",
    desc:"Vivi la nieve del Cerro Catedral arriba de una moto. Elegi la travesia diurna, el After Ski con fondue o el Nocturno con cena de 4 pasos.",
-   incluye:["Paseo en moto de nieve por el Cerro Catedral","Charla tecnica y paradas para fotos","After Ski y Nocturno: incluyen traslados y experiencia gastronomica"],
+   incluye:["Paseo en moto de nieve por el Cerro Catedral","Charla tecnica de manejo","After Ski y Nocturno: incluyen traslados y experiencia gastronomica"],
    notas:["Conduccion exclusiva para mayores de 18 (o 17 con registro).","Cascos incluidos. No incluye ropa de nieve.","La Travesia Diurna no incluye traslados al cerro.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:false,
    opciones:[
      {key:"travesia",label:"Travesia Diurna · 45 min",
-      incluye:["Paseo en moto de nieve de 45 minutos","Charla tecnica de manejo","Paradas para fotos en el cerro","Cascos incluidos"],
-      notas:["Conduccion exclusiva para mayores de 18 (o 17 con registro).","No incluye traslados al cerro.","No incluye ropa de nieve.","Reservas con mínimo 24 hs de anticipación."],
+      detalle:"Embárcate en un recorrido guiado en motos de nieve que te llevará a descubrir impresionantes miradores naturales, cruzar arroyos y disfrutar del maravilloso encanto de la montaña y su entorno incomparable.\n\nExplora un área exclusiva del centro de esquí, accesible solo en vehículos todo-terreno. ¡No te pierdas esta experiencia única en la naturaleza!",
+      incluye:["Paseo en moto de nieve (6 kilómetros de recorrido; 45 minutos)","Charla técnica de manejo","Casco"],
+      notas:["Conducción exclusiva para mayores de 18 (o 17 con registro).","No incluye traslados al cerro.","No incluye ropa de nieve.","Reservas con mínimo 24 hs de anticipación."],
       cats:[{key:'veh',label:'Por vehiculo',sub:'1 o 2 personas',min:1,max:6}],precios:{veh:270000}},
      {key:"afterski",label:"After Ski · 2:30 hs (con fondue)",
-      incluye:["Traslado ida y vuelta al Cerro Catedral","Paseo en moto de nieve","Fondue incluida al finalizar el paseo","Cascos incluidos"],
-      notas:["Mínimo de edad: 6 años.","No incluye ropa de nieve.","Reservas con mínimo 24 hs de anticipación."],
+      detalle:"La tarde nos invita a iniciar una aventura donde cada momento se convierte en un recuerdo inolvidable.\n\nDisfruta de un emocionante paseo en motos de nieve, seguido de un descanso en el acogedor living de La Cueva. Allí, podrás deleitarte con una exquisita propuesta de la cocina regional mientras contemplas el espectacular atardecer sobre el Cerro Catedral.",
+      incluye:["Paseo en moto de nieve","Experiencia gastronómica en la mítica Cueva Catedral con fondue de queso como plato destacado","Traslados hacia Cerro Catedral y regreso con pick up y drop off en hoteles"],
+      notas:["Mínimo de edad: 6 años.","Familias con niños de 3 a 5 años podrán disfrutar únicamente de esta experiencia siempre acompañados de un adulto responsable y subirán en UTV (Mini SnowBus) todo el recorrido (sujeto a disponibilidad).","No incluye ropa de nieve.","Precios por persona, compartiendo vehículo sin excepción (2 máximo).","Reservas con mínimo 24 hs de anticipación."],
       cats:[A(),M({label:'Menores 6-12'}),{key:'nino',label:'Ninos 3-5',sub:'solo con adulto',min:0}],precios:{adulto:400000,menor:360000,nino:150000}},
      {key:"nocturno",label:"Nocturno & Cena · 4 pasos",
-      incluye:["Traslado ida y vuelta al Cerro Catedral","Paseo nocturno en moto de nieve","Cena de 4 pasos en el refugio","Cascos incluidos"],
-      notas:["Mínimo de edad: 6 años.","No incluye ropa de nieve.","Reservas con mínimo 24 hs de anticipación."],
+      detalle:"La Cueva te invita a vivir una experiencia exclusiva en motos de nieve, acompañada de una sorprendente propuesta gastronómica en un acogedor ambiente nocturno. Disfruta de una cena de cuatro pasos que resalta auténticos sabores regionales, rodeado de un entorno natural que, en el corazón del Cerro Catedral, resulta verdaderamente única.",
+      incluye:["Paseo en moto de nieve","Experiencia gastronómica en cuatro pasos","Traslados hacia Cerro Catedral y regreso con pick up y drop off en hoteles"],
+      notas:["Mínimo de edad: 6 años.","Familias con niños de 3 a 5 años podrán disfrutar únicamente de esta experiencia siempre acompañados de un adulto responsable y subirán en UTV (Mini SnowBus) todo el recorrido (sujeto a disponibilidad).","No incluye ropa de nieve.","Precios por persona, compartiendo vehículo sin excepción (2 máximo).","Reservas con mínimo 24 hs de anticipación."],
       cats:[A(),M({label:'Menores 6-12'})],precios:{adulto:450000,menor:400000}},
    ]
  },
@@ -1092,6 +1095,10 @@ function renderContent(optIdx){
 
   const finalNotas = [...(notas||[])];
 
+  const detalle = opt.detalle || e.detalle;
+  document.getElementById("block-detalle").hidden = !detalle;
+  if(detalle) document.getElementById("c-detalle").textContent=detalle;
+
   const chk='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D4F" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>';
   const dot='<svg width="16" height="16" viewBox="0 0 24 24" fill="#E9A23C"><circle cx="12" cy="12" r="4"/></svg>';
 
@@ -1115,8 +1122,6 @@ function renderStatic(){
   document.getElementById("b-subt").textContent=e.subt||"";
   document.getElementById("b-subt").hidden=!e.subt;
   document.getElementById("c-desc").textContent=e.desc;
-  document.getElementById("block-detalle").hidden = !e.detalle;
-  if(e.detalle) document.getElementById("c-detalle").textContent=e.detalle;
   document.title="Reservar "+e.nombre+" · Vivir Viajes";
 
   buildCarousel();
