@@ -137,6 +137,9 @@
   .stepper button:disabled{opacity:.35;cursor:not-allowed}
   .stepper .n{min-width:24px;text-align:center;font-weight:700;font-family:var(--display)}
 
+  .price-breakdown{margin-top:.9rem;font-size:.85rem;color:var(--ink-soft)}
+  .price-breakdown .pb-row{display:flex;justify-content:space-between;padding:.15rem 0}
+  .price-breakdown .pb-discount{color:#2E7D4F;font-weight:700}
   .total{display:flex;align-items:baseline;justify-content:space-between;margin:1.1rem 0 .2rem}
   .total small{color:var(--ink-soft);font-weight:600}
   .total b{font-family:var(--display);font-weight:700;font-size:1.8rem;color:var(--navy)}
@@ -269,6 +272,7 @@
             <label>Lugar de hospedaje</label>
             <input type="text" id="c-hosp" placeholder="Hotel / cabaña / alojamiento en Bariloche">
           </div>
+          <div class="price-breakdown" id="price-breakdown" hidden></div>
           <div class="total"><small>Total estimado</small><b id="total">&mdash;</b></div>
           <div class="hint" id="hint"></div>
           <button class="btn btn-go" id="go" disabled>Reservar</button>
@@ -744,7 +748,8 @@ const EXC = {
        "No incluye tasa de embarque ni ingreso al Parque Nacional.",
        "No incluye comidas.",
        "Traslado no incluido — se puede agregar arriba.",
-       "Jubilados argentinos con carnet: precio igual al menor.",
+       "Menores y Jubilados argentinos presentando carnet 50% off.",
+       "En caso de ser un grupo o familia de 4 o más personas 10% off.",
        "Infantes (0 a 4 años): sin cargo.",
        "Reservas con mínimo 24 hs de anticipación.",
      ],
@@ -753,7 +758,8 @@ const EXC = {
        "Embarque en Puerto Pañuelo, Península Llao Llao.",
        "No incluye tasa de embarque ni ingreso al Parque Nacional.",
        "No incluye comidas.",
-       "Jubilados argentinos con carnet: precio igual al menor.",
+       "Menores y Jubilados argentinos presentando carnet 50% off.",
+       "En caso de ser un grupo o familia de 4 o más personas 10% off.",
        "Infantes (0 a 4 años): sin cargo.",
        "Reservas con mínimo 24 hs de anticipación.",
      ],
@@ -764,6 +770,7 @@ const EXC = {
        {key:'infante',label:'Infantes',sub:'0 a 4 años · sin cargo',min:0},
      ],
      precios:{adulto:{sin:140000,con:162000},menor:{sin:70000,con:92000},jubilado:{sin:70000,con:92000},infante:{sin:0,con:0}},
+     groupDiscount:{minPax:4,pct:0.10},
    }]
  },
 
@@ -823,7 +830,8 @@ const EXC = {
        "No incluye comidas.",
        "Traslado no incluido — se puede agregar arriba.",
        "Extensión Lago Frías disponible como opcional.",
-       "Jubilados argentinos con carnet: precio igual al menor.",
+       "Menores y Jubilados argentinos presentando carnet 50% off.",
+       "En caso de ser un grupo o familia de 4 o más personas 10% off.",
        "Infantes (0 a 4 años): sin cargo.",
        "Reservas con mínimo 24 hs de anticipación.",
      ],
@@ -833,7 +841,8 @@ const EXC = {
        "No incluye tasa de embarque ni ingreso al Parque Nacional.",
        "No incluye comidas.",
        "Extensión Lago Frías disponible como opcional.",
-       "Jubilados argentinos con carnet: precio igual al menor.",
+       "Menores y Jubilados argentinos presentando carnet 50% off.",
+       "En caso de ser un grupo o familia de 4 o más personas 10% off.",
        "Infantes (0 a 4 años): sin cargo.",
        "Reservas con mínimo 24 hs de anticipación.",
      ],
@@ -845,6 +854,7 @@ const EXC = {
      ],
      precios:{adulto:{sin:140000,con:162000},menor:{sin:70000,con:92000},jubilado:{sin:70000,con:92000},infante:{sin:0,con:0}},
      preciosLF:{adulto:54000,menor:27000,jubilado:27000,infante:0},
+     groupDiscount:{minPax:4,pct:0.10},
    }]
  },
 };
@@ -875,6 +885,14 @@ function priceFor(opt,catKey,sk,con){
     base += opt.preciosLF[catKey]||0;
   }
   return base;
+}
+function pricingFor(opt,sk,con){
+  let subtotal=0, pax=0;
+  opt.cats.forEach(c=>{ pax+=state.counts[c.key]; subtotal+=state.counts[c.key]*priceFor(opt,c.key,sk,con); });
+  let discount=0;
+  const gd = opt.groupDiscount;
+  if(gd && pax>=gd.minPax) discount = Math.round(subtotal*gd.pct);
+  return {pax, subtotal, discount, total: subtotal-discount};
 }
 
 /* =================== CAROUSEL ================================= */
@@ -1250,15 +1268,27 @@ function render(){
 
   renderPax(sk);
   const totalEl=document.getElementById("total"), hint=document.getElementById("hint"), go=document.getElementById("go");
+  const pbEl=document.getElementById("price-breakdown");
 
   const cotizar=!!e.cotizar;
   const offSeason = e.seasonal && state.fecha && sk==="__off__";
   const noDate = !state.fecha;
   const beforeStart = e.startDate && state.fecha && state.fecha < e.startDate;
   const canPrice = !cotizar && (!e.seasonal || (state.fecha && sk!=="__off__"));
-  let total=0,pax=0;
+  let total=0,pax=0,discount=0,subtotal=0;
   opt.cats.forEach(c=>pax+=state.counts[c.key]);
-  if(canPrice){ opt.cats.forEach(c=>total+=state.counts[c.key]*priceFor(opt,c.key,sk,state.con)); }
+  if(canPrice){ const p=pricingFor(opt,sk,state.con); subtotal=p.subtotal; discount=p.discount; total=p.total; }
+
+  if(canPrice && discount>0 && pax>0){
+    const gd = opt.groupDiscount;
+    const pct = Math.round(gd.pct*100);
+    pbEl.hidden=false;
+    pbEl.innerHTML =
+      '<div class="pb-row"><span>Subtotal</span><span>'+fmt(subtotal)+'</span></div>'+
+      '<div class="pb-row pb-discount"><span>Descuento grupo familiar ('+pct+'%, '+gd.minPax+'+ pax)</span><span>-'+fmt(discount)+'</span></div>';
+  } else {
+    pbEl.hidden=true; pbEl.innerHTML="";
+  }
 
   if(cotizar){
     totalEl.textContent = pax>0 ? "A cotizar" : "—";
@@ -1308,7 +1338,11 @@ function reservarPorWhatsApp(){
   const detalle=[]; opt.cats.forEach(c=>{ if(state.counts[c.key]>0) detalle.push(state.counts[c.key]+" "+c.label); });
   if(detalle.length) lines.push("• Pasajeros: "+detalle.join(", "));
   const canPrice = !e.cotizar && (!e.seasonal || (state.fecha && sk!=="__off__"));
-  if(canPrice){ let total=0; opt.cats.forEach(c=>total+=state.counts[c.key]*priceFor(opt,c.key,sk,state.con)); if(total>0) lines.push("• Total estimado: "+fmt(total)); }
+  if(canPrice){
+    const p=pricingFor(opt,sk,state.con);
+    if(p.discount>0) lines.push("• Descuento grupo familiar: -"+fmt(p.discount));
+    if(p.total>0) lines.push("• Total estimado: "+fmt(p.total));
+  }
   const url="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(lines.join("\n"));
   window.open(url,"_blank");
 }
@@ -1322,7 +1356,7 @@ async function pagarConMercadoPago(){
   const e=EXC[id], opt=curOpt();
   const sk=seasonKeyFor(e,state.fecha);
   const fechaTxt = state.fecha.split("-").reverse().join("/");
-  let total=0; opt.cats.forEach(c=>total+=state.counts[c.key]*priceFor(opt,c.key,sk,state.con));
+  const p = pricingFor(opt,sk,state.con);
   const detalle=[]; opt.cats.forEach(c=>{ if(state.counts[c.key]>0) detalle.push(state.counts[c.key]+" "+c.label); });
 
   const payload = {
@@ -1334,7 +1368,8 @@ async function pagarConMercadoPago(){
     pickup: state.con ? (state.pickup||null) : null,
     lagoFrias: e.lagoFrias ? (state.lf?"Si":"No") : null,
     pasajeros: detalle.join(", "),
-    total: total,
+    descuentoGrupal: p.discount>0 ? p.discount : null,
+    total: p.total,
     nombre: state.nombre,
     telefono: state.tel,
     hospedaje: state.hosp,
