@@ -693,6 +693,22 @@ const EXC = {
     cats:[{key:'pp',label:'Por persona',min:1}],precios:{unica:{pp:93000}}}]
  },
 
+ /* ---------- CAMPO DE TULIPANES ---------- */
+ "campo-tulipanes":{
+   nombre:"Visita al Campo de Tulipanes", subt:"Trevelin · Salidas limitadas", tag:"Dia completo",
+   desc:"Dia completo a Trevelin por la Ruta 40: el Campo de Tulipanes y las Cascadas Nant y Fall.",
+   detalle:"Partiendo desde Bariloche, nos dirigimos hacia el sur por la emblemática Ruta 40, siempre acompañados por la majestuosidad de la Cordillera de los Andes, que enmarca el camino con paisajes imponentes y únicos de la Patagonia.\n\nNuestra primera parada será en El Bolsón, en la provincia de Río Negro. Reconocido por su belleza natural, su ambiente tranquilo y su producción artesanal, este pintoresco pueblo está rodeado de montañas, ríos y bosques que invitan a disfrutar del entorno. Aquí realizaremos una breve pausa para desayunar y utilizar los baños antes de continuar la travesía.\n\nEl recorrido sigue hacia el sur, atravesando la provincia de Río Negro hasta adentrarnos en Chubut. Tras unas tres horas de viaje, llegaremos al magnífico pueblo de Trevelin, cuyo nombre significa \"Pueblo del Molino\" en galés. Rodeado de un fértil valle y paisajes cordilleranos, Trevelin se presenta como uno de los destinos más encantadores de la Patagonia.\n\nDurante el paseo, nuestro guía coordinará la parada para el almuerzo (no incluido), que podrá realizarse en Esquel o directamente en Trevelin, según el tiempo disponible y las preferencias del grupo.\n\nCampo de Tulipanes\nLa visita central será al Campo de Tulipanes, un espectáculo único en Argentina donde miles de flores transforman el paisaje en un manto de colores. El contraste entre los tulipanes y las montañas nevadas de fondo crea postales inolvidables. La entrada está incluida, y se dispondrá de tiempo para recorrer el lugar y tomar fotografías.\n\nCascadas Nant y Fall\nTambién visitaremos las Cascadas Nant y Fall, un conjunto de siete saltos de agua rodeados de naturaleza. A través de pasarelas estratégicamente ubicadas, podremos apreciar cuatro de ellos en todo su esplendor. Entrada incluida.",
+   incluye:["Pick up y drop off en hoteles céntricos de Bariloche","Guía en español","Entrada al Campo de Tulipanes","Entrada a Cascadas Nant y Fall"],
+   notas:["Duración: 15 horas.","Días de salida: 12, 20 y 22 de octubre 2026.","No incluye comidas ni bebidas.","Reservas con mínimo 24 hs de anticipación."],
+   seasonal:false, traslado:false,
+   defaultMonth:"2026-10",
+   allowedDates:["2026-10-12","2026-10-20","2026-10-22"],
+   opciones:[{key:"tour",label:null,
+    incluye:["Pick up y drop off en hoteles céntricos de Bariloche","Guía en español","Entrada al Campo de Tulipanes","Entrada a Cascadas Nant y Fall"],
+    notas:["Duración: 15 horas.","Días de salida: 12, 20 y 22 de octubre 2026.","No incluye comidas ni bebidas.","Reservas con mínimo 24 hs de anticipación."],
+    cats:[{key:'pp',label:'Por persona',min:1}],precios:{pp:360000}}]
+ },
+
  /* ---------- SAN MARTIN ---------- */
  "san-martin":{
    nombre:"San Martin de los Andes - 7 Lagos", subt:"Camino de los Siete Lagos", tag:"Ruta",
@@ -988,7 +1004,9 @@ let calYear, calMonth;
 
 function calInit(){
   const now = new Date();
-  calYear = now.getFullYear(); calMonth = now.getMonth();
+  const dm = EXC[id].defaultMonth;
+  if(dm){ const [y,m] = dm.split("-").map(Number); calYear = y; calMonth = m-1; }
+  else { calYear = now.getFullYear(); calMonth = now.getMonth(); }
   document.getElementById("cal-prev").onclick = () => { calMonth--; if(calMonth<0){calMonth=11;calYear--;} renderCal(); };
   document.getElementById("cal-next").onclick = () => { calMonth++; if(calMonth>11){calMonth=0;calYear++;} renderCal(); };
   document.getElementById("date-trigger").onclick = (e) => { e.stopPropagation(); toggleCal(); };
@@ -1051,8 +1069,9 @@ function renderCal(){
     const isTomorrow = dateStr === tomorrowStr;
     const beforeStart = startStr && dateStr < startStr;
     const isClosedDow = exc.closedDow && exc.closedDow.includes(new Date(calYear, calMonth, d).getDay());
+    const isNotAllowed = exc.allowedDates && !exc.allowedDates.includes(dateStr);
 
-    if(isPast || beforeStart || isClosedDow){
+    if(isPast || beforeStart || isClosedDow || isNotAllowed){
       btn.disabled = true;
     } else if(isTomorrow){
       btn.classList.add("cal-tomorrow");
