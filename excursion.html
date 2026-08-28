@@ -547,9 +547,10 @@ const EXC = {
  "roca-negra":{
    nombre:"Roca Negra · Refugio", subt:"Raquetas + fondue · Colonia Suiza", tag:"Raquetas & Fondue",
    desc:"Una aventura en la nieve: caminata con raquetas hasta un refugio de montania y una fondue para entrar en calor.",
-   incluye:["Ascenso y descenso en Land Rover 4x4","Caminata con raquetas guiada","Fondue a eleccion — 1 por reserva (queso o chocolate)","Traslados desde los puntos de Pick Up (centro)"],
-   notas:["Lunes a sabado. Domingo cerrado.","Pick up en Galería del Sol / NH Edelweiss (centro).","Dificultad baja, apta para toda la familia.","Cancelacion: mínimo 72 hs de anticipación.","Reservas con mínimo 24 hs de anticipación."],
-   seasonal:true, traslado:false,
+   detalle:"Se recogerá a los pasajeros y se los acercará a la base del Cerro López.\n\nDesde allí comenzamos el ascenso, en vehículos 4x4, por un escarpado camino de montaña entre el bosque de coihues centenarios y altas lengas. Las curvas del camino son miradores naturales hacia la inmensidad del Parque Nacional Nahuel Huapi, con sus lagos, islas y montañas. Luego de haber tomado las primeras fotografías iniciamos nuestra caminata.\n\nNos equipamos con raquetas de nieve y nuestro guía nos explica el funcionamiento y cómo caminar con ellas. La raqueta es un instrumento que se ajusta a nuestro calzado y nos permite transitar por zonas nevadas sin hundirnos. Durante el recorrido (una hora aprox.) el guía nos cuenta acerca del lugar y disfrutamos de la belleza natural que esta montaña tiene para ofrecernos.\n\nFinalizada la caminata, nos dan una cálida bienvenida en Roca Negra, donde disfrutamos de una fondue de queso o chocolate, dependiendo del horario elegido. Allí en lo alto, y con una impresionante vista de la región, compartimos nuestra fondue. Descendemos, en los vehículos 4x4, hasta la base del cerro, donde termina la excursión y se lleva a los pasajeros a sus respectivos hoteles.",
+   incluye:["Traslado ida y vuelta desde y hacia el centro","Ascenso y descenso en Land Rover 4x4","Caminata guiada con raquetas","Fondue a elección — 1 por reserva (queso o chocolate)"],
+   notas:["Días de salida: lunes a sábado. Domingo cerrado.","Apto para toda la familia: dificultad baja.","Niños de 0-3 años sin costo.","Bebidas frías no incluidas.","Pick up en Galería del Sol / NH Edelweiss (centro).","Cancelacion: mínimo 72 hs de anticipación.","Reservas con mínimo 24 hs de anticipación."],
+   seasonal:true, traslado:false, closedDow:[0],
    leyenda:"Mayo y junio: tarifa base · Julio y agosto: temporada alta",
    temporadas:[
      {key:"mayjun",nombre:"Mayo / Junio",cls:"media",rangos:[["05-01","06-30"]]},
@@ -557,13 +558,13 @@ const EXC = {
    ],
    opciones:[
      {key:"queso",label:"Fondue de Queso · Pick Up 10:00 · Regreso 16:00",
-      incluye:["Pick Up 10:00 hs · Regreso 16:00 hs","Punto de encuentro: Galería del Sol / NH Edelweiss","Ascenso y descenso en Land Rover 4x4","Caminata con raquetas guiada","Fondue de queso en el refugio","Traslados desde los puntos de Pick Up"],
-      notas:["Lunes a sabado. Domingo cerrado.","Dificultad baja, apta para toda la familia.","Ninos 0-3 sin costo.","Cancelacion: mínimo 72 hs de anticipación.","Reservas con mínimo 24 hs de anticipación."],
+      incluye:["Traslado ida y vuelta desde y hacia el centro","Pick Up 10:00 hs · Regreso 16:00 hs","Punto de encuentro: Galería del Sol / NH Edelweiss","Ascenso y descenso en Land Rover 4x4","Caminata guiada con raquetas","Fondue de queso en el refugio"],
+      notas:["Días de salida: lunes a sábado. Domingo cerrado.","Apto para toda la familia: dificultad baja.","Niños de 0-3 sin costo.","Bebidas frías no incluidas.","Cancelacion: mínimo 72 hs de anticipación.","Reservas con mínimo 24 hs de anticipación."],
       cats:[A(),M({label:'Menores 4-12'}),{key:'bebe',label:'Ninos 0-3',sub:'sin costo',min:0}],
       precios:{mayjun:{adulto:250000,menor:200000,bebe:0},julago:{adulto:300000,menor:250000,bebe:0}}},
      {key:"choco",label:"Fondue de Chocolate · Pick Up 14:00 · Regreso 20:00",
-      incluye:["Pick Up 14:00 hs · Regreso 16:00 hs","Punto de encuentro: Galería del Sol / NH Edelweiss","Ascenso y descenso en Land Rover 4x4","Caminata con raquetas guiada","Fondue de chocolate en el refugio","Traslados desde los puntos de Pick Up"],
-      notas:["Lunes a sabado. Domingo cerrado.","Dificultad baja, apta para toda la familia.","Ninos 0-3 sin costo.","Cancelacion: mínimo 72 hs de anticipación.","Reservas con mínimo 24 hs de anticipación."],
+      incluye:["Traslado ida y vuelta desde y hacia el centro","Pick Up 14:00 hs · Regreso 20:00 hs","Punto de encuentro: Galería del Sol / NH Edelweiss","Ascenso y descenso en Land Rover 4x4","Caminata guiada con raquetas","Fondue de chocolate en el refugio"],
+      notas:["Días de salida: lunes a sábado. Domingo cerrado.","Apto para toda la familia: dificultad baja.","Niños de 0-3 sin costo.","Bebidas frías no incluidas.","Cancelacion: mínimo 72 hs de anticipación.","Reservas con mínimo 24 hs de anticipación."],
       cats:[A(),M({label:'Menores 4-12'}),{key:'bebe',label:'Ninos 0-3',sub:'sin costo',min:0}],
       precios:{mayjun:{adulto:250000,menor:200000,bebe:0},julago:{adulto:300000,menor:250000,bebe:0}}},
    ]
@@ -1018,8 +1019,9 @@ function renderCal(){
     const isPast = dateStr <= todayStr;
     const isTomorrow = dateStr === tomorrowStr;
     const beforeStart = startStr && dateStr < startStr;
+    const isClosedDow = exc.closedDow && exc.closedDow.includes(new Date(calYear, calMonth, d).getDay());
 
-    if(isPast || beforeStart){
+    if(isPast || beforeStart || isClosedDow){
       btn.disabled = true;
     } else if(isTomorrow){
       btn.classList.add("cal-tomorrow");
