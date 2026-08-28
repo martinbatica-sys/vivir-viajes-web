@@ -187,7 +187,7 @@
     <div class="content">
       <p class="lead" id="c-desc"></p>
       <div class="block" id="block-detalle" hidden>
-        <h3>El paseo</h3>
+        <h3 id="c-detalle-titulo">El paseo</h3>
         <p id="c-detalle"></p>
       </div>
       <div class="block" id="block-incluye">
@@ -334,17 +334,17 @@ const EXC = {
    notas:["Conduccion exclusiva para mayores de 18 (o 17 con registro).","Cascos incluidos. No incluye ropa de nieve.","La Travesia Diurna no incluye traslados al cerro.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:false,
    opciones:[
-     {key:"travesia",label:"Travesia Diurna · 45 min",
+     {key:"travesia",label:"Travesia Diurna · 45 min",tituloCorto:"Travesía Diurna",
       detalle:"Embárcate en un recorrido guiado en motos de nieve que te llevará a descubrir impresionantes miradores naturales, cruzar arroyos y disfrutar del maravilloso encanto de la montaña y su entorno incomparable.\n\nExplora un área exclusiva del centro de esquí, accesible solo en vehículos todo-terreno. ¡No te pierdas esta experiencia única en la naturaleza!",
       incluye:["Paseo en moto de nieve (6 kilómetros de recorrido; 45 minutos)","Charla técnica de manejo","Casco"],
       notas:["Conducción exclusiva para mayores de 18 (o 17 con registro).","No incluye traslados al cerro.","No incluye ropa de nieve.","Reservas con mínimo 24 hs de anticipación."],
       cats:[{key:'veh',label:'Por vehiculo',sub:'1 o 2 personas',min:1,max:6}],precios:{veh:270000}},
-     {key:"afterski",label:"After Ski · 2:30 hs (con fondue)",
+     {key:"afterski",label:"After Ski · 2:30 hs (con fondue)",tituloCorto:"After Ski",
       detalle:"La tarde nos invita a iniciar una aventura donde cada momento se convierte en un recuerdo inolvidable.\n\nDisfruta de un emocionante paseo en motos de nieve, seguido de un descanso en el acogedor living de La Cueva. Allí, podrás deleitarte con una exquisita propuesta de la cocina regional mientras contemplas el espectacular atardecer sobre el Cerro Catedral.",
       incluye:["Paseo en moto de nieve","Experiencia gastronómica en la mítica Cueva Catedral con fondue de queso como plato destacado","Traslados hacia Cerro Catedral y regreso con pick up y drop off en hoteles"],
       notas:["Mínimo de edad: 6 años.","Familias con niños de 3 a 5 años podrán disfrutar únicamente de esta experiencia siempre acompañados de un adulto responsable y subirán en UTV (Mini SnowBus) todo el recorrido (sujeto a disponibilidad).","No incluye ropa de nieve.","Precios por persona, compartiendo vehículo sin excepción (2 máximo).","Reservas con mínimo 24 hs de anticipación."],
       cats:[A(),M({label:'Menores 6-12'}),{key:'nino',label:'Ninos 3-5',sub:'solo con adulto',min:0}],precios:{adulto:400000,menor:360000,nino:150000}},
-     {key:"nocturno",label:"Nocturno & Cena · 4 pasos",
+     {key:"nocturno",label:"Nocturno & Cena · 4 pasos",tituloCorto:"Nocturno y Cena",
       detalle:"La Cueva te invita a vivir una experiencia exclusiva en motos de nieve, acompañada de una sorprendente propuesta gastronómica en un acogedor ambiente nocturno. Disfruta de una cena de cuatro pasos que resalta auténticos sabores regionales, rodeado de un entorno natural que, en el corazón del Cerro Catedral, resulta verdaderamente única.",
       incluye:["Paseo en moto de nieve","Experiencia gastronómica en cuatro pasos","Traslados hacia Cerro Catedral y regreso con pick up y drop off en hoteles"],
       notas:["Mínimo de edad: 6 años.","Familias con niños de 3 a 5 años podrán disfrutar únicamente de esta experiencia siempre acompañados de un adulto responsable y subirán en UTV (Mini SnowBus) todo el recorrido (sujeto a disponibilidad).","No incluye ropa de nieve.","Precios por persona, compartiendo vehículo sin excepción (2 máximo).","Reservas con mínimo 24 hs de anticipación."],
@@ -1098,6 +1098,7 @@ function renderContent(optIdx){
   const detalle = opt.detalle || e.detalle;
   document.getElementById("block-detalle").hidden = !detalle;
   if(detalle) document.getElementById("c-detalle").textContent=detalle;
+  document.getElementById("c-detalle-titulo").textContent = opt.tituloCorto ? "El paseo - "+opt.tituloCorto : "El paseo";
 
   const chk='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D4F" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>';
   const dot='<svg width="16" height="16" viewBox="0 0 24 24" fill="#E9A23C"><circle cx="12" cy="12" r="4"/></svg>';
