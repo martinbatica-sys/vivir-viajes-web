@@ -29,14 +29,14 @@
   .back:hover{color:var(--navy)}
   .switch{font-family:var(--body);font-weight:600;font-size:.9rem;color:var(--navy);border:1.5px solid var(--line);border-radius:10px;padding:.5rem .7rem;background:#fff;cursor:pointer}
 
-  .banner{background:linear-gradient(120deg,#1A2F58,#0F1D38);color:#fff;padding:2.6rem 0 3rem}
-  .banner-layout{display:flex;flex-direction:column;align-items:flex-start;gap:1.4rem}
+  .banner{background:linear-gradient(120deg,#1A2F58,#0F1D38);color:#fff;padding:1.3rem 0 2.2rem}
+  .banner-layout{display:flex;flex-direction:column;align-items:flex-start;gap:.6rem}
   .banner-info{flex:1;min-width:240px}
   .banner .tag{display:inline-block;background:rgba(233,162,60,.18);color:var(--gold);font-weight:700;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;padding:.32rem .7rem;border-radius:7px;margin-bottom:.9rem}
   .banner h1{font-family:var(--display);font-weight:700;font-size:clamp(1.8rem,4.2vw,2.8rem);letter-spacing:-.02em;line-height:1.06}
   .banner .subt{color:rgba(255,255,255,.7);margin-top:.4rem;font-size:1.02rem}
 
-  .carousel{position:relative;width:100%;max-width:760px;height:360px;margin:0 auto;overflow:hidden;background:transparent}
+  .carousel{position:relative;width:100%;max-width:980px;aspect-ratio:19/9;margin:0 auto;overflow:hidden;background:transparent}
   .carousel-track{position:relative;display:flex;align-items:center;height:100%;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
   .car-slide{position:relative;flex:0 0 76%;height:88%;margin-right:16px;border-radius:18px;overflow:hidden;background:#0c1730;transform:scale(.92);opacity:.5;filter:brightness(.7);transition:transform .5s cubic-bezier(.2,.7,.2,1),opacity .5s,filter .5s,box-shadow .5s;cursor:pointer}
   .car-slide:last-child{margin-right:0}
@@ -51,13 +51,14 @@
   .carousel-dots button{width:7px;height:7px;border-radius:50%;border:none;background:rgba(255,255,255,.5);cursor:pointer;padding:0;transition:.2s}
   .carousel-dots button.on{background:var(--gold);width:18px;border-radius:5px}
 
-  @media(max-width:860px){.carousel{height:260px}.car-slide{flex-basis:82%}}
+  @media(max-width:860px){.car-slide{flex-basis:82%}}
 
   .layout{display:grid;grid-template-columns:1.5fr 1fr;gap:2.2rem;padding:2.6rem 0 4rem;align-items:start}
   .content h2{font-family:var(--display);font-weight:600;font-size:1.3rem;color:var(--navy);margin:0 0 .7rem}
   .content p.lead{font-size:1.05rem;color:var(--ink-soft);margin-bottom:2rem}
   .block{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.4rem 1.5rem;margin-bottom:1.2rem;transition:opacity .25s}
   .block h3{font-family:var(--display);font-weight:600;font-size:1.02rem;color:var(--navy);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+  .block p{font-size:.95rem;color:#33425e;line-height:1.65;margin:0;white-space:pre-line}
   .list{list-style:none;display:flex;flex-direction:column;gap:.55rem}
   .list li{display:flex;gap:.6rem;font-size:.95rem;color:#33425e}
   .list li svg{flex:0 0 auto;margin-top:3px}
@@ -71,6 +72,8 @@
   .field>label{display:block;font-weight:700;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.5rem}
   select{width:100%;font-family:var(--body);font-size:1rem;color:var(--navy);border:1.5px solid var(--line);border-radius:11px;padding:.7rem .8rem;background:#fff;cursor:pointer}
   select:focus{outline:none;border-color:var(--gold)}
+  input[type=text],input[type=tel]{width:100%;font-family:var(--body);font-size:1rem;color:var(--navy);border:1.5px solid var(--line);border-radius:11px;padding:.7rem .8rem;background:#fff}
+  input[type=text]:focus,input[type=tel]:focus{outline:none;border-color:var(--gold)}
 
   /* Custom date picker trigger */
   .date-trigger{width:100%;font-family:var(--body);font-size:1rem;color:var(--navy);border:1.5px solid var(--line);border-radius:11px;padding:.7rem .8rem;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:border-color .2s}
@@ -134,6 +137,9 @@
   .stepper button:disabled{opacity:.35;cursor:not-allowed}
   .stepper .n{min-width:24px;text-align:center;font-weight:700;font-family:var(--display)}
 
+  .price-breakdown{margin-top:.9rem;font-size:.85rem;color:var(--ink-soft)}
+  .price-breakdown .pb-row{display:flex;justify-content:space-between;padding:.15rem 0}
+  .price-breakdown .pb-discount{color:#2E7D4F;font-weight:700}
   .total{display:flex;align-items:baseline;justify-content:space-between;margin:1.1rem 0 .2rem}
   .total small{color:var(--ink-soft);font-weight:600}
   .total b{font-family:var(--display);font-weight:700;font-size:1.8rem;color:var(--navy)}
@@ -183,6 +189,10 @@
   <div class="layout">
     <div class="content">
       <p class="lead" id="c-desc"></p>
+      <div class="block" id="block-detalle" hidden>
+        <h3 id="c-detalle-titulo">El paseo</h3>
+        <p id="c-detalle"></p>
+      </div>
       <div class="block" id="block-incluye">
         <h3>&#10003; Que incluye</h3>
         <ul class="list" id="c-incluye"></ul>
@@ -250,10 +260,23 @@
             <label>Pasajeros</label>
             <div id="pax"></div>
           </div>
+          <div class="field">
+            <label>Nombre y apellido</label>
+            <input type="text" id="c-nombre" placeholder="Nombre de quien reserva">
+          </div>
+          <div class="field">
+            <label>Telefono de contacto</label>
+            <input type="tel" id="c-tel" placeholder="Ej: 2944 123456">
+          </div>
+          <div class="field">
+            <label>Lugar de hospedaje</label>
+            <input type="text" id="c-hosp" placeholder="Hotel / cabaña / alojamiento en Bariloche">
+          </div>
+          <div class="price-breakdown" id="price-breakdown" hidden></div>
           <div class="total"><small>Total estimado</small><b id="total">&mdash;</b></div>
           <div class="hint" id="hint"></div>
           <button class="btn btn-go" id="go" disabled>Reservar</button>
-          <div class="mp-note">Pago seguro proximamente &middot; hoy coordinamos por WhatsApp</div>
+          <div class="mp-note" id="mp-note">Pago 100% seguro con Mercado Pago</div>
         </div>
       </div>
     </aside>
@@ -288,17 +311,18 @@ const WHATSAPP = "5492944539672";
 // EDITAR-GALERIA: agregá las fotos que quieras por excursión, en el orden que se muestran en el carrousel.
 // Ejemplo con varias fotos: "la-cueva":["fotos/la-cueva.jpg","fotos/la-cueva-2.jpg","fotos/la-cueva-3.jpg"]
 const GALLERY = {
-  "la-cueva":["fotos/la-cueva.jpg"],
-  "eas":["fotos/eas.jpg"],
-  "san-ramon":["fotos/san-ramon.jpg"],
-  "roca-negra":["fotos/roca-negra.jpg"],
+  "la-cueva":["fotos/la-cueva-01.jpg","fotos/la-cueva-02.jpg","fotos/la-cueva-03.jpg","fotos/la-cueva-04.jpg","fotos/la-cueva-05.jpg","fotos/la-cueva-06.jpg"],
+  "eas":["fotos/eas-01.jpg",{src:"fotos/eas-02.jpg",pos:"center 90%"},"fotos/eas-03.jpg","fotos/eas-04.jpg"],
+  "san-ramon":["fotos/cabalgata-01.jpg","fotos/cabalgata-02.jpg","fotos/cabalgata-03.jpg","fotos/cabalgata-04.jpg"],
+  "roca-negra":["fotos/roca-negra-01.jpg","fotos/roca-negra-02.jpg","fotos/roca-negra-03.jpg","fotos/roca-negra-04.jpg","fotos/roca-negra-05.jpg","fotos/roca-negra-06.jpg"],
   "neumeyer":["fotos/neumeyer.jpg","fotos/neumeyer-2.jpg","fotos/neumeyer-3.jpg","fotos/neumeyer-4.jpg","fotos/neumeyer-5.jpg"],
-  "circuito-chico":["fotos/circuito-chico.jpg"],
-  "villa-bayo":["fotos/villa-bayo.jpg"],
-  "san-martin":["fotos/san-martin.jpg"],
-  "tronador":["fotos/tronador.jpg"],
-  "isla-victoria":["fotos/isla-victoria.jpg"],
-  "puerto-blest":["fotos/puerto-blest.jpg"]
+  "circuito-chico":["fotos/chico-01.jpg","fotos/chico-02.jpg","fotos/chico-03.jpg","fotos/chico-04.jpg",{src:"fotos/chico-05.jpg",pos:"center 85%"},"fotos/chico-06.jpg","fotos/chico-07.jpg","fotos/chico-08.jpg","fotos/chico-09.jpg"],
+  "villa-bayo":["fotos/02.jpg","fotos/03.jpg","fotos/06.jpg","fotos/10.jpg","fotos/11.jpg"],
+  "campo-tulipanes":["fotos/campo-tulipanes-01.jpg","fotos/campo-tulipanes-02.jpg","fotos/campo-tulipanes-03.jpg","fotos/campo-tulipanes-04.jpg","fotos/campo-tulipanes-05.jpg","fotos/campo-tulipanes-06.jpg"],
+  "san-martin":["fotos/sma-01.jpg","fotos/sma-09.jpg","fotos/sma-02.jpg","fotos/sma-03.jpg","fotos/sma-08.jpg","fotos/sma-05.jpg","fotos/sma-06.jpg"],
+  "tronador":["fotos/tronador-08.jpg","fotos/tronador-02.jpg","fotos/tronador-03.jpg","fotos/tronador-06.jpg","fotos/tronador-05.jpg","fotos/tronador-07.jpg","fotos/tronador-09.jpg"],
+  "isla-victoria":["fotos/isla-victoria-01.jpg","fotos/isla-victoria-02.jpg","fotos/isla-victoria-03.jpg","fotos/isla-victoria-04.jpg","fotos/isla-victoria-05.jpg"],
+  "puerto-blest":["fotos/puerto-blest-01.jpg","fotos/puerto-blest-02.jpg","fotos/puerto-blest-03.jpg","fotos/puerto-blest-04.jpg","fotos/puerto-blest-05.jpg"]
 };
 
 /* =================== DATOS ===================================== */
@@ -311,21 +335,24 @@ const EXC = {
  "la-cueva":{
    nombre:"La Cueva · Motos de nieve", subt:"Cerro Catedral · Bariloche", tag:"Motos de nieve",
    desc:"Vivi la nieve del Cerro Catedral arriba de una moto. Elegi la travesia diurna, el After Ski con fondue o el Nocturno con cena de 4 pasos.",
-   incluye:["Paseo en moto de nieve por el Cerro Catedral","Charla tecnica y paradas para fotos","After Ski y Nocturno: incluyen traslados y experiencia gastronomica"],
+   incluye:["Paseo en moto de nieve por el Cerro Catedral","Charla tecnica de manejo","After Ski y Nocturno: incluyen traslados y experiencia gastronomica"],
    notas:["Conduccion exclusiva para mayores de 18 (o 17 con registro).","Cascos incluidos. No incluye ropa de nieve.","La Travesia Diurna no incluye traslados al cerro.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:false,
    opciones:[
-     {key:"travesia",label:"Travesia Diurna · 45 min",
-      incluye:["Paseo en moto de nieve de 45 minutos","Charla tecnica de manejo","Paradas para fotos en el cerro","Cascos incluidos"],
-      notas:["Conduccion exclusiva para mayores de 18 (o 17 con registro).","No incluye traslados al cerro.","No incluye ropa de nieve.","Reservas con mínimo 24 hs de anticipación."],
+     {key:"travesia",label:"Travesia Diurna · 45 min",tituloCorto:"Travesía Diurna",
+      detalle:"Embárcate en un recorrido guiado en motos de nieve que te llevará a descubrir impresionantes miradores naturales, cruzar arroyos y disfrutar del maravilloso encanto de la montaña y su entorno incomparable.\n\nExplora un área exclusiva del centro de esquí, accesible solo en vehículos todo-terreno. ¡No te pierdas esta experiencia única en la naturaleza!",
+      incluye:["Paseo en moto de nieve (6 kilómetros de recorrido; 45 minutos)","Charla técnica de manejo","Casco"],
+      notas:["Conducción exclusiva para mayores de 18 (o 17 con registro).","No incluye traslados al cerro.","No incluye ropa de nieve.","Reservas con mínimo 24 hs de anticipación."],
       cats:[{key:'veh',label:'Por vehiculo',sub:'1 o 2 personas',min:1,max:6}],precios:{veh:270000}},
-     {key:"afterski",label:"After Ski · 2:30 hs (con fondue)",
-      incluye:["Traslado ida y vuelta al Cerro Catedral","Paseo en moto de nieve","Fondue incluida al finalizar el paseo","Cascos incluidos"],
-      notas:["Mínimo de edad: 6 años.","No incluye ropa de nieve.","Reservas con mínimo 24 hs de anticipación."],
+     {key:"afterski",label:"After Ski · 2:30 hs (con fondue)",tituloCorto:"After Ski",
+      detalle:"La tarde nos invita a iniciar una aventura donde cada momento se convierte en un recuerdo inolvidable.\n\nDisfruta de un emocionante paseo en motos de nieve, seguido de un descanso en el acogedor living de La Cueva. Allí, podrás deleitarte con una exquisita propuesta de la cocina regional mientras contemplas el espectacular atardecer sobre el Cerro Catedral.",
+      incluye:["Paseo en moto de nieve","Experiencia gastronómica en la mítica Cueva Catedral con fondue de queso como plato destacado","Traslados hacia Cerro Catedral y regreso con pick up y drop off en hoteles"],
+      notas:["Mínimo de edad: 6 años.","Familias con niños de 3 a 5 años podrán disfrutar únicamente de esta experiencia siempre acompañados de un adulto responsable y subirán en UTV (Mini SnowBus) todo el recorrido (sujeto a disponibilidad).","No incluye ropa de nieve.","Precios por persona, compartiendo vehículo sin excepción (2 máximo).","Reservas con mínimo 24 hs de anticipación."],
       cats:[A(),M({label:'Menores 6-12'}),{key:'nino',label:'Ninos 3-5',sub:'solo con adulto',min:0}],precios:{adulto:400000,menor:360000,nino:150000}},
-     {key:"nocturno",label:"Nocturno & Cena · 4 pasos",
-      incluye:["Traslado ida y vuelta al Cerro Catedral","Paseo nocturno en moto de nieve","Cena de 4 pasos en el refugio","Cascos incluidos"],
-      notas:["Mínimo de edad: 6 años.","No incluye ropa de nieve.","Reservas con mínimo 24 hs de anticipación."],
+     {key:"nocturno",label:"Nocturno & Cena · 4 pasos",tituloCorto:"Nocturno y Cena",
+      detalle:"La Cueva te invita a vivir una experiencia exclusiva en motos de nieve, acompañada de una sorprendente propuesta gastronómica en un acogedor ambiente nocturno. Disfruta de una cena de cuatro pasos que resalta auténticos sabores regionales, rodeado de un entorno natural que, en el corazón del Cerro Catedral, resulta verdaderamente única.",
+      incluye:["Paseo en moto de nieve","Experiencia gastronómica en cuatro pasos","Traslados hacia Cerro Catedral y regreso con pick up y drop off en hoteles"],
+      notas:["Mínimo de edad: 6 años.","Familias con niños de 3 a 5 años podrán disfrutar únicamente de esta experiencia siempre acompañados de un adulto responsable y subirán en UTV (Mini SnowBus) todo el recorrido (sujeto a disponibilidad).","No incluye ropa de nieve.","Precios por persona, compartiendo vehículo sin excepción (2 máximo).","Reservas con mínimo 24 hs de anticipación."],
       cats:[A(),M({label:'Menores 6-12'})],precios:{adulto:450000,menor:400000}},
    ]
  },
@@ -528,9 +555,10 @@ const EXC = {
  "roca-negra":{
    nombre:"Roca Negra · Refugio", subt:"Raquetas + fondue · Colonia Suiza", tag:"Raquetas & Fondue",
    desc:"Una aventura en la nieve: caminata con raquetas hasta un refugio de montania y una fondue para entrar en calor.",
-   incluye:["Ascenso y descenso en Land Rover 4x4","Caminata con raquetas guiada","Fondue a eleccion — 1 por reserva (queso o chocolate)","Traslados desde los puntos de Pick Up (centro)"],
-   notas:["Lunes a sabado. Domingo cerrado.","Pick up en Galería del Sol / NH Edelweiss (centro).","Dificultad baja, apta para toda la familia.","Cancelacion: mínimo 72 hs de anticipación.","Reservas con mínimo 24 hs de anticipación."],
-   seasonal:true, traslado:false,
+   detalle:"Se recogerá a los pasajeros y se los acercará a la base del Cerro López.\n\nDesde allí comenzamos el ascenso, en vehículos 4x4, por un escarpado camino de montaña entre el bosque de coihues centenarios y altas lengas. Las curvas del camino son miradores naturales hacia la inmensidad del Parque Nacional Nahuel Huapi, con sus lagos, islas y montañas. Luego de haber tomado las primeras fotografías iniciamos nuestra caminata.\n\nNos equipamos con raquetas de nieve y nuestro guía nos explica el funcionamiento y cómo caminar con ellas. La raqueta es un instrumento que se ajusta a nuestro calzado y nos permite transitar por zonas nevadas sin hundirnos. Durante el recorrido (una hora aprox.) el guía nos cuenta acerca del lugar y disfrutamos de la belleza natural que esta montaña tiene para ofrecernos.\n\nFinalizada la caminata, nos dan una cálida bienvenida en Roca Negra, donde disfrutamos de una fondue de queso o chocolate, dependiendo del horario elegido. Allí en lo alto, y con una impresionante vista de la región, compartimos nuestra fondue. Descendemos, en los vehículos 4x4, hasta la base del cerro, donde termina la excursión y se lleva a los pasajeros a sus respectivos hoteles.",
+   incluye:["Traslado ida y vuelta desde y hacia el centro","Ascenso y descenso en Land Rover 4x4","Caminata guiada con raquetas","Fondue a elección — 1 por reserva (queso o chocolate)"],
+   notas:["Días de salida: lunes a sábado. Domingo cerrado.","Apto para toda la familia: dificultad baja.","Niños de 0-3 años sin costo.","Bebidas frías no incluidas.","Pick up en Galería del Sol / NH Edelweiss (centro).","Reservas con mínimo 24 hs de anticipación."],
+   seasonal:true, traslado:false, closedDow:[0],
    leyenda:"Mayo y junio: tarifa base · Julio y agosto: temporada alta",
    temporadas:[
      {key:"mayjun",nombre:"Mayo / Junio",cls:"media",rangos:[["05-01","06-30"]]},
@@ -538,38 +566,55 @@ const EXC = {
    ],
    opciones:[
      {key:"queso",label:"Fondue de Queso · Pick Up 10:00 · Regreso 16:00",
-      incluye:["Pick Up 10:00 hs · Regreso 16:00 hs","Punto de encuentro: Galería del Sol / NH Edelweiss","Ascenso y descenso en Land Rover 4x4","Caminata con raquetas guiada","Fondue de queso en el refugio","Traslados desde los puntos de Pick Up"],
-      notas:["Lunes a sabado. Domingo cerrado.","Dificultad baja, apta para toda la familia.","Ninos 0-3 sin costo.","Cancelacion: mínimo 72 hs de anticipación.","Reservas con mínimo 24 hs de anticipación."],
+      incluye:["Traslado ida y vuelta desde y hacia el centro","Ascenso y descenso en Land Rover 4x4","Caminata guiada con raquetas","Fondue de queso en el refugio"],
+      notas:["Días de salida: lunes a sábado. Domingo cerrado.","Apto para toda la familia: dificultad baja.","Niños de 0-3 sin costo.","Bebidas frías no incluidas.","Reservas con mínimo 24 hs de anticipación."],
       cats:[A(),M({label:'Menores 4-12'}),{key:'bebe',label:'Ninos 0-3',sub:'sin costo',min:0}],
       precios:{mayjun:{adulto:250000,menor:200000,bebe:0},julago:{adulto:300000,menor:250000,bebe:0}}},
      {key:"choco",label:"Fondue de Chocolate · Pick Up 14:00 · Regreso 20:00",
-      incluye:["Pick Up 14:00 hs · Regreso 16:00 hs","Punto de encuentro: Galería del Sol / NH Edelweiss","Ascenso y descenso en Land Rover 4x4","Caminata con raquetas guiada","Fondue de chocolate en el refugio","Traslados desde los puntos de Pick Up"],
-      notas:["Lunes a sabado. Domingo cerrado.","Dificultad baja, apta para toda la familia.","Ninos 0-3 sin costo.","Cancelacion: mínimo 72 hs de anticipación.","Reservas con mínimo 24 hs de anticipación."],
+      incluye:["Traslado ida y vuelta desde y hacia el centro","Ascenso y descenso en Land Rover 4x4","Caminata guiada con raquetas","Fondue de chocolate en el refugio"],
+      notas:["Días de salida: lunes a sábado. Domingo cerrado.","Apto para toda la familia: dificultad baja.","Niños de 0-3 sin costo.","Bebidas frías no incluidas.","Reservas con mínimo 24 hs de anticipación."],
       cats:[A(),M({label:'Menores 4-12'}),{key:'bebe',label:'Ninos 0-3',sub:'sin costo',min:0}],
       precios:{mayjun:{adulto:250000,menor:200000,bebe:0},julago:{adulto:300000,menor:250000,bebe:0}}},
    ]
  },
 
- /* ---------- SAN RAMON ---------- */
+ /* ---------- LA FRAGUA (ex San Ramon) ---------- */
  "san-ramon":{
-   nombre:"Cabalgata San Ramon", subt:"Medio dia con asado criollo", tag:"Cabalgata",
-   desc:"Medio dia a caballo por la estancia San Ramon, cerrando con un asado criollo a la parrilla.",
-   incluye:["Desayuno criollo: tortas fritas, dulces e infusiones","2 horas de cabalgata (aprox.)","Asado criollo completo con ensaladas y postre","Bebidas: vino, gaseosa y agua"],
-   notas:["Traslado al campo opcional.","Menú vegetariano a pedido con anticipación.","Cancelación: 24 hs de anticipación.","Reservas con mínimo 24 hs de anticipación."],
+   nombre:"Cabalgata La Fragua", subt:"Medio dia con asado patagonico", tag:"Cabalgata",
+   desc:"Medio dia a caballo por el Valle de La Fragua, cerrando con un asado patagonico a las brasas.",
+   detalle:"El paseo comienza con el traslado desde Bariloche (aprox. 45 min). Al llegar, nos reciben con un desayuno criollo: infusiones calientes acompañadas de exquisitas tortas fritas caseras.\n\nAntes de iniciar la cabalgata, recibirás una charla introductoria sobre el lugar, los caballos, técnicas de monta y medidas de seguridad.\n\nLa cabalgata dura aproximadamente 2 horas, recorreremos el Valle de La Fragua, transitando entre bosques de transición y la estepa patagónica, cruzando arroyos, vados y suaves lomas. Nuestros caballos, propios de la estancia, están muy bien cuidados y amansados, ideales para una experiencia segura y confiable.\n\nEn el trayecto es posible avistar fauna autóctona en estado natural, como ciervos y el majestuoso cóndor andino, una de las aves voladoras más grandes del mundo.\n\nAl regresar, nos espera un delicioso asado patagónico en la estancia que consta de asado a las brasas, ensaladas frescas y panqueques con dulce de leche de postre. Bebidas incluidas (vino, gaseosa y agua).",
+   incluye:["Desayuno criollo (tortas fritas + mate)","2 horas de cabalgata guiada","Asado campestre patagónico","Vino, gaseosas y agua","Guía experto de la zona"],
+   notas:["Menú vegetariano a pedido con anticipación.","Menores de 5 años no incluye cabalgata (pueden concurrir).","Traslado opcional — activar arriba.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:true,
    opciones:[
      {key:"cab",label:null,
-      incluye:["Desayuno criollo: tortas fritas, dulces e infusiones","2 horas de cabalgata guiada","Asado criollo completo con ensaladas y postre","Bebidas: vino, gaseosa y agua"],
-      notas:["Menú vegetariano a pedido con anticipación.","Menores de 5 años no incluye cabalgata (pueden concurrir).","Traslado opcional — activar arriba.","Reservas con mínimo 24 hs de anticipación."],
+      incluye_sin:[
+        "Desayuno criollo (tortas fritas + mate)",
+        "2 horas de cabalgata guiada",
+        "Asado campestre patagónico",
+        "Vino, gaseosas y agua",
+        "Guía experto de la zona",
+      ],
+      incluye_con:[
+        "Traslado desde Bariloche",
+        "Desayuno criollo (tortas fritas + mate)",
+        "2 horas de cabalgata guiada",
+        "Asado campestre patagónico",
+        "Vino, gaseosas y agua",
+        "Guía experto de la zona",
+      ],
+      notas_sin:["Menú vegetariano a pedido con anticipación.","Menores de 5 años no incluye cabalgata (pueden concurrir).","Traslado no incluido — se puede agregar arriba.","Reservas con mínimo 24 hs de anticipación."],
+      notas_con:["Menú vegetariano a pedido con anticipación.","Menores de 5 años no incluye cabalgata (pueden concurrir).","Reservas con mínimo 24 hs de anticipación."],
       cats:[{key:'mayor',label:'Mayores',min:1},{key:'menor',label:'Menores 5-12',min:0}],
-      precios:{mayor:{sin:230000,con:240000},menor:{sin:220000,con:230000}}},
+      precios:{mayor:{sin:230000,con:240000},menor:{sin:220000,con:220000}}},
    ]
  },
 
  /* ---------- NEUMEYER ---------- */
  "neumeyer":{
    nombre:"Refugio Neumeyer", subt:"Valle del Challhuaco · Bariloche", tag:"Naturaleza",
-   desc:"Un día completo para zambullirse en un extenso bosque nevado de lengas. Asombrarse con la quietud de la naturaleza, degustar gastronomía regional y divertirse con la magia del culipatín. ¿Pensabas que las lagunas congeladas solo existían en las películas? Acompañanos en esta travesía hasta el mirador de la Laguna Verde, ahora totalmente congelada, hogar de la endémica ranita del Challhuaco (única en el mundo). Apta para todas las edades: en familia, en pareja o con amigos. Duración: 7 hs.",
+   desc:"Día completo en el Refugio Neumeyer, en el Valle del Challhuaco: bosque nevado, laguna congelada y la magia del culipatín.",
+   detalle:"Un día completo para zambullirse en un extenso bosque nevado de lengas. Asombrarse con la quietud de la naturaleza, degustar gastronomía regional y divertirse con la magia del culipatín. ¿Pensabas que las lagunas congeladas solo existían en las películas? Acompañanos en esta travesía hasta el mirador de la Laguna Verde, ahora totalmente congelada, hogar de la endémica ranita del Challhuaco (única en el mundo). Apta para todas las edades: en familia, en pareja o con amigos. Duración: 7 hs.",
    incluye:["Pick up dentro del radio de búsqueda del operador","Almuerzo","Merienda","Guía en español y portugués","Uso del refugio, pista y culipatines"],
    notas:["No incluye indumentaria de nieve (gorro, guantes).","No incluye bebidas.","Lunes a domingo · 09:00 a 16:00 hs / 11:00 a 18:00 hs.","Operativo en invierno (junio a septiembre).","Sujeto a condiciones de nieve.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:true, traslado:false,
@@ -616,8 +661,9 @@ const EXC = {
  "circuito-chico":{
    nombre:"Circuito Chico y Colonia Suiza", subt:"El clasico de Bariloche", tag:"Clasico",
    desc:"El paseo imperdible: Llao Llao, Punto Panoramico, Bahia Lopez, Cerro Campanario y la historica Colonia Suiza.",
+   detalle:"El paseo comienza desde el centro de Bariloche, recorriendo la Av. Bustillo, una de nuestras avenidas principales. La primera parada la realizamos a 17 km del centro, en el Cerro Campanario. Allí tendrán tiempo libre para contratar el ascenso en aerosilla y subir a la parte alta del cerro, donde encontrarán cinco miradores y una confitería vidriada ideal para tomar algo caliente. Pueden llevar dinero en efectivo para la aerosilla: la guía se encarga de comprar los tickets en boletería rápida mientras ustedes hacen la fila para subir, así aprovechan mejor el tiempo en la cima.\n\nLuego nos volvemos a encontrar en el vehículo y continuamos hacia la segunda parada: la Capilla San Eduardo, construida por el mismo arquitecto del Hotel Llao Llao, donde podrán tomar fotografías tanto de la capilla como del entorno, y el mirador de Punto Panorámico, con vistas al lago Moreno, al Hotel Llao Llao y al lago Nahuel Huapi, una de las postales más famosas de Bariloche.\n\nFinalmente, vamos a nuestra tercera y última parada: Colonia Suiza, donde estaremos una hora para que puedan recorrer la calle principal y la feria de gastronomía y artesanías. El punto de encuentro va a ser la tradicional casa de té Zurich.",
    incluye:["Recorrido por los miradores del circuito","Parada en la historica Colonia Suiza","Guia acompanante"],
-   notas:["Medio dia.","Reservas con mínimo 24 hs de anticipación."],
+   notas:["Horario de Pick Up (estimado): 13:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Medio dia.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:true, traslado:false,
    leyenda:"Hasta el 30/06: $35.000 por persona · Desde el 01/07: $45.000",
    temporadas:[
@@ -626,33 +672,51 @@ const EXC = {
    ],
    opciones:[{key:"tour",label:null,
     incluye:["Recorrido completo por los miradores del circuito","Parada en Llao Llao y Punto Panoramico","Parada en la historica Colonia Suiza","Guia acompanante"],
-    notas:["Medio dia.","Reservas con mínimo 24 hs de anticipación."],
+    notas:["Horario de Pick Up (estimado): 13:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Medio dia.","Reservas con mínimo 24 hs de anticipación."],
     cats:[{key:'pp',label:'Por persona',min:1}],precios:{base:{pp:35000},alta:{pp:45000}}}]
  },
 
  /* ---------- VILLA BAYO ---------- */
  "villa-bayo":{
-   nombre:"Villa La Angostura y Cerro Bayo", subt:"Dia completo", tag:"Lagos",
+   nombre:"Villa La Angostura y Cerro Bayo", subt:"", tag:"Invierno",
    desc:"Dia completo a Villa La Angostura: su costanera, el bosque andino y las vistas del Cerro Bayo.",
-   incluye:["Traslado ida y vuelta","Tiempo libre en Villa La Angostura","Vistas del Cerro Bayo"],
-   notas:["Disponible a partir del 06/06/2026.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
+   detalle:"Iniciamos nuestro recorrido desde Bariloche con dirección a la ciudad de Villa La Angostura, que se encuentra a unos 83 kilómetros de distancia aproximadamente. Unos 5 kilómetros antes de llegar al centro de la ciudad, nos desviamos para comenzar el ascenso hacia la base del Cerro Bayo. Uno de los objetivos de este paseo es que nuestros pasajeros puedan disfrutar de este centro de ski y de todas las actividades que ofrece, desde clases de ski hasta pistas de culipatín. Al mediodía comenzamos el descenso del cerro hacia la ciudad para poder aprovechar las propuestas gastronómicas que la villa tiene para sus visitantes, donde nos quedaremos aproximadamente unas 2 horas. A las 16:30 horas emprendemos el regreso hacia San Carlos de Bariloche.",
+   incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
+   notas:["Horario de Pick Up (estimado): 08:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Recomendamos averiguar previamente los valores del uso de los medios de elevación.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:true, traslado:false,
    leyenda:"Disponible desde el 06/06/2026",
    temporadas:[
      {key:"unica",nombre:"Disponible",cls:"alta",rangos:[["2026-06-06","2027-12-31"]]},
    ],
    opciones:[{key:"tour",label:null,
-    incluye:["Traslado ida y vuelta","Tiempo libre en Villa La Angostura","Recorrido por la costanera y el bosque andino","Vistas del Cerro Bayo"],
-    notas:["Disponible a partir del 06/06/2026.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
+    incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
+    notas:["Horario de Pick Up (estimado): 08:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Recomendamos averiguar previamente los valores del uso de los medios de elevación.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
     cats:[{key:'pp',label:'Por persona',min:1}],precios:{unica:{pp:93000}}}]
+ },
+
+ /* ---------- CAMPO DE TULIPANES ---------- */
+ "campo-tulipanes":{
+   nombre:"Visita al Campo de Tulipanes", subt:"Trevelin · Salidas limitadas", tag:"Dia completo",
+   desc:"Dia completo a Trevelin por la Ruta 40: el Campo de Tulipanes y las Cascadas Nant y Fall.",
+   detalle:"Partiendo desde Bariloche, nos dirigimos hacia el sur por la emblemática Ruta 40, siempre acompañados por la majestuosidad de la Cordillera de los Andes, que enmarca el camino con paisajes imponentes y únicos de la Patagonia.\n\nNuestra primera parada será en El Bolsón, en la provincia de Río Negro. Reconocido por su belleza natural, su ambiente tranquilo y su producción artesanal, este pintoresco pueblo está rodeado de montañas, ríos y bosques que invitan a disfrutar del entorno. Aquí realizaremos una breve pausa para desayunar y utilizar los baños antes de continuar la travesía.\n\nEl recorrido sigue hacia el sur, atravesando la provincia de Río Negro hasta adentrarnos en Chubut. Tras unas tres horas de viaje, llegaremos al magnífico pueblo de Trevelin, cuyo nombre significa \"Pueblo del Molino\" en galés. Rodeado de un fértil valle y paisajes cordilleranos, Trevelin se presenta como uno de los destinos más encantadores de la Patagonia.\n\nDurante el paseo, nuestro guía coordinará la parada para el almuerzo (no incluido), que podrá realizarse en Esquel o directamente en Trevelin, según el tiempo disponible y las preferencias del grupo.\n\nCampo de Tulipanes\nLa visita central será al Campo de Tulipanes, un espectáculo único en Argentina donde miles de flores transforman el paisaje en un manto de colores. El contraste entre los tulipanes y las montañas nevadas de fondo crea postales inolvidables. La entrada está incluida, y se dispondrá de tiempo para recorrer el lugar y tomar fotografías.\n\nCascadas Nant y Fall\nTambién visitaremos las Cascadas Nant y Fall, un conjunto de siete saltos de agua rodeados de naturaleza. A través de pasarelas estratégicamente ubicadas, podremos apreciar cuatro de ellos en todo su esplendor. Entrada incluida.",
+   incluye:["Pick up y drop off en hoteles céntricos de Bariloche","Guía en español","Entrada al Campo de Tulipanes","Entrada a Cascadas Nant y Fall"],
+   notas:["Duración: 15 horas.","Días de salida: 12, 20 y 26 de octubre 2026.","No incluye comidas ni bebidas.","Reservas con mínimo 24 hs de anticipación."],
+   seasonal:false, traslado:false,
+   defaultMonth:"2026-10",
+   allowedDates:["2026-10-12","2026-10-20","2026-10-26"],
+   opciones:[{key:"tour",label:null,
+    incluye:["Pick up y drop off en hoteles céntricos de Bariloche","Guía en español","Entrada al Campo de Tulipanes","Entrada a Cascadas Nant y Fall"],
+    notas:["Duración: 15 horas.","Días de salida: 12, 20 y 26 de octubre 2026.","No incluye comidas ni bebidas.","Reservas con mínimo 24 hs de anticipación."],
+    cats:[{key:'pp',label:'Por persona',min:1}],precios:{pp:360000}}]
  },
 
  /* ---------- SAN MARTIN ---------- */
  "san-martin":{
    nombre:"San Martin de los Andes - 7 Lagos", subt:"Camino de los Siete Lagos", tag:"Ruta",
    desc:"El mitico Camino de los Siete Lagos hasta San Martin de los Andes, entre lagos, bosques y miradores.",
-   incluye:["Recorrido escenico de los Siete Lagos","Tiempo en San Martin de los Andes","Guia acompanante"],
-   notas:["Dia completo.","Reservas con mínimo 24 hs de anticipación."],
+   detalle:"La ciudad de San Martín de los Andes está ubicada al sur de la provincia de Neuquén. Está enclavada en un amplio valle sobre la costa del Lago Lacar, a una altura de 640 metros sobre el nivel del mar. Saliendo desde Bariloche, emprendemos el viaje hacia San Martín de los Andes: primero pasamos por Villa La Angostura, para luego encarar el Camino de los Siete Lagos, donde vas a poder disfrutar de los paisajes más hermosos de la región, lagos de aguas cristalinas con inusuales colores verdes y azules, en el marco de una región de bosques frondosos y añejos.\n\nLlegamos a San Martín de los Andes, típica ciudad de montaña, donde vas a tener el tiempo necesario para recorrer la ciudad, visitar la ribera del Lago Lacar y disfrutar de la variada y riquísima gastronomía de la zona. Luego nos reunimos en nuestro punto de encuentro para emprender el regreso a Bariloche. Esta es, sin lugar a dudas, una excursión que no puede faltar en tu visita a nuestra zona.",
+   incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
+   notas:["Horario de Pick Up (estimado): 08:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:true, traslado:false,
    leyenda:"Hasta el 30/06: $75.000 por persona · Desde el 01/07: $110.000",
    temporadas:[
@@ -660,17 +724,18 @@ const EXC = {
      {key:"alta",nombre:"Desde 01/07",cls:"alta",rangos:[["2026-07-01","2027-12-31"]]},
    ],
    opciones:[{key:"tour",label:null,
-    incluye:["Recorrido completo por los Siete Lagos","Paradas en miradores panoramicos","Tiempo libre en San Martin de los Andes","Guia acompanante"],
-    notas:["Dia completo.","Reservas con mínimo 24 hs de anticipación."],
+    incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
+    notas:["Horario de Pick Up (estimado): 08:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
     cats:[{key:'pp',label:'Por persona',min:1}],precios:{base:{pp:75000},alta:{pp:110000}}}]
  },
 
  /* ---------- TRONADOR ---------- */
  "tronador":{
-   nombre:"Cerro Tronador y Ventisquero Negro", subt:"Dia completo · 09:00 a 18:00 hs", tag:"Glaciar",
+   nombre:"Cerro Tronador y Ventisquero Negro", subt:"Experiencia imperdible", tag:"Glaciar",
    desc:"Una de las excursiones más fascinantes del Parque Nacional Nahuel Huapi: atravesamos caminos entre lagos, ríos y bosques para llegar al imponente Cerro Tronador, frontera natural entre Argentina y Chile. Durante el recorrido bordeamos los lagos Gutiérrez y Mascardi, cruzamos el puente sobre el Río Manso, paramos en el mirador de la Isla Corazón, visitamos Playa Negra y almorzamos en Pampa Linda en plena montaña. El cierre es el Ventisquero Negro, un glaciar único de color oscuro por los sedimentos volcánicos. Duración: 8 hs.",
-   incluye:["Transporte ida y vuelta","Pick up dentro del radio de búsqueda de la agencia","Guía en español y portugués"],
-   notas:["No incluye comidas ni bebidas.","No incluye impuesto de ingreso al Parque Nacional.","Llevar DNI físico obligatorio.","Llevar dinero en efectivo: no hay señal para pagos digitales.","No se suspende por lluvia.","Lunes a domingo.","Reservas con mínimo 24 hs de anticipación."],
+   detalle:"Este recorrido conquista tanto por el camino como por el destino. Vamos bordeando los lagos Gutiérrez y Mascardi, cruzamos el puente sobre el río Manso y llegamos a Pampa Linda, un rincón rodeado de montañas ideal para almorzar en plena naturaleza.\n\nEn el trayecto se suceden cascadas, vertientes y bosques patagónicos que invitan a bajar un cambio y dejar la rutina atrás por un rato.\n\nY al llegar al pie del Cerro Tronador, con un poco de suerte vas a escuchar el estruendo del hielo desprendiéndose en las alturas: un instante que se queda grabado.",
+   incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
+   notas:["Horario de Pick Up (estimado): 09:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Recomendamos averiguar previamente el valor del ingreso a Parques Nacionales. Se abona el día de la excursión, previo a llegar a Pampa Linda. Residentes argentinos tienen descuento presentando el DNI. Es importante contar con efectivo para realizar dicho pago, ya que no hay señal para pagos digitales.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:true, traslado:false,
    leyenda:"Hasta el 30/06: $67.000 por persona · Desde el 01/07: $100.000",
    temporadas:[
@@ -678,15 +743,16 @@ const EXC = {
      {key:"alta",nombre:"Desde 01/07",cls:"alta",rangos:[["2026-07-01","2027-12-31"]]},
    ],
    opciones:[{key:"tour",label:null,
-    incluye:["Transporte ida y vuelta","Pick up dentro del radio de búsqueda de la agencia","Bordeando los lagos Gutiérrez y Mascardi","Mirador de la Isla Corazón","Playa Negra","Almuerzo en Pampa Linda (entorno de montaña)","Ventisquero Negro","Guía en español y portugués"],
-    notas:["No incluye comidas ni bebidas.","No incluye impuesto de ingreso al Parque Nacional.","Llevar DNI físico obligatorio.","Llevar dinero en efectivo: no hay señal para pagos digitales.","No se suspende por lluvia.","Lunes a domingo.","Reservas con mínimo 24 hs de anticipación."],
+    incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
+    notas:["Horario de Pick Up (estimado): 09:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Recomendamos averiguar previamente el valor del ingreso a Parques Nacionales. Se abona el día de la excursión, previo a llegar a Pampa Linda. Residentes argentinos tienen descuento presentando el DNI. Es importante contar con efectivo para realizar dicho pago, ya que no hay señal para pagos digitales.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
     cats:[{key:'pp',label:'Por persona',min:1}],precios:{base:{pp:67000},alta:{pp:100000}}}]
  },
 
  /* ---------- ISLA VICTORIA & BOSQUE DE ARRAYANES ---------- */
  "isla-victoria":{
    nombre:"Isla Victoria y Bosque de Arrayanes", subt:"Navegando el Nahuel Huapi · 14:00 a 18:30", tag:"Navegación",
-   desc:"Tras una hora de navegación, partiendo desde Puerto Pañuelo en la impresionante Península de Llao Llao, se arriba a la península de Quetrihue, asiento del Bosque de Arrayanes. El arrayán (Quetrihue en lengua mapuche) es un arbusto de exquisito color azafrán y flores blancas que en este lugar único en el mundo toma la envergadura de árbol formando un mágico e inusual bosque. Luego se navega hacia Puerto Anchorena, Isla Victoria, donde es posible disfrutar de flora autóctona y llegar hasta Playa del Toro para descubrir pinturas rupestres en una espléndida playa de arena volcánica. La compañía de Guías del Parque Nacional acompaña con información precisa en cada paso del recorrido.",
+   desc:"Navegando el Nahuel Huapi hasta el mágico Bosque de Arrayanes y la Isla Victoria, con guías del Parque Nacional.",
+   detalle:"Tras una hora de navegación, partiendo desde Puerto Pañuelo en la impresionante Península de Llao Llao, se arriba a la península de Quetrihue, asiento del Bosque de Arrayanes. El arrayán (Quetrihue en lengua mapuche) es un arbusto de exquisito color azafrán y flores blancas que en este lugar único en el mundo toma la envergadura de árbol formando un mágico e inusual bosque. Luego se navega hacia Puerto Anchorena, Isla Victoria, donde es posible disfrutar de flora autóctona y llegar hasta Playa del Toro para descubrir pinturas rupestres en una espléndida playa de arena volcánica. La compañía de Guías del Parque Nacional acompaña con información precisa en cada paso del recorrido.",
    notas_gen:["Salidas de lunes a domingo.","Horario: 14:00 a 18:30 hs.","Punto de embarque: Puerto Pañuelo, Península Llao Llao.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:true,
    pickupPoints:[
@@ -715,7 +781,8 @@ const EXC = {
        "No incluye tasa de embarque ni ingreso al Parque Nacional.",
        "No incluye comidas.",
        "Traslado no incluido — se puede agregar arriba.",
-       "Jubilados argentinos con carnet: precio igual al menor.",
+       "Menores y Jubilados argentinos presentando carnet 50% off.",
+       "En caso de ser un grupo o familia de 4 o más personas 10% off.",
        "Infantes (0 a 4 años): sin cargo.",
        "Reservas con mínimo 24 hs de anticipación.",
      ],
@@ -724,7 +791,8 @@ const EXC = {
        "Embarque en Puerto Pañuelo, Península Llao Llao.",
        "No incluye tasa de embarque ni ingreso al Parque Nacional.",
        "No incluye comidas.",
-       "Jubilados argentinos con carnet: precio igual al menor.",
+       "Menores y Jubilados argentinos presentando carnet 50% off.",
+       "En caso de ser un grupo o familia de 4 o más personas 10% off.",
        "Infantes (0 a 4 años): sin cargo.",
        "Reservas con mínimo 24 hs de anticipación.",
      ],
@@ -735,13 +803,15 @@ const EXC = {
        {key:'infante',label:'Infantes',sub:'0 a 4 años · sin cargo',min:0},
      ],
      precios:{adulto:{sin:140000,con:162000},menor:{sin:70000,con:92000},jubilado:{sin:70000,con:92000},infante:{sin:0,con:0}},
+     groupDiscount:{minPax:4,pct:0.10},
    }]
  },
 
  /* ---------- PUERTO BLEST & CASCADA LOS CANTAROS ---------- */
  "puerto-blest":{
    nombre:"Puerto Blest y Cascada Los Cántaros", subt:"Navegando el Nahuel Huapi · 10:00 a 17:00", tag:"Navegación",
-   desc:"Zarpando de Puerto Pañuelo, en la península del Llao Llao, la excursión propone conocer el islote Centinela, donde descansan los restos del Perito Francisco Pascasio Moreno, padre de los Parques Nacionales en la Argentina, para arribar a la Cascada de los Cántaros. Luego, por la frondosa selva Valdiviana, se llega al Lago Cántaros donde nace la cascada y habita un alerce con más de 1.500 años. Se navegan cinco minutos más para llegar a Puerto Blest, que ha maravillado a viajeros de todo el mundo. Desde allí es posible visitar la bahía y conocer el Lago Frías, cuyas aguas verdes provienen del glaciar del Cerro Tronador, límite natural entre Argentina y Chile.",
+   desc:"Navegando el Nahuel Huapi hasta la Cascada de los Cántaros y Puerto Blest, en plena selva valdiviana.",
+   detalle:"Zarpando de Puerto Pañuelo, en la península del Llao Llao, la excursión propone conocer el islote Centinela, donde descansan los restos del Perito Francisco Pascasio Moreno, padre de los Parques Nacionales en la Argentina, para arribar a la Cascada de los Cántaros. Luego, por la frondosa selva Valdiviana, se llega al Lago Cántaros donde nace la cascada y habita un alerce con más de 1.500 años. Se navegan cinco minutos más para llegar a Puerto Blest, que ha maravillado a viajeros de todo el mundo. Desde allí es posible visitar la bahía y conocer el Lago Frías, cuyas aguas verdes provienen del glaciar del Cerro Tronador, límite natural entre Argentina y Chile.",
    notas_gen:["Salidas de lunes a domingo.","Horario: 10:00 a 17:00 hs.","Punto de embarque: Puerto Pañuelo, Península Llao Llao.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:true, lagoFrias:true,
    pickupPoints:[
@@ -756,7 +826,6 @@ const EXC = {
        "Visita al islote Centinela (Perito Moreno)",
        "Cascada de los Cántaros",
        "Caminata por la selva Valdiviana hasta el Lago Cántaros",
-       "Puerto Blest",
        "Audioguía en español e inglés",
      ],
      incluye_con:[
@@ -765,7 +834,6 @@ const EXC = {
        "Visita al islote Centinela (Perito Moreno)",
        "Cascada de los Cántaros",
        "Caminata por la selva Valdiviana hasta el Lago Cántaros",
-       "Puerto Blest",
        "Audioguía en español e inglés",
      ],
      incluye_lagofrias:[
@@ -780,7 +848,6 @@ const EXC = {
        "Visita al islote Centinela (Perito Moreno)",
        "Cascada de los Cántaros",
        "Caminata por la selva Valdiviana hasta el Lago Cántaros",
-       "Puerto Blest",
        "Traslado en ómnibus Puerto Blest → Puerto Alegre (3 km)",
        "Navegación por el Lago Frías (aguas verde glaciar)",
        "Llegada a Puerto Frías (próximo al límite con Chile)",
@@ -793,7 +860,7 @@ const EXC = {
        "No incluye comidas.",
        "Traslado no incluido — se puede agregar arriba.",
        "Extensión Lago Frías disponible como opcional.",
-       "Jubilados argentinos con carnet: precio igual al menor.",
+       "Menores y Jubilados argentinos presentando carnet 50% off.",
        "Infantes (0 a 4 años): sin cargo.",
        "Reservas con mínimo 24 hs de anticipación.",
      ],
@@ -803,7 +870,7 @@ const EXC = {
        "No incluye tasa de embarque ni ingreso al Parque Nacional.",
        "No incluye comidas.",
        "Extensión Lago Frías disponible como opcional.",
-       "Jubilados argentinos con carnet: precio igual al menor.",
+       "Menores y Jubilados argentinos presentando carnet 50% off.",
        "Infantes (0 a 4 años): sin cargo.",
        "Reservas con mínimo 24 hs de anticipación.",
      ],
@@ -824,7 +891,7 @@ const fmt = n => "$"+new Intl.NumberFormat("es-AR").format(n);
 const params = new URLSearchParams(location.search);
 let id = params.get("exc"); if(!EXC[id]) id = "neumeyer";
 
-let state = {opt:0, con:false, lf:false, pickup:"", fecha:"", counts:{}};
+let state = {opt:0, con:false, lf:false, pickup:"", fecha:"", counts:{}, nombre:"", tel:"", hosp:""};
 
 function seasonKeyFor(exc, dateStr){
   if(!exc.seasonal || !dateStr) return null;
@@ -846,6 +913,14 @@ function priceFor(opt,catKey,sk,con){
   }
   return base;
 }
+function pricingFor(opt,sk,con){
+  let subtotal=0, pax=0;
+  opt.cats.forEach(c=>{ pax+=state.counts[c.key]; subtotal+=state.counts[c.key]*priceFor(opt,c.key,sk,con); });
+  let discount=0;
+  const gd = opt.groupDiscount;
+  if(gd && pax>=gd.minPax) discount = Math.round(subtotal*gd.pct);
+  return {pax, subtotal, discount, total: subtotal-discount};
+}
 
 /* =================== CAROUSEL ================================= */
 let carImages = [], carIdx = 0, carTimer = null;
@@ -857,9 +932,11 @@ function buildCarousel(){
   const dots = document.getElementById("carousel-dots");
 
   track.classList.toggle("single", carImages.length<=1);
-  track.innerHTML = carImages.map((src,i)=>
-    '<div class="car-slide" data-i="'+i+'"><img src="'+src+'" alt="'+EXC[id].nombre+'"></div>'
-  ).join("");
+  track.innerHTML = carImages.map((item,i)=>{
+    const src = typeof item==="string" ? item : item.src;
+    const pos = typeof item==="string" ? "" : ' style="object-position:'+item.pos+'"';
+    return '<div class="car-slide" data-i="'+i+'"><img src="'+src+'" alt="'+EXC[id].nombre+'"'+pos+'></div>';
+  }).join("");
 
   track.querySelectorAll(".car-slide").forEach(el=>{
     el.addEventListener("click", ()=>{
@@ -928,7 +1005,9 @@ let calYear, calMonth;
 
 function calInit(){
   const now = new Date();
-  calYear = now.getFullYear(); calMonth = now.getMonth();
+  const dm = EXC[id].defaultMonth;
+  if(dm){ const [y,m] = dm.split("-").map(Number); calYear = y; calMonth = m-1; }
+  else { calYear = now.getFullYear(); calMonth = now.getMonth(); }
   document.getElementById("cal-prev").onclick = () => { calMonth--; if(calMonth<0){calMonth=11;calYear--;} renderCal(); };
   document.getElementById("cal-next").onclick = () => { calMonth++; if(calMonth>11){calMonth=0;calYear++;} renderCal(); };
   document.getElementById("date-trigger").onclick = (e) => { e.stopPropagation(); toggleCal(); };
@@ -990,8 +1069,10 @@ function renderCal(){
     const isPast = dateStr <= todayStr;
     const isTomorrow = dateStr === tomorrowStr;
     const beforeStart = startStr && dateStr < startStr;
+    const isClosedDow = exc.closedDow && exc.closedDow.includes(new Date(calYear, calMonth, d).getDay());
+    const isNotAllowed = exc.allowedDates && !exc.allowedDates.includes(dateStr);
 
-    if(isPast || beforeStart){
+    if(isPast || beforeStart || isClosedDow || isNotAllowed){
       btn.disabled = true;
     } else if(isTomorrow){
       btn.classList.add("cal-tomorrow");
@@ -1062,6 +1143,11 @@ function renderContent(optIdx){
 
   const finalNotas = [...(notas||[])];
 
+  const detalle = opt.detalle || e.detalle;
+  document.getElementById("block-detalle").hidden = !detalle;
+  if(detalle) document.getElementById("c-detalle").textContent=detalle;
+  document.getElementById("c-detalle-titulo").textContent = opt.tituloCorto ? "El paseo - "+opt.tituloCorto : "El paseo";
+
   const chk='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D4F" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>';
   const dot='<svg width="16" height="16" viewBox="0 0 24 24" fill="#E9A23C"><circle cx="12" cy="12" r="4"/></svg>';
 
@@ -1082,7 +1168,8 @@ function renderStatic(){
   const e=EXC[id];
   document.getElementById("b-tag").textContent=e.tag;
   document.getElementById("b-nombre").textContent=e.nombre;
-  document.getElementById("b-subt").textContent=e.subt;
+  document.getElementById("b-subt").textContent=e.subt||"";
+  document.getElementById("b-subt").hidden=!e.subt;
   document.getElementById("c-desc").textContent=e.desc;
   document.title="Reservar "+e.nombre+" · Vivir Viajes";
 
@@ -1145,6 +1232,14 @@ function renderStatic(){
   } else { flf.hidden=true; }
 
   document.getElementById("go").onclick = reservar;
+  ["c-nombre","c-tel","c-hosp"].forEach(fid=>{
+    document.getElementById(fid).addEventListener("input", ()=>{
+      state.nombre = document.getElementById("c-nombre").value.trim();
+      state.tel = document.getElementById("c-tel").value.trim();
+      state.hosp = document.getElementById("c-hosp").value.trim();
+      render();
+    });
+  });
   resetCounts();
   renderContent(0);
 }
@@ -1203,15 +1298,27 @@ function render(){
 
   renderPax(sk);
   const totalEl=document.getElementById("total"), hint=document.getElementById("hint"), go=document.getElementById("go");
+  const pbEl=document.getElementById("price-breakdown");
 
   const cotizar=!!e.cotizar;
   const offSeason = e.seasonal && state.fecha && sk==="__off__";
   const noDate = !state.fecha;
   const beforeStart = e.startDate && state.fecha && state.fecha < e.startDate;
   const canPrice = !cotizar && (!e.seasonal || (state.fecha && sk!=="__off__"));
-  let total=0,pax=0;
+  let total=0,pax=0,discount=0,subtotal=0;
   opt.cats.forEach(c=>pax+=state.counts[c.key]);
-  if(canPrice){ opt.cats.forEach(c=>total+=state.counts[c.key]*priceFor(opt,c.key,sk,state.con)); }
+  if(canPrice){ const p=pricingFor(opt,sk,state.con); subtotal=p.subtotal; discount=p.discount; total=p.total; }
+
+  if(canPrice && discount>0 && pax>0){
+    const gd = opt.groupDiscount;
+    const pct = Math.round(gd.pct*100);
+    pbEl.hidden=false;
+    pbEl.innerHTML =
+      '<div class="pb-row"><span>Subtotal</span><span>'+fmt(subtotal)+'</span></div>'+
+      '<div class="pb-row pb-discount"><span>Descuento grupo familiar ('+pct+'%, '+gd.minPax+'+ pax)</span><span>-'+fmt(discount)+'</span></div>';
+  } else {
+    pbEl.hidden=true; pbEl.innerHTML="";
+  }
 
   if(cotizar){
     totalEl.textContent = pax>0 ? "A cotizar" : "—";
@@ -1225,15 +1332,29 @@ function render(){
 
   const needsPickup = state.con && EXC[id].pickupPoints && EXC[id].pickupPoints.length && !state.pickup;
 
-  if(noDate){ hint.textContent="Elegí una fecha para continuar."; go.disabled=true; go.textContent="Reservar"; }
-  else if(beforeStart){ hint.textContent="Las clases arrancan el "+e.startDate.split("-").reverse().join("/")+". Elegí una fecha posterior."; go.disabled=true; go.textContent="Reservar"; }
+  const missingContact = !state.nombre || !state.tel || !state.hosp;
+
+  if(noDate){ hint.textContent="Elegí una fecha para continuar."; go.disabled=true; go.textContent="Pagar y reservar"; }
+  else if(beforeStart){ hint.textContent="Las clases arrancan el "+e.startDate.split("-").reverse().join("/")+". Elegí una fecha posterior."; go.disabled=true; go.textContent="Pagar y reservar"; }
   else if(offSeason){ hint.textContent="Esa fecha está fuera de temporada. Escribinos para ver disponibilidad."; go.disabled=false; go.textContent="Consultar por WhatsApp"; }
-  else if(pax<=0){ hint.textContent="Agregá al menos un pasajero."; go.disabled=true; go.textContent="Reservar"; }
-  else if(needsPickup){ hint.textContent="Seleccioná tu punto de pick up."; go.disabled=true; go.textContent="Reservar"; }
-  else { hint.textContent=""; go.disabled=false; go.textContent="Reservar por WhatsApp"; }
+  else if(pax<=0){ hint.textContent="Agregá al menos un pasajero."; go.disabled=true; go.textContent="Pagar y reservar"; }
+  else if(needsPickup){ hint.textContent="Seleccioná tu punto de pick up."; go.disabled=true; go.textContent="Pagar y reservar"; }
+  else if(missingContact){ hint.textContent="Completá tus datos de contacto para reservar."; go.disabled=true; go.textContent="Pagar y reservar"; }
+  else { hint.textContent=""; go.disabled=false; go.textContent="Pagar y reservar"; }
 }
 
 function reservar(){
+  const e=EXC[id];
+  const sk=seasonKeyFor(e,state.fecha);
+  const offSeason = e.seasonal && state.fecha && sk==="__off__";
+  if(e.cotizar || offSeason){
+    reservarPorWhatsApp();
+  } else {
+    pagarConMercadoPago();
+  }
+}
+
+function reservarPorWhatsApp(){
   const e=EXC[id], opt=curOpt();
   const sk=seasonKeyFor(e,state.fecha);
   const fechaTxt = state.fecha ? state.fecha.split("-").reverse().join("/") : "(a definir)";
@@ -1247,9 +1368,58 @@ function reservar(){
   const detalle=[]; opt.cats.forEach(c=>{ if(state.counts[c.key]>0) detalle.push(state.counts[c.key]+" "+c.label); });
   if(detalle.length) lines.push("• Pasajeros: "+detalle.join(", "));
   const canPrice = !e.cotizar && (!e.seasonal || (state.fecha && sk!=="__off__"));
-  if(canPrice){ let total=0; opt.cats.forEach(c=>total+=state.counts[c.key]*priceFor(opt,c.key,sk,state.con)); if(total>0) lines.push("• Total estimado: "+fmt(total)); }
+  if(canPrice){
+    const p=pricingFor(opt,sk,state.con);
+    if(p.discount>0) lines.push("• Descuento grupo familiar: -"+fmt(p.discount));
+    if(p.total>0) lines.push("• Total estimado: "+fmt(p.total));
+  }
   const url="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(lines.join("\n"));
   window.open(url,"_blank");
+}
+
+async function pagarConMercadoPago(){
+  const go=document.getElementById("go");
+  const prevText=go.textContent;
+  go.disabled=true;
+  go.textContent="Redirigiendo a Mercado Pago...";
+
+  const e=EXC[id], opt=curOpt();
+  const sk=seasonKeyFor(e,state.fecha);
+  const fechaTxt = state.fecha.split("-").reverse().join("/");
+  const p = pricingFor(opt,sk,state.con);
+  const detalle=[]; opt.cats.forEach(c=>{ if(state.counts[c.key]>0) detalle.push(state.counts[c.key]+" "+c.label); });
+
+  const payload = {
+    excursionId: id,
+    excursion: e.nombre,
+    opcion: opt.label || null,
+    fecha: fechaTxt,
+    traslado: e.traslado ? (state.con?"Con traslado":"Sin traslado") : null,
+    pickup: state.con ? (state.pickup||null) : null,
+    lagoFrias: e.lagoFrias ? (state.lf?"Si":"No") : null,
+    pasajeros: detalle.join(", "),
+    descuentoGrupal: p.discount>0 ? p.discount : null,
+    total: p.total,
+    nombre: state.nombre,
+    telefono: state.tel,
+    hospedaje: state.hosp,
+  };
+
+  try{
+    const resp = await fetch("/api/create-preference", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify(payload),
+    });
+    const data = await resp.json();
+    if(!resp.ok || !data.init_point) throw new Error(data.error || "No se pudo iniciar el pago");
+    console.log("Mercado Pago init points (para debug manual):", {usado: data.init_point, produccion: data.init_point_prod, sandbox: data.init_point_sandbox});
+    window.location.href = data.init_point;
+  }catch(err){
+    alert("Hubo un problema iniciando el pago:\n\n"+(err && err.message ? err.message : err));
+    go.disabled=false;
+    go.textContent=prevText;
+  }
 }
 
 buildSwitch();
