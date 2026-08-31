@@ -59,6 +59,17 @@
   .block{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.4rem 1.5rem;margin-bottom:1.2rem;transition:opacity .25s}
   .block h3{font-family:var(--display);font-weight:600;font-size:1.02rem;color:var(--navy);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
   .block p{font-size:.95rem;color:#33425e;line-height:1.65;margin:0;white-space:pre-line}
+  .related{margin:2.6rem 0 3.2rem}
+  .related h2{font-family:var(--display);font-weight:700;font-size:1.35rem;color:var(--navy);margin-bottom:1.1rem}
+  .related-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+  .related-card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s}
+  .related-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .related-card .img{height:130px;background-size:cover;background-position:center;position:relative}
+  .related-card .img .tag{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.94);color:var(--navy);font-size:.68rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:.26rem .55rem;border-radius:6px}
+  .related-card .body{padding:.95rem 1.05rem 1.15rem}
+  .related-card h4{font-family:var(--display);font-weight:600;font-size:.98rem;color:var(--navy);margin-bottom:.35rem}
+  .related-card p{font-size:.84rem;color:var(--ink-soft);line-height:1.5}
+  @media(max-width:860px){.related-cards{grid-template-columns:1fr}}
   .list{list-style:none;display:flex;flex-direction:column;gap:.55rem}
   .list li{display:flex;gap:.6rem;font-size:.95rem;color:#33425e}
   .list li svg{flex:0 0 auto;margin-top:3px}
@@ -289,6 +300,10 @@
       </div>
     </aside>
   </div>
+  <div class="related" id="related-section" hidden>
+    <h2>También te puede interesar</h2>
+    <div class="related-cards" id="related-cards"></div>
+  </div>
 </div>
 
 <footer>
@@ -343,6 +358,7 @@ const EXC = {
  "la-cueva":{
    nombre:"La Cueva · Motos de nieve", subt:"Cerro Catedral · Bariloche", tag:"Motos de nieve",
    desc:"Viví la nieve del Cerro Catedral arriba de una moto. Elegí la travesía diurna, el After Ski con fondue o el Nocturno con cena de 4 pasos.",
+   relacionadas:["roca-negra","eas"],
    incluye:["Paseo en moto de nieve por el Cerro Catedral","Charla tecnica de manejo","After Ski y Nocturno: incluyen traslados y experiencia gastronomica"],
    notas:["Conduccion exclusiva para mayores de 18 (o 17 con registro).","Cascos incluidos. No incluye ropa de nieve.","La Travesia Diurna no incluye traslados al cerro.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:false,
@@ -369,6 +385,7 @@ const EXC = {
  "eas":{
    nombre:"Clases de Ski & Snowboard", subt:"Escuela en el Cerro Catedral", tag:"Clases",
    desc:"Clases de ski y snowboard en el Cerro Catedral con instructores certificados. Bautismo grupal para principiantes, clases exclusivas y semi exclusivas.",
+   relacionadas:["la-cueva","roca-negra"],
    incluye:["2 horas de clase con instructor certificado","Equipo completo: esquís, botas y bastones"],
    notas:["No incluye pase de medios de elevación (se compra aparte).","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:true,
@@ -563,6 +580,7 @@ const EXC = {
  "roca-negra":{
    nombre:"Roca Negra · Refugio", subt:"Raquetas + fondue · Colonia Suiza", tag:"Raquetas & Fondue",
    desc:"Una aventura en la nieve: caminata con raquetas hasta un refugio de montaña y una fondue para entrar en calor.",
+   relacionadas:["la-cueva","neumeyer"],
    detalle:"Los pasajeros son recogidos y trasladados a la base del Cerro López. Desde allí iniciamos el ascenso en vehículos 4x4, por un escarpado camino de montaña entre bosques de coihues centenarios y altas lengas. Las curvas del camino son miradores naturales hacia la inmensidad del Parque Nacional Nahuel Huapi, con sus lagos, islas y montañas.\n\nDespués de las primeras fotos, iniciamos la caminata. Nos equipamos con raquetas de nieve y el guía explica el funcionamiento y la técnica para caminar con ellas — un instrumento que se ajusta al calzado y permite transitar por zonas nevadas sin hundirse. Durante el recorrido (aproximadamente una hora) el guía comparte la historia del lugar mientras disfrutamos de la belleza natural que esta montaña tiene para ofrecer.\n\nFinalizada la caminata, una cálida bienvenida nos espera en Roca Negra: fondue de queso o de chocolate, según el horario elegido. Allí en lo alto, con una impresionante vista de la región, compartimos el momento en torno a la fondue. El descenso es nuevamente en los vehículos 4x4, hasta la base del cerro, donde finaliza la excursión.",
    incluye:["Traslado ida y vuelta desde y hacia el centro","Ascenso y descenso en Land Rover 4x4","Caminata guiada con raquetas","Fondue a elección — 1 por reserva (queso o chocolate)"],
    notas:["Días de salida: lunes a sábado. Domingo cerrado.","Apto para toda la familia: dificultad baja.","Niños de 0-3 años sin costo.","Bebidas frías no incluidas.","Pick up en Galería del Sol / NH Edelweiss (centro).","Reservas con mínimo 24 hs de anticipación."],
@@ -590,6 +608,7 @@ const EXC = {
  "san-ramon":{
    nombre:"Cabalgata La Fragua", subt:"Medio dia con asado patagonico", tag:"Cabalgata",
    desc:"Medio día a caballo por el Valle de La Fragua, cerrando con un asado patagónico a las brasas.",
+   relacionadas:["neumeyer","circuito-chico"],
    detalle:"El paseo comienza con el traslado desde Bariloche (aprox. 45 min). Al llegar, nos reciben con un desayuno criollo: infusiones calientes y exquisitas tortas fritas caseras.\n\nAntes de montar, una charla introductoria cubre el lugar, los caballos, las técnicas de monta y las medidas de seguridad.\n\nLa cabalgata dura aproximadamente 2 horas por el Valle de La Fragua, transitando entre bosques de transición y la estepa patagónica, cruzando arroyos, vados y suaves lomas. Los caballos de la estancia están muy bien cuidados y amansados — ideales para una experiencia segura y confiable para toda la familia.\n\nEn el trayecto es posible avistar fauna autóctona, como ciervos y el majestuoso cóndor andino, una de las aves voladoras más grandes del mundo.\n\nAl regresar, nos espera un asado patagónico a las brasas con ensaladas frescas y panqueques con dulce de leche de postre. Bebidas incluidas: vino, gaseosa y agua.",
    incluye:["Desayuno criollo (tortas fritas + mate)","2 horas de cabalgata guiada","Asado campestre patagónico","Vino, gaseosas y agua","Guía experto de la zona"],
    notas:["Menú vegetariano a pedido con anticipación.","Menores de 5 años no incluye cabalgata (pueden concurrir).","Traslado opcional — activar arriba.","Reservas con mínimo 24 hs de anticipación."],
@@ -622,6 +641,7 @@ const EXC = {
  "neumeyer":{
    nombre:"Refugio Neumeyer", subt:"Valle del Challhuaco · Bariloche", tag:"Naturaleza",
    desc:"Día completo en el Refugio Neumeyer, en el Valle del Challhuaco: bosque nevado, laguna congelada y la magia del culipatín.",
+   relacionadas:["roca-negra","san-ramon"],
    detalle:"Un día completo para zambullirse en un extenso bosque nevado de lengas: asombrarse con la quietud de la naturaleza, degustar gastronomía regional y divertirse con la magia del culipatín.\n\n¿Pensabas que las lagunas congeladas solo existían en las películas? Acompañanos en esta travesía hasta el mirador de la Laguna Verde, ahora totalmente congelada, hogar de la endémica ranita del Challhuaco (única en el mundo).\n\nApta para todas las edades: en familia, en pareja o con amigos. Duración: 7 hs.",
    incluye:["Pick up dentro del radio de búsqueda del operador","Almuerzo","Merienda","Guía en español y portugués","Uso del refugio, pista y culipatines"],
    notas:["No incluye indumentaria de nieve (gorro, guantes).","No incluye bebidas.","Lunes a domingo · 09:00 a 16:00 hs / 11:00 a 18:00 hs.","Operativo en invierno (junio a septiembre).","Sujeto a condiciones de nieve.","Reservas con mínimo 24 hs de anticipación."],
@@ -669,6 +689,7 @@ const EXC = {
  "circuito-chico":{
    nombre:"Circuito Chico y Colonia Suiza", subt:"El clasico de Bariloche", tag:"Clasico",
    desc:"El paseo imperdible: Llao Llao, Punto Panorámico, Bahía López, Cerro Campanario y la histórica Colonia Suiza.",
+   relacionadas:["villa-bayo","tronador"],
    detalle:"El paseo parte desde el centro de Bariloche por la Av. Bustillo, una de las avenidas más bellas de la ciudad.\n\nPrimera parada: Cerro Campanario, a 17 km del centro. Al llegar, la guía se encarga de comprar los tickets de la aerosilla en boletería mientras los pasajeros hacen la fila para subir — así se aprovecha mejor el tiempo. En la parte alta los esperan cinco miradores y una confitería vidriada ideal para tomar algo caliente con las mejores vistas de Bariloche.\n\nSegunda parada: la Capilla San Eduardo — construida por el mismo arquitecto del Hotel Llao Llao — y el mirador de Punto Panorámico, con vistas al lago Moreno, al Llao Llao y al Nahuel Huapi. Una de las postales más famosas de Bariloche.\n\nTercera y última parada: Colonia Suiza. Una hora para recorrer la calle principal y la feria de gastronomía y artesanías. El punto de encuentro es la tradicional Casa de Té Zurich.",
    incluye:["Recorrido por los miradores del circuito","Parada en la historica Colonia Suiza","Guia acompanante"],
    notas:["Horario de Pick Up (estimado): 13:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Medio dia.","Reservas con mínimo 24 hs de anticipación."],
@@ -688,6 +709,7 @@ const EXC = {
  "villa-bayo":{
    nombre:"Villa La Angostura y Cerro Bayo", subt:"", tag:"Invierno",
    desc:"Dia completo a Villa La Angostura: su costanera, el bosque andino y las vistas del Cerro Bayo.",
+   relacionadas:["circuito-chico","san-martin"],
    detalle:"Partimos desde Bariloche hacia Villa La Angostura, a unos 83 km de distancia. Unos 5 km antes del centro, nos desviamos para ascender hacia la base del Cerro Bayo, un centro de ski ideal para disfrutar del invierno patagónico: desde clases de ski y snowboard hasta pistas de culipatín para toda la familia.\n\nAl mediodía iniciamos el descenso hacia la villa para explorar su oferta gastronómica — aproximadamente 2 horas para comer, recorrer y descansar.\n\nA las 16:30 emprendemos el regreso a Bariloche.",
    incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
    notas:["Horario de Pick Up (estimado): 08:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Recomendamos averiguar previamente los valores del uso de los medios de elevación.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
@@ -706,6 +728,7 @@ const EXC = {
  "campo-tulipanes":{
    nombre:"Visita al Campo de Tulipanes", subt:"Trevelin · Salidas limitadas", tag:"Dia completo",
    desc:"Dia completo a Trevelin por la Ruta 40: el Campo de Tulipanes y las Cascadas Nant y Fall.",
+   relacionadas:["san-martin","tronador"],
    detalle:"Partiendo desde Bariloche, nos dirigimos hacia el sur por la emblemática Ruta 40, siempre acompañados por la majestuosidad de la Cordillera de los Andes, que enmarca el camino con paisajes imponentes y únicos de la Patagonia.\n\nLa primera parada es El Bolsón, en la provincia de Río Negro: un pintoresco pueblo reconocido por su belleza natural, su ambiente tranquilo y su producción artesanal, rodeado de montañas, ríos y bosques. Aquí realizaremos una breve pausa para desayunar y utilizar los baños antes de continuar la travesía.\n\nEl recorrido sigue hacia el sur, atravesando la provincia de Río Negro hasta adentrarnos en Chubut. Tras unas tres horas de viaje, llegaremos al magnífico pueblo de Trevelin, cuyo nombre significa \"Pueblo del Molino\" en galés. Rodeado de un fértil valle y paisajes cordilleranos, Trevelin se presenta como uno de los destinos más encantadores de la Patagonia.\n\nDurante el paseo, nuestro guía coordinará la parada para el almuerzo (no incluido), que podrá realizarse en Esquel o directamente en Trevelin, según el tiempo disponible y las preferencias del grupo.\n\nCampo de Tulipanes\nLa visita central es el Campo de Tulipanes, un espectáculo único en Argentina donde miles de flores transforman el paisaje en un manto de colores. El contraste entre los tulipanes y las montañas nevadas de fondo crea postales inolvidables. La entrada está incluida, y se dispondrá de tiempo para recorrer el lugar y tomar fotografías.\n\nCascadas Nant y Fall\nTambién visitaremos las Cascadas Nant y Fall, un conjunto de siete saltos de agua rodeados de naturaleza. A través de pasarelas estratégicamente ubicadas, podremos apreciar cuatro de ellos en todo su esplendor. Entrada incluida.",
    incluye:["Pick up y drop off en hoteles céntricos de Bariloche","Guía en español","Entrada al Campo de Tulipanes","Entrada a Cascadas Nant y Fall"],
    notas:["Duración: 15 horas.","Días de salida: 12, 20 y 26 de octubre 2026.","No incluye comidas ni bebidas.","Reservas con mínimo 24 hs de anticipación."],
@@ -722,6 +745,7 @@ const EXC = {
  "san-martin":{
    nombre:"San Martin de los Andes - 7 Lagos", subt:"Camino de los Siete Lagos", tag:"Ruta",
    desc:"El mítico Camino de los Siete Lagos hasta San Martín de los Andes, entre lagos, bosques y miradores.",
+   relacionadas:["villa-bayo","tronador"],
    detalle:"Partiendo desde Bariloche, el viaje hacia San Martín de los Andes atraviesa Villa La Angostura y el mítico Camino de los Siete Lagos: lagos de aguas cristalinas con inusuales tonos verdes y azules, en el marco de bosques frondosos y añejos. Una de las rutas más hermosas de la Patagonia.\n\nSan Martín de los Andes es una típica ciudad de montaña enclavada en un amplio valle sobre la costa del Lago Lacar, a 640 m de altitud. Vas a tener tiempo para recorrerla, visitar la ribera del lago y disfrutar de su variada y riquísima gastronomía.\n\nEsta es, sin lugar a dudas, una excursión que no puede faltar en tu visita a la zona.",
    incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
    notas:["Horario de Pick Up (estimado): 08:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
@@ -741,6 +765,7 @@ const EXC = {
  "tronador":{
    nombre:"Cerro Tronador y Ventisquero Negro", subt:"Experiencia imperdible", tag:"Glaciar",
    desc:"",
+   relacionadas:["san-martin","isla-victoria"],
    detalle:"Una de las excursiones más fascinantes del Parque Nacional Nahuel Huapi. Bordeamos los lagos Gutiérrez y Mascardi, cruzamos el puente sobre el Río Manso y llegamos a Pampa Linda — un rincón rodeado de montañas ideal para almorzar en plena naturaleza. En el trayecto se suceden cascadas, vertientes y bosques patagónicos que invitan a bajar el ritmo y dejar la rutina atrás por un rato.\n\nParamos en el mirador de la Isla Corazón, visitamos Playa Negra y cerramos en el Ventisquero Negro: un glaciar de color oscuro por los sedimentos volcánicos, único en su tipo. Y al llegar al pie del Cerro Tronador — frontera natural entre Argentina y Chile —, con un poco de suerte vas a escuchar el estruendo del hielo desprendiéndose en las alturas: un instante que se queda grabado.",
    incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
    notas:["Horario de Pick Up (estimado): 09:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Recomendamos averiguar previamente el valor del ingreso a Parques Nacionales. Se abona el día de la excursión, previo a llegar a Pampa Linda. Residentes argentinos tienen descuento presentando el DNI. Es importante contar con efectivo para realizar dicho pago, ya que no hay señal para pagos digitales.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
@@ -760,6 +785,7 @@ const EXC = {
  "isla-victoria":{
    nombre:"Isla Victoria y Bosque de Arrayanes", subt:"Navegando el Nahuel Huapi · 14:00 a 18:30", tag:"Navegación",
    desc:"Navegando el Nahuel Huapi hasta el mágico Bosque de Arrayanes y la Isla Victoria, con guías del Parque Nacional.",
+   relacionadas:["puerto-blest","tronador"],
    detalle:"Tras una hora de navegación desde Puerto Pañuelo, en la impresionante Península de Llao Llao, llegamos a la Península de Quetrihue, asiento del Bosque de Arrayanes. El arrayán (Quetrihue en lengua mapuche) es un arbusto de exquisito color azafrán y flores blancas que, en este lugar único en el mundo, alcanza la envergadura de árbol formando un bosque mágico e inusual.\n\nLuego navegamos hacia Puerto Anchorena, en la Isla Victoria, donde es posible disfrutar de la flora autóctona y llegar hasta Playa del Toro para descubrir pinturas rupestres en una espléndida playa de arena volcánica. Guías del Parque Nacional acompañan el recorrido con información precisa en cada etapa.",
    notas_gen:["Salidas de lunes a domingo.","Horario: 14:00 a 18:30 hs.","Punto de embarque: Puerto Pañuelo, Península Llao Llao.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:true,
@@ -819,6 +845,7 @@ const EXC = {
  "puerto-blest":{
    nombre:"Puerto Blest y Cascada Los Cántaros", subt:"Navegando el Nahuel Huapi · 10:00 a 17:00", tag:"Navegación",
    desc:"Navegando el Nahuel Huapi hasta la Cascada de los Cántaros y Puerto Blest, en plena selva valdiviana.",
+   relacionadas:["isla-victoria","tronador"],
    detalle:"Zarpando desde Puerto Pañuelo, en la Península de Llao Llao, la primera parada es el islote Centinela, donde descansan los restos del Perito Francisco Pascasio Moreno, padre de los Parques Nacionales en la Argentina.\n\nDesde allí continuamos hacia la Cascada de los Cántaros y, por la frondosa selva valdiviana, llegamos al Lago Cántaros: un lugar donde nace la cascada y habita un alerce de más de 1.500 años.\n\nCinco minutos más de navegación y llegamos a Puerto Blest, que ha maravillado a viajeros de todo el mundo. Desde aquí es posible visitar la bahía y conocer el Lago Frías, cuyas aguas de color verde glaciar provienen del Cerro Tronador, límite natural entre Argentina y Chile.",
    notas_gen:["Salidas de lunes a domingo.","Horario: 10:00 a 17:00 hs.","Punto de embarque: Puerto Pañuelo, Península Llao Llao.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:true, lagoFrias:true,
@@ -1253,6 +1280,29 @@ function renderStatic(){
   });
   resetCounts();
   renderContent(0);
+  renderRelated();
+}
+
+function renderRelated(){
+  const e = EXC[id];
+  const ids = (e.relacionadas||[]).filter(k=>EXC[k]);
+  const section = document.getElementById("related-section");
+  const grid = document.getElementById("related-cards");
+  if(!ids.length){ section.hidden = true; return; }
+
+  grid.innerHTML = "";
+  ids.forEach(k=>{
+    const rel = EXC[k];
+    const img = (GALLERY[k] && GALLERY[k][0]) || "";
+    const a = document.createElement("a");
+    a.className = "related-card";
+    a.href = "excursion.html?exc="+k;
+    a.innerHTML =
+      '<div class="img" style="background-image:url(\''+img+'\')"><span class="tag">'+rel.tag+'</span></div>'+
+      '<div class="body"><h4>'+rel.nombre+'</h4><p>'+(rel.desc||rel.subt||"")+'</p></div>';
+    grid.appendChild(a);
+  });
+  section.hidden = false;
 }
 
 function curOpt(){ return EXC[id].opciones[state.opt]; }
