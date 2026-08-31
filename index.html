@@ -105,8 +105,9 @@
 
   /* ---------- Cards ---------- */
   .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem}
-  .card{background:#fff;border-radius:18px;overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
+  .card{position:relative;background:#fff;border-radius:18px;overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
   .card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+  .card-link{position:absolute;inset:0}
   /* EDITAR-FOTO: cada .card-img usa un degrade de ejemplo.
      Para tu foto real reemplaza el "background" por:
         background:url('fotos/la-cueva.jpg') center/cover; */
@@ -223,6 +224,7 @@
             <a class="btn btn-primary" href="excursion.html?exc=eas">Reservar</a>
           </div>
         </div>
+      <a class="card-link" href="excursion.html?exc=eas" tabindex="-1" aria-hidden="true"></a>
       </article>
 
       <article class="card">
@@ -236,6 +238,7 @@
             <a class="btn btn-primary" href="excursion.html?exc=campo-tulipanes">Reservar</a>
           </div>
         </div>
+      <a class="card-link" href="excursion.html?exc=campo-tulipanes" tabindex="-1" aria-hidden="true"></a>
       </article>
 
       <article class="card">
@@ -249,6 +252,7 @@
             <a class="btn btn-primary" href="excursion.html?exc=neumeyer">Reservar</a>
           </div>
         </div>
+      <a class="card-link" href="excursion.html?exc=neumeyer" tabindex="-1" aria-hidden="true"></a>
       </article>
       </div>
     </div>
@@ -270,6 +274,7 @@
             <a class="btn btn-primary" href="excursion.html?exc=circuito-chico">Reservar</a>
           </div>
         </div>
+      <a class="card-link" href="excursion.html?exc=circuito-chico" tabindex="-1" aria-hidden="true"></a>
       </article>
 
       <article class="card">
@@ -283,6 +288,7 @@
             <a class="btn btn-primary" href="excursion.html?exc=villa-bayo">Reservar</a>
           </div>
         </div>
+      <a class="card-link" href="excursion.html?exc=villa-bayo" tabindex="-1" aria-hidden="true"></a>
       </article>
 
       <article class="card">
@@ -296,6 +302,7 @@
             <a class="btn btn-primary" href="excursion.html?exc=tronador">Reservar</a>
           </div>
         </div>
+      <a class="card-link" href="excursion.html?exc=tronador" tabindex="-1" aria-hidden="true"></a>
       </article>
 
       <article class="card">
@@ -309,6 +316,7 @@
             <a class="btn btn-primary" href="excursion.html?exc=san-martin">Reservar</a>
           </div>
         </div>
+      <a class="card-link" href="excursion.html?exc=san-martin" tabindex="-1" aria-hidden="true"></a>
       </article>
       </div>
     </div>
@@ -330,6 +338,7 @@
             <a class="btn btn-primary" href="excursion.html?exc=roca-negra">Reservar</a>
           </div>
         </div>
+      <a class="card-link" href="excursion.html?exc=roca-negra" tabindex="-1" aria-hidden="true"></a>
       </article>
 
       <article class="card">
@@ -343,6 +352,7 @@
             <a class="btn btn-primary" href="excursion.html?exc=la-cueva">Reservar</a>
           </div>
         </div>
+      <a class="card-link" href="excursion.html?exc=la-cueva" tabindex="-1" aria-hidden="true"></a>
       </article>
 
       <article class="card proximo">
@@ -377,6 +387,7 @@
             <a class="btn btn-primary" href="excursion.html?exc=isla-victoria">Reservar</a>
           </div>
         </div>
+      <a class="card-link" href="excursion.html?exc=isla-victoria" tabindex="-1" aria-hidden="true"></a>
       </article>
 
       <article class="card">
@@ -390,6 +401,7 @@
             <a class="btn btn-primary" href="excursion.html?exc=puerto-blest">Reservar</a>
           </div>
         </div>
+      <a class="card-link" href="excursion.html?exc=puerto-blest" tabindex="-1" aria-hidden="true"></a>
       </article>
       </div>
     </div>
@@ -411,6 +423,7 @@
             <a class="btn btn-primary" href="excursion.html?exc=san-ramon">Reservar</a>
           </div>
         </div>
+      <a class="card-link" href="excursion.html?exc=san-ramon" tabindex="-1" aria-hidden="true"></a>
       </article>
       </div>
     </div>
