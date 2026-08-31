@@ -46,6 +46,8 @@ export default async function handler(req, res) {
       `Pasajeros: ${m.pasajeros || '-'}`,
       `Total pagado: $${payment.transaction_amount}`,
       `Cliente: ${m.nombre || '-'}`,
+      `DNI: ${m.dni || '-'}`,
+      `E-mail: ${m.email || '-'}`,
       `Tel: ${m.telefono || '-'}`,
       `Hospedaje: ${m.hospedaje || '-'}`,
       `Referencia: ${payment.external_reference || '-'}`,

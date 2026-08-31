@@ -265,6 +265,14 @@
             <input type="text" id="c-nombre" placeholder="Nombre de quien reserva">
           </div>
           <div class="field">
+            <label>DNI</label>
+            <input type="text" id="c-dni" inputmode="numeric" placeholder="Ej: 30123456">
+          </div>
+          <div class="field">
+            <label>E-mail</label>
+            <input type="email" id="c-email" placeholder="Ej: nombre@mail.com">
+          </div>
+          <div class="field">
             <label>Telefono de contacto</label>
             <input type="tel" id="c-tel" placeholder="Ej: 2944 123456">
           </div>
@@ -891,7 +899,7 @@ const fmt = n => "$"+new Intl.NumberFormat("es-AR").format(n);
 const params = new URLSearchParams(location.search);
 let id = params.get("exc"); if(!EXC[id]) id = "neumeyer";
 
-let state = {opt:0, con:false, lf:false, pickup:"", fecha:"", counts:{}, nombre:"", tel:"", hosp:""};
+let state = {opt:0, con:false, lf:false, pickup:"", fecha:"", counts:{}, nombre:"", dni:"", email:"", tel:"", hosp:""};
 
 function seasonKeyFor(exc, dateStr){
   if(!exc.seasonal || !dateStr) return null;
@@ -1233,9 +1241,11 @@ function renderStatic(){
   } else { flf.hidden=true; }
 
   document.getElementById("go").onclick = reservar;
-  ["c-nombre","c-tel","c-hosp"].forEach(fid=>{
+  ["c-nombre","c-dni","c-email","c-tel","c-hosp"].forEach(fid=>{
     document.getElementById(fid).addEventListener("input", ()=>{
       state.nombre = document.getElementById("c-nombre").value.trim();
+      state.dni = document.getElementById("c-dni").value.trim();
+      state.email = document.getElementById("c-email").value.trim();
       state.tel = document.getElementById("c-tel").value.trim();
       state.hosp = document.getElementById("c-hosp").value.trim();
       render();
@@ -1333,7 +1343,7 @@ function render(){
 
   const needsPickup = state.con && EXC[id].pickupPoints && EXC[id].pickupPoints.length && !state.pickup;
 
-  const missingContact = !state.nombre || !state.tel || !state.hosp;
+  const missingContact = !state.nombre || !state.dni || !state.email || !state.tel || !state.hosp;
 
   if(noDate){ hint.textContent="Elegí una fecha para continuar."; go.disabled=true; go.textContent="Pagar y reservar"; }
   else if(beforeStart){ hint.textContent="Las clases arrancan el "+e.startDate.split("-").reverse().join("/")+". Elegí una fecha posterior."; go.disabled=true; go.textContent="Pagar y reservar"; }
@@ -1402,6 +1412,8 @@ async function pagarConMercadoPago(){
     descuentoGrupal: p.discount>0 ? p.discount : null,
     total: p.total,
     nombre: state.nombre,
+    dni: state.dni,
+    email: state.email,
     telefono: state.tel,
     hospedaje: state.hosp,
   };

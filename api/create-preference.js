@@ -14,10 +14,10 @@ export default async function handler(req, res) {
 
   const {
     excursionId, excursion, opcion, fecha, traslado, pickup, lagoFrias,
-    pasajeros, total, nombre, telefono, hospedaje,
+    pasajeros, total, nombre, dni, email, telefono, hospedaje,
   } = req.body || {};
 
-  if (!excursion || !fecha || !total || !nombre || !telefono || !hospedaje) {
+  if (!excursion || !fecha || !total || !nombre || !dni || !email || !telefono || !hospedaje) {
     return res.status(400).json({ error: 'Faltan datos de la reserva' });
   }
 
@@ -41,7 +41,11 @@ export default async function handler(req, res) {
         currency_id: 'ARS',
       },
     ],
-    payer: { name: nombre },
+    payer: {
+      name: nombre,
+      email,
+      identification: { type: 'DNI', number: dni },
+    },
     external_reference: externalReference,
     metadata: {
       excursion_id: excursionId || '',
@@ -53,6 +57,8 @@ export default async function handler(req, res) {
       lago_frias: lagoFrias || '',
       pasajeros: pasajeros || '',
       nombre,
+      dni,
+      email,
       telefono,
       hospedaje,
     },
