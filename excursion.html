@@ -786,6 +786,7 @@ const EXC = {
    nombre:"Isla Victoria y Bosque de Arrayanes", subt:"Navegando el Nahuel Huapi · 14:00 a 18:30", tag:"Navegación",
    desc:"Navegando el Nahuel Huapi hasta el mágico Bosque de Arrayanes y la Isla Victoria, con guías del Parque Nacional.",
    relacionadas:["puerto-blest","tronador"],
+   teaserPos:"center bottom",
    detalle:"Tras una hora de navegación desde Puerto Pañuelo, en la impresionante Península de Llao Llao, llegamos a la Península de Quetrihue, asiento del Bosque de Arrayanes. El arrayán (Quetrihue en lengua mapuche) es un arbusto de exquisito color azafrán y flores blancas que, en este lugar único en el mundo, alcanza la envergadura de árbol formando un bosque mágico e inusual.\n\nLuego navegamos hacia Puerto Anchorena, en la Isla Victoria, donde es posible disfrutar de la flora autóctona y llegar hasta Playa del Toro para descubrir pinturas rupestres en una espléndida playa de arena volcánica. Guías del Parque Nacional acompañan el recorrido con información precisa en cada etapa.",
    notas_gen:["Salidas de lunes a domingo.","Horario: 14:00 a 18:30 hs.","Punto de embarque: Puerto Pañuelo, Península Llao Llao.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:true,
@@ -1294,11 +1295,12 @@ function renderRelated(){
   ids.forEach(k=>{
     const rel = EXC[k];
     const img = (GALLERY[k] && GALLERY[k][0]) || "";
+    const pos = rel.teaserPos || "center";
     const a = document.createElement("a");
     a.className = "related-card";
     a.href = "excursion.html?exc="+k;
     a.innerHTML =
-      '<div class="img" style="background-image:url(\''+img+'\')"><span class="tag">'+rel.tag+'</span></div>'+
+      '<div class="img" style="background-image:url(\''+img+'\');background-position:'+pos+'"><span class="tag">'+rel.tag+'</span></div>'+
       '<div class="body"><h4>'+rel.nombre+'</h4><p>'+(rel.desc||rel.subt||"")+'</p></div>';
     grid.appendChild(a);
   });
