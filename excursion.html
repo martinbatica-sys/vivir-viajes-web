@@ -732,8 +732,8 @@ const EXC = {
  /* ---------- TRONADOR ---------- */
  "tronador":{
    nombre:"Cerro Tronador y Ventisquero Negro", subt:"Experiencia imperdible", tag:"Glaciar",
-   desc:"Una de las excursiones más fascinantes del Parque Nacional Nahuel Huapi: atravesamos caminos entre lagos, ríos y bosques para llegar al imponente Cerro Tronador, frontera natural entre Argentina y Chile. Durante el recorrido bordeamos los lagos Gutiérrez y Mascardi, cruzamos el puente sobre el Río Manso, paramos en el mirador de la Isla Corazón, visitamos Playa Negra y almorzamos en Pampa Linda, en plena montaña. El cierre es el Ventisquero Negro: un glaciar de color oscuro por los sedimentos volcánicos, único en su tipo. Duración: 8 hs.",
-   detalle:"Este recorrido conquista tanto por el camino como por el destino. Bordeamos los lagos Gutiérrez y Mascardi, cruzamos el puente sobre el Río Manso y llegamos a Pampa Linda, un rincón rodeado de montañas ideal para almorzar en plena naturaleza.\n\nEn el trayecto se suceden cascadas, vertientes y bosques patagónicos que invitan a bajar el ritmo y dejar la rutina atrás por un rato.\n\nAl llegar al pie del Cerro Tronador, con un poco de suerte vas a escuchar el estruendo del hielo desprendiéndose en las alturas: un instante que se queda grabado.",
+   desc:"",
+   detalle:"Una de las excursiones más fascinantes del Parque Nacional Nahuel Huapi. Bordeamos los lagos Gutiérrez y Mascardi, cruzamos el puente sobre el Río Manso y llegamos a Pampa Linda — un rincón rodeado de montañas ideal para almorzar en plena naturaleza. En el trayecto se suceden cascadas, vertientes y bosques patagónicos que invitan a bajar el ritmo y dejar la rutina atrás por un rato.\n\nParamos en el mirador de la Isla Corazón, visitamos Playa Negra y cerramos en el Ventisquero Negro: un glaciar de color oscuro por los sedimentos volcánicos, único en su tipo. Y al llegar al pie del Cerro Tronador — frontera natural entre Argentina y Chile —, con un poco de suerte vas a escuchar el estruendo del hielo desprendiéndose en las alturas: un instante que se queda grabado.",
    incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
    notas:["Horario de Pick Up (estimado): 09:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Recomendamos averiguar previamente el valor del ingreso a Parques Nacionales. Se abona el día de la excursión, previo a llegar a Pampa Linda. Residentes argentinos tienen descuento presentando el DNI. Es importante contar con efectivo para realizar dicho pago, ya que no hay señal para pagos digitales.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:true, traslado:false,
@@ -1170,7 +1170,8 @@ function renderStatic(){
   document.getElementById("b-nombre").textContent=e.nombre;
   document.getElementById("b-subt").textContent=e.subt||"";
   document.getElementById("b-subt").hidden=!e.subt;
-  document.getElementById("c-desc").textContent=e.desc;
+  document.getElementById("c-desc").textContent=e.desc||"";
+  document.getElementById("c-desc").hidden=!e.desc;
   document.title="Reservar "+e.nombre+" · Vivir Viajes";
 
   buildCarousel();
