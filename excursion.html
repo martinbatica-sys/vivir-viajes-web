@@ -1503,7 +1503,7 @@ function render(){
 
   const missingContact = !state.nombre || !state.dni || !state.email || !state.tel || !state.hosp;
 
-  if(noDate){ hint.textContent="Elegí una fecha para continuar."; go.disabled=true; go.textContent="Pagar y reservar"; }
+  if(noDate){ hint.textContent=""; go.disabled=true; go.textContent="Pagar y reservar"; }
   else if(beforeStart){ hint.textContent="Las clases arrancan el "+e.startDate.split("-").reverse().join("/")+". Elegí una fecha posterior."; go.disabled=true; go.textContent="Pagar y reservar"; }
   else if(offSeason){ hint.textContent="Esa fecha está fuera de temporada. Escribinos para ver disponibilidad."; go.disabled=false; go.textContent="Consultar por WhatsApp"; }
   else if(pax<=0){ hint.textContent="Agregá al menos un pasajero."; go.disabled=true; go.textContent="Pagar y reservar"; }
