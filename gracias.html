@@ -42,6 +42,7 @@
   .voucher .row span:first-child{color:var(--ink-soft)}
   .voucher .row.total{font-weight:700;color:var(--navy);border-bottom:none;margin-top:.3rem;padding-top:.5rem}
   .voucher .ref{margin-top:.8rem;text-align:center;font-size:.72rem;color:var(--ink-soft);letter-spacing:.03em}
+  .voucher .legend{margin-top:.3rem;text-align:center;font-size:.72rem;font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase}
 
   footer{text-align:center;padding:1.6rem;color:var(--ink-soft);font-size:.82rem}
 
@@ -75,11 +76,14 @@
         <h3>Voucher de reserva</h3>
         <div class="row"><span>Excursión</span><span id="v-excursion">-</span></div>
         <div class="row" id="v-opcion-row" hidden><span>Opción</span><span id="v-opcion"></span></div>
+        <div class="row"><span>Pasajero</span><span id="v-nombre">-</span></div>
+        <div class="row" id="v-hotel-row" hidden><span>Hotel</span><span id="v-hotel"></span></div>
+        <div class="row"><span>Cant Pax</span><span id="v-pasajeros">-</span></div>
         <div class="row"><span>Fecha</span><span id="v-fecha">-</span></div>
-        <div class="row"><span>Pasajeros</span><span id="v-pasajeros">-</span></div>
-        <div class="row"><span>Titular</span><span id="v-nombre">-</span></div>
+        <div class="row" id="v-horario-row" hidden><span>A partir de</span><span id="v-horario"></span></div>
         <div class="row total"><span>Total pagado</span><span id="v-total">-</span></div>
         <div class="ref" id="v-ref"></div>
+        <div class="legend">No válido como factura</div>
       </div>
     </div>
   </div>
@@ -125,6 +129,18 @@
     document.getElementById("v-fecha").textContent = fecha ? fecha.split("-").reverse().join("/") : "-";
     document.getElementById("v-pasajeros").textContent = params.get("pasajeros") || "-";
     document.getElementById("v-nombre").textContent = params.get("nombre") || "-";
+
+    const hotel = params.get("hospedaje");
+    if(hotel){
+      document.getElementById("v-hotel-row").hidden = false;
+      document.getElementById("v-hotel").textContent = hotel;
+    }
+
+    const horario = params.get("horario");
+    if(horario){
+      document.getElementById("v-horario-row").hidden = false;
+      document.getElementById("v-horario").textContent = horario;
+    }
 
     const total = params.get("total");
     document.getElementById("v-total").textContent = total ? "$" + Number(total).toLocaleString("es-AR") : "-";

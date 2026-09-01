@@ -678,19 +678,19 @@ const EXC = {
    detalle:"Los pasajeros son recogidos y trasladados a la base del Cerro López. Desde allí iniciamos el ascenso en vehículos 4x4, por un escarpado camino de montaña entre bosques de coihues centenarios y altas lengas. Las curvas del camino son miradores naturales hacia la inmensidad del Parque Nacional Nahuel Huapi, con sus lagos, islas y montañas.\n\nDespués de las primeras fotos, iniciamos la caminata. Nos equipamos con raquetas de nieve y el guía explica el funcionamiento y la técnica para caminar con ellas — un instrumento que se ajusta al calzado y permite transitar por zonas nevadas sin hundirse. Durante el recorrido (aproximadamente una hora) el guía comparte la historia del lugar mientras disfrutamos de la belleza natural que esta montaña tiene para ofrecer.\n\nFinalizada la caminata, una cálida bienvenida nos espera en Roca Negra: fondue de queso o de chocolate, según el horario elegido. Allí en lo alto, con una impresionante vista de la región, compartimos el momento en torno a la fondue. El descenso es nuevamente en los vehículos 4x4, hasta la base del cerro, donde finaliza la excursión.",
    incluye:["Traslado ida y vuelta desde y hacia el centro","Ascenso y descenso en Land Rover 4x4","Caminata guiada con raquetas","Fondue a elección — 1 por reserva (queso o chocolate)"],
    notas:["Días de salida: lunes a sábado. Domingo cerrado.","Apto para toda la familia: dificultad baja.","Niños de 0-3 años sin costo.","Bebidas frías no incluidas.","Pick up en Galería del Sol / NH Edelweiss (centro).","Reservas con mínimo 24 hs de anticipación."],
-   seasonal:true, traslado:false, closedDow:[0],
+   seasonal:true, traslado:false, closedDow:[0], horario:"10:00 hs",
    leyenda:"Mayo y junio: tarifa base · Julio y agosto: temporada alta",
    temporadas:[
      {key:"mayjun",nombre:"Mayo / Junio",cls:"media",rangos:[["05-01","06-30"]]},
      {key:"julago",nombre:"Julio / Agosto",cls:"alta",rangos:[["07-01","08-31"]]},
    ],
    opciones:[
-     {key:"queso",label:"Fondue de Queso · Pick Up 10:00 · Regreso 16:00",
+     {key:"queso",label:"Fondue de Queso · Pick Up 10:00 · Regreso 16:00", horario:"10:00 hs",
       incluye:["Traslado ida y vuelta desde y hacia el centro","Ascenso y descenso en Land Rover 4x4","Caminata guiada con raquetas","Fondue de queso en el refugio"],
       notas:["Días de salida: lunes a sábado. Domingo cerrado.","Apto para toda la familia: dificultad baja.","Niños de 0-3 sin costo.","Bebidas frías no incluidas.","Reservas con mínimo 24 hs de anticipación."],
       cats:[A(),M({label:'Menores 4-12'}),{key:'bebe',label:'Ninos 0-3',sub:'sin costo',min:0}],
       precios:{mayjun:{adulto:250000,menor:200000,bebe:0},julago:{adulto:300000,menor:250000,bebe:0}}},
-     {key:"choco",label:"Fondue de Chocolate · Pick Up 14:00 · Regreso 20:00",
+     {key:"choco",label:"Fondue de Chocolate · Pick Up 14:00 · Regreso 20:00", horario:"14:00 hs",
       incluye:["Traslado ida y vuelta desde y hacia el centro","Ascenso y descenso en Land Rover 4x4","Caminata guiada con raquetas","Fondue de chocolate en el refugio"],
       notas:["Días de salida: lunes a sábado. Domingo cerrado.","Apto para toda la familia: dificultad baja.","Niños de 0-3 sin costo.","Bebidas frías no incluidas.","Reservas con mínimo 24 hs de anticipación."],
       cats:[A(),M({label:'Menores 4-12'}),{key:'bebe',label:'Ninos 0-3',sub:'sin costo',min:0}],
@@ -745,8 +745,9 @@ const EXC = {
      {key:"media",nombre:"Media",cls:"media",rangos:[["06-01","06-30"],["09-01","09-30"]]},
      {key:"alta",nombre:"Alta",cls:"alta",rangos:[["07-01","08-31"]]},
    ],
+   horario:"09:00 hs",
    opciones:[
-     {key:"lag-a",label:"Laguna Congelada · Opción A (09:00 a 16:00 hs)",
+     {key:"lag-a",label:"Laguna Congelada · Opción A (09:00 a 16:00 hs)", horario:"09:00 hs",
       incluye:[
         "Traslado ida y vuelta desde hoteles del centro",
         "Caminata guiada al lago congelado",
@@ -756,7 +757,7 @@ const EXC = {
       notas:["Dia completo · 09:00 a 16:00 hs. Operativo junio a septiembre.","Sujeto a condiciones de nieve.","Reservas con mínimo 24 hs de anticipación."],
       cats:[A({label:'Mayores',sub:'13+ años'}),M({label:'Menores',sub:'4 a 12'})],
       precios:{media:{adulto:250000,menor:230000},alta:{adulto:280000,menor:250000}}},
-     {key:"lag-b",label:"Laguna Congelada · Opción B (11:00 a 18:00 hs)",
+     {key:"lag-b",label:"Laguna Congelada · Opción B (11:00 a 18:00 hs)", horario:"11:00 hs",
       incluye:[
         "Traslado ida y vuelta desde hoteles del centro",
         "Caminata guiada al lago congelado",
@@ -766,7 +767,7 @@ const EXC = {
       notas:["Dia completo · 11:00 a 18:00 hs. Operativo junio a septiembre.","Sujeto a condiciones de nieve.","Reservas con mínimo 24 hs de anticipación."],
       cats:[A({label:'Mayores',sub:'13+ años'}),M({label:'Menores',sub:'4 a 12'})],
       precios:{media:{adulto:250000,menor:230000},alta:{adulto:280000,menor:250000}}},
-     {key:"viv",label:"Vivencias · tarde con merienda (14:00 a 19:00 hs)",
+     {key:"viv",label:"Vivencias · tarde con merienda (14:00 a 19:00 hs)", horario:"14:00 hs",
       incluye:[
         "Traslado ida y vuelta desde hoteles del centro",
         "Caminata guiada por el valle",
@@ -787,7 +788,7 @@ const EXC = {
    detalle:"El paseo parte desde el centro de Bariloche por la Av. Bustillo, una de las avenidas más bellas de la ciudad.\n\nPrimera parada: Cerro Campanario, a 17 km del centro. Al llegar, la guía se encarga de comprar los tickets de la aerosilla en boletería mientras los pasajeros hacen la fila para subir — así se aprovecha mejor el tiempo. En la parte alta los esperan cinco miradores y una confitería vidriada ideal para tomar algo caliente con las mejores vistas de Bariloche.\n\nSegunda parada: la Capilla San Eduardo — construida por el mismo arquitecto del Hotel Llao Llao — y el mirador de Punto Panorámico, con vistas al lago Moreno, al Llao Llao y al Nahuel Huapi. Una de las postales más famosas de Bariloche.\n\nTercera y última parada: Colonia Suiza. Una hora para recorrer la calle principal y la feria de gastronomía y artesanías. El punto de encuentro es la tradicional Casa de Té Zurich.",
    incluye:["Recorrido por los miradores del circuito","Parada en la historica Colonia Suiza","Guia acompanante"],
    notas:["Horario de Pick Up (estimado): 13:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Medio dia.","Reservas con mínimo 24 hs de anticipación."],
-   seasonal:true, traslado:false,
+   seasonal:true, traslado:false, horario:"13:00 hs",
    leyenda:"Hasta el 30/06: $35.000 por persona · Desde el 01/07: $45.000",
    temporadas:[
      {key:"base",nombre:"Hasta 30/06",cls:"media",rangos:[["2026-01-01","2026-06-30"]]},
@@ -807,7 +808,7 @@ const EXC = {
    detalle:"Partimos desde Bariloche hacia Villa La Angostura, a unos 83 km de distancia. Unos 5 km antes del centro, nos desviamos para ascender hacia la base del Cerro Bayo, un centro de ski ideal para disfrutar del invierno patagónico: desde clases de ski y snowboard hasta pistas de culipatín para toda la familia.\n\nAl mediodía iniciamos el descenso hacia la villa para explorar su oferta gastronómica — aproximadamente 2 horas para comer, recorrer y descansar.\n\nA las 16:30 emprendemos el regreso a Bariloche.",
    incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
    notas:["Horario de Pick Up (estimado): 08:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Recomendamos averiguar previamente los valores del uso de los medios de elevación.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
-   seasonal:true, traslado:false,
+   seasonal:true, traslado:false, horario:"08:00 hs",
    leyenda:"Disponible desde el 06/06/2026",
    temporadas:[
      {key:"unica",nombre:"Disponible",cls:"alta",rangos:[["2026-06-06","2027-12-31"]]},
@@ -843,7 +844,7 @@ const EXC = {
    detalle:"Partiendo desde Bariloche, el viaje hacia San Martín de los Andes atraviesa Villa La Angostura y el mítico Camino de los Siete Lagos: lagos de aguas cristalinas con inusuales tonos verdes y azules, en el marco de bosques frondosos y añejos. Una de las rutas más hermosas de la Patagonia.\n\nSan Martín de los Andes es una típica ciudad de montaña enclavada en un amplio valle sobre la costa del Lago Lacar, a 640 m de altitud. Vas a tener tiempo para recorrerla, visitar la ribera del lago y disfrutar de su variada y riquísima gastronomía.\n\nEsta es, sin lugar a dudas, una excursión que no puede faltar en tu visita a la zona.",
    incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
    notas:["Horario de Pick Up (estimado): 08:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
-   seasonal:true, traslado:false,
+   seasonal:true, traslado:false, horario:"08:00 hs",
    leyenda:"Hasta el 30/06: $75.000 por persona · Desde el 01/07: $110.000",
    temporadas:[
      {key:"base",nombre:"Hasta 30/06",cls:"media",rangos:[["2026-01-01","2026-06-30"]]},
@@ -863,7 +864,7 @@ const EXC = {
    detalle:"Una de las excursiones más fascinantes del Parque Nacional Nahuel Huapi. Bordeamos los lagos Gutiérrez y Mascardi, cruzamos el puente sobre el Río Manso y llegamos a Pampa Linda — un rincón rodeado de montañas ideal para almorzar en plena naturaleza. En el trayecto se suceden cascadas, vertientes y bosques patagónicos que invitan a bajar el ritmo y dejar la rutina atrás por un rato.\n\nParamos en el mirador de la Isla Corazón, visitamos Playa Negra y cerramos en el Ventisquero Negro: un glaciar de color oscuro por los sedimentos volcánicos, único en su tipo. Y al llegar al pie del Cerro Tronador — frontera natural entre Argentina y Chile —, con un poco de suerte vas a escuchar el estruendo del hielo desprendiéndose en las alturas: un instante que se queda grabado.",
    incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
    notas:["Horario de Pick Up (estimado): 09:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Recomendamos averiguar previamente el valor del ingreso a Parques Nacionales. Se abona el día de la excursión, previo a llegar a Pampa Linda. Residentes argentinos tienen descuento presentando el DNI. Es importante contar con efectivo para realizar dicho pago, ya que no hay señal para pagos digitales.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
-   seasonal:true, traslado:false,
+   seasonal:true, traslado:false, horario:"09:00 hs",
    leyenda:"Hasta el 30/06: $67.000 por persona · Desde el 01/07: $100.000",
    temporadas:[
      {key:"base",nombre:"Hasta 30/06",cls:"media",rangos:[["2026-01-01","2026-06-30"]]},
@@ -883,7 +884,7 @@ const EXC = {
    teaserPos:"center bottom",
    detalle:"Tras una hora de navegación desde Puerto Pañuelo, en la impresionante Península de Llao Llao, llegamos a la Península de Quetrihue, asiento del Bosque de Arrayanes. El arrayán (Quetrihue en lengua mapuche) es un arbusto de exquisito color azafrán y flores blancas que, en este lugar único en el mundo, alcanza la envergadura de árbol formando un bosque mágico e inusual.\n\nLuego navegamos hacia Puerto Anchorena, en la Isla Victoria, donde es posible disfrutar de la flora autóctona y llegar hasta Playa del Toro para descubrir pinturas rupestres en una espléndida playa de arena volcánica. Guías del Parque Nacional acompañan el recorrido con información precisa en cada etapa.",
    notas_gen:["Salidas de lunes a domingo.","Horario: 14:00 a 18:30 hs.","Punto de embarque: Puerto Pañuelo, Península Llao Llao.","Reservas con mínimo 24 hs de anticipación."],
-   seasonal:false, traslado:true,
+   seasonal:false, traslado:true, horario:"14:00 hs",
    pickupPoints:[
      "Oficina Turisur (Mitre 150)","Tres Reyes (12 de octubre 135)","NH Edelweiss (San Martin 202)",
      "Sheraton (San Martin 536)","Patagonia (Av. Bustillo 1231)","Design Suites (km 2.5)",
@@ -943,7 +944,7 @@ const EXC = {
    relacionadas:["isla-victoria","tronador"],
    detalle:"Zarpando desde Puerto Pañuelo, en la Península de Llao Llao, la primera parada es el islote Centinela, donde descansan los restos del Perito Francisco Pascasio Moreno, padre de los Parques Nacionales en la Argentina.\n\nDesde allí continuamos hacia la Cascada de los Cántaros y, por la frondosa selva valdiviana, llegamos al Lago Cántaros: un lugar donde nace la cascada y habita un alerce de más de 1.500 años.\n\nCinco minutos más de navegación y llegamos a Puerto Blest, que ha maravillado a viajeros de todo el mundo. Desde aquí es posible visitar la bahía y conocer el Lago Frías, cuyas aguas de color verde glaciar provienen del Cerro Tronador, límite natural entre Argentina y Chile.",
    notas_gen:["Salidas de lunes a domingo.","Horario: 10:00 a 17:00 hs.","Punto de embarque: Puerto Pañuelo, Península Llao Llao.","Reservas con mínimo 24 hs de anticipación."],
-   seasonal:false, traslado:true, lagoFrias:true,
+   seasonal:false, traslado:true, lagoFrias:true, horario:"10:00 hs",
    pickupPoints:[
      "Oficina Turisur (Mitre 150)","Tres Reyes (12 de octubre 135)","NH Edelweiss (San Martin 202)",
      "Sheraton (San Martin 536)","Patagonia (Av. Bustillo 1231)","Design Suites (km 2.5)",
@@ -1564,6 +1565,7 @@ async function pagarConMercadoPago(){
     excursion: e.nombre,
     opcion: opt.label || null,
     fecha: fechaTxt,
+    horario: opt.horario || e.horario || null,
     traslado: e.traslado ? (state.con?"Con traslado":"Sin traslado") : null,
     pickup: state.con ? (state.pickup||null) : null,
     lagoFrias: e.lagoFrias ? (state.lf?"Si":"No") : null,

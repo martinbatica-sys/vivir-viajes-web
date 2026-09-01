@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   }
 
   const {
-    excursionId, excursion, opcion, fecha, traslado, pickup, lagoFrias,
+    excursionId, excursion, opcion, fecha, horario, traslado, pickup, lagoFrias,
     pasajeros, total, nombre, dni, email, telefono, hospedaje,
   } = req.body || {};
 
@@ -68,9 +68,11 @@ export default async function handler(req, res) {
         excursion,
         opcion: opcion || '',
         fecha,
+        horario: horario || '',
         pasajeros: String(pasajeros || ''),
         total: String(unitPrice),
         nombre,
+        hospedaje: hospedaje || '',
       }).toString();
       return {
         success: `${origin}/gracias.html?status=success&${voucherParams}`,
