@@ -434,6 +434,7 @@ const GALLERY = {
   "roca-negra":["fotos/roca-negra-01.jpg","fotos/roca-negra-02.jpg","fotos/roca-negra-03.jpg","fotos/roca-negra-04.jpg","fotos/roca-negra-05.jpg","fotos/roca-negra-06.jpg"],
   "neumeyer":["fotos/neumeyer.jpg","fotos/neumeyer-2.jpg","fotos/neumeyer-3.jpg","fotos/neumeyer-4.jpg","fotos/neumeyer-5.jpg"],
   "circuito-chico":["fotos/chico-01.jpg","fotos/chico-02.jpg","fotos/chico-03.jpg","fotos/chico-04.jpg",{src:"fotos/chico-05.jpg",pos:"center 85%"},"fotos/chico-06.jpg","fotos/chico-07.jpg","fotos/chico-08.jpg","fotos/chico-09.jpg"],
+  "circuito-chico-campanario":["fotos/circuito-chico-campanario-01.jpg","fotos/circuito-chico-campanario-02.jpg","fotos/circuito-chico-campanario-03.jpg","fotos/circuito-chico-campanario-04.jpg","fotos/circuito-chico-campanario-05.jpg","fotos/circuito-chico-campanario-06.jpg","fotos/circuito-chico-campanario-07.jpg","fotos/circuito-chico-campanario-08.jpg"],
   "villa-bayo":["fotos/02.jpg","fotos/03.jpg","fotos/06.jpg","fotos/10.jpg","fotos/11.jpg"],
   "campo-tulipanes":["fotos/campo-tulipanes-01.jpg","fotos/campo-tulipanes-02.jpg","fotos/campo-tulipanes-03.jpg","fotos/campo-tulipanes-04.jpg","fotos/campo-tulipanes-05.jpg","fotos/campo-tulipanes-06.jpg"],
   "san-martin":["fotos/sma-01.jpg","fotos/sma-09.jpg","fotos/sma-02.jpg","fotos/sma-03.jpg","fotos/sma-08.jpg","fotos/sma-05.jpg","fotos/sma-06.jpg"],
@@ -785,8 +786,28 @@ const EXC = {
    nombre:"Circuito Chico y Colonia Suiza", subt:"El clasico de Bariloche", tag:"Clasico",
    desc:"El paseo imperdible: Llao Llao, Punto Panorámico, Bahía López, Cerro Campanario y la histórica Colonia Suiza.",
    relacionadas:["villa-bayo","tronador"],
-   detalle:"El paseo parte desde el centro de Bariloche por la Av. Bustillo, una de las avenidas más bellas de la ciudad.\n\nPrimera parada: Cerro Campanario, a 17 km del centro. Al llegar, la guía se encarga de comprar los tickets de la aerosilla en boletería mientras los pasajeros hacen la fila para subir — así se aprovecha mejor el tiempo. En la parte alta los esperan cinco miradores y una confitería vidriada ideal para tomar algo caliente con las mejores vistas de Bariloche.\n\nSegunda parada: la Capilla San Eduardo — construida por el mismo arquitecto del Hotel Llao Llao — y el mirador de Punto Panorámico, con vistas al lago Moreno, al Llao Llao y al Nahuel Huapi. Una de las postales más famosas de Bariloche.\n\nTercera y última parada: Colonia Suiza. Una hora para recorrer la calle principal y la feria de gastronomía y artesanías. El punto de encuentro es la tradicional Casa de Té Zurich.",
+   detalle:"El paseo parte desde el centro de Bariloche por la Av. Bustillo, una de las avenidas más bellas de la ciudad.\n\nPrimera parada: Cerro Campanario, a 17 km del centro. Al llegar, la guía se encarga de comprar los tickets de la aerosilla en boletería mientras los pasajeros hacen la fila para subir — así se aprovecha mejor el tiempo. En la parte alta los esperan cinco miradores y una confitería vidriada ideal para tomar algo caliente con las mejores vistas de Bariloche.\n\nDe vuelta en el vehículo, continuamos hacia la segunda parada: la Capilla San Eduardo. Construida en 1938 con piedra, troncos de ciprés y tejuelas de alerce, es obra del arquitecto Alejandro Bustillo — el mismo que diseñó el Hotel Llao Llao ese mismo año, y que le dio a ambos edificios un estilo montañés con influencias neogóticas europeas. Un detalle curioso: esta pequeña capilla es anterior a la propia Catedral de Bariloche. Desde su escalinata de piedra, con el Llao Llao de fondo y el Cerro López a la distancia, se obtiene una de las postales más fotografiadas de la región.\n\nLa tercera parada es el mirador de Punto Panorámico, con vistas al lago Moreno, al Hotel Llao Llao y al lago Nahuel Huapi — una de las postales más icónicas de Bariloche.\n\nCuarta y última parada: Colonia Suiza. Una hora para recorrer la calle principal y la feria de gastronomía y artesanías. El punto de encuentro es la tradicional Casa de Té Zurich.",
    incluye:["Recorrido por los miradores del circuito","Parada en la historica Colonia Suiza","Guia acompanante"],
+   notas:["Horario de Pick Up (estimado): 13:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Medio dia.","Reservas con mínimo 24 hs de anticipación."],
+   seasonal:true, traslado:false, horario:"13:00 hs",
+   leyenda:"Hasta el 30/06: $35.000 por persona · Desde el 01/07: $45.000",
+   temporadas:[
+     {key:"base",nombre:"Hasta 30/06",cls:"media",rangos:[["2026-01-01","2026-06-30"]]},
+     {key:"alta",nombre:"Desde 01/07",cls:"alta",rangos:[["2026-07-01","2027-12-31"]]},
+   ],
+   opciones:[{key:"tour",label:null,
+    incluye:["Recorrido completo por los miradores del circuito","Parada en Llao Llao y Punto Panoramico","Parada en la historica Colonia Suiza","Guia acompanante"],
+    notas:["Horario de Pick Up (estimado): 13:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Medio dia.","Reservas con mínimo 24 hs de anticipación."],
+    cats:[{key:'pp',label:'Por persona',min:1}],precios:{base:{pp:35000},alta:{pp:45000}}}]
+ },
+
+ /* ---------- CIRCUITO CHICO · CERRO CAMPANARIO ---------- */
+ "circuito-chico-campanario":{
+   nombre:"Circuito Chico - Cerro Campanario", subt:"El clasico de Bariloche", tag:"Clasico",
+   desc:"Subí en aerosilla al Cerro Campanario, uno de los miradores más famosos de Bariloche, y recorré la Capilla San Eduardo y Punto Panorámico camino a la histórica Colonia Suiza.",
+   relacionadas:["circuito-chico","villa-bayo"],
+   detalle:"El paseo parte desde el centro de Bariloche recorriendo la Av. Bustillo, una de las avenidas más bellas de la ciudad.\n\nLa primera parada es el Cerro Campanario, a 17 km del centro. Al llegar, la guía se encarga de comprar los tickets de la aerosilla en boletería mientras los pasajeros hacen la fila para subir — así se aprovecha mejor el tiempo en la cima. En la parte alta los esperan cinco miradores y una confitería vidriada ideal para tomar algo caliente con las mejores vistas de Bariloche.\n\nDe vuelta en el vehículo, continuamos hacia la segunda parada: la Capilla San Eduardo. Construida en 1938 con piedra, troncos de ciprés y tejuelas de alerce, es obra del arquitecto Alejandro Bustillo — el mismo que diseñó el Hotel Llao Llao ese mismo año, y que le dio a ambos edificios un estilo montañés con influencias neogóticas europeas. Un detalle curioso: esta pequeña capilla es anterior a la propia Catedral de Bariloche. Desde su escalinata de piedra, con el Llao Llao de fondo y el Cerro López a la distancia, se obtiene una de las postales más fotografiadas de la región.\n\nLa tercera parada es el mirador de Punto Panorámico, con vistas al lago Moreno, al Hotel Llao Llao y al lago Nahuel Huapi — una de las postales más icónicas de Bariloche.",
+   incluye:["Recorrido completo por los miradores del circuito","Parada en Llao Llao y Punto Panoramico","Parada en la historica Colonia Suiza","Guia acompanante"],
    notas:["Horario de Pick Up (estimado): 13:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Medio dia.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:true, traslado:false, horario:"13:00 hs",
    leyenda:"Hasta el 30/06: $35.000 por persona · Desde el 01/07: $45.000",
