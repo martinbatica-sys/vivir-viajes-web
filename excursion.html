@@ -435,6 +435,7 @@ const GALLERY = {
   "neumeyer":["fotos/neumeyer.jpg","fotos/neumeyer-2.jpg","fotos/neumeyer-3.jpg","fotos/neumeyer-4.jpg","fotos/neumeyer-5.jpg"],
   "circuito-chico":["fotos/chico-01.jpg","fotos/chico-02.jpg","fotos/chico-03.jpg","fotos/chico-04.jpg",{src:"fotos/chico-05.jpg",pos:"center 85%"},"fotos/chico-06.jpg","fotos/chico-07.jpg","fotos/chico-08.jpg","fotos/chico-09.jpg"],
   "circuito-chico-campanario":["fotos/circuito-chico-campanario-01.jpg","fotos/circuito-chico-campanario-02.jpg","fotos/circuito-chico-campanario-03.jpg","fotos/circuito-chico-campanario-04.jpg","fotos/circuito-chico-campanario-05.jpg","fotos/circuito-chico-campanario-06.jpg","fotos/circuito-chico-campanario-07.jpg","fotos/circuito-chico-campanario-08.jpg"],
+  "circuito-grande":["fotos/traful-01.jpg","fotos/traful-02.jpg","fotos/traful-03.jpg","fotos/traful-04.jpg","fotos/traful-05.jpg","fotos/traful-06.jpg","fotos/traful-07.jpg","fotos/traful-08.jpg"],
   "villa-bayo":["fotos/02.jpg","fotos/03.jpg","fotos/06.jpg","fotos/10.jpg","fotos/11.jpg"],
   "campo-tulipanes":["fotos/campo-tulipanes-01.jpg","fotos/campo-tulipanes-02.jpg","fotos/campo-tulipanes-03.jpg","fotos/campo-tulipanes-04.jpg","fotos/campo-tulipanes-05.jpg","fotos/campo-tulipanes-06.jpg"],
   "san-martin":["fotos/sma-01.jpg","fotos/sma-09.jpg","fotos/sma-02.jpg","fotos/sma-03.jpg","fotos/sma-08.jpg","fotos/sma-05.jpg","fotos/sma-06.jpg"],
@@ -875,6 +876,21 @@ const EXC = {
     incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
     notas:["Horario de Pick Up (estimado): 08:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
     cats:[{key:'pp',label:'Por persona',min:1}],precios:{base:{pp:75000},alta:{pp:110000}}}]
+ },
+
+ /* ---------- CIRCUITO GRANDE · VILLA TRAFUL ---------- */
+ "circuito-grande":{
+   nombre:"Circuito Grande - Villa Traful", subt:"Valle Encantado · Lago Traful · Siete Lagos", tag:"Ruta",
+   desc:"Un día completo por el Circuito Grande: el Valle Encantado, el lago Traful con su bosque sumergido, y el regreso por la Ruta de los Siete Lagos vía Villa La Angostura.",
+   relacionadas:["san-martin","circuito-chico"],
+   detalle:"El viaje parte desde Bariloche por la Ruta Nacional 40, atravesando paisajes que ya de por sí valen el paseo: el arroyo Ñireco, el río Ñirihuau y la costa del lago Nahuel Huapi, hasta alcanzar el río Limay, límite natural entre Río Negro y Neuquén.\n\nLa primera parada es el Anfiteatro, una imponente formación rocosa a orillas del Limay que, por su forma circular y su acústica natural, recuerda a un circo romano.\n\nContinuamos hacia el Valle Encantado, a 62 km de Bariloche, uno de los paisajes más singulares de la Patagonia. Las laderas están pobladas de formaciones rocosas de origen volcánico esculpidas durante siglos por el viento, el agua y la nieve — y la imaginación hace el resto: castillos, catedrales góticas, leones, torres. Algunas tienen nombre propio: \"El dedo de Dios\", \"El Centinela del Valle\", \"La Montura Chilena\". El río Limay serpentea entre todo esto con sus aguas de un azul profundo. Una parada que merece tiempo.\n\nTras cruzar la confluencia de los ríos Limay y Traful, el camino bordea el lago Traful hasta llegar al Mirador del Viento, un acantilado de más de 70 metros de altura con vistas panorámicas que justifican solos el viaje.\n\nLa siguiente parada es Villa Traful: un pequeño poblado cordillerano de apenas unos cientos de habitantes, enclavado dentro del Parque Nacional Nahuel Huapi sobre la costa del lago homónimo. Hay tiempo para recorrer su costanera, almorzar o tomar un té con dulces y alfajores caseros, y descubrir uno de sus datos más llamativos: en el fondo del lago Traful descansa un bosque sumergido de alrededor de 60 cipreses que se yerguen desde el lecho del agua — una rareza natural que pocos lugares del mundo pueden ofrecer.\n\nRetomamos camino hacia Puerto Arrayán y El Portezuelo para empalmar con la Ruta de los Siete Lagos (RN 234), atravesando bosques densos y bordeando los lagos Espejo y Correntoso hasta llegar a Villa La Angostura. Tiempo libre para recorrer su centro, conocer sus rincones y disfrutar de la gastronomía local.\n\nEl regreso a Bariloche se hace por la Ruta Nacional 231, pasando por Puerto Manzano y bordeando el Brazo Huemul del lago Nahuel Huapi, con vistas privilegiadas de la Península Huemul antes de tomar la RN 237 de vuelta a la ciudad.",
+   incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
+   notas:["Horario de Pick Up (estimado): 08:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
+   seasonal:false, traslado:false, horario:"08:00 hs",
+   opciones:[{key:"tour",label:null,
+    incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
+    notas:["Horario de Pick Up (estimado): 08:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
+    cats:[{key:'pp',label:'Por persona',min:1}],precios:{pp:80000}}]
  },
 
  /* ---------- TRONADOR ---------- */
