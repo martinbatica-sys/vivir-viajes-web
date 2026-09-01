@@ -48,6 +48,12 @@
 
   footer{text-align:center;padding:1.6rem;color:var(--ink-soft);font-size:.82rem}
 
+  .lang-switch{position:fixed;top:1.2rem;right:1.2rem;display:flex;gap:.2rem;background:var(--paper);border:1px solid var(--line);padding:.22rem;border-radius:999px;z-index:5}
+  .lang-switch button{font-family:var(--body);font-weight:700;font-size:.76rem;letter-spacing:.02em;border:none;background:transparent;color:var(--ink-soft);padding:.38rem .6rem;border-radius:999px;cursor:pointer;transition:.18s}
+  .lang-switch button.active{background:var(--navy);color:#fff}
+  .lang-switch button:hover:not(.active){color:var(--navy)}
+  @media print{ .lang-switch{display:none!important} }
+
   @media print{
     header,.actions,.printer,footer,.icon{display:none!important}
     body{background:#fff}
@@ -58,6 +64,11 @@
 </style>
 </head>
 <body>
+<div class="lang-switch" id="lang-switch">
+  <button type="button" data-lang="es">ES</button>
+  <button type="button" data-lang="en">EN</button>
+  <button type="button" data-lang="pt">PT</button>
+</div>
 <header>
   <a href="index.html"><img src="logo-color.png" alt="Vivir Viajes"></a>
 </header>
@@ -68,33 +79,96 @@
     <p id="msg">Estamos confirmando tu reserva.</p>
 
     <div class="actions">
-      <button type="button" class="btn" id="voucher-btn" hidden>Imprimir Voucher</button>
-      <a class="btn secondary" id="cta" href="index.html">Volver a la tienda</a>
+      <button type="button" class="btn" id="voucher-btn" hidden data-i18n="btn.voucher">Imprimir Voucher</button>
+      <a class="btn secondary" id="cta" href="index.html" data-i18n="btn.tienda">Volver a la tienda</a>
     </div>
 
     <div class="printer" id="printer" hidden></div>
     <div class="voucher-wrap" id="voucher-wrap">
       <div class="voucher">
         <img class="voucher-logo" src="logo-color.png" alt="Vivir Viajes">
-        <h3>Voucher de reserva</h3>
-        <div class="row"><span>Excursión</span><span id="v-excursion">-</span></div>
-        <div class="row" id="v-opcion-row" hidden><span>Opción</span><span id="v-opcion"></span></div>
-        <div class="row"><span>Pasajero</span><span id="v-nombre">-</span></div>
-        <div class="row" id="v-hotel-row" hidden><span>Hotel</span><span id="v-hotel"></span></div>
-        <div class="row"><span>Cant Pax</span><span id="v-pasajeros">-</span></div>
-        <div class="row"><span>Fecha</span><span id="v-fecha">-</span></div>
-        <div class="row" id="v-horario-row" hidden><span>A partir de</span><span id="v-horario"></span></div>
-        <div class="row total"><span>Total pagado</span><span id="v-total">-</span></div>
+        <h3 data-i18n="voucher.title">Voucher de reserva</h3>
+        <div class="row"><span data-i18n="voucher.excursion">Excursión</span><span id="v-excursion">-</span></div>
+        <div class="row" id="v-opcion-row" hidden><span data-i18n="voucher.opcion">Opción</span><span id="v-opcion"></span></div>
+        <div class="row"><span data-i18n="voucher.pasajero">Pasajero</span><span id="v-nombre">-</span></div>
+        <div class="row" id="v-hotel-row" hidden><span data-i18n="voucher.hotel">Hotel</span><span id="v-hotel"></span></div>
+        <div class="row"><span data-i18n="voucher.pax">Cant Pax</span><span id="v-pasajeros">-</span></div>
+        <div class="row"><span data-i18n="voucher.fecha">Fecha</span><span id="v-fecha">-</span></div>
+        <div class="row" id="v-horario-row" hidden><span data-i18n="voucher.horario">A partir de</span><span id="v-horario"></span></div>
+        <div class="row total"><span data-i18n="voucher.total">Total pagado</span><span id="v-total">-</span></div>
         <div class="ref" id="v-ref"></div>
-        <div class="legend">No válido como factura</div>
-        <div class="contact">Consultas: 2944 53-9672 &middot; info@vivirviajes.com.ar</div>
+        <div class="legend" data-i18n="voucher.legend">No válido como factura</div>
+        <div class="contact"><span data-i18n="voucher.consultas">Consultas:</span> 2944 53-9672 &middot; info@vivirviajes.com.ar</div>
       </div>
     </div>
   </div>
 </main>
-<footer>&copy; 2026 Vivir Viajes &middot; Bariloche, Patagonia</footer>
+<footer data-i18n="footer.text">&copy; 2026 Vivir Viajes &middot; Bariloche, Patagonia</footer>
 
 <script>
+  const I18N = {
+    es: {
+      "btn.voucher":"Imprimir Voucher", "btn.tienda":"Volver a la tienda",
+      "voucher.title":"Voucher de reserva", "voucher.excursion":"Excursión", "voucher.opcion":"Opción",
+      "voucher.pasajero":"Pasajero", "voucher.hotel":"Hotel", "voucher.pax":"Cant Pax", "voucher.fecha":"Fecha",
+      "voucher.horario":"A partir de", "voucher.total":"Total pagado", "voucher.legend":"No válido como factura",
+      "voucher.consultas":"Consultas:", "voucher.referencia":"Referencia: ",
+      "footer.text":"© 2026 Vivir Viajes · Bariloche, Patagonia",
+      "status.success.title":"¡Reserva confirmada!", "status.success.msg":"Tu pago se acreditó correctamente. En breve nuestro equipo se va a contactar para coordinar los detalles.",
+      "status.pending.title":"Pago en proceso", "status.pending.msg":"Tu pago está siendo procesado. Te vamos a avisar apenas se confirme.",
+      "status.failure.title":"El pago no se completó", "status.failure.msg":"Algo falló al procesar el pago. Podés intentar de nuevo o escribirnos por WhatsApp.",
+    },
+    en: {
+      "btn.voucher":"Print Voucher", "btn.tienda":"Back to the store",
+      "voucher.title":"Booking voucher", "voucher.excursion":"Excursion", "voucher.opcion":"Option",
+      "voucher.pasajero":"Traveler", "voucher.hotel":"Hotel", "voucher.pax":"Pax count", "voucher.fecha":"Date",
+      "voucher.horario":"Starting at", "voucher.total":"Total paid", "voucher.legend":"Not valid as an invoice",
+      "voucher.consultas":"Questions:", "voucher.referencia":"Reference: ",
+      "footer.text":"© 2026 Vivir Viajes · Bariloche, Patagonia",
+      "status.success.title":"Booking confirmed!", "status.success.msg":"Your payment was successfully processed. Our team will be in touch shortly to coordinate the details.",
+      "status.pending.title":"Payment in process", "status.pending.msg":"Your payment is being processed. We'll let you know as soon as it's confirmed.",
+      "status.failure.title":"The payment wasn't completed", "status.failure.msg":"Something went wrong processing the payment. You can try again or write to us on WhatsApp.",
+    },
+    pt: {
+      "btn.voucher":"Imprimir Voucher", "btn.tienda":"Voltar à loja",
+      "voucher.title":"Voucher de reserva", "voucher.excursion":"Passeio", "voucher.opcion":"Opção",
+      "voucher.pasajero":"Passageiro", "voucher.hotel":"Hotel", "voucher.pax":"Qtd. Pax", "voucher.fecha":"Data",
+      "voucher.horario":"A partir de", "voucher.total":"Total pago", "voucher.legend":"Não válido como fatura",
+      "voucher.consultas":"Dúvidas:", "voucher.referencia":"Referência: ",
+      "footer.text":"© 2026 Vivir Viajes · Bariloche, Patagônia",
+      "status.success.title":"Reserva confirmada!", "status.success.msg":"Seu pagamento foi processado com sucesso. Em breve nossa equipe vai entrar em contato para combinar os detalhes.",
+      "status.pending.title":"Pagamento em processamento", "status.pending.msg":"Seu pagamento está sendo processado. Vamos avisar assim que for confirmado.",
+      "status.failure.title":"O pagamento não foi concluído", "status.failure.msg":"Algo deu errado ao processar o pagamento. Você pode tentar novamente ou falar com a gente pelo WhatsApp.",
+    },
+  };
+
+  let lang = "es";
+  try{ lang = localStorage.getItem("vv-lang") || "es"; }catch(e){}
+  if(!I18N[lang]) lang = "es";
+  function t(key){ return (I18N[lang] && I18N[lang][key]) ?? I18N.es[key]; }
+
+  let refreshVoucherRef = null;
+  function applyLang(){
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+      const v = t(el.getAttribute("data-i18n"));
+      if(v!=null) el.textContent = v;
+    });
+    document.querySelectorAll("#lang-switch button").forEach(b=>{
+      b.classList.toggle("active", b.getAttribute("data-lang")===lang);
+    });
+    if(refreshVoucherRef) refreshVoucherRef();
+  }
+  applyLang();
+  document.querySelectorAll("#lang-switch button").forEach(b=>{
+    b.addEventListener("click", () => {
+      lang = b.getAttribute("data-lang");
+      try{ localStorage.setItem("vv-lang", lang); }catch(e){}
+      applyLang();
+      renderStatus();
+    });
+  });
+
   const params = new URLSearchParams(location.search);
   const status = params.get("status");
 
@@ -106,19 +180,22 @@
   const printer = document.getElementById("printer");
   const voucherWrap = document.getElementById("voucher-wrap");
 
-  if(status === "success"){
-    icon.textContent = "✅";
-    title.textContent = "¡Reserva confirmada!";
-    msg.textContent = "Tu pago se acreditó correctamente. En breve nuestro equipo se va a contactar para coordinar los detalles.";
-  } else if(status === "pending"){
-    icon.textContent = "🕒";
-    title.textContent = "Pago en proceso";
-    msg.textContent = "Tu pago está siendo procesado. Te vamos a avisar apenas se confirme.";
-  } else {
-    icon.textContent = "⚠️";
-    title.textContent = "El pago no se completó";
-    msg.textContent = "Algo falló al procesar el pago. Podés intentar de nuevo o escribirnos por WhatsApp.";
+  function renderStatus(){
+    if(status === "success"){
+      icon.textContent = "✅";
+      title.textContent = t("status.success.title");
+      msg.textContent = t("status.success.msg");
+    } else if(status === "pending"){
+      icon.textContent = "🕒";
+      title.textContent = t("status.pending.title");
+      msg.textContent = t("status.pending.msg");
+    } else {
+      icon.textContent = "⚠️";
+      title.textContent = t("status.failure.title");
+      msg.textContent = t("status.failure.msg");
+    }
   }
+  renderStatus();
 
   if(status === "success" && params.get("excursion")){
     document.getElementById("v-excursion").textContent = params.get("excursion") || "-";
@@ -150,7 +227,9 @@
     document.getElementById("v-total").textContent = total ? "$" + Number(total).toLocaleString("es-AR") : "-";
 
     const ref = params.get("external_reference") || params.get("payment_id") || "";
-    document.getElementById("v-ref").textContent = ref ? "Referencia: " + ref : "";
+    function refreshRef(){ document.getElementById("v-ref").textContent = ref ? t("voucher.referencia") + ref : ""; }
+    refreshRef();
+    refreshVoucherRef = refreshRef;
 
     printer.hidden = false;
     voucherBtn.hidden = false;
