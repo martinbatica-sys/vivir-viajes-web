@@ -28,6 +28,11 @@
   .back{font-weight:600;color:var(--ink-soft);font-size:.92rem;display:inline-flex;align-items:center;gap:.4rem}
   .back:hover{color:var(--navy)}
   .switch{font-family:var(--body);font-weight:600;font-size:.9rem;color:var(--navy);border:1.5px solid var(--line);border-radius:10px;padding:.5rem .7rem;background:#fff;cursor:pointer}
+  .nav-right{display:flex;align-items:center;gap:.7rem;margin-left:auto}
+  .lang-switch{display:flex;gap:.2rem;background:var(--panel);padding:.22rem;border-radius:999px;flex:0 0 auto}
+  .lang-switch button{font-family:var(--body);font-weight:700;font-size:.76rem;letter-spacing:.02em;border:none;background:transparent;color:var(--ink-soft);padding:.38rem .6rem;border-radius:999px;cursor:pointer;transition:.18s}
+  .lang-switch button.active{background:var(--navy);color:#fff}
+  .lang-switch button:hover:not(.active){color:var(--navy)}
 
   .banner{background:linear-gradient(120deg,#1A2F58,#0F1D38);color:#fff;padding:1.3rem 0 2.2rem}
   .banner-layout{display:flex;flex-direction:column;align-items:flex-start;gap:.6rem}
@@ -194,8 +199,15 @@
 <header>
   <div class="wrap nav">
     <a class="brand" href="index.html"><img src="logo-color.png" alt="Vivir Viajes"></a>
-    <a class="back" href="index.html">&larr; Volver a excursiones</a>
-    <select class="switch" id="switch" title="Cambiar excursion"></select>
+    <a class="back" href="index.html" data-i18n="nav.volver">&larr; Volver a excursiones</a>
+    <div class="nav-right">
+      <select class="switch" id="switch" title="Cambiar excursion"></select>
+      <div class="lang-switch" id="lang-switch">
+        <button type="button" data-lang="es">ES</button>
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="pt">PT</button>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -204,8 +216,8 @@
     <div class="banner-layout">
       <div class="carousel" id="carousel">
         <div class="carousel-track" id="carousel-track"></div>
-        <button type="button" class="car-nav prev" id="car-prev" aria-label="Anterior">&#8249;</button>
-        <button type="button" class="car-nav next" id="car-next" aria-label="Siguiente">&#8250;</button>
+        <button type="button" class="car-nav prev" id="car-prev" aria-label="Anterior" data-i18n-aria="carousel.prev">&#8249;</button>
+        <button type="button" class="car-nav next" id="car-next" aria-label="Siguiente" data-i18n-aria="carousel.next">&#8250;</button>
         <div class="carousel-dots" id="carousel-dots"></div>
       </div>
       <div class="banner-info">
@@ -226,48 +238,48 @@
         <p id="c-detalle"></p>
       </div>
       <div class="block" id="block-incluye">
-        <h3>&#10003; Que incluye</h3>
+        <h3>&#10003; <span data-i18n="content.incluye">Que incluye</span></h3>
         <ul class="list" id="c-incluye"></ul>
       </div>
       <div class="block" id="block-notas">
-        <h3>Informacion importante</h3>
+        <h3 data-i18n="content.notas">Informacion importante</h3>
         <ul class="list notas" id="c-notas"></ul>
       </div>
     </div>
 
     <aside>
       <div class="resv">
-        <div class="resv-head">&#128197; Reservar online</div>
+        <div class="resv-head">&#128197; <span data-i18n="form.reservar-online">Reservar online</span></div>
         <div class="resv-body">
           <div class="field" id="f-opcion" hidden>
-            <label>Experiencia / opcion</label>
+            <label data-i18n="form.opcion">Experiencia / opcion</label>
             <select id="opcion"></select>
           </div>
           <div class="field" id="f-traslado" hidden>
-            <label>Traslado</label>
+            <label data-i18n="form.traslado">Traslado</label>
             <div class="toggle">
-              <button type="button" data-t="0" class="on">Sin traslado</button>
-              <button type="button" data-t="1">Con traslado</button>
+              <button type="button" data-t="0" class="on" data-i18n="form.sin-traslado">Sin traslado</button>
+              <button type="button" data-t="1" data-i18n="form.con-traslado">Con traslado</button>
             </div>
           </div>
           <div class="field" id="f-pickup" hidden>
-            <label>Punto de pick up</label>
+            <label data-i18n="form.pickup">Punto de pick up</label>
             <select id="pickup-select">
-              <option value="">Seleccionar punto de pick up...</option>
+              <option value="" data-i18n="form.pickup-placeholder">Seleccionar punto de pick up...</option>
             </select>
           </div>
           <div class="field" id="f-lagofrias" hidden>
-            <label>Extensión Lago Frías</label>
+            <label data-i18n="form.lagofrias">Extensión Lago Frías</label>
             <div class="toggle" id="toggle-lf">
-              <button type="button" data-lf="0" class="on">Sin Lago Frías</button>
-              <button type="button" data-lf="1">Con Lago Frías</button>
+              <button type="button" data-lf="0" class="on" data-i18n="form.sin-lagofrias">Sin Lago Frías</button>
+              <button type="button" data-lf="1" data-i18n="form.con-lagofrias">Con Lago Frías</button>
             </div>
           </div>
           <div class="field">
-            <label>Fecha de la excursion</label>
+            <label data-i18n="form.fecha">Fecha de la excursion</label>
             <div class="cal-wrap">
               <button type="button" class="date-trigger" id="date-trigger">
-                <span class="dt-text" id="dt-text">Elegir fecha</span>
+                <span class="dt-text" id="dt-text" data-i18n="form.elegir-fecha">Elegir fecha</span>
                 <span class="dt-icon">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
                 </span>
@@ -279,8 +291,8 @@
                   <button class="cal-nav" id="cal-next">&#8250;</button>
                 </div>
                 <div class="cal-grid">
-                  <div class="cal-dow">
-                    <span>Do</span><span>Lu</span><span>Ma</span><span>Mi</span><span>Ju</span><span>Vi</span><span>Sa</span>
+                  <div class="cal-dow" id="cal-dow">
+                    <span data-i18n="cal.dow0">Do</span><span data-i18n="cal.dow1">Lu</span><span data-i18n="cal.dow2">Ma</span><span data-i18n="cal.dow3">Mi</span><span data-i18n="cal.dow4">Ju</span><span data-i18n="cal.dow5">Vi</span><span data-i18n="cal.dow6">Sa</span>
                   </div>
                   <div class="cal-days" id="cal-days"></div>
                 </div>
@@ -289,44 +301,44 @@
             <div id="season-badge"></div>
           </div>
           <div class="field">
-            <label>Pasajeros</label>
+            <label data-i18n="form.pasajeros">Pasajeros</label>
             <div id="pax"></div>
           </div>
           <div class="field">
-            <label>Nombre y apellido</label>
-            <input type="text" id="c-nombre" placeholder="Nombre de quien reserva">
+            <label data-i18n="form.nombre">Nombre y apellido</label>
+            <input type="text" id="c-nombre" placeholder="Nombre de quien reserva" data-i18n-placeholder="form.nombre-placeholder">
           </div>
           <div class="field">
-            <label>DNI</label>
-            <input type="text" id="c-dni" inputmode="numeric" placeholder="Ej: 30123456">
+            <label data-i18n="form.dni">DNI</label>
+            <input type="text" id="c-dni" inputmode="numeric" placeholder="Ej: 30123456" data-i18n-placeholder="form.dni-placeholder">
           </div>
           <div class="field">
-            <label>E-mail</label>
-            <input type="email" id="c-email" placeholder="Ej: nombre@mail.com">
+            <label data-i18n="form.email">E-mail</label>
+            <input type="email" id="c-email" placeholder="Ej: nombre@mail.com" data-i18n-placeholder="form.email-placeholder">
           </div>
           <div class="field">
-            <label>Telefono de contacto</label>
-            <input type="tel" id="c-tel" placeholder="Ej: 2944 123456">
+            <label data-i18n="form.tel">Telefono de contacto</label>
+            <input type="tel" id="c-tel" placeholder="Ej: 2944 123456" data-i18n-placeholder="form.tel-placeholder">
           </div>
           <div class="field">
-            <label>Lugar de hospedaje</label>
-            <input type="text" id="c-hosp" placeholder="Hotel / cabaña / alojamiento en Bariloche">
+            <label data-i18n="form.hosp">Lugar de hospedaje</label>
+            <input type="text" id="c-hosp" placeholder="Hotel / cabaña / alojamiento en Bariloche" data-i18n-placeholder="form.hosp-placeholder">
           </div>
           <div class="price-breakdown" id="price-breakdown" hidden></div>
-          <div class="total"><small>Total estimado</small><b id="total">&mdash;</b></div>
+          <div class="total"><small data-i18n="form.total-estimado">Total estimado</small><b id="total">&mdash;</b></div>
           <div class="tc-field">
             <input type="checkbox" id="c-tc">
-            <label for="c-tc">He leído y estoy de acuerdo con los <span class="tc-link" id="tc-link">términos y condiciones</span> de la web</label>
+            <label for="c-tc" data-i18n-html="form.tc-label">He leído y estoy de acuerdo con los <span class="tc-link" id="tc-link">términos y condiciones</span> de la web</label>
           </div>
           <div class="hint" id="hint"></div>
-          <button class="btn btn-go" id="go" disabled>Reservar</button>
-          <div class="mp-note" id="mp-note">Pago 100% seguro con Mercado Pago</div>
+          <button class="btn btn-go" id="go" disabled data-i18n="form.reservar">Reservar</button>
+          <div class="mp-note" id="mp-note" data-i18n="form.mp-note">Pago 100% seguro con Mercado Pago</div>
         </div>
       </div>
     </aside>
   </div>
   <div class="related" id="related-section" hidden>
-    <h2>También te puede interesar</h2>
+    <h2 data-i18n="content.relacionadas">También te puede interesar</h2>
     <div class="related-cards" id="related-cards"></div>
   </div>
 </div>
@@ -334,7 +346,7 @@
 <footer>
   <div class="wrap foot">
     <img src="logo-blanco.png" alt="Vivir Viajes">
-    <span>&copy; 2026 Vivir Viajes &middot; Bariloche, Patagonia</span>
+    <span data-i18n="footer.text">&copy; 2026 Vivir Viajes &middot; Bariloche, Patagonia</span>
   </div>
 </footer>
 
@@ -342,82 +354,82 @@
 <div class="modal-overlay" id="modal-24hs">
   <div class="modal-box">
     <div class="modal-icon">⏰</div>
-    <div class="modal-title">Reserva con menos de 24 hs</div>
-    <div class="modal-body">Para reservas de último momento comunicate directamente con nosotros por WhatsApp y te respondemos al instante.</div>
+    <div class="modal-title" data-i18n="modal24.title">Reserva con menos de 24 hs</div>
+    <div class="modal-body" data-i18n="modal24.body">Para reservas de último momento comunicate directamente con nosotros por WhatsApp y te respondemos al instante.</div>
     <a class="modal-btn" id="modal-wa" href="#" target="_blank" rel="noopener">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.1.1.3 0 .5l-.4.5c-.2.2-.3.4-.1.6.6 1 1.3 1.6 2.2 2.1.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.5 0 .8z"/></svg>
-      Escribir por WhatsApp
+      <span data-i18n="modal24.button">Escribir por WhatsApp</span>
     </a>
-    <button class="modal-close" id="modal-close">Elegir otra fecha</button>
+    <button class="modal-close" id="modal-close" data-i18n="modal24.close">Elegir otra fecha</button>
   </div>
 </div>
 
 <!-- Modal Terminos y Condiciones -->
 <div class="modal-overlay" id="modal-tc">
   <div class="modal-box tc-box">
-    <button class="tc-x" id="tc-x" aria-label="Cerrar">&times;</button>
-    <div class="modal-title">Términos y condiciones</div>
+    <button class="tc-x" id="tc-x" aria-label="Cerrar" data-i18n-aria="tc.close-aria">&times;</button>
+    <div class="modal-title" data-i18n="tc.title">Términos y condiciones</div>
     <div class="tc-scroll">
-      <h3>PRECIOS INCLUYEN</h3>
+      <h3 data-i18n="tc.h1">PRECIOS INCLUYEN</h3>
       <ul>
-        <li>Todos los servicios que se mencionan específicamente en cada servicio. Los precios incluyen IVA y están sujetos a cambios sin previo aviso hasta el momento en que el cliente abona la totalidad de los servicios contratados.</li>
-        <li>Todos los importes pagados antes de la confirmación definitiva de los servicios son percibidos en concepto de reserva. La confirmación definitiva de los servicios y precios respectivos se producirá con la emisión del voucher y la facturación respectiva.</li>
+        <li data-i18n="tc.h1.li1">Todos los servicios que se mencionan específicamente en cada servicio. Los precios incluyen IVA y están sujetos a cambios sin previo aviso hasta el momento en que el cliente abona la totalidad de los servicios contratados.</li>
+        <li data-i18n="tc.h1.li2">Todos los importes pagados antes de la confirmación definitiva de los servicios son percibidos en concepto de reserva. La confirmación definitiva de los servicios y precios respectivos se producirá con la emisión del voucher y la facturación respectiva.</li>
       </ul>
 
-      <h3>NUESTROS PRECIOS NO INCLUYEN</h3>
+      <h3 data-i18n="tc.h2">NUESTROS PRECIOS NO INCLUYEN</h3>
       <ul>
-        <li>Entradas a Parques Nacionales, tasas, ni otros no especificadas en el servicio.</li>
-        <li>Extras de ningún tipo o gastos que no estén debidamente especificados en los servicios.</li>
+        <li data-i18n="tc.h2.li1">Entradas a Parques Nacionales, tasas, ni otros no especificadas en el servicio.</li>
+        <li data-i18n="tc.h2.li2">Extras de ningún tipo o gastos que no estén debidamente especificados en los servicios.</li>
       </ul>
 
-      <h3>Cambios y cancelaciones</h3>
+      <h3 data-i18n="tc.h3">Cambios y cancelaciones</h3>
 
-      <h4>Cancelaciones por parte de la empresa</h4>
-      <p>Vivir Viajes se reserva la facultad de cancelar el servicio ante casos de fuerza mayor o caso fortuito. En ese caso se realizará la devolución total del importe abonado, menos un 12% en concepto de gastos administrativos.</p>
+      <h4 data-i18n="tc.h3a">Cancelaciones por parte de la empresa</h4>
+      <p data-i18n="tc.h3a.p1">Vivir Viajes se reserva la facultad de cancelar el servicio ante casos de fuerza mayor o caso fortuito. En ese caso se realizará la devolución total del importe abonado, menos un 12% en concepto de gastos administrativos.</p>
 
-      <h4>Cancelaciones por parte del cliente</h4>
-      <p>Toda cancelación debe notificarse por escrito con al menos 24 hs de anticipación al horario de salida, a través de alguno de los siguientes canales:</p>
+      <h4 data-i18n="tc.h3b">Cancelaciones por parte del cliente</h4>
+      <p data-i18n="tc.h3b.p1">Toda cancelación debe notificarse por escrito con al menos 24 hs de anticipación al horario de salida, a través de alguno de los siguientes canales:</p>
       <ul>
         <li>Email: info@vivirviajes.com.ar</li>
         <li>Teléfono: +54 294 443 9320</li>
         <li>WhatsApp: 2944 53-9672</li>
       </ul>
-      <p>Penalidades según el momento de la cancelación:</p>
+      <p data-i18n="tc.h3b.p2">Penalidades según el momento de la cancelación:</p>
       <ul>
-        <li>Con más de 24 hs de anticipación: se retiene el 15% del total en concepto de gastos administrativos. La devolución del resto se realiza por el mismo canal en que se efectuó el pago.</li>
-        <li>Con menos de 12 hs de anticipación: sin devolución.</li>
-        <li>Sin aviso previo: sin devolución. No corresponde reembolso por ningún servicio no utilizado, incluyendo traslados, actividades y excursiones.</li>
+        <li data-i18n="tc.h3b.li1">Con más de 24 hs de anticipación: se retiene el 15% del total en concepto de gastos administrativos. La devolución del resto se realiza por el mismo canal en que se efectuó el pago.</li>
+        <li data-i18n="tc.h3b.li2">Con menos de 12 hs de anticipación: sin devolución.</li>
+        <li data-i18n="tc.h3b.li3">Sin aviso previo: sin devolución. No corresponde reembolso por ningún servicio no utilizado, incluyendo traslados, actividades y excursiones.</li>
       </ul>
-      <p>Vivir Viajes se reserva el derecho de evaluar cada caso y, a su criterio, otorgar una nota de crédito en lugar de la devolución cuando correspondan gastos por cancelación.</p>
+      <p data-i18n="tc.h3b.p3">Vivir Viajes se reserva el derecho de evaluar cada caso y, a su criterio, otorgar una nota de crédito en lugar de la devolución cuando correspondan gastos por cancelación.</p>
 
-      <h4>Cambios de fecha</h4>
-      <p>Los cambios de fecha no tienen costo adicional, siempre que haya disponibilidad en la nueva fecha solicitada y el cambio se realice dentro de la vigencia de la tarifa. Todo cambio queda sujeto a disponibilidad.</p>
+      <h4 data-i18n="tc.h3c">Cambios de fecha</h4>
+      <p data-i18n="tc.h3c.p1">Los cambios de fecha no tienen costo adicional, siempre que haya disponibilidad en la nueva fecha solicitada y el cambio se realice dentro de la vigencia de la tarifa. Todo cambio queda sujeto a disponibilidad.</p>
 
-      <h4>Condiciones especiales</h4>
-      <p>Algunos servicios pueden tener condiciones de cancelación particulares, que serán informadas en el detalle de cada producto al momento de la reserva.</p>
+      <h4 data-i18n="tc.h3d">Condiciones especiales</h4>
+      <p data-i18n="tc.h3d.p1">Algunos servicios pueden tener condiciones de cancelación particulares, que serán informadas en el detalle de cada producto al momento de la reserva.</p>
 
-      <h3>RESPONSABILIDADES</h3>
-      <p>Es responsabilidad única y exclusiva de cada pasajero tener toda la documentación en regla para el viaje. El pasajero deberá estar provisto de pasaporte vigente y las visas requeridas según el itinerario escogido. El incumplimiento de lo antes expuesto por parte del cliente le ocasionará la pérdida de derecho a cualquier reembolso. Las consecuencias de su omisión y los gastos que se originaren como consecuencia de ello serán por cuenta del viajero, aplicándose en este caso las condiciones establecidas para el desistimiento voluntario de servicios. Lo mismo ocurrirá cuando las autoridades de cualquier país rehusaren permitir la entrada al pasajero.</p>
+      <h3 data-i18n="tc.h4">RESPONSABILIDADES</h3>
+      <p data-i18n="tc.h4.p1">Es responsabilidad única y exclusiva de cada pasajero tener toda la documentación en regla para el viaje. El pasajero deberá estar provisto de pasaporte vigente y las visas requeridas según el itinerario escogido. El incumplimiento de lo antes expuesto por parte del cliente le ocasionará la pérdida de derecho a cualquier reembolso. Las consecuencias de su omisión y los gastos que se originaren como consecuencia de ello serán por cuenta del viajero, aplicándose en este caso las condiciones establecidas para el desistimiento voluntario de servicios. Lo mismo ocurrirá cuando las autoridades de cualquier país rehusaren permitir la entrada al pasajero.</p>
       <ul>
-        <li>VIVIR VIAJES declara explícitamente que obra únicamente como intermediaria en la reserva o contratación de los distintos servicios vinculados e incluidos en el respectivo tour o reservación de servicios: hoteles, restaurantes, medios de transportes u otros prestadores. Por consiguiente declina toda responsabilidad por deficiencias en cualquiera de los servicios prestados, así como cualquier accidente, daño, herida, retraso o irregularidades que pudieran ocurrir durante la ejecución de los servicios a las personas que ejecutan el viaje por su mediación.</li>
-        <li>VIVIR VIAJES declina toda responsabilidad por retrasos, adelantos o anulaciones que se produzcan por parte de las compañías aéreas o de las empresas transportistas, siendo los gastos que se originen a cargo de los pasajeros.</li>
-        <li>Si por razones con causa justificada VIVIR VIAJES se viera obligada a suspender cualquiera de las excursiones, los pasajeros inscriptos no tendrán más derecho que el reembolso que correspondiere del importe abonado, con renuncia expresa a cualquier otro reclamo.</li>
-        <li>Cuando el transporte se efectúe en vehículos propios o alquilados por el organizador, el viajero se somete expresamente a la legislación en materia de accidentes por carretera de la nación en que se halla matriculado el vehículo, renunciando taxativamente a cualquier otro derecho que pudiera corresponderle, en virtud de los cuales las indemnizaciones serían pagadas a los interesados, beneficiarios o representantes legales en el país de matrícula del vehículo y en la moneda legal del país. El pago de las posibles indemnizaciones en caso de accidente corresponde únicamente a las compañías de seguros.</li>
-        <li>VIVIR VIAJES no asume responsabilidad alguna sobre los criterios y el control en el otorgamiento de categorías a los hoteles. Las que figuran en la promoción de los paquetes y en los itinerarios enviados a los pasajeros son las que oficialmente otorgan las autoridades turísticas del país.</li>
-        <li>VIVIR VIAJES no se responsabiliza por el equipaje y demás efectos personales del cliente, los que viajan por cuenta y riesgo de éste.</li>
-        <li>VIVIR VIAJES no se responsabiliza por los hechos que se produzcan por caso fortuito o fuerza mayor, fenómenos climáticos o hechos de la naturaleza que acontezcan antes o durante el desarrollo del tour que impidan, demoren o de cualquier modo obstaculicen la ejecución total o parcial de las prestaciones comprometidas por la empresa.</li>
-        <li>Una vez comenzado el viaje, la suspensión, modificación o interrupción de los servicios por parte del pasajero por razones personales de cualquier índole no dará lugar a reclamo, reembolso o devolución alguna.</li>
+        <li data-i18n="tc.h4.li1">VIVIR VIAJES declara explícitamente que obra únicamente como intermediaria en la reserva o contratación de los distintos servicios vinculados e incluidos en el respectivo tour o reservación de servicios: hoteles, restaurantes, medios de transportes u otros prestadores. Por consiguiente declina toda responsabilidad por deficiencias en cualquiera de los servicios prestados, así como cualquier accidente, daño, herida, retraso o irregularidades que pudieran ocurrir durante la ejecución de los servicios a las personas que ejecutan el viaje por su mediación.</li>
+        <li data-i18n="tc.h4.li2">VIVIR VIAJES declina toda responsabilidad por retrasos, adelantos o anulaciones que se produzcan por parte de las compañías aéreas o de las empresas transportistas, siendo los gastos que se originen a cargo de los pasajeros.</li>
+        <li data-i18n="tc.h4.li3">Si por razones con causa justificada VIVIR VIAJES se viera obligada a suspender cualquiera de las excursiones, los pasajeros inscriptos no tendrán más derecho que el reembolso que correspondiere del importe abonado, con renuncia expresa a cualquier otro reclamo.</li>
+        <li data-i18n="tc.h4.li4">Cuando el transporte se efectúe en vehículos propios o alquilados por el organizador, el viajero se somete expresamente a la legislación en materia de accidentes por carretera de la nación en que se halla matriculado el vehículo, renunciando taxativamente a cualquier otro derecho que pudiera corresponderle, en virtud de los cuales las indemnizaciones serían pagadas a los interesados, beneficiarios o representantes legales en el país de matrícula del vehículo y en la moneda legal del país. El pago de las posibles indemnizaciones en caso de accidente corresponde únicamente a las compañías de seguros.</li>
+        <li data-i18n="tc.h4.li5">VIVIR VIAJES no asume responsabilidad alguna sobre los criterios y el control en el otorgamiento de categorías a los hoteles. Las que figuran en la promoción de los paquetes y en los itinerarios enviados a los pasajeros son las que oficialmente otorgan las autoridades turísticas del país.</li>
+        <li data-i18n="tc.h4.li6">VIVIR VIAJES no se responsabiliza por el equipaje y demás efectos personales del cliente, los que viajan por cuenta y riesgo de éste.</li>
+        <li data-i18n="tc.h4.li7">VIVIR VIAJES no se responsabiliza por los hechos que se produzcan por caso fortuito o fuerza mayor, fenómenos climáticos o hechos de la naturaleza que acontezcan antes o durante el desarrollo del tour que impidan, demoren o de cualquier modo obstaculicen la ejecución total o parcial de las prestaciones comprometidas por la empresa.</li>
+        <li data-i18n="tc.h4.li8">Una vez comenzado el viaje, la suspensión, modificación o interrupción de los servicios por parte del pasajero por razones personales de cualquier índole no dará lugar a reclamo, reembolso o devolución alguna.</li>
       </ul>
 
-      <h3>ACEPTACIÓN DEL CLIENTE</h3>
-      <p>El cliente declara conocer y aceptar las presentes condiciones generales de contratación y dicha aceptación queda ratificada por medio de uno cualesquiera de los siguientes actos:</p>
+      <h3 data-i18n="tc.h5">ACEPTACIÓN DEL CLIENTE</h3>
+      <p data-i18n="tc.h5.p1">El cliente declara conocer y aceptar las presentes condiciones generales de contratación y dicha aceptación queda ratificada por medio de uno cualesquiera de los siguientes actos:</p>
       <ul>
-        <li>El pago de los servicios contratados antes del inicio del viaje, por cualquier forma o modalidad.</li>
-        <li>La aceptación de la factura de los servicios contratados.</li>
-        <li>Mediante el uso de una porción cualquiera de los servicios contratados.</li>
+        <li data-i18n="tc.h5.li1">El pago de los servicios contratados antes del inicio del viaje, por cualquier forma o modalidad.</li>
+        <li data-i18n="tc.h5.li2">La aceptación de la factura de los servicios contratados.</li>
+        <li data-i18n="tc.h5.li3">Mediante el uso de una porción cualquiera de los servicios contratados.</li>
       </ul>
     </div>
-    <button class="modal-close tc-accept" id="tc-accept">Entendido</button>
+    <button class="modal-close tc-accept" id="tc-accept" data-i18n="tc.accept">Entendido</button>
   </div>
 </div>
 
@@ -1059,7 +1071,285 @@ const fmt = n => "$"+new Intl.NumberFormat("es-AR").format(n);
 const params = new URLSearchParams(location.search);
 let id = params.get("exc"); if(!EXC[id]) id = "neumeyer";
 
-let state = {opt:0, con:false, lf:false, pickup:"", fecha:"", counts:{}, nombre:"", dni:"", email:"", tel:"", hosp:"", tc:false};
+let state = {opt:0, con:false, lf:false, pickup:"", fecha:"", counts:{}, nombre:"", dni:"", email:"", tel:"", hosp:"", tc:false, lang:"es"};
+
+/* =================== I18N ====================================== */
+const UI = {
+  es: {
+    "nav.volver":"← Volver a excursiones",
+    "content.incluye":"Que incluye", "content.notas":"Informacion importante", "content.relacionadas":"También te puede interesar", "content.el-paseo":"El paseo",
+    "form.reservar-online":"Reservar online", "form.opcion":"Experiencia / opcion", "form.traslado":"Traslado", "form.sin-traslado":"Sin traslado", "form.con-traslado":"Con traslado",
+    "form.pickup":"Punto de pick up", "form.pickup-placeholder":"Seleccionar punto de pick up...",
+    "form.lagofrias":"Extensión Lago Frías", "form.sin-lagofrias":"Sin Lago Frías", "form.con-lagofrias":"Con Lago Frías",
+    "form.fecha":"Fecha de la excursion", "form.elegir-fecha":"Elegir fecha", "form.pasajeros":"Pasajeros",
+    "form.nombre":"Nombre y apellido", "form.nombre-placeholder":"Nombre de quien reserva",
+    "form.dni":"DNI", "form.dni-placeholder":"Ej: 30123456",
+    "form.email":"E-mail", "form.email-placeholder":"Ej: nombre@mail.com",
+    "form.tel":"Telefono de contacto", "form.tel-placeholder":"Ej: 2944 123456",
+    "form.hosp":"Lugar de hospedaje", "form.hosp-placeholder":"Hotel / cabaña / alojamiento en Bariloche",
+    "form.total-estimado":"Total estimado",
+    "form.tc-label":"He leído y estoy de acuerdo con los <span class=\"tc-link\" id=\"tc-link\">términos y condiciones</span> de la web",
+    "form.reservar":"Reservar", "form.mp-note":"Pago 100% seguro con Mercado Pago",
+    "footer.text":"© 2026 Vivir Viajes · Bariloche, Patagonia",
+    "modal24.title":"Reserva con menos de 24 hs", "modal24.body":"Para reservas de último momento comunicate directamente con nosotros por WhatsApp y te respondemos al instante.", "modal24.button":"Escribir por WhatsApp", "modal24.close":"Elegir otra fecha",
+    "carousel.prev":"Anterior", "carousel.next":"Siguiente",
+    "cal.dow0":"Do","cal.dow1":"Lu","cal.dow2":"Ma","cal.dow3":"Mi","cal.dow4":"Ju","cal.dow5":"Vi","cal.dow6":"Sa",
+    "tc.title":"Términos y condiciones", "tc.close-aria":"Cerrar",
+    "tc.h1":"PRECIOS INCLUYEN",
+    "tc.h1.li1":"Todos los servicios que se mencionan específicamente en cada servicio. Los precios incluyen IVA y están sujetos a cambios sin previo aviso hasta el momento en que el cliente abona la totalidad de los servicios contratados.",
+    "tc.h1.li2":"Todos los importes pagados antes de la confirmación definitiva de los servicios son percibidos en concepto de reserva. La confirmación definitiva de los servicios y precios respectivos se producirá con la emisión del voucher y la facturación respectiva.",
+    "tc.h2":"NUESTROS PRECIOS NO INCLUYEN",
+    "tc.h2.li1":"Entradas a Parques Nacionales, tasas, ni otros no especificadas en el servicio.",
+    "tc.h2.li2":"Extras de ningún tipo o gastos que no estén debidamente especificados en los servicios.",
+    "tc.h3":"Cambios y cancelaciones",
+    "tc.h3a":"Cancelaciones por parte de la empresa",
+    "tc.h3a.p1":"Vivir Viajes se reserva la facultad de cancelar el servicio ante casos de fuerza mayor o caso fortuito. En ese caso se realizará la devolución total del importe abonado, menos un 12% en concepto de gastos administrativos.",
+    "tc.h3b":"Cancelaciones por parte del cliente",
+    "tc.h3b.p1":"Toda cancelación debe notificarse por escrito con al menos 24 hs de anticipación al horario de salida, a través de alguno de los siguientes canales:",
+    "tc.h3b.p2":"Penalidades según el momento de la cancelación:",
+    "tc.h3b.li1":"Con más de 24 hs de anticipación: se retiene el 15% del total en concepto de gastos administrativos. La devolución del resto se realiza por el mismo canal en que se efectuó el pago.",
+    "tc.h3b.li2":"Con menos de 12 hs de anticipación: sin devolución.",
+    "tc.h3b.li3":"Sin aviso previo: sin devolución. No corresponde reembolso por ningún servicio no utilizado, incluyendo traslados, actividades y excursiones.",
+    "tc.h3b.p3":"Vivir Viajes se reserva el derecho de evaluar cada caso y, a su criterio, otorgar una nota de crédito en lugar de la devolución cuando correspondan gastos por cancelación.",
+    "tc.h3c":"Cambios de fecha",
+    "tc.h3c.p1":"Los cambios de fecha no tienen costo adicional, siempre que haya disponibilidad en la nueva fecha solicitada y el cambio se realice dentro de la vigencia de la tarifa. Todo cambio queda sujeto a disponibilidad.",
+    "tc.h3d":"Condiciones especiales",
+    "tc.h3d.p1":"Algunos servicios pueden tener condiciones de cancelación particulares, que serán informadas en el detalle de cada producto al momento de la reserva.",
+    "tc.h4":"RESPONSABILIDADES",
+    "tc.h4.p1":"Es responsabilidad única y exclusiva de cada pasajero tener toda la documentación en regla para el viaje. El pasajero deberá estar provisto de pasaporte vigente y las visas requeridas según el itinerario escogido. El incumplimiento de lo antes expuesto por parte del cliente le ocasionará la pérdida de derecho a cualquier reembolso. Las consecuencias de su omisión y los gastos que se originaren como consecuencia de ello serán por cuenta del viajero, aplicándose en este caso las condiciones establecidas para el desistimiento voluntario de servicios. Lo mismo ocurrirá cuando las autoridades de cualquier país rehusaren permitir la entrada al pasajero.",
+    "tc.h4.li1":"VIVIR VIAJES declara explícitamente que obra únicamente como intermediaria en la reserva o contratación de los distintos servicios vinculados e incluidos en el respectivo tour o reservación de servicios: hoteles, restaurantes, medios de transportes u otros prestadores. Por consiguiente declina toda responsabilidad por deficiencias en cualquiera de los servicios prestados, así como cualquier accidente, daño, herida, retraso o irregularidades que pudieran ocurrir durante la ejecución de los servicios a las personas que ejecutan el viaje por su mediación.",
+    "tc.h4.li2":"VIVIR VIAJES declina toda responsabilidad por retrasos, adelantos o anulaciones que se produzcan por parte de las compañías aéreas o de las empresas transportistas, siendo los gastos que se originen a cargo de los pasajeros.",
+    "tc.h4.li3":"Si por razones con causa justificada VIVIR VIAJES se viera obligada a suspender cualquiera de las excursiones, los pasajeros inscriptos no tendrán más derecho que el reembolso que correspondiere del importe abonado, con renuncia expresa a cualquier otro reclamo.",
+    "tc.h4.li4":"Cuando el transporte se efectúe en vehículos propios o alquilados por el organizador, el viajero se somete expresamente a la legislación en materia de accidentes por carretera de la nación en que se halla matriculado el vehículo, renunciando taxativamente a cualquier otro derecho que pudiera corresponderle, en virtud de los cuales las indemnizaciones serían pagadas a los interesados, beneficiarios o representantes legales en el país de matrícula del vehículo y en la moneda legal del país. El pago de las posibles indemnizaciones en caso de accidente corresponde únicamente a las compañías de seguros.",
+    "tc.h4.li5":"VIVIR VIAJES no asume responsabilidad alguna sobre los criterios y el control en el otorgamiento de categorías a los hoteles. Las que figuran en la promoción de los paquetes y en los itinerarios enviados a los pasajeros son las que oficialmente otorgan las autoridades turísticas del país.",
+    "tc.h4.li6":"VIVIR VIAJES no se responsabiliza por el equipaje y demás efectos personales del cliente, los que viajan por cuenta y riesgo de éste.",
+    "tc.h4.li7":"VIVIR VIAJES no se responsabiliza por los hechos que se produzcan por caso fortuito o fuerza mayor, fenómenos climáticos o hechos de la naturaleza que acontezcan antes o durante el desarrollo del tour que impidan, demoren o de cualquier modo obstaculicen la ejecución total o parcial de las prestaciones comprometidas por la empresa.",
+    "tc.h4.li8":"Una vez comenzado el viaje, la suspensión, modificación o interrupción de los servicios por parte del pasajero por razones personales de cualquier índole no dará lugar a reclamo, reembolso o devolución alguna.",
+    "tc.h5":"ACEPTACIÓN DEL CLIENTE",
+    "tc.h5.p1":"El cliente declara conocer y aceptar las presentes condiciones generales de contratación y dicha aceptación queda ratificada por medio de uno cualesquiera de los siguientes actos:",
+    "tc.h5.li1":"El pago de los servicios contratados antes del inicio del viaje, por cualquier forma o modalidad.",
+    "tc.h5.li2":"La aceptación de la factura de los servicios contratados.",
+    "tc.h5.li3":"Mediante el uso de una porción cualquiera de los servicios contratados.",
+    "tc.accept":"Entendido",
+    "months":["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+    "locale":"es-AR", "sin-costo":"Sin costo", "cu-suffix":" c/u",
+    "badge.elegi-fecha":"Elegi una fecha para ver el precio", "badge.fuera-temporada":"Fuera de temporada — consultanos", "badge.temporada":"Temporada ", "badge.disponible-desde":"Disponible a partir del ",
+    "pb.subtotal":"Subtotal", "pb.descuento":"Descuento grupo familiar (", "pb.pax-suffix":"+ pax)",
+    "hint.clases-arrancan":"Las clases arrancan el ", "hint.elegi-posterior":". Elegí una fecha posterior.",
+    "hint.fuera-temporada":"Esa fecha está fuera de temporada. Escribinos para ver disponibilidad.",
+    "hint.agrega-pasajero":"Agregá al menos un pasajero.", "hint.elegi-pickup":"Seleccioná tu punto de pick up.",
+    "hint.completa-datos":"Completá tus datos de contacto para reservar.", "hint.acepta-tc":"Aceptá los términos y condiciones para continuar.",
+    "hint.elegi-fecha-cotizar":"Elegi una fecha para pedir tu cotizacion.", "hint.agrega-pasajero-cotizar":"Agrega al menos un pasajero.",
+    "hint.whatsapp-instant":"Te pasamos el precio al instante por WhatsApp.",
+    "btn.pagar-reservar":"Pagar y reservar", "btn.consultar-whatsapp":"Consultar por WhatsApp",
+    "btn.pedir-cotizacion":"Pedir cotizacion", "btn.pedir-cotizacion-wa":"Pedir cotizacion por WhatsApp",
+    "btn.redirigiendo":"Redirigiendo a Mercado Pago...", "total.a-cotizar":"A cotizar",
+    "err.pago":"Hubo un problema iniciando el pago:\n\n", "err.pago-generico":"No se pudo iniciar el pago",
+    "wa.cotizacion-header":"Hola Vivir Viajes! Quiero una cotización para:", "wa.reserva-header":"Hola Vivir Viajes! Quiero reservar:",
+    "wa.opcion":"Opción: ", "wa.pickup":"Pick up: ", "wa.lagofrias":"Extensión Lago Frías: ", "wa.si":"Sí", "wa.no":"No",
+    "wa.fecha":"Fecha: ", "wa.pasajeros":"Pasajeros: ", "wa.descuento":"Descuento grupo familiar: -", "wa.total":"Total estimado: ",
+    "wa.24hs":"Hola Vivir Viajes! Quiero reservar ", "wa.24hs-suffix":" para mañana. ¿Hay disponibilidad?",
+    "title.reservar":"Reservar ", "title.suffix":" · Vivir Viajes", "date.na":"(a definir)",
+  },
+  en: {
+    "nav.volver":"← Back to excursions",
+    "content.incluye":"What's included", "content.notas":"Important information", "content.relacionadas":"You might also like", "content.el-paseo":"The tour",
+    "form.reservar-online":"Book online", "form.opcion":"Experience / option", "form.traslado":"Transfer", "form.sin-traslado":"Without transfer", "form.con-traslado":"With transfer",
+    "form.pickup":"Pick-up point", "form.pickup-placeholder":"Select a pick-up point...",
+    "form.lagofrias":"Lake Frías extension", "form.sin-lagofrias":"Without Lake Frías", "form.con-lagofrias":"With Lake Frías",
+    "form.fecha":"Excursion date", "form.elegir-fecha":"Choose a date", "form.pasajeros":"Travelers",
+    "form.nombre":"Full name", "form.nombre-placeholder":"Name of the person booking",
+    "form.dni":"ID number", "form.dni-placeholder":"e.g.: 30123456",
+    "form.email":"E-mail", "form.email-placeholder":"e.g.: name@mail.com",
+    "form.tel":"Contact phone", "form.tel-placeholder":"e.g.: 2944 123456",
+    "form.hosp":"Accommodation", "form.hosp-placeholder":"Hotel / cabin / lodging in Bariloche",
+    "form.total-estimado":"Estimated total",
+    "form.tc-label":"I have read and agree to the <span class=\"tc-link\" id=\"tc-link\">terms and conditions</span> of the site",
+    "form.reservar":"Book now", "form.mp-note":"100% secure payment with Mercado Pago",
+    "footer.text":"© 2026 Vivir Viajes · Bariloche, Patagonia",
+    "modal24.title":"Booking with less than 24 hs notice", "modal24.body":"For last-minute bookings, reach out to us directly on WhatsApp and we'll get back to you right away.", "modal24.button":"Message us on WhatsApp", "modal24.close":"Choose another date",
+    "carousel.prev":"Previous", "carousel.next":"Next",
+    "cal.dow0":"Su","cal.dow1":"Mo","cal.dow2":"Tu","cal.dow3":"We","cal.dow4":"Th","cal.dow5":"Fr","cal.dow6":"Sa",
+    "tc.title":"Terms and conditions", "tc.close-aria":"Close",
+    "tc.h1":"PRICES INCLUDE",
+    "tc.h1.li1":"All services specifically mentioned for each offering. Prices include tax and are subject to change without notice until the client pays the full amount of the contracted services.",
+    "tc.h1.li2":"All amounts paid before the final confirmation of services are received as a booking deposit. Final confirmation of services and prices takes place once the voucher and corresponding invoice are issued.",
+    "tc.h2":"OUR PRICES DO NOT INCLUDE",
+    "tc.h2.li1":"National Park entrance fees, taxes, or anything else not specified in the service.",
+    "tc.h2.li2":"Any extras or expenses not expressly specified in the services.",
+    "tc.h3":"Changes and cancellations",
+    "tc.h3a":"Cancellations by the company",
+    "tc.h3a.p1":"Vivir Viajes reserves the right to cancel a service in cases of force majeure or unforeseeable circumstances. In that case, the full amount paid will be refunded, minus 12% for administrative costs.",
+    "tc.h3b":"Cancellations by the client",
+    "tc.h3b.p1":"All cancellations must be notified in writing at least 24 hours before departure time, through any of the following channels:",
+    "tc.h3b.p2":"Penalties depending on when the cancellation is made:",
+    "tc.h3b.li1":"More than 24 hs in advance: 15% of the total is withheld for administrative costs. The rest is refunded through the same method used for payment.",
+    "tc.h3b.li2":"Less than 12 hs in advance: no refund.",
+    "tc.h3b.li3":"No notice given: no refund. No reimbursement applies for any unused service, including transfers, activities and excursions.",
+    "tc.h3b.p3":"Vivir Viajes reserves the right to review each case and, at its discretion, issue a credit note instead of a refund when cancellation fees apply.",
+    "tc.h3c":"Date changes",
+    "tc.h3c.p1":"Date changes carry no extra cost, provided there is availability on the new requested date and the change is made while the fare is still valid. All changes are subject to availability.",
+    "tc.h3d":"Special conditions",
+    "tc.h3d.p1":"Some services may have particular cancellation conditions, which will be provided in each product's details at the time of booking.",
+    "tc.h4":"LIABILITY",
+    "tc.h4.p1":"It is the sole and exclusive responsibility of each traveler to have all travel documentation in order. Travelers must carry a valid passport and any visas required for the chosen itinerary. Failure to comply with the above will result in the loss of any right to a refund. Any consequences of such failure, and any costs arising from it, will be borne by the traveler, under the conditions established for voluntary withdrawal from services. The same applies when the authorities of any country refuse entry to the traveler.",
+    "tc.h4.li1":"VIVIR VIAJES explicitly states that it acts solely as an intermediary in booking or contracting the various services included in the respective tour or service reservation: hotels, restaurants, means of transport or other providers. Accordingly, it disclaims all liability for deficiencies in any of the services provided, as well as any accident, damage, injury, delay or irregularity that may occur during the execution of the services to persons traveling through its mediation.",
+    "tc.h4.li2":"VIVIR VIAJES disclaims all liability for delays, early departures or cancellations caused by airlines or transport companies, with any resulting costs being borne by the passengers.",
+    "tc.h4.li3":"If, for justified reasons, VIVIR VIAJES is forced to suspend any of the excursions, enrolled passengers will have no right beyond the refund of the amount paid, expressly waiving any other claim.",
+    "tc.h4.li4":"When transport is carried out in vehicles owned or rented by the organizer, the traveler expressly submits to the road accident legislation of the country in which the vehicle is registered, expressly waiving any other right that might otherwise apply, under which any compensation would be paid to the interested parties, beneficiaries or legal representatives in the country of vehicle registration and in that country's legal currency. Payment of any compensation in the event of an accident is the sole responsibility of the insurance companies.",
+    "tc.h4.li5":"VIVIR VIAJES assumes no responsibility for the criteria or oversight used in assigning hotel categories. Those shown in package promotions and itineraries sent to passengers are the ones officially assigned by the country's tourism authorities.",
+    "tc.h4.li6":"VIVIR VIAJES is not responsible for the client's luggage or other personal belongings, which travel at the client's own risk.",
+    "tc.h4.li7":"VIVIR VIAJES is not responsible for events arising from force majeure or unforeseeable circumstances, weather events or natural occurrences that take place before or during the tour and that prevent, delay or in any way hinder the full or partial performance of the services committed to by the company.",
+    "tc.h4.li8":"Once the trip has begun, the suspension, modification or interruption of services by the passenger for personal reasons of any kind will not give rise to any claim, reimbursement or refund.",
+    "tc.h5":"CLIENT ACCEPTANCE",
+    "tc.h5.p1":"The client declares that they know and accept these general contracting conditions, and such acceptance is confirmed by any of the following acts:",
+    "tc.h5.li1":"Payment for the contracted services before the trip begins, by any method.",
+    "tc.h5.li2":"Acceptance of the invoice for the contracted services.",
+    "tc.h5.li3":"Use of any portion of the contracted services.",
+    "tc.accept":"Got it",
+    "months":["January","February","March","April","May","June","July","August","September","October","November","December"],
+    "locale":"en-US", "sin-costo":"Free", "cu-suffix":" each",
+    "badge.elegi-fecha":"Choose a date to see the price", "badge.fuera-temporada":"Off season — get in touch", "badge.temporada":"Season: ", "badge.disponible-desde":"Available from ",
+    "pb.subtotal":"Subtotal", "pb.descuento":"Family/group discount (", "pb.pax-suffix":"+ pax)",
+    "hint.clases-arrancan":"Classes start on ", "hint.elegi-posterior":". Choose a later date.",
+    "hint.fuera-temporada":"That date is off season. Message us to check availability.",
+    "hint.agrega-pasajero":"Add at least one traveler.", "hint.elegi-pickup":"Select your pick-up point.",
+    "hint.completa-datos":"Fill in your contact details to book.", "hint.acepta-tc":"Accept the terms and conditions to continue.",
+    "hint.elegi-fecha-cotizar":"Choose a date to request your quote.", "hint.agrega-pasajero-cotizar":"Add at least one traveler.",
+    "hint.whatsapp-instant":"We'll send you the price instantly on WhatsApp.",
+    "btn.pagar-reservar":"Book now", "btn.consultar-whatsapp":"Ask on WhatsApp",
+    "btn.pedir-cotizacion":"Request quote", "btn.pedir-cotizacion-wa":"Request quote on WhatsApp",
+    "btn.redirigiendo":"Redirecting to Mercado Pago...", "total.a-cotizar":"Quote on request",
+    "err.pago":"There was a problem starting the payment:\n\n", "err.pago-generico":"Could not start the payment",
+    "wa.cotizacion-header":"Hi Vivir Viajes! I'd like a quote for:", "wa.reserva-header":"Hi Vivir Viajes! I'd like to book:",
+    "wa.opcion":"Option: ", "wa.pickup":"Pick-up: ", "wa.lagofrias":"Lake Frías extension: ", "wa.si":"Yes", "wa.no":"No",
+    "wa.fecha":"Date: ", "wa.pasajeros":"Travelers: ", "wa.descuento":"Family/group discount: -", "wa.total":"Estimated total: ",
+    "wa.24hs":"Hi Vivir Viajes! I'd like to book ", "wa.24hs-suffix":" for tomorrow. Is it available?",
+    "title.reservar":"Book ", "title.suffix":" · Vivir Viajes", "date.na":"(to be defined)",
+  },
+  pt: {
+    "nav.volver":"← Voltar aos passeios",
+    "content.incluye":"O que inclui", "content.notas":"Informações importantes", "content.relacionadas":"Você também pode gostar", "content.el-paseo":"O passeio",
+    "form.reservar-online":"Reservar online", "form.opcion":"Experiência / opção", "form.traslado":"Traslado", "form.sin-traslado":"Sem traslado", "form.con-traslado":"Com traslado",
+    "form.pickup":"Ponto de embarque", "form.pickup-placeholder":"Selecionar ponto de embarque...",
+    "form.lagofrias":"Extensão Lago Frías", "form.sin-lagofrias":"Sem Lago Frías", "form.con-lagofrias":"Com Lago Frías",
+    "form.fecha":"Data do passeio", "form.elegir-fecha":"Escolher data", "form.pasajeros":"Passageiros",
+    "form.nombre":"Nome e sobrenome", "form.nombre-placeholder":"Nome de quem reserva",
+    "form.dni":"Documento (DNI/Passaporte)", "form.dni-placeholder":"Ex: 30123456",
+    "form.email":"E-mail", "form.email-placeholder":"Ex: nome@mail.com",
+    "form.tel":"Telefone de contato", "form.tel-placeholder":"Ex: 2944 123456",
+    "form.hosp":"Local de hospedagem", "form.hosp-placeholder":"Hotel / cabana / hospedagem em Bariloche",
+    "form.total-estimado":"Total estimado",
+    "form.tc-label":"Li e concordo com os <span class=\"tc-link\" id=\"tc-link\">termos e condições</span> do site",
+    "form.reservar":"Reservar", "form.mp-note":"Pagamento 100% seguro com Mercado Pago",
+    "footer.text":"© 2026 Vivir Viajes · Bariloche, Patagônia",
+    "modal24.title":"Reserva com menos de 24 hs", "modal24.body":"Para reservas de última hora, fale diretamente com a gente pelo WhatsApp e respondemos na hora.", "modal24.button":"Falar no WhatsApp", "modal24.close":"Escolher outra data",
+    "carousel.prev":"Anterior", "carousel.next":"Próximo",
+    "cal.dow0":"Do","cal.dow1":"2ª","cal.dow2":"3ª","cal.dow3":"4ª","cal.dow4":"5ª","cal.dow5":"6ª","cal.dow6":"Sá",
+    "tc.title":"Termos e condições", "tc.close-aria":"Fechar",
+    "tc.h1":"OS PREÇOS INCLUEM",
+    "tc.h1.li1":"Todos os serviços mencionados especificamente em cada serviço. Os preços incluem impostos e estão sujeitos a alterações sem aviso prévio até o momento em que o cliente pague a totalidade dos serviços contratados.",
+    "tc.h1.li2":"Todos os valores pagos antes da confirmação definitiva dos serviços são recebidos como sinal de reserva. A confirmação definitiva dos serviços e respectivos preços ocorrerá com a emissão do voucher e a respectiva fatura.",
+    "tc.h2":"NOSSOS PREÇOS NÃO INCLUEM",
+    "tc.h2.li1":"Ingressos a Parques Nacionais, taxas, nem outros itens não especificados no serviço.",
+    "tc.h2.li2":"Extras de qualquer tipo ou despesas não devidamente especificadas nos serviços.",
+    "tc.h3":"Mudanças e cancelamentos",
+    "tc.h3a":"Cancelamentos por parte da empresa",
+    "tc.h3a.p1":"A Vivir Viajes se reserva o direito de cancelar o serviço em casos de força maior ou caso fortuito. Nesse caso, será feita a devolução total do valor pago, menos 12% referente a despesas administrativas.",
+    "tc.h3b":"Cancelamentos por parte do cliente",
+    "tc.h3b.p1":"Todo cancelamento deve ser notificado por escrito com pelo menos 24 horas de antecedência do horário de saída, através de um dos seguintes canais:",
+    "tc.h3b.p2":"Penalidades de acordo com o momento do cancelamento:",
+    "tc.h3b.li1":"Com mais de 24 hs de antecedência: retém-se 15% do total referente a despesas administrativas. A devolução do restante é feita pelo mesmo meio utilizado no pagamento.",
+    "tc.h3b.li2":"Com menos de 12 hs de antecedência: sem devolução.",
+    "tc.h3b.li3":"Sem aviso prévio: sem devolução. Não há reembolso para nenhum serviço não utilizado, incluindo traslados, atividades e passeios.",
+    "tc.h3b.p3":"A Vivir Viajes se reserva o direito de avaliar cada caso e, a seu critério, conceder uma nota de crédito em vez da devolução quando houver despesas de cancelamento.",
+    "tc.h3c":"Mudanças de data",
+    "tc.h3c.p1":"As mudanças de data não têm custo adicional, desde que haja disponibilidade na nova data solicitada e a mudança seja feita dentro da vigência da tarifa. Toda mudança está sujeita à disponibilidade.",
+    "tc.h3d":"Condições especiais",
+    "tc.h3d.p1":"Alguns serviços podem ter condições de cancelamento específicas, que serão informadas no detalhe de cada produto no momento da reserva.",
+    "tc.h4":"RESPONSABILIDADES",
+    "tc.h4.p1":"É de responsabilidade única e exclusiva de cada passageiro ter toda a documentação em ordem para a viagem. O passageiro deverá portar passaporte válido e os vistos exigidos de acordo com o itinerário escolhido. O descumprimento do exposto acima por parte do cliente acarretará a perda do direito a qualquer reembolso. As consequências dessa omissão e os gastos dela decorrentes serão por conta do viajante, aplicando-se neste caso as condições estabelecidas para a desistência voluntária de serviços. O mesmo ocorrerá quando as autoridades de qualquer país recusarem a entrada do passageiro.",
+    "tc.h4.li1":"A VIVIR VIAJES declara explicitamente que atua unicamente como intermediária na reserva ou contratação dos diversos serviços vinculados e incluídos no respectivo tour ou reserva de serviços: hotéis, restaurantes, meios de transporte ou outros prestadores. Por consequência, isenta-se de qualquer responsabilidade por deficiências em quaisquer dos serviços prestados, bem como por qualquer acidente, dano, ferimento, atraso ou irregularidade que possa ocorrer durante a execução dos serviços às pessoas que realizam a viagem por sua intermediação.",
+    "tc.h4.li2":"A VIVIR VIAJES isenta-se de qualquer responsabilidade por atrasos, antecipações ou cancelamentos que ocorram por parte das companhias aéreas ou empresas transportadoras, sendo os gastos daí decorrentes de responsabilidade dos passageiros.",
+    "tc.h4.li3":"Se, por motivos justificados, a VIVIR VIAJES for obrigada a suspender qualquer um dos passeios, os passageiros inscritos não terão outro direito além do reembolso do valor pago, com renúncia expressa a qualquer outra reclamação.",
+    "tc.h4.li4":"Quando o transporte for realizado em veículos próprios ou alugados pelo organizador, o viajante se submete expressamente à legislação de acidentes rodoviários do país em que o veículo está registrado, renunciando taxativamente a qualquer outro direito que pudesse lhe corresponder, segundo o qual as indenizações seriam pagas aos interessados, beneficiários ou representantes legais no país de registro do veículo e na moeda legal desse país. O pagamento de eventuais indenizações em caso de acidente é de responsabilidade exclusiva das companhias de seguro.",
+    "tc.h4.li5":"A VIVIR VIAJES não assume nenhuma responsabilidade sobre os critérios e o controle na atribuição de categorias aos hotéis. As categorias apresentadas na divulgação dos pacotes e nos itinerários enviados aos passageiros são as oficialmente atribuídas pelas autoridades de turismo do país.",
+    "tc.h4.li6":"A VIVIR VIAJES não se responsabiliza pela bagagem e demais pertences pessoais do cliente, que viajam por conta e risco deste.",
+    "tc.h4.li7":"A VIVIR VIAJES não se responsabiliza por fatos decorrentes de caso fortuito ou força maior, fenômenos climáticos ou eventos da natureza que ocorram antes ou durante o passeio e que impeçam, atrasem ou de qualquer forma dificultem a execução total ou parcial dos serviços comprometidos pela empresa.",
+    "tc.h4.li8":"Uma vez iniciada a viagem, a suspensão, modificação ou interrupção dos serviços por parte do passageiro por razões pessoais de qualquer natureza não dará direito a reclamação, reembolso ou devolução alguma.",
+    "tc.h5":"ACEITAÇÃO DO CLIENTE",
+    "tc.h5.p1":"O cliente declara conhecer e aceitar as presentes condições gerais de contratação, e tal aceitação fica ratificada por meio de qualquer um dos seguintes atos:",
+    "tc.h5.li1":"O pagamento dos serviços contratados antes do início da viagem, por qualquer forma ou modalidade.",
+    "tc.h5.li2":"A aceitação da fatura dos serviços contratados.",
+    "tc.h5.li3":"O uso de qualquer parte dos serviços contratados.",
+    "tc.accept":"Entendi",
+    "months":["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"],
+    "locale":"pt-BR", "sin-costo":"Sem custo", "cu-suffix":" cada",
+    "badge.elegi-fecha":"Escolha uma data para ver o preço", "badge.fuera-temporada":"Fora de temporada — fale com a gente", "badge.temporada":"Temporada ", "badge.disponible-desde":"Disponível a partir de ",
+    "pb.subtotal":"Subtotal", "pb.descuento":"Desconto grupo/família (", "pb.pax-suffix":"+ pax)",
+    "hint.clases-arrancan":"As aulas começam em ", "hint.elegi-posterior":". Escolha uma data posterior.",
+    "hint.fuera-temporada":"Essa data está fora de temporada. Fale com a gente para checar disponibilidade.",
+    "hint.agrega-pasajero":"Adicione pelo menos um passageiro.", "hint.elegi-pickup":"Selecione seu ponto de embarque.",
+    "hint.completa-datos":"Preencha seus dados de contato para reservar.", "hint.acepta-tc":"Aceite os termos e condições para continuar.",
+    "hint.elegi-fecha-cotizar":"Escolha uma data para pedir seu orçamento.", "hint.agrega-pasajero-cotizar":"Adicione pelo menos um passageiro.",
+    "hint.whatsapp-instant":"Enviamos o preço na hora pelo WhatsApp.",
+    "btn.pagar-reservar":"Pagar e reservar", "btn.consultar-whatsapp":"Consultar no WhatsApp",
+    "btn.pedir-cotizacion":"Pedir orçamento", "btn.pedir-cotizacion-wa":"Pedir orçamento pelo WhatsApp",
+    "btn.redirigiendo":"Redirecionando para o Mercado Pago...", "total.a-cotizar":"A orçar",
+    "err.pago":"Houve um problema ao iniciar o pagamento:\n\n", "err.pago-generico":"Não foi possível iniciar o pagamento",
+    "wa.cotizacion-header":"Olá Vivir Viajes! Quero um orçamento para:", "wa.reserva-header":"Olá Vivir Viajes! Quero reservar:",
+    "wa.opcion":"Opção: ", "wa.pickup":"Embarque: ", "wa.lagofrias":"Extensão Lago Frías: ", "wa.si":"Sim", "wa.no":"Não",
+    "wa.fecha":"Data: ", "wa.pasajeros":"Passageiros: ", "wa.descuento":"Desconto grupo/família: -", "wa.total":"Total estimado: ",
+    "wa.24hs":"Olá Vivir Viajes! Quero reservar ", "wa.24hs-suffix":" para amanhã. Tem disponibilidade?",
+    "title.reservar":"Reservar ", "title.suffix":" · Vivir Viajes", "date.na":"(a definir)",
+  },
+};
+
+function t(key){ return (UI[state.lang] && UI[state.lang][key]) ?? UI.es[key]; }
+
+function trExcField(exc, field){
+  const v = exc.i18n && exc.i18n[state.lang] && exc.i18n[state.lang][field];
+  return v!=null ? v : exc[field];
+}
+function trE(field){ return trExcField(EXC[id], field); }
+function trOpt(opt, field){
+  const oi = EXC[id].i18n && EXC[id].i18n[state.lang] && EXC[id].i18n[state.lang].opciones && EXC[id].i18n[state.lang].opciones[opt.key];
+  const v = oi && oi[field];
+  return v!=null ? v : opt[field];
+}
+function trCat(opt, c, field){
+  const oi = EXC[id].i18n && EXC[id].i18n[state.lang] && EXC[id].i18n[state.lang].opciones && EXC[id].i18n[state.lang].opciones[opt.key];
+  const cv = oi && oi.cats && oi.cats[c.key] && oi.cats[c.key][field];
+  return cv!=null ? cv : c[field];
+}
+function trTempName(exc, sk){
+  const so = seasonObj(exc, sk);
+  const ti = exc.i18n && exc.i18n[state.lang] && exc.i18n[state.lang].temporadas && exc.i18n[state.lang].temporadas[sk];
+  return ti!=null ? ti : (so ? so.nombre : "");
+}
+
+function applyStaticI18n(){
+  document.documentElement.lang = state.lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const v = t(el.getAttribute("data-i18n"));
+    if(v!=null) el.textContent = v;
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach(el=>{
+    const v = t(el.getAttribute("data-i18n-html"));
+    if(v!=null) el.innerHTML = v;
+  });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
+    const v = t(el.getAttribute("data-i18n-placeholder"));
+    if(v!=null) el.placeholder = v;
+  });
+  document.querySelectorAll("[data-i18n-aria]").forEach(el=>{
+    const v = t(el.getAttribute("data-i18n-aria"));
+    if(v!=null) el.setAttribute("aria-label", v);
+  });
+  document.querySelectorAll("#lang-switch button").forEach(b=>{
+    b.classList.toggle("active", b.getAttribute("data-lang")===state.lang);
+  });
+}
 
 function seasonKeyFor(exc, dateStr){
   if(!exc.seasonal || !dateStr) return null;
@@ -1103,7 +1393,7 @@ function buildCarousel(){
   track.innerHTML = carImages.map((item,i)=>{
     const src = typeof item==="string" ? item : item.src;
     const pos = typeof item==="string" ? "" : ' style="object-position:'+item.pos+'"';
-    return '<div class="car-slide" data-i="'+i+'"><img src="'+src+'" alt="'+EXC[id].nombre+'"'+pos+'></div>';
+    return '<div class="car-slide" data-i="'+i+'"><img src="'+src+'" alt="'+trE('nombre')+'"'+pos+'></div>';
   }).join("");
 
   track.querySelectorAll(".car-slide").forEach(el=>{
@@ -1168,7 +1458,6 @@ function carouselInit(){
 }
 
 /* =================== CALENDAR ================================= */
-const MESES=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 let calYear, calMonth;
 
 function calInit(){
@@ -1195,7 +1484,7 @@ function closeCal(){
 }
 
 function renderCal(){
-  document.getElementById("cal-month").textContent = MESES[calMonth]+" "+calYear;
+  document.getElementById("cal-month").textContent = t("months")[calMonth]+" "+calYear;
   const grid = document.getElementById("cal-days");
   grid.innerHTML = "";
   const exc = EXC[id];
@@ -1251,7 +1540,7 @@ function renderCal(){
       btn.onclick = () => {
         state.fecha = dateStr;
         const dt = new Date(dateStr+"T12:00:00");
-        document.getElementById("dt-text").textContent = dt.toLocaleDateString("es-AR",{weekday:"long",day:"numeric",month:"long"}).replace(/^\w/,c=>c.toUpperCase());
+        document.getElementById("dt-text").textContent = dt.toLocaleDateString(t("locale"),{weekday:"long",day:"numeric",month:"long"}).replace(/^\w/,c=>c.toUpperCase());
         closeCal();
         render();
       };
@@ -1262,8 +1551,7 @@ function renderCal(){
 
 function showModal24hs(){
   closeCal();
-  const exc = EXC[id];
-  const msg = encodeURIComponent("Hola Vivir Viajes! Quiero reservar "+exc.nombre+" para mañana. ¿Hay disponibilidad?");
+  const msg = encodeURIComponent(t("wa.24hs")+trE("nombre")+t("wa.24hs-suffix"));
   document.getElementById("modal-wa").href = "https://wa.me/"+WHATSAPP+"?text="+msg;
   document.getElementById("modal-24hs").classList.add("show");
 }
@@ -1278,8 +1566,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const tcModal = document.getElementById("modal-tc");
-  const openTc = e => { e.preventDefault(); e.stopPropagation(); tcModal.classList.add("show"); };
-  document.getElementById("tc-link").addEventListener("click", openTc);
+  document.getElementById("c-tc").parentElement.querySelector("label").addEventListener("click", e => {
+    if(e.target.closest(".tc-link")){ e.preventDefault(); e.stopPropagation(); tcModal.classList.add("show"); }
+  });
   document.getElementById("tc-x").onclick = () => tcModal.classList.remove("show");
   document.getElementById("tc-accept").onclick = () => tcModal.classList.remove("show");
   tcModal.addEventListener("click", e => { if(e.target === tcModal) tcModal.classList.remove("show"); });
@@ -1288,13 +1577,24 @@ document.addEventListener("DOMContentLoaded", () => {
     state.tc = e.target.checked;
     render();
   });
+
+  document.querySelectorAll("#lang-switch button").forEach(b=>{
+    b.addEventListener("click", () => {
+      state.lang = b.getAttribute("data-lang");
+      try{ localStorage.setItem("vv-lang", state.lang); }catch(err){}
+      applyStaticI18n();
+      buildSwitch();
+      renderStatic();
+      render();
+    });
+  });
 });
 
 /* =================== BUILD UI ================================= */
 function buildSwitch(){
   const sw=document.getElementById("switch"); sw.innerHTML="";
   for(const k in EXC){
-    const o=document.createElement("option"); o.value=k; o.textContent=EXC[k].nombre;
+    const o=document.createElement("option"); o.value=k; o.textContent=trExcField(EXC[k],"nombre");
     if(k===id) o.selected=true; sw.appendChild(o);
   }
   sw.onchange=()=>{ location.search="?exc="+sw.value; };
@@ -1303,30 +1603,45 @@ function buildSwitch(){
 function renderContent(optIdx){
   const e = EXC[id];
   const opt = e.opciones[optIdx];
-  let inc, notas;
+  let incKey, notasKey;
 
   // Navigation excursions with lagoFrias logic
   if(e.lagoFrias && opt.incluye_lagofrias){
-    if(state.con && state.lf){ inc = opt.incluye_todo; }
-    else if(state.con && !state.lf){ inc = opt.incluye_con; }
+    if(state.con && state.lf){ incKey = "incluye_todo"; }
+    else if(state.con && !state.lf){ incKey = "incluye_con"; }
     else if(!state.con && state.lf){
-      inc = [...(opt.incluye_sin||[]), ...(opt.incluye_lagofrias||[])];
-    } else { inc = opt.incluye_sin; }
-    notas = state.con ? (opt.notas_con||opt.notas_sin) : (opt.notas_sin||opt.notas_con);
+      incKey = null; // handled below (concat of sin + lagofrias)
+    } else { incKey = "incluye_sin"; }
+    notasKey = state.con ? (opt.notas_con?"notas_con":"notas_sin") : (opt.notas_sin?"notas_sin":"notas_con");
   } else if(opt.incluye_sin || opt.incluye_con){
-    inc   = state.con ? (opt.incluye_con || opt.incluye_sin) : (opt.incluye_sin || opt.incluye_con);
-    notas = state.con ? (opt.notas_con   || opt.notas_sin)  : (opt.notas_sin   || opt.notas_con);
+    incKey   = state.con ? (opt.incluye_con?"incluye_con":"incluye_sin") : (opt.incluye_sin?"incluye_sin":"incluye_con");
+    notasKey = state.con ? (opt.notas_con?"notas_con":"notas_sin")       : (opt.notas_sin?"notas_sin":"notas_con");
   } else {
-    inc   = opt.incluye || e.incluye;
-    notas = opt.notas   || e.notas;
+    incKey   = null;
+    notasKey = null;
+  }
+
+  let inc, notas;
+  if(e.lagoFrias && opt.incluye_lagofrias && !state.con && state.lf){
+    inc = [...(trOpt(opt,"incluye_sin")||[]), ...(trOpt(opt,"incluye_lagofrias")||[])];
+  } else if(incKey){
+    inc = trOpt(opt, incKey);
+  } else {
+    inc = trOpt(opt,"incluye") || trE("incluye");
+  }
+  if(notasKey){
+    notas = trOpt(opt, notasKey);
+  } else {
+    notas = trOpt(opt,"notas") || trE("notas");
   }
 
   const finalNotas = [...(notas||[])];
 
-  const detalle = opt.detalle || e.detalle;
+  const detalle = trOpt(opt,"detalle") || trE("detalle");
   document.getElementById("block-detalle").hidden = !detalle;
   if(detalle) document.getElementById("c-detalle").textContent=detalle;
-  document.getElementById("c-detalle-titulo").textContent = opt.tituloCorto ? "El paseo - "+opt.tituloCorto : "El paseo";
+  const tituloCorto = trOpt(opt,"tituloCorto");
+  document.getElementById("c-detalle-titulo").textContent = tituloCorto ? t("content.el-paseo")+" - "+tituloCorto : t("content.el-paseo");
 
   const chk='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D4F" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>';
   const dot='<svg width="16" height="16" viewBox="0 0 24 24" fill="#E9A23C"><circle cx="12" cy="12" r="4"/></svg>';
@@ -1346,13 +1661,13 @@ function renderContent(optIdx){
 
 function renderStatic(){
   const e=EXC[id];
-  document.getElementById("b-tag").textContent=e.tag;
-  document.getElementById("b-nombre").textContent=e.nombre;
-  document.getElementById("b-subt").textContent=e.subt||"";
+  document.getElementById("b-tag").textContent=trE("tag");
+  document.getElementById("b-nombre").textContent=trE("nombre");
+  document.getElementById("b-subt").textContent=trE("subt")||"";
   document.getElementById("b-subt").hidden=!e.subt;
-  document.getElementById("c-desc").textContent=e.desc||"";
+  document.getElementById("c-desc").textContent=trE("desc")||"";
   document.getElementById("c-desc").hidden=!e.desc;
-  document.title="Reservar "+e.nombre+" · Vivir Viajes";
+  document.title=t("title.reservar")+trE("nombre")+t("title.suffix");
 
   buildCarousel();
   startAutoplay();
@@ -1363,7 +1678,7 @@ function renderStatic(){
   if(hasLabels){
     fo.hidden=false; sel.innerHTML="";
     e.opciones.forEach((o,i)=>{
-      const op=document.createElement("option"); op.value=i; op.textContent=o.label; sel.appendChild(op);
+      const op=document.createElement("option"); op.value=i; op.textContent=trOpt(o,"label"); sel.appendChild(op);
     });
     sel.onchange=()=>{ state.opt=+sel.value; resetCounts(); renderContent(state.opt); render(); };
   } else fo.hidden=true;
@@ -1376,7 +1691,7 @@ function renderStatic(){
     ft.hidden=false;
     // populate pickup selector
     if(e.pickupPoints && e.pickupPoints.length){
-      ps.innerHTML='<option value="">Seleccionar punto de pick up...</option>';
+      ps.innerHTML='<option value="">'+t("form.pickup-placeholder")+'</option>';
       e.pickupPoints.forEach(p=>{
         const op=document.createElement("option"); op.value=p; op.textContent=p; ps.appendChild(op);
       });
@@ -1444,8 +1759,8 @@ function renderRelated(){
     a.className = "related-card";
     a.href = "excursion.html?exc="+k;
     a.innerHTML =
-      '<div class="img" style="background-image:url(\''+img+'\');background-position:'+pos+'"><span class="tag">'+rel.tag+'</span></div>'+
-      '<div class="body"><h4>'+rel.nombre+'</h4><p>'+(rel.desc||rel.subt||"")+'</p></div>';
+      '<div class="img" style="background-image:url(\''+img+'\');background-position:'+pos+'"><span class="tag">'+trExcField(rel,"tag")+'</span></div>'+
+      '<div class="body"><h4>'+trExcField(rel,"nombre")+'</h4><p>'+(trExcField(rel,"desc")||trExcField(rel,"subt")||"")+'</p></div>';
     grid.appendChild(a);
   });
   section.hidden = false;
@@ -1464,11 +1779,12 @@ function renderPax(sk){
     const row=document.createElement("div"); row.className="pax-row";
     let puTxt = "";
     if(showPrice){
-      if(showCU && pu>0){ puTxt='<span class="pu">'+fmt(pu)+' c/u</span>'; }
+      if(showCU && pu>0){ puTxt='<span class="pu">'+fmt(pu)+t("cu-suffix")+'</span>'; }
       else if(!showCU && pu>0){ puTxt=''; } // no c/u for exclusivas
-      else if(pu===0){ puTxt='<span class="pu">Sin costo</span>'; }
+      else if(pu===0){ puTxt='<span class="pu">'+t("sin-costo")+'</span>'; }
     } else { puTxt='<span>&mdash;</span>'; }
-    row.innerHTML='<div class="pax-info"><b>'+c.label+'</b>'+(c.sub?'<span>'+c.sub+'</span> ':'')+puTxt+'</div>';
+    const cLabel = trCat(opt,c,"label"), cSub = trCat(opt,c,"sub");
+    row.innerHTML='<div class="pax-info"><b>'+cLabel+'</b>'+(cSub?'<span>'+cSub+'</span> ':'')+puTxt+'</div>';
 
     const st=document.createElement("div"); st.className="stepper";
     const minus=document.createElement("button"); minus.textContent="-";
@@ -1489,17 +1805,18 @@ function render(){
   // season badge
   const sb=document.getElementById("season-badge"); sb.innerHTML="";
   if(e.seasonal){
-    if(!state.fecha){ sb.innerHTML='<span class="badge media">Elegi una fecha para ver el precio</span>'; }
-    else if(sk==="__off__"){ sb.innerHTML='<span class="badge off">Fuera de temporada — consultanos</span>'; }
-    else { const so=seasonObj(e,sk); sb.innerHTML='<span class="badge '+so.cls+'">Temporada '+so.nombre+'</span>'; }
-    if(e.leyenda){ const l=document.createElement("div"); l.style.cssText="font-size:.78rem;color:var(--ink-soft);margin-top:.4rem"; l.textContent=e.leyenda; sb.appendChild(l); }
+    if(!state.fecha){ sb.innerHTML='<span class="badge media">'+t("badge.elegi-fecha")+'</span>'; }
+    else if(sk==="__off__"){ sb.innerHTML='<span class="badge off">'+t("badge.fuera-temporada")+'</span>'; }
+    else { const so=seasonObj(e,sk); sb.innerHTML='<span class="badge '+so.cls+'">'+t("badge.temporada")+trTempName(e,sk)+'</span>'; }
+    const leyenda = trE("leyenda");
+    if(leyenda){ const l=document.createElement("div"); l.style.cssText="font-size:.78rem;color:var(--ink-soft);margin-top:.4rem"; l.textContent=leyenda; sb.appendChild(l); }
   }
 
   // EAS start date badge
   if(e.startDate && state.fecha && state.fecha < e.startDate){
     const lockBadge = document.createElement("span");
     lockBadge.className = "badge locked";
-    lockBadge.textContent = "Disponible a partir del "+e.startDate.split("-").reverse().join("/");
+    lockBadge.textContent = t("badge.disponible-desde")+e.startDate.split("-").reverse().join("/");
     sb.appendChild(lockBadge);
   }
 
@@ -1521,17 +1838,17 @@ function render(){
     const pct = Math.round(gd.pct*100);
     pbEl.hidden=false;
     pbEl.innerHTML =
-      '<div class="pb-row"><span>Subtotal</span><span>'+fmt(subtotal)+'</span></div>'+
-      '<div class="pb-row pb-discount"><span>Descuento grupo familiar ('+pct+'%, '+gd.minPax+'+ pax)</span><span>-'+fmt(discount)+'</span></div>';
+      '<div class="pb-row"><span>'+t("pb.subtotal")+'</span><span>'+fmt(subtotal)+'</span></div>'+
+      '<div class="pb-row pb-discount"><span>'+t("pb.descuento")+pct+'%, '+gd.minPax+t("pb.pax-suffix")+'</span><span>-'+fmt(discount)+'</span></div>';
   } else {
     pbEl.hidden=true; pbEl.innerHTML="";
   }
 
   if(cotizar){
-    totalEl.textContent = pax>0 ? "A cotizar" : "—";
-    if(noDate){ hint.textContent="Elegi una fecha para pedir tu cotizacion."; go.disabled=true; go.textContent="Pedir cotizacion"; }
-    else if(pax<=0){ hint.textContent="Agrega al menos un pasajero."; go.disabled=true; go.textContent="Pedir cotizacion"; }
-    else { hint.textContent="Te pasamos el precio al instante por WhatsApp."; go.disabled=false; go.textContent="Pedir cotizacion por WhatsApp"; }
+    totalEl.textContent = pax>0 ? t("total.a-cotizar") : "—";
+    if(noDate){ hint.textContent=t("hint.elegi-fecha-cotizar"); go.disabled=true; go.textContent=t("btn.pedir-cotizacion"); }
+    else if(pax<=0){ hint.textContent=t("hint.agrega-pasajero-cotizar"); go.disabled=true; go.textContent=t("btn.pedir-cotizacion"); }
+    else { hint.textContent=t("hint.whatsapp-instant"); go.disabled=false; go.textContent=t("btn.pedir-cotizacion-wa"); }
     return;
   }
 
@@ -1541,14 +1858,14 @@ function render(){
 
   const missingContact = !state.nombre || !state.dni || !state.email || !state.tel || !state.hosp;
 
-  if(noDate){ hint.textContent=""; go.disabled=true; go.textContent="Pagar y reservar"; }
-  else if(beforeStart){ hint.textContent="Las clases arrancan el "+e.startDate.split("-").reverse().join("/")+". Elegí una fecha posterior."; go.disabled=true; go.textContent="Pagar y reservar"; }
-  else if(offSeason){ hint.textContent="Esa fecha está fuera de temporada. Escribinos para ver disponibilidad."; go.disabled=false; go.textContent="Consultar por WhatsApp"; }
-  else if(pax<=0){ hint.textContent="Agregá al menos un pasajero."; go.disabled=true; go.textContent="Pagar y reservar"; }
-  else if(needsPickup){ hint.textContent="Seleccioná tu punto de pick up."; go.disabled=true; go.textContent="Pagar y reservar"; }
-  else if(missingContact){ hint.textContent="Completá tus datos de contacto para reservar."; go.disabled=true; go.textContent="Pagar y reservar"; }
-  else if(!state.tc){ hint.textContent="Aceptá los términos y condiciones para continuar."; go.disabled=true; go.textContent="Pagar y reservar"; }
-  else { hint.textContent=""; go.disabled=false; go.textContent="Pagar y reservar"; }
+  if(noDate){ hint.textContent=""; go.disabled=true; go.textContent=t("btn.pagar-reservar"); }
+  else if(beforeStart){ hint.textContent=t("hint.clases-arrancan")+e.startDate.split("-").reverse().join("/")+t("hint.elegi-posterior"); go.disabled=true; go.textContent=t("btn.pagar-reservar"); }
+  else if(offSeason){ hint.textContent=t("hint.fuera-temporada"); go.disabled=false; go.textContent=t("btn.consultar-whatsapp"); }
+  else if(pax<=0){ hint.textContent=t("hint.agrega-pasajero"); go.disabled=true; go.textContent=t("btn.pagar-reservar"); }
+  else if(needsPickup){ hint.textContent=t("hint.elegi-pickup"); go.disabled=true; go.textContent=t("btn.pagar-reservar"); }
+  else if(missingContact){ hint.textContent=t("hint.completa-datos"); go.disabled=true; go.textContent=t("btn.pagar-reservar"); }
+  else if(!state.tc){ hint.textContent=t("hint.acepta-tc"); go.disabled=true; go.textContent=t("btn.pagar-reservar"); }
+  else { hint.textContent=""; go.disabled=false; go.textContent=t("btn.pagar-reservar"); }
 }
 
 function reservar(){
@@ -1565,21 +1882,22 @@ function reservar(){
 function reservarPorWhatsApp(){
   const e=EXC[id], opt=curOpt();
   const sk=seasonKeyFor(e,state.fecha);
-  const fechaTxt = state.fecha ? state.fecha.split("-").reverse().join("/") : "(a definir)";
-  let lines=[e.cotizar?"Hola Vivir Viajes! Quiero una cotización para:":"Hola Vivir Viajes! Quiero reservar:"];
-  lines.push("• "+e.nombre);
-  if(opt.label) lines.push("• Opción: "+opt.label);
-  if(e.traslado) lines.push("• "+(state.con?"Con traslado":"Sin traslado"));
-  if(state.con && state.pickup) lines.push("• Pick up: "+state.pickup);
-  if(e.lagoFrias) lines.push("• Extensión Lago Frías: "+(state.lf?"Sí":"No"));
-  lines.push("• Fecha: "+fechaTxt);
-  const detalle=[]; opt.cats.forEach(c=>{ if(state.counts[c.key]>0) detalle.push(state.counts[c.key]+" "+c.label); });
-  if(detalle.length) lines.push("• Pasajeros: "+detalle.join(", "));
+  const fechaTxt = state.fecha ? state.fecha.split("-").reverse().join("/") : t("date.na");
+  const optLabel = trOpt(opt,"label");
+  let lines=[e.cotizar?t("wa.cotizacion-header"):t("wa.reserva-header")];
+  lines.push("• "+trE("nombre"));
+  if(optLabel) lines.push("• "+t("wa.opcion")+optLabel);
+  if(e.traslado) lines.push("• "+(state.con?t("form.con-traslado"):t("form.sin-traslado")));
+  if(state.con && state.pickup) lines.push("• "+t("wa.pickup")+state.pickup);
+  if(e.lagoFrias) lines.push("• "+t("wa.lagofrias")+(state.lf?t("wa.si"):t("wa.no")));
+  lines.push("• "+t("wa.fecha")+fechaTxt);
+  const detalle=[]; opt.cats.forEach(c=>{ if(state.counts[c.key]>0) detalle.push(state.counts[c.key]+" "+trCat(opt,c,"label")); });
+  if(detalle.length) lines.push("• "+t("wa.pasajeros")+detalle.join(", "));
   const canPrice = !e.cotizar && (!e.seasonal || (state.fecha && sk!=="__off__"));
   if(canPrice){
     const p=pricingFor(opt,sk,state.con);
-    if(p.discount>0) lines.push("• Descuento grupo familiar: -"+fmt(p.discount));
-    if(p.total>0) lines.push("• Total estimado: "+fmt(p.total));
+    if(p.discount>0) lines.push("• "+t("wa.descuento")+fmt(p.discount));
+    if(p.total>0) lines.push("• "+t("wa.total")+fmt(p.total));
   }
   const url="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(lines.join("\n"));
   window.open(url,"_blank");
@@ -1589,23 +1907,24 @@ async function pagarConMercadoPago(){
   const go=document.getElementById("go");
   const prevText=go.textContent;
   go.disabled=true;
-  go.textContent="Redirigiendo a Mercado Pago...";
+  go.textContent=t("btn.redirigiendo");
 
   const e=EXC[id], opt=curOpt();
   const sk=seasonKeyFor(e,state.fecha);
   const fechaTxt = state.fecha.split("-").reverse().join("/");
   const p = pricingFor(opt,sk,state.con);
-  const detalle=[]; opt.cats.forEach(c=>{ if(state.counts[c.key]>0) detalle.push(state.counts[c.key]+" "+c.label); });
+  const optLabel = trOpt(opt,"label");
+  const detalle=[]; opt.cats.forEach(c=>{ if(state.counts[c.key]>0) detalle.push(state.counts[c.key]+" "+trCat(opt,c,"label")); });
 
   const payload = {
     excursionId: id,
-    excursion: e.nombre,
-    opcion: opt.label || null,
+    excursion: trE("nombre"),
+    opcion: optLabel || null,
     fecha: fechaTxt,
     horario: opt.horario || e.horario || null,
-    traslado: e.traslado ? (state.con?"Con traslado":"Sin traslado") : null,
+    traslado: e.traslado ? (state.con?t("form.con-traslado"):t("form.sin-traslado")) : null,
     pickup: state.con ? (state.pickup||null) : null,
-    lagoFrias: e.lagoFrias ? (state.lf?"Si":"No") : null,
+    lagoFrias: e.lagoFrias ? (state.lf?t("wa.si"):t("wa.no")) : null,
     pasajeros: detalle.join(", "),
     descuentoGrupal: p.discount>0 ? p.discount : null,
     total: p.total,
@@ -1623,16 +1942,23 @@ async function pagarConMercadoPago(){
       body: JSON.stringify(payload),
     });
     const data = await resp.json();
-    if(!resp.ok || !data.init_point) throw new Error(data.error || "No se pudo iniciar el pago");
+    if(!resp.ok || !data.init_point) throw new Error(data.error || t("err.pago-generico"));
     console.log("Mercado Pago init points (para debug manual):", {usado: data.init_point, produccion: data.init_point_prod, sandbox: data.init_point_sandbox});
     window.location.href = data.init_point;
   }catch(err){
-    alert("Hubo un problema iniciando el pago:\n\n"+(err && err.message ? err.message : err));
+    alert(t("err.pago")+(err && err.message ? err.message : err));
     go.disabled=false;
     go.textContent=prevText;
   }
 }
 
+(function initLang(){
+  let saved = "es";
+  try{ saved = localStorage.getItem("vv-lang") || "es"; }catch(e){}
+  if(!UI[saved]) saved = "es";
+  state.lang = saved;
+})();
+applyStaticI18n();
 buildSwitch();
 calInit();
 carouselInit();
