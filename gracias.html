@@ -37,12 +37,14 @@
   .voucher{background:#fff;border:1px dashed var(--line);border-radius:2px;padding:1.3rem 1.15rem 1.1rem;margin-top:6px;text-align:left;font-size:.86rem;transform:translateY(-100%)}
   .voucher-wrap.show .voucher{animation:print-out .7s cubic-bezier(.4,0,.2,1) forwards}
   @keyframes print-out{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+  .voucher .voucher-logo{height:28px;display:block;margin:0 auto .8rem}
   .voucher h3{font-family:var(--display);font-size:1rem;color:var(--navy);margin-bottom:.7rem;text-align:center}
   .voucher .row{display:flex;justify-content:space-between;gap:.6rem;padding:.32rem 0;border-bottom:1px dashed var(--line);color:var(--ink)}
   .voucher .row span:first-child{color:var(--ink-soft)}
   .voucher .row.total{font-weight:700;color:var(--navy);border-bottom:none;margin-top:.3rem;padding-top:.5rem}
   .voucher .ref{margin-top:.8rem;text-align:center;font-size:.72rem;color:var(--ink-soft);letter-spacing:.03em}
   .voucher .legend{margin-top:.3rem;text-align:center;font-size:.72rem;font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase}
+  .voucher .contact{margin-top:.6rem;padding-top:.6rem;border-top:1px solid var(--line);text-align:center;font-size:.76rem;color:var(--ink-soft)}
 
   footer{text-align:center;padding:1.6rem;color:var(--ink-soft);font-size:.82rem}
 
@@ -73,6 +75,7 @@
     <div class="printer" id="printer" hidden></div>
     <div class="voucher-wrap" id="voucher-wrap">
       <div class="voucher">
+        <img class="voucher-logo" src="logo-color.png" alt="Vivir Viajes">
         <h3>Voucher de reserva</h3>
         <div class="row"><span>Excursión</span><span id="v-excursion">-</span></div>
         <div class="row" id="v-opcion-row" hidden><span>Opción</span><span id="v-opcion"></span></div>
@@ -84,6 +87,7 @@
         <div class="row total"><span>Total pagado</span><span id="v-total">-</span></div>
         <div class="ref" id="v-ref"></div>
         <div class="legend">No válido como factura</div>
+        <div class="contact">Consultas: 2944 53-9672 &middot; info@vivirviajes.com.ar</div>
       </div>
     </div>
   </div>
@@ -151,7 +155,11 @@
     printer.hidden = false;
     voucherBtn.hidden = false;
     voucherBtn.addEventListener("click", () => {
+      const opening = !voucherWrap.classList.contains("show");
       voucherWrap.classList.toggle("show");
+      if(opening){
+        setTimeout(() => window.print(), 2000);
+      }
     });
   }
 </script>
