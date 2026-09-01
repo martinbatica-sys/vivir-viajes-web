@@ -53,7 +53,7 @@ export default async function handler(req, res) {
       `Referencia: ${payment.external_reference || '-'}`,
     ].filter(Boolean).join('\n');
 
-    await sendEmail(`Nueva reserva pagada: ${m.excursion || '-'}`, body);
+    await sendEmail(`Nueva reserva pagada: ${m.excursion || '-'}`, body, `mp-payment-${paymentId}`);
 
     return res.status(200).json({ ok: true });
   } catch (err) {
