@@ -62,11 +62,22 @@ export default async function handler(req, res) {
       telefono,
       hospedaje,
     },
-    back_urls: {
-      success: `${origin}/gracias.html?status=success&exc=${encodeURIComponent(excursionId || '')}`,
-      failure: `${origin}/gracias.html?status=failure&exc=${encodeURIComponent(excursionId || '')}`,
-      pending: `${origin}/gracias.html?status=pending&exc=${encodeURIComponent(excursionId || '')}`,
-    },
+    back_urls: (() => {
+      const voucherParams = new URLSearchParams({
+        exc: excursionId || '',
+        excursion,
+        opcion: opcion || '',
+        fecha,
+        pasajeros: String(pasajeros || ''),
+        total: String(unitPrice),
+        nombre,
+      }).toString();
+      return {
+        success: `${origin}/gracias.html?status=success&${voucherParams}`,
+        failure: `${origin}/gracias.html?status=failure&${voucherParams}`,
+        pending: `${origin}/gracias.html?status=pending&${voucherParams}`,
+      };
+    })(),
     auto_return: 'approved',
     notification_url: `${origin}/api/mp-webhook`,
   };

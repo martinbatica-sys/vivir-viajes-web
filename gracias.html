@@ -23,9 +23,35 @@
   .icon{font-size:2.6rem;margin-bottom:1rem}
   h1{font-family:var(--display);font-weight:700;font-size:1.5rem;color:var(--navy);margin-bottom:.7rem}
   p{color:var(--ink-soft);margin-bottom:1.6rem}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-family:var(--body);font-weight:700;font-size:.98rem;background:var(--gold);color:var(--navy);border:none;border-radius:12px;padding:.85rem 1.6rem;cursor:pointer;transition:.18s}
+  .actions{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;margin-bottom:.4rem}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-family:var(--body);font-weight:700;font-size:.95rem;background:var(--gold);color:var(--navy);border:none;border-radius:12px;padding:.85rem 1.5rem;cursor:pointer;transition:.18s}
   .btn:hover{background:var(--gold-dark)}
+  .btn.secondary{background:transparent;border:2px solid var(--navy);color:var(--navy);padding:.75rem 1.4rem}
+  .btn.secondary:hover{background:var(--navy);color:#fff}
+
+  .printer{width:130px;height:44px;background:var(--navy);border-radius:9px 9px 4px 4px;margin:1.8rem auto 0;position:relative;box-shadow:0 8px 16px -8px rgba(15,29,56,.45)}
+  .printer::before{content:"";position:absolute;left:14px;top:14px;width:8px;height:8px;border-radius:50%;background:var(--gold)}
+  .printer::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);width:106px;height:6px;background:var(--gold-dark);border-radius:3px}
+  .voucher-wrap{max-width:340px;margin:0 auto;overflow:hidden;max-height:0;transition:max-height .7s cubic-bezier(.4,0,.2,1)}
+  .voucher-wrap.show{max-height:640px}
+  .voucher{background:#fff;border:1px dashed var(--line);border-radius:2px;padding:1.3rem 1.15rem 1.1rem;margin-top:6px;text-align:left;font-size:.86rem;transform:translateY(-100%)}
+  .voucher-wrap.show .voucher{animation:print-out .7s cubic-bezier(.4,0,.2,1) forwards}
+  @keyframes print-out{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+  .voucher h3{font-family:var(--display);font-size:1rem;color:var(--navy);margin-bottom:.7rem;text-align:center}
+  .voucher .row{display:flex;justify-content:space-between;gap:.6rem;padding:.32rem 0;border-bottom:1px dashed var(--line);color:var(--ink)}
+  .voucher .row span:first-child{color:var(--ink-soft)}
+  .voucher .row.total{font-weight:700;color:var(--navy);border-bottom:none;margin-top:.3rem;padding-top:.5rem}
+  .voucher .ref{margin-top:.8rem;text-align:center;font-size:.72rem;color:var(--ink-soft);letter-spacing:.03em}
+
   footer{text-align:center;padding:1.6rem;color:var(--ink-soft);font-size:.82rem}
+
+  @media print{
+    header,.actions,.printer,footer,.icon{display:none!important}
+    body{background:#fff}
+    .card{box-shadow:none;border:none}
+    .voucher-wrap{max-height:none!important}
+    .voucher{transform:none!important;animation:none!important}
+  }
 </style>
 </head>
 <body>
@@ -37,7 +63,25 @@
     <div class="icon" id="icon">⏳</div>
     <h1 id="title">Un momento...</h1>
     <p id="msg">Estamos confirmando tu reserva.</p>
-    <a class="btn" id="cta" href="index.html">Volver al inicio</a>
+
+    <div class="actions">
+      <button type="button" class="btn" id="voucher-btn" hidden>Imprimir Voucher</button>
+      <a class="btn secondary" id="cta" href="index.html">Volver a la tienda</a>
+    </div>
+
+    <div class="printer" id="printer" hidden></div>
+    <div class="voucher-wrap" id="voucher-wrap">
+      <div class="voucher">
+        <h3>Voucher de reserva</h3>
+        <div class="row"><span>Excursión</span><span id="v-excursion">-</span></div>
+        <div class="row" id="v-opcion-row" hidden><span>Opción</span><span id="v-opcion"></span></div>
+        <div class="row"><span>Fecha</span><span id="v-fecha">-</span></div>
+        <div class="row"><span>Pasajeros</span><span id="v-pasajeros">-</span></div>
+        <div class="row"><span>Titular</span><span id="v-nombre">-</span></div>
+        <div class="row total"><span>Total pagado</span><span id="v-total">-</span></div>
+        <div class="ref" id="v-ref"></div>
+      </div>
+    </div>
   </div>
 </main>
 <footer>&copy; 2026 Vivir Viajes &middot; Bariloche, Patagonia</footer>
@@ -45,12 +89,14 @@
 <script>
   const params = new URLSearchParams(location.search);
   const status = params.get("status");
-  const exc = params.get("exc");
 
   const icon = document.getElementById("icon");
   const title = document.getElementById("title");
   const msg = document.getElementById("msg");
   const cta = document.getElementById("cta");
+  const voucherBtn = document.getElementById("voucher-btn");
+  const printer = document.getElementById("printer");
+  const voucherWrap = document.getElementById("voucher-wrap");
 
   if(status === "success"){
     icon.textContent = "✅";
@@ -66,9 +112,31 @@
     msg.textContent = "Algo falló al procesar el pago. Podés intentar de nuevo o escribirnos por WhatsApp.";
   }
 
-  if(exc){
-    cta.textContent = "Volver a la excursión";
-    cta.href = "excursion.html?exc=" + encodeURIComponent(exc);
+  if(status === "success" && params.get("excursion")){
+    document.getElementById("v-excursion").textContent = params.get("excursion") || "-";
+
+    const opcion = params.get("opcion");
+    if(opcion){
+      document.getElementById("v-opcion-row").hidden = false;
+      document.getElementById("v-opcion").textContent = opcion;
+    }
+
+    const fecha = params.get("fecha");
+    document.getElementById("v-fecha").textContent = fecha ? fecha.split("-").reverse().join("/") : "-";
+    document.getElementById("v-pasajeros").textContent = params.get("pasajeros") || "-";
+    document.getElementById("v-nombre").textContent = params.get("nombre") || "-";
+
+    const total = params.get("total");
+    document.getElementById("v-total").textContent = total ? "$" + Number(total).toLocaleString("es-AR") : "-";
+
+    const ref = params.get("external_reference") || params.get("payment_id") || "";
+    document.getElementById("v-ref").textContent = ref ? "Referencia: " + ref : "";
+
+    printer.hidden = false;
+    voucherBtn.hidden = false;
+    voucherBtn.addEventListener("click", () => {
+      voucherWrap.classList.toggle("show");
+    });
   }
 </script>
 </body>
