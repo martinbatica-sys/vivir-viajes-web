@@ -34,6 +34,20 @@ export default async function handler(req, res) {
       return res.status(200).json({ ok: true, status: payment.status });
     }
 
+    // Mercado Pago puede reenviar la notificacion de un pago mucho tiempo
+    // despues de aprobado (reintentos, reenvios manuales, etc). Un aviso
+    // legitimo de una reserva nueva siempre llega en minutos, asi que si el
+    // pago se aprobo hace mas de unas horas lo tratamos como un reenvio de
+    // algo que ya se notifico y no volvemos a mandar el mail.
+    const MAX_NOTIFY_AGE_MS = 6 * 60 * 60 * 1000; // 6 horas
+    if (payment.date_approved) {
+      const ageMs = Date.now() - new Date(payment.date_approved).getTime();
+      if (ageMs > MAX_NOTIFY_AGE_MS) {
+        console.log('Webhook ignorado: pago aprobado hace mas de 6hs (probable reenvio)', paymentId, payment.date_approved);
+        return res.status(200).json({ ok: true, ignored: true, reason: 'stale_notification' });
+      }
+    }
+
     const m = payment.metadata || {};
     const body = [
       '🏔️ Nueva reserva pagada - Vivir Viajes',
