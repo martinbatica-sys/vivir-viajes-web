@@ -1,9 +1,12 @@
 // Webhook de Mercado Pago: se llama solo cuando cambia el estado de un pago.
 // Si el pago esta aprobado, arma el aviso de reserva y lo manda por correo
-// a la mesa de operaciones.
-// Variables de entorno necesarias en Vercel: MP_ACCESS_TOKEN (+ las de Resend)
+// a la mesa de operaciones, y marca el lead correspondiente como "ganado"
+// en el mini-CRM.
+// Variables de entorno necesarias en Vercel: MP_ACCESS_TOKEN (+ las de Resend,
+// + SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY)
 
 import { sendEmail } from '../lib/notify-email.js';
+import { updateLeadByExternalReference } from '../lib/supabase.js';
 
 export default async function handler(req, res) {
   try {
@@ -68,6 +71,18 @@ export default async function handler(req, res) {
     ].filter(Boolean).join('\n');
 
     await sendEmail(`Nueva reserva pagada: ${m.excursion || '-'}`, body, `mp-payment-${paymentId}`);
+
+    if (payment.external_reference) {
+      try {
+        await updateLeadByExternalReference(payment.external_reference, {
+          status: 'ganado',
+          payment_id: String(paymentId),
+          updated_at: new Date().toISOString(),
+        });
+      } catch (err) {
+        console.error('Error actualizando lead en Supabase', err);
+      }
+    }
 
     return res.status(200).json({ ok: true });
   } catch (err) {

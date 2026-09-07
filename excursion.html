@@ -4,6 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reservar excursion · Vivir Viajes</title>
+<script>
+// Guarda utm_source/medium/campaign/term/content + gclid/fbclid apenas llegan
+// en la URL, para poder asociar despues cada consulta/reserva a la campana
+// que la origino. Se lee mas abajo con getTracking() al mandar la reserva.
+(function(){
+  try {
+    var params = new URLSearchParams(location.search);
+    var keys = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid'];
+    var stored = {};
+    try { stored = JSON.parse(localStorage.getItem('vv-tracking') || '{}'); } catch(e) {}
+    var now = Date.now();
+    var THIRTY_DAYS = 30*24*60*60*1000;
+    if (stored._ts && now - stored._ts > THIRTY_DAYS) stored = {};
+    var changed = false;
+    keys.forEach(function(k){
+      var v = params.get(k);
+      if (v) { stored[k] = v; changed = true; }
+    });
+    if (changed || !stored._ts) stored._ts = now;
+    localStorage.setItem('vv-tracking', JSON.stringify(stored));
+  } catch(e) {}
+})();
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1616,6 +1639,21 @@ const EXC = {
 
 /* =================== HELPERS ================================== */
 const fmt = n => "$"+new Intl.NumberFormat("es-AR").format(n);
+
+function getTracking(){
+  let stored = {};
+  try { stored = JSON.parse(localStorage.getItem("vv-tracking") || "{}"); } catch(e) {}
+  return {
+    utm_source: stored.utm_source || null,
+    utm_medium: stored.utm_medium || null,
+    utm_campaign: stored.utm_campaign || null,
+    utm_term: stored.utm_term || null,
+    utm_content: stored.utm_content || null,
+    gclid: stored.gclid || null,
+    fbclid: stored.fbclid || null,
+  };
+}
+
 const params = new URLSearchParams(location.search);
 let id = params.get("exc"); if(!EXC[id]) id = "neumeyer";
 
@@ -2449,6 +2487,25 @@ function reservarPorWhatsApp(){
   }
   const url="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(lines.join("\n"));
   window.open(url,"_blank");
+
+  fetch("/api/log-lead", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({
+      channel: "whatsapp",
+      excursionId: id,
+      excursion: trE("nombre"),
+      opcion: optLabel || null,
+      fecha: fechaTxt,
+      pasajeros: detalle.join(", "),
+      nombre: state.nombre,
+      dni: state.dni,
+      email: state.email,
+      telefono: state.tel,
+      hospedaje: state.hosp,
+      ...getTracking(),
+    }),
+  }).catch(()=>{});
 }
 
 async function pagarConMercadoPago(){
@@ -2481,6 +2538,7 @@ async function pagarConMercadoPago(){
     email: state.email,
     telefono: state.tel,
     hospedaje: state.hosp,
+    ...getTracking(),
   };
 
   try{

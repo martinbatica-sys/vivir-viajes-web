@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Panel de consultas · Vivir Viajes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16284C;--navy-2:#1E3566;--navy-deep:#0F1D38;
+    --gold:#E9A23C;--gold-dark:#C9852A;
+    --paper:#F5F7FB;--panel:#E9EFFA;--ink:#16284C;--ink-soft:#5A6A86;
+    --line:rgba(22,40,76,.12);
+    --display:"Poppins",sans-serif;--body:"Mulish",-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.5;min-height:100vh}
+  a{color:inherit}
+
+  /* Login gate */
+  .gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+  .gate-box{background:#fff;border:1px solid var(--line);border-radius:16px;padding:2.2rem 2rem;max-width:360px;width:100%;box-shadow:0 20px 45px -20px rgba(15,29,56,.3)}
+  .gate-box h1{font-family:var(--display);font-size:1.25rem;color:var(--navy);margin-bottom:.4rem}
+  .gate-box p{color:var(--ink-soft);font-size:.9rem;margin-bottom:1.4rem}
+  .gate-box input{width:100%;font-family:var(--body);font-size:1rem;border:1.5px solid var(--line);border-radius:10px;padding:.7rem .8rem;margin-bottom:1rem}
+  .gate-box input:focus{outline:none;border-color:var(--gold)}
+  .gate-box button{width:100%;font-family:var(--body);font-weight:700;font-size:.95rem;background:var(--gold);color:var(--navy);border:none;border-radius:10px;padding:.8rem;cursor:pointer}
+  .gate-box button:hover{background:var(--gold-dark)}
+  .gate-error{color:#B5462E;font-size:.85rem;margin-top:.7rem;min-height:1.1em}
+
+  /* App */
+  #app{display:none}
+  header{background:var(--navy);color:#fff;padding:1.1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem}
+  header h1{font-family:var(--display);font-size:1.15rem;font-weight:600}
+  header .meta{font-size:.82rem;color:rgba(255,255,255,.7)}
+  .toolbar{display:flex;gap:.6rem;align-items:center;padding:1rem 1.4rem;flex-wrap:wrap;background:#fff;border-bottom:1px solid var(--line)}
+  .toolbar select,.toolbar input{font-family:var(--body);font-size:.88rem;border:1.5px solid var(--line);border-radius:8px;padding:.5rem .6rem}
+  .toolbar button{font-family:var(--body);font-weight:700;font-size:.85rem;background:var(--panel);color:var(--navy);border:1.5px solid var(--line);border-radius:8px;padding:.5rem .8rem;cursor:pointer}
+  .toolbar button:hover{border-color:var(--navy)}
+  .stats{display:flex;gap:1.2rem;padding:0 1.4rem;margin-top:.9rem;flex-wrap:wrap}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.6rem 1rem;font-size:.82rem;color:var(--ink-soft)}
+  .stat b{display:block;font-family:var(--display);font-size:1.15rem;color:var(--navy)}
+
+  .table-wrap{padding:1.2rem 1.4rem 2.5rem;overflow-x:auto}
+  table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:.85rem;min-width:1100px}
+  th{text-align:left;background:var(--panel);color:var(--navy);font-weight:700;padding:.6rem .7rem;white-space:nowrap;position:sticky;top:0}
+  td{padding:.55rem .7rem;border-top:1px solid var(--line);vertical-align:top}
+  tr:hover td{background:#FAFBFE}
+  .muted{color:var(--ink-soft)}
+  .badge{display:inline-block;font-size:.72rem;font-weight:700;padding:.2rem .5rem;border-radius:6px;text-transform:uppercase;letter-spacing:.02em}
+  .badge.mercadopago{background:#E6F4EC;color:#2E7D4F}
+  .badge.whatsapp{background:#E7F1FB;color:#1E6FA3}
+  select.status{font-family:var(--body);font-weight:700;font-size:.78rem;border-radius:6px;border:1.5px solid var(--line);padding:.3rem .4rem;cursor:pointer}
+  select.status.nuevo{background:#F0F0F5;color:#4A4A66}
+  select.status.contactado{background:#E7F1FB;color:#1E6FA3}
+  select.status.cotizado{background:#FBEEDD;color:var(--gold-dark)}
+  select.status.ganado{background:#E6F4EC;color:#2E7D4F}
+  select.status.perdido{background:#FDE9E7;color:#B5462E}
+  .notes-input{width:160px;font-family:var(--body);font-size:.8rem;border:1.5px solid var(--line);border-radius:6px;padding:.35rem .5rem}
+  .save-hint{font-size:.7rem;color:var(--ink-soft);margin-left:.3rem}
+  .empty{padding:2.5rem;text-align:center;color:var(--ink-soft)}
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <h1>Panel de consultas</h1>
+    <p>Acceso interno · Vivir Viajes</p>
+    <input type="password" id="pw" placeholder="Contraseña" autocomplete="current-password">
+    <button type="button" id="pw-btn">Entrar</button>
+    <div class="gate-error" id="pw-error"></div>
+  </div>
+</div>
+
+<div id="app">
+  <header>
+    <h1>📋 Panel de consultas y reservas</h1>
+    <div class="meta" id="last-update"></div>
+  </header>
+
+  <div class="toolbar">
+    <select id="f-status">
+      <option value="">Todos los estados</option>
+      <option value="nuevo">Nuevo</option>
+      <option value="contactado">Contactado</option>
+      <option value="cotizado">Cotizado</option>
+      <option value="ganado">Ganado</option>
+      <option value="perdido">Perdido</option>
+    </select>
+    <select id="f-channel">
+      <option value="">Todos los canales</option>
+      <option value="mercadopago">Pago (Mercado Pago)</option>
+      <option value="whatsapp">Consulta (WhatsApp)</option>
+    </select>
+    <input type="text" id="f-search" placeholder="Buscar por nombre, email o excursión...">
+    <button type="button" id="refresh-btn">↻ Actualizar</button>
+  </div>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="table-wrap">
+    <table id="table" hidden>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Canal</th>
+          <th>Excursión</th>
+          <th>Fecha paseo</th>
+          <th>Cliente</th>
+          <th>Contacto</th>
+          <th>Origen</th>
+          <th>Total</th>
+          <th>Estado</th>
+          <th>Notas</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <div class="empty" id="empty" hidden>No hay consultas para mostrar.</div>
+  </div>
+</div>
+
+<script>
+  const gate = document.getElementById('gate');
+  const app = document.getElementById('app');
+  const pwInput = document.getElementById('pw');
+  const pwBtn = document.getElementById('pw-btn');
+  const pwError = document.getElementById('pw-error');
+
+  let ADMIN_KEY = '';
+  try { ADMIN_KEY = sessionStorage.getItem('vv-admin-key') || ''; } catch (e) {}
+
+  let allLeads = [];
+
+  function fmtDate(iso) {
+    if (!iso) return '-';
+    const d = new Date(iso);
+    return d.toLocaleDateString('es-AR') + ' ' + d.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function fmtMoney(n) {
+    if (n == null || n === '') return '-';
+    return '$' + Number(n).toLocaleString('es-AR');
+  }
+
+  function originText(lead) {
+    const parts = [];
+    if (lead.utm_source) parts.push(lead.utm_source + (lead.utm_campaign ? ' / ' + lead.utm_campaign : ''));
+    if (lead.gclid) parts.push('Google Ads');
+    if (lead.fbclid) parts.push('Meta Ads');
+    return parts.length ? parts.join(' · ') : '<span class="muted">Directo / orgánico</span>';
+  }
+
+  async function apiFetch(path, options = {}) {
+    const resp = await fetch(path, {
+      ...options,
+      headers: { 'Content-Type': 'application/json', 'x-admin-key': ADMIN_KEY, ...(options.headers || {}) },
+    });
+    return resp;
+  }
+
+  async function tryLogin(key) {
+    ADMIN_KEY = key;
+    const resp = await apiFetch('/api/admin-leads');
+    if (resp.status === 401) return false;
+    const data = await resp.json();
+    if (!resp.ok || !data.ok) throw new Error(data.error || 'Error cargando datos');
+    allLeads = data.leads || [];
+    return true;
+  }
+
+  pwBtn.onclick = async () => {
+    pwError.textContent = '';
+    pwBtn.disabled = true;
+    pwBtn.textContent = 'Entrando...';
+    try {
+      const ok = await tryLogin(pwInput.value);
+      if (!ok) {
+        pwError.textContent = 'Contraseña incorrecta.';
+        ADMIN_KEY = '';
+      } else {
+        try { sessionStorage.setItem('vv-admin-key', ADMIN_KEY); } catch (e) {}
+        showApp();
+      }
+    } catch (err) {
+      pwError.textContent = 'Error: ' + (err.message || err);
+    } finally {
+      pwBtn.disabled = false;
+      pwBtn.textContent = 'Entrar';
+    }
+  };
+  pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') pwBtn.click(); });
+
+  function showApp() {
+    gate.style.display = 'none';
+    app.style.display = 'block';
+    render();
+  }
+
+  async function loadLeads() {
+    const resp = await apiFetch('/api/admin-leads');
+    if (resp.status === 401) {
+      try { sessionStorage.removeItem('vv-admin-key'); } catch (e) {}
+      location.reload();
+      return;
+    }
+    const data = await resp.json();
+    if (!resp.ok || !data.ok) throw new Error(data.error || 'Error cargando datos');
+    allLeads = data.leads || [];
+    document.getElementById('last-update').textContent = 'Actualizado ' + new Date().toLocaleTimeString('es-AR');
+    render();
+  }
+
+  function render() {
+    const statusF = document.getElementById('f-status').value;
+    const channelF = document.getElementById('f-channel').value;
+    const searchF = document.getElementById('f-search').value.trim().toLowerCase();
+
+    let leads = allLeads.filter(l => {
+      if (statusF && l.status !== statusF) return false;
+      if (channelF && l.channel !== channelF) return false;
+      if (searchF) {
+        const hay = [l.nombre, l.email, l.excursion, l.telefono].filter(Boolean).join(' ').toLowerCase();
+        if (!hay.includes(searchF)) return false;
+      }
+      return true;
+    });
+
+    const stats = document.getElementById('stats');
+    const counts = { nuevo: 0, contactado: 0, cotizado: 0, ganado: 0, perdido: 0 };
+    allLeads.forEach(l => { if (counts[l.status] != null) counts[l.status]++; });
+    stats.innerHTML = `
+      <div class="stat"><b>${allLeads.length}</b>Total</div>
+      <div class="stat"><b>${counts.nuevo}</b>Nuevos</div>
+      <div class="stat"><b>${counts.contactado + counts.cotizado}</b>En proceso</div>
+      <div class="stat"><b>${counts.ganado}</b>Ganados</div>
+      <div class="stat"><b>${counts.perdido}</b>Perdidos</div>
+    `;
+
+    const table = document.getElementById('table');
+    const empty = document.getElementById('empty');
+    const tbody = document.getElementById('tbody');
+
+    if (!leads.length) {
+      table.hidden = true;
+      empty.hidden = false;
+      return;
+    }
+    table.hidden = false;
+    empty.hidden = true;
+
+    tbody.innerHTML = leads.map(l => `
+      <tr data-id="${l.id}">
+        <td>${fmtDate(l.created_at)}</td>
+        <td><span class="badge ${l.channel === 'mercadopago' ? 'mercadopago' : 'whatsapp'}">${l.channel === 'mercadopago' ? 'Pago' : 'Consulta'}</span></td>
+        <td>${l.excursion || '-'}${l.opcion ? '<br><span class="muted">' + l.opcion + '</span>' : ''}</td>
+        <td>${l.fecha || '-'}</td>
+        <td>${l.nombre || '<span class="muted">Sin nombre</span>'}${l.dni ? '<br><span class="muted">DNI ' + l.dni + '</span>' : ''}</td>
+        <td>${l.telefono || '-'}${l.email ? '<br><span class="muted">' + l.email + '</span>' : ''}</td>
+        <td>${originText(l)}</td>
+        <td>${fmtMoney(l.total)}</td>
+        <td>
+          <select class="status ${l.status}" data-field="status">
+            <option value="nuevo" ${l.status === 'nuevo' ? 'selected' : ''}>Nuevo</option>
+            <option value="contactado" ${l.status === 'contactado' ? 'selected' : ''}>Contactado</option>
+            <option value="cotizado" ${l.status === 'cotizado' ? 'selected' : ''}>Cotizado</option>
+            <option value="ganado" ${l.status === 'ganado' ? 'selected' : ''}>Ganado</option>
+            <option value="perdido" ${l.status === 'perdido' ? 'selected' : ''}>Perdido</option>
+          </select>
+        </td>
+        <td>
+          <input type="text" class="notes-input" data-field="notes" value="${(l.notes || '').replace(/"/g, '&quot;')}" placeholder="Notas...">
+          <span class="save-hint"></span>
+        </td>
+      </tr>
+    `).join('');
+
+    tbody.querySelectorAll('select.status').forEach(sel => {
+      sel.addEventListener('change', () => saveField(sel));
+    });
+    tbody.querySelectorAll('.notes-input').forEach(inp => {
+      inp.addEventListener('change', () => saveField(inp));
+    });
+  }
+
+  async function saveField(el) {
+    const tr = el.closest('tr');
+    const id = tr.dataset.id;
+    const field = el.dataset.field;
+    const value = el.value;
+    const hint = tr.querySelector('.save-hint');
+
+    if (field === 'status') {
+      el.className = 'status ' + value;
+      const lead = allLeads.find(l => String(l.id) === String(id));
+      if (lead) lead.status = value;
+    }
+
+    try {
+      const resp = await apiFetch('/api/admin-update-lead', {
+        method: 'POST',
+        body: JSON.stringify({ id, [field]: value }),
+      });
+      const data = await resp.json();
+      if (!resp.ok || !data.ok) throw new Error(data.error || 'Error');
+      if (hint) { hint.textContent = '✓'; setTimeout(() => { hint.textContent = ''; }, 1500); }
+      if (field === 'status') render();
+    } catch (err) {
+      if (hint) hint.textContent = '✗ ' + (err.message || err);
+    }
+  }
+
+  document.getElementById('f-status').addEventListener('change', render);
+  document.getElementById('f-channel').addEventListener('change', render);
+  document.getElementById('f-search').addEventListener('input', render);
+  document.getElementById('refresh-btn').addEventListener('click', loadLeads);
+
+  (async function init() {
+    if (ADMIN_KEY) {
+      try {
+        const ok = await tryLogin(ADMIN_KEY);
+        if (ok) { showApp(); return; }
+      } catch (e) {}
+      try { sessionStorage.removeItem('vv-admin-key'); } catch (e) {}
+      ADMIN_KEY = '';
+    }
+  })();
+</script>
+</body>
+</html>

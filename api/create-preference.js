@@ -1,6 +1,9 @@
 // Crea una preferencia de pago (Checkout Pro) en Mercado Pago a partir de los
 // datos de la reserva, y devuelve la URL a la que redirigir al cliente.
 // Variables de entorno necesarias en Vercel: MP_ACCESS_TOKEN
+// (+ SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY para el mini-CRM de leads)
+
+import { insertLead } from '../lib/supabase.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -15,6 +18,7 @@ export default async function handler(req, res) {
   const {
     excursionId, excursion, opcion, fecha, horario, traslado, pickup, lagoFrias,
     pasajeros, total, nombre, dni, email, telefono, hospedaje,
+    utm_source, utm_medium, utm_campaign, utm_term, utm_content, gclid, fbclid,
   } = req.body || {};
 
   if (!excursion || !fecha || !total || !nombre || !dni || !email || !telefono || !hospedaje) {
@@ -24,6 +28,36 @@ export default async function handler(req, res) {
   const proto = req.headers['x-forwarded-proto'] || 'https';
   const origin = `${proto}://${req.headers.host}`;
   const externalReference = `VV-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+
+  // Registrar el lead en el mini-CRM es best-effort: si Supabase no esta
+  // configurado o falla, el pago tiene que poder seguir su curso igual.
+  try {
+    await insertLead({
+      channel: 'mercadopago',
+      status: 'nuevo',
+      excursion_id: excursionId || null,
+      excursion,
+      opcion: opcion || null,
+      fecha,
+      pasajeros: pasajeros || null,
+      total: Number(total),
+      nombre,
+      dni,
+      email,
+      telefono,
+      hospedaje,
+      utm_source: utm_source || null,
+      utm_medium: utm_medium || null,
+      utm_campaign: utm_campaign || null,
+      utm_term: utm_term || null,
+      utm_content: utm_content || null,
+      gclid: gclid || null,
+      fbclid: fbclid || null,
+      external_reference: externalReference,
+    });
+  } catch (err) {
+    console.error('Error guardando lead en Supabase', err);
+  }
 
   // Permite forzar un monto bajo para probar la integracion real con una
   // tarjeta verdadera sin cobrar el precio completo. Se activa solo si
