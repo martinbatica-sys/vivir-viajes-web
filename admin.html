@@ -97,6 +97,9 @@
       <option value="whatsapp">Consulta (WhatsApp)</option>
     </select>
     <input type="text" id="f-search" placeholder="Buscar por nombre, email o excursión...">
+    <input type="date" id="f-from" title="Desde">
+    <input type="date" id="f-to" title="Hasta">
+    <button type="button" id="f-clear-dates">Limpiar fechas</button>
     <button type="button" id="refresh-btn">↻ Actualizar</button>
   </div>
 
@@ -219,6 +222,8 @@
     const statusF = document.getElementById('f-status').value;
     const channelF = document.getElementById('f-channel').value;
     const searchF = document.getElementById('f-search').value.trim().toLowerCase();
+    const fromF = document.getElementById('f-from').value;
+    const toF = document.getElementById('f-to').value;
 
     let leads = allLeads.filter(l => {
       if (statusF && l.status !== statusF) return false;
@@ -226,6 +231,12 @@
       if (searchF) {
         const hay = [l.nombre, l.email, l.excursion, l.telefono].filter(Boolean).join(' ').toLowerCase();
         if (!hay.includes(searchF)) return false;
+      }
+      if (fromF || toF) {
+        const created = l.created_at ? l.created_at.slice(0, 10) : '';
+        if (!created) return false;
+        if (fromF && created < fromF) return false;
+        if (toF && created > toF) return false;
       }
       return true;
     });
@@ -317,6 +328,13 @@
   document.getElementById('f-status').addEventListener('change', render);
   document.getElementById('f-channel').addEventListener('change', render);
   document.getElementById('f-search').addEventListener('input', render);
+  document.getElementById('f-from').addEventListener('change', render);
+  document.getElementById('f-to').addEventListener('change', render);
+  document.getElementById('f-clear-dates').addEventListener('click', () => {
+    document.getElementById('f-from').value = '';
+    document.getElementById('f-to').value = '';
+    render();
+  });
   document.getElementById('refresh-btn').addEventListener('click', loadLeads);
 
   (async function init() {
