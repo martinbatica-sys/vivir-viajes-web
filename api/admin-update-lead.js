@@ -1,5 +1,7 @@
 // Actualiza el estado/notas de un lead desde el panel admin.html.
-// Protegido con una contrasenia simple (header x-admin-key).
+// Protegido con ADMIN_PASSWORD unicamente (header x-admin-key) - a
+// diferencia de admin-leads.js, aca NO se acepta VIEWER_PASSWORD: los
+// accesos de solo lectura no pueden editar leads.
 // Variables de entorno necesarias en Vercel: ADMIN_PASSWORD
 // (+ SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY)
 

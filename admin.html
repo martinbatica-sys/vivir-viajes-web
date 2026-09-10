@@ -59,6 +59,13 @@
   select.status.cotizado{background:#FBEEDD;color:var(--gold-dark)}
   select.status.ganado{background:#E6F4EC;color:#2E7D4F}
   select.status.perdido{background:#FDE9E7;color:#B5462E}
+  .badge.status{cursor:default}
+  .badge.status.nuevo{background:#F0F0F5;color:#4A4A66}
+  .badge.status.contactado{background:#E7F1FB;color:#1E6FA3}
+  .badge.status.cotizado{background:#FBEEDD;color:var(--gold-dark)}
+  .badge.status.ganado{background:#E6F4EC;color:#2E7D4F}
+  .badge.status.perdido{background:#FDE9E7;color:#B5462E}
+  .role-badge{font-size:.72rem;font-weight:700;padding:.2rem .55rem;border-radius:6px;background:rgba(255,255,255,.15);letter-spacing:.02em}
   .notes-input{width:160px;font-family:var(--body);font-size:.8rem;border:1.5px solid var(--line);border-radius:6px;padding:.35rem .5rem}
   .save-hint{font-size:.7rem;color:var(--ink-soft);margin-left:.3rem}
   .empty{padding:2.5rem;text-align:center;color:var(--ink-soft)}
@@ -79,7 +86,10 @@
 <div id="app">
   <header>
     <h1>📋 Panel de consultas y reservas</h1>
-    <div class="meta" id="last-update"></div>
+    <div style="display:flex;align-items:center;gap:.8rem">
+      <span class="role-badge" id="role-badge" hidden>Solo lectura</span>
+      <div class="meta" id="last-update"></div>
+    </div>
   </header>
 
   <div class="toolbar">
@@ -136,6 +146,8 @@
 
   let ADMIN_KEY = '';
   try { ADMIN_KEY = sessionStorage.getItem('vv-admin-key') || ''; } catch (e) {}
+  let ROLE = 'admin';
+  try { ROLE = sessionStorage.getItem('vv-admin-role') || 'admin'; } catch (e) {}
 
   let allLeads = [];
 
@@ -173,6 +185,7 @@
     const data = await resp.json();
     if (!resp.ok || !data.ok) throw new Error(data.error || 'Error cargando datos');
     allLeads = data.leads || [];
+    ROLE = data.role || 'admin';
     return true;
   }
 
@@ -186,7 +199,10 @@
         pwError.textContent = 'Contraseña incorrecta.';
         ADMIN_KEY = '';
       } else {
-        try { sessionStorage.setItem('vv-admin-key', ADMIN_KEY); } catch (e) {}
+        try {
+          sessionStorage.setItem('vv-admin-key', ADMIN_KEY);
+          sessionStorage.setItem('vv-admin-role', ROLE);
+        } catch (e) {}
         showApp();
       }
     } catch (err) {
@@ -201,19 +217,22 @@
   function showApp() {
     gate.style.display = 'none';
     app.style.display = 'block';
+    document.getElementById('role-badge').hidden = ROLE !== 'viewer';
     render();
   }
 
   async function loadLeads() {
     const resp = await apiFetch('/api/admin-leads');
     if (resp.status === 401) {
-      try { sessionStorage.removeItem('vv-admin-key'); } catch (e) {}
+      try { sessionStorage.removeItem('vv-admin-key'); sessionStorage.removeItem('vv-admin-role'); } catch (e) {}
       location.reload();
       return;
     }
     const data = await resp.json();
     if (!resp.ok || !data.ok) throw new Error(data.error || 'Error cargando datos');
     allLeads = data.leads || [];
+    ROLE = data.role || 'admin';
+    document.getElementById('role-badge').hidden = ROLE !== 'viewer';
     document.getElementById('last-update').textContent = 'Actualizado ' + new Date().toLocaleTimeString('es-AR');
     render();
   }
@@ -264,6 +283,9 @@
     table.hidden = false;
     empty.hidden = true;
 
+    const readOnly = ROLE === 'viewer';
+    const STATUS_LABELS = { nuevo: 'Nuevo', contactado: 'Contactado', cotizado: 'Cotizado', ganado: 'Ganado', perdido: 'Perdido' };
+
     tbody.innerHTML = leads.map(l => `
       <tr data-id="${l.id}">
         <td>${fmtDate(l.created_at)}</td>
@@ -275,27 +297,33 @@
         <td>${originText(l)}</td>
         <td>${fmtMoney(l.total)}</td>
         <td>
-          <select class="status ${l.status}" data-field="status">
+          ${readOnly
+            ? `<span class="badge status ${l.status}">${STATUS_LABELS[l.status] || l.status}</span>`
+            : `<select class="status ${l.status}" data-field="status">
             <option value="nuevo" ${l.status === 'nuevo' ? 'selected' : ''}>Nuevo</option>
             <option value="contactado" ${l.status === 'contactado' ? 'selected' : ''}>Contactado</option>
             <option value="cotizado" ${l.status === 'cotizado' ? 'selected' : ''}>Cotizado</option>
             <option value="ganado" ${l.status === 'ganado' ? 'selected' : ''}>Ganado</option>
             <option value="perdido" ${l.status === 'perdido' ? 'selected' : ''}>Perdido</option>
-          </select>
+          </select>`}
         </td>
         <td>
-          <input type="text" class="notes-input" data-field="notes" value="${(l.notes || '').replace(/"/g, '&quot;')}" placeholder="Notas...">
-          <span class="save-hint"></span>
+          ${readOnly
+            ? (l.notes ? l.notes : '<span class="muted">-</span>')
+            : `<input type="text" class="notes-input" data-field="notes" value="${(l.notes || '').replace(/"/g, '&quot;')}" placeholder="Notas...">
+          <span class="save-hint"></span>`}
         </td>
       </tr>
     `).join('');
 
-    tbody.querySelectorAll('select.status').forEach(sel => {
-      sel.addEventListener('change', () => saveField(sel));
-    });
-    tbody.querySelectorAll('.notes-input').forEach(inp => {
-      inp.addEventListener('change', () => saveField(inp));
-    });
+    if (!readOnly) {
+      tbody.querySelectorAll('select.status').forEach(sel => {
+        sel.addEventListener('change', () => saveField(sel));
+      });
+      tbody.querySelectorAll('.notes-input').forEach(inp => {
+        inp.addEventListener('change', () => saveField(inp));
+      });
+    }
   }
 
   async function saveField(el) {
