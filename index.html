@@ -171,11 +171,15 @@
   .contact .hero-cta{justify-content:center}
 
   /* ---------- Avalan (entidades) ---------- */
-  .avalan{background:#fff;padding:2.6rem 0;border-top:1px solid var(--line)}
-  .avalan h3{text-align:center;font-family:var(--display);font-weight:700;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;color:var(--cyan);margin-bottom:1.6rem}
-  .avalan-strip{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:2.4rem 3rem}
-  .avalan-strip img{height:42px;width:auto;filter:grayscale(1);opacity:.65;transition:.2s}
+  .avalan{background:#fff;padding:2.8rem 0;border-top:1px solid var(--line);overflow:hidden}
+  .avalan h3{text-align:center;font-family:var(--display);font-weight:700;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;color:var(--cyan);margin-bottom:1.8rem}
+  .avalan-track{width:100%;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+  .avalan-strip{display:flex;align-items:center;gap:4.2rem;width:max-content;animation:avalan-scroll 32s linear infinite}
+  .avalan-strip:hover{animation-play-state:paused}
+  .avalan-strip img{height:64px;width:auto;filter:grayscale(1);opacity:.65;transition:.2s;flex:0 0 auto}
   .avalan-strip img:hover{opacity:1;filter:grayscale(0)}
+  @keyframes avalan-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){.avalan-strip{animation:none;flex-wrap:wrap;justify-content:center;width:auto}}
 
   /* ---------- Footer ---------- */
   footer{background:var(--navy-deep);color:rgba(255,255,255,.7);padding:3.2rem 0 2.6rem}
@@ -545,16 +549,27 @@
 <section class="avalan">
   <div class="wrap">
     <h3>Estas entidades nos avalan</h3>
-    <div class="avalan-strip">
-      <img src="fotos/ministerio-1.png" alt="Ministerio de Turismo y Deportes - Argentina" loading="lazy">
-      <img src="fotos/aavytuba-1.png" alt="AAVYTUBA - Asociacion de Agencias de Viajes y Turismo de Bariloche" loading="lazy">
-      <img src="fotos/aetap-1.png" alt="AETAP" loading="lazy">
-      <img src="fotos/argentina-1.png" alt="Argentina" loading="lazy">
-      <img src="fotos/bariloche-1.png" alt="Bariloche" loading="lazy">
-      <img src="fotos/catedral-1.png" alt="Catedral Alta Patagonia" loading="lazy">
-      <img src="fotos/cerro-bayo-1.png" alt="Cerro Bayo Ski Boutique" loading="lazy">
-      <img src="fotos/emprotur-1.png" alt="EMPROTUR - Ente Mixto de Promocion Turistica" loading="lazy">
-      <img src="fotos/faevit-1.png" alt="FAEVYT" loading="lazy">
+    <div class="avalan-track">
+      <div class="avalan-strip">
+        <img src="fotos/ministerio-1.png" alt="Ministerio de Turismo y Deportes - Argentina" loading="lazy">
+        <img src="fotos/aavytuba-1.png" alt="AAVYTUBA - Asociacion de Agencias de Viajes y Turismo de Bariloche" loading="lazy">
+        <img src="fotos/aetap-1.png" alt="AETAP" loading="lazy">
+        <img src="fotos/argentina-1.png" alt="Argentina" loading="lazy">
+        <img src="fotos/bariloche-1.png" alt="Bariloche" loading="lazy">
+        <img src="fotos/catedral-1.png" alt="Catedral Alta Patagonia" loading="lazy">
+        <img src="fotos/cerro-bayo-1.png" alt="Cerro Bayo Ski Boutique" loading="lazy">
+        <img src="fotos/emprotur-1.png" alt="EMPROTUR - Ente Mixto de Promocion Turistica" loading="lazy">
+        <img src="fotos/faevit-1.png" alt="FAEVYT" loading="lazy">
+        <img src="fotos/ministerio-1.png" alt="" aria-hidden="true" loading="lazy">
+        <img src="fotos/aavytuba-1.png" alt="" aria-hidden="true" loading="lazy">
+        <img src="fotos/aetap-1.png" alt="" aria-hidden="true" loading="lazy">
+        <img src="fotos/argentina-1.png" alt="" aria-hidden="true" loading="lazy">
+        <img src="fotos/bariloche-1.png" alt="" aria-hidden="true" loading="lazy">
+        <img src="fotos/catedral-1.png" alt="" aria-hidden="true" loading="lazy">
+        <img src="fotos/cerro-bayo-1.png" alt="" aria-hidden="true" loading="lazy">
+        <img src="fotos/emprotur-1.png" alt="" aria-hidden="true" loading="lazy">
+        <img src="fotos/faevit-1.png" alt="" aria-hidden="true" loading="lazy">
+      </div>
     </div>
   </div>
 </section>
