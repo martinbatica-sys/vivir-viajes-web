@@ -176,7 +176,7 @@
   .avalan-track{width:100%;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
   .avalan-strip{display:flex;align-items:center;gap:4.2rem;width:max-content;animation:avalan-scroll 32s linear infinite}
   .avalan-strip:hover{animation-play-state:paused}
-  .avalan-strip img{height:64px;width:auto;filter:grayscale(1);opacity:.65;transition:.2s;flex:0 0 auto}
+  .avalan-strip img{height:92px;width:auto;filter:grayscale(1);opacity:.65;transition:.2s;flex:0 0 auto}
   .avalan-strip img:hover{opacity:1;filter:grayscale(0)}
   @keyframes avalan-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   @media (prefers-reduced-motion:reduce){.avalan-strip{animation:none;flex-wrap:wrap;justify-content:center;width:auto}}
@@ -265,17 +265,31 @@
       </div>
       <div class="cards">
       <article class="card">
-        <div class="card-img" style="background-image:url('fotos/eas.jpg')"><span class="tag" data-i18n="card.eas.tag">Clases</span></div>
+        <div class="card-img" style="background-image:url('fotos/circuito-chico.jpg')"><span class="tag" data-i18n="card.circuito-chico.tag">Clasico</span></div>
         <div class="card-body">
-          <h3 data-i18n="card.eas.title">EAS &middot; Ski &amp; Snowboard</h3>
-          <p class="desc" data-i18n="card.eas.desc">Clases de ski y snowboard en el Cerro Catedral: bautismo, exclusivas y semi exclusivas. Equipo incluido.</p>
-          <div class="meta"><span>&#9201; <span data-i18n="card.eas.meta1">2 hs</span></span><span>&#9733; <span data-i18n="card.eas.meta2">Todos los niveles</span></span></div>
+          <h3 data-i18n="card.circuito-chico.title">Circuito Chico y Colonia Suiza</h3>
+          <p class="desc" data-i18n="card.circuito-chico.desc">El paseo imperdible de Bariloche: Llao Llao, Punto Panoramico, Bahia Lopez y la historica Colonia Suiza.</p>
+          <div class="meta"><span>&#9201; <span data-i18n="card.circuito-chico.meta1">Medio dia</span></span><span>&#9733; <span data-i18n="common.facil">Facil</span></span></div>
           <div class="card-foot">
-            <div class="price"><small data-i18n="common.desde">Desde</small><b>$143.750</b></div>
-            <a class="btn btn-primary" href="excursion.html?exc=eas" data-i18n="common.reservar">Reservar</a>
+            <div class="price"><small data-i18n="common.desde">Desde</small><b>$35.000</b></div>
+            <a class="btn btn-primary" href="excursion.html?exc=circuito-chico" data-i18n="common.reservar">Reservar</a>
           </div>
         </div>
-      <a class="card-link" href="excursion.html?exc=eas" tabindex="-1" aria-hidden="true"></a>
+      <a class="card-link" href="excursion.html?exc=circuito-chico" tabindex="-1" aria-hidden="true"></a>
+      </article>
+
+      <article class="card">
+        <div class="card-img" style="background-image:url('fotos/isla-victoria.jpg');background-size:cover;background-position:center"><span class="tag" data-i18n="common.navegacion">Navegación</span><span class="discount" data-i18n="card.isla-victoria.discount">-10% grupo 4+</span></div>
+        <div class="card-body">
+          <h3 data-i18n="card.isla-victoria.title">Isla Victoria y Bosque de Arrayanes</h3>
+          <p class="desc" data-i18n="card.isla-victoria.desc">Navegación por el Nahuel Huapi hasta el único bosque de arrayanes del mundo. Pinturas rupestres y flora autóctona en Isla Victoria.</p>
+          <div class="meta"><span>&#9201; 14:00 a 18:30</span><span>&#9733; <span data-i18n="card.isla-victoria.meta2">Apta familia</span></span></div>
+          <div class="card-foot">
+            <div class="price"><small data-i18n="common.desde">Desde</small><b>$140.000</b></div>
+            <a class="btn btn-primary" href="excursion.html?exc=isla-victoria" data-i18n="common.reservar">Reservar</a>
+          </div>
+        </div>
+      <a class="card-link" href="excursion.html?exc=isla-victoria" tabindex="-1" aria-hidden="true"></a>
       </article>
 
       <article class="card">
@@ -291,26 +305,12 @@
         </div>
       <a class="card-link" href="excursion.html?exc=campo-tulipanes" tabindex="-1" aria-hidden="true"></a>
       </article>
-
-      <article class="card">
-        <div class="card-img" style="background-image:url('fotos/neumeyer.jpg')"><span class="tag" data-i18n="card.neumeyer.tag">Naturaleza</span></div>
-        <div class="card-body">
-          <h3 data-i18n="card.neumeyer.title">Refugio Neumeyer</h3>
-          <p class="desc" data-i18n="card.neumeyer.desc">Día de naturaleza en el Valle del Challhuaco: caminata guiada y gastronomía regional, con almuerzo o merienda.</p>
-          <div class="meta"><span>&#9201; <span data-i18n="card.neumeyer.meta1">Dia completo</span></span><span>&#9733; <span data-i18n="card.neumeyer.meta2">Apta familia</span></span></div>
-          <div class="card-foot">
-            <div class="price"><small data-i18n="common.desde">Desde</small><b>$250.000</b></div>
-            <a class="btn btn-primary" href="excursion.html?exc=neumeyer" data-i18n="common.reservar">Reservar</a>
-          </div>
-        </div>
-      <a class="card-link" href="excursion.html?exc=neumeyer" tabindex="-1" aria-hidden="true"></a>
-      </article>
       </div>
     </div>
 
     <div class="sec-group">
       <div class="section-head reveal">
-        <h2 class="bracketed"><span class="b">[</span> <span data-i18n="sec.clasico.title">Bariloche Clasico</span> <span class="b">]</span></h2>
+        <h2 class="bracketed"><span class="b">[</span> <span data-i18n="sec.clasico.title">Bariloche Todo el Año</span> <span class="b">]</span></h2>
         <p class="section-sub" data-i18n="sec.clasico.sub">Los paseos que no te podes perder</p>
       </div>
       <div class="cards">
@@ -343,20 +343,6 @@
       </article>
 
       <article class="card">
-        <div class="card-img" style="background-image:url('fotos/villa-bayo.jpg')"><span class="tag" data-i18n="card.villa-bayo.tag">Invierno</span></div>
-        <div class="card-body">
-          <h3 data-i18n="card.villa-bayo.title">Villa La Angostura y Cerro Bayo</h3>
-          <p class="desc" data-i18n="card.villa-bayo.desc">Dia completo a Villa La Angostura: su costanera, el bosque andino y las vistas del Cerro Bayo.</p>
-          <div class="meta"><span>&#9201; <span data-i18n="common.dia-completo">Dia completo</span></span><span>&#9733; <span data-i18n="common.facil">Facil</span></span></div>
-          <div class="card-foot">
-            <div class="price"><small data-i18n="common.desde">Desde</small><b>$93.000</b></div>
-            <a class="btn btn-primary" href="excursion.html?exc=villa-bayo" data-i18n="common.reservar">Reservar</a>
-          </div>
-        </div>
-      <a class="card-link" href="excursion.html?exc=villa-bayo" tabindex="-1" aria-hidden="true"></a>
-      </article>
-
-      <article class="card">
         <div class="card-img" style="background-image:url('fotos/tronador.jpg')"><span class="tag" data-i18n="card.tronador.tag">Glaciar</span></div>
         <div class="card-body">
           <h3 data-i18n="card.tronador.title">Cerro Tronador y Ventisquero Negro</h3>
@@ -383,7 +369,15 @@
         </div>
       <a class="card-link" href="excursion.html?exc=san-martin" tabindex="-1" aria-hidden="true"></a>
       </article>
+      </div>
+    </div>
 
+    <div class="sec-group">
+      <div class="section-head reveal">
+        <h2 class="bracketed"><span class="b">[</span> <span data-i18n="sec.verano.title">Bariloche Verano</span> <span class="b">]</span></h2>
+        <p class="section-sub" data-i18n="sec.verano.sub">Rutas y paisajes que se lucen en la temporada calida</p>
+      </div>
+      <div class="cards">
       <article class="card">
         <div class="card-img" style="background-image:url('fotos/traful-02.jpg')"><span class="tag" data-i18n="card.san-martin.tag">Ruta</span></div>
         <div class="card-body">
@@ -406,6 +400,34 @@
         <p class="section-sub" data-i18n="sec.invierno.sub">Aventura sobre la nieve</p>
       </div>
       <div class="cards">
+      <article class="card">
+        <div class="card-img" style="background-image:url('fotos/eas.jpg')"><span class="tag" data-i18n="card.eas.tag">Clases</span></div>
+        <div class="card-body">
+          <h3 data-i18n="card.eas.title">EAS &middot; Ski &amp; Snowboard</h3>
+          <p class="desc" data-i18n="card.eas.desc">Clases de ski y snowboard en el Cerro Catedral: bautismo, exclusivas y semi exclusivas. Equipo incluido.</p>
+          <div class="meta"><span>&#9201; <span data-i18n="card.eas.meta1">2 hs</span></span><span>&#9733; <span data-i18n="card.eas.meta2">Todos los niveles</span></span></div>
+          <div class="card-foot">
+            <div class="price"><small data-i18n="common.desde">Desde</small><b>$143.750</b></div>
+            <a class="btn btn-primary" href="excursion.html?exc=eas" data-i18n="common.reservar">Reservar</a>
+          </div>
+        </div>
+      <a class="card-link" href="excursion.html?exc=eas" tabindex="-1" aria-hidden="true"></a>
+      </article>
+
+      <article class="card">
+        <div class="card-img" style="background-image:url('fotos/villa-bayo.jpg')"><span class="tag" data-i18n="card.villa-bayo.tag">Invierno</span></div>
+        <div class="card-body">
+          <h3 data-i18n="card.villa-bayo.title">Villa La Angostura y Cerro Bayo</h3>
+          <p class="desc" data-i18n="card.villa-bayo.desc">Dia completo a Villa La Angostura: su costanera, el bosque andino y las vistas del Cerro Bayo.</p>
+          <div class="meta"><span>&#9201; <span data-i18n="common.dia-completo">Dia completo</span></span><span>&#9733; <span data-i18n="common.facil">Facil</span></span></div>
+          <div class="card-foot">
+            <div class="price"><small data-i18n="common.desde">Desde</small><b>$93.000</b></div>
+            <a class="btn btn-primary" href="excursion.html?exc=villa-bayo" data-i18n="common.reservar">Reservar</a>
+          </div>
+        </div>
+      <a class="card-link" href="excursion.html?exc=villa-bayo" tabindex="-1" aria-hidden="true"></a>
+      </article>
+
       <article class="card">
         <div class="card-img" style="background-image:url('fotos/roca-negra.jpg')"><span class="tag" data-i18n="card.roca-negra.tag">Raquetas &amp; Fondue</span></div>
         <div class="card-body">
@@ -613,7 +635,8 @@ const I18N = {
     "common.desde":"Desde", "common.reservar":"Reservar",
     "card.campo-tulipanes.tag":"Dia completo", "card.campo-tulipanes.title":"Campo de Tulipanes", "card.campo-tulipanes.desc":"Dia completo a Trevelin: el Campo de Tulipanes, las Cascadas Nant y Fall y los paisajes de la Ruta 40.", "card.campo-tulipanes.meta1":"15 hs", "card.campo-tulipanes.meta2":"Salidas limitadas",
     "card.neumeyer.tag":"Naturaleza", "card.neumeyer.title":"Refugio Neumeyer", "card.neumeyer.desc":"Día de naturaleza en el Valle del Challhuaco: caminata guiada y gastronomía regional, con almuerzo o merienda.", "card.neumeyer.meta1":"Dia completo", "card.neumeyer.meta2":"Apta familia",
-    "sec.clasico.title":"Bariloche Clasico", "sec.clasico.sub":"Los paseos que no te podes perder",
+    "sec.clasico.title":"Bariloche Todo el Año", "sec.clasico.sub":"Los paseos que no te podes perder",
+    "sec.verano.title":"Bariloche Verano", "sec.verano.sub":"Rutas y paisajes que se lucen en la temporada calida",
     "card.circuito-chico.tag":"Clasico", "card.circuito-chico.title":"Circuito Chico y Colonia Suiza", "card.circuito-chico.desc":"El paseo imperdible de Bariloche: Llao Llao, Punto Panoramico, Bahia Lopez y la historica Colonia Suiza.", "card.circuito-chico.meta1":"Medio dia",
     "common.facil":"Facil",
     "card.circuito-chico-campanario.title":"Circuito Chico - Cerro Campanario", "card.circuito-chico-campanario.desc":"Subi en aerosilla al Cerro Campanario, la Capilla San Eduardo y Punto Panoramico camino a la historica Colonia Suiza.",
