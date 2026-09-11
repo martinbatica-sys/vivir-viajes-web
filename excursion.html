@@ -478,7 +478,8 @@ const GALLERY = {
   "isla-victoria":["fotos/isla-victoria-01.jpg","fotos/isla-victoria-02.jpg","fotos/isla-victoria-03.jpg","fotos/isla-victoria-04.jpg","fotos/isla-victoria-05.jpg"],
   "puerto-blest":["fotos/puerto-blest-01.jpg","fotos/puerto-blest-02.jpg","fotos/puerto-blest-03.jpg","fotos/puerto-blest-04.jpg","fotos/puerto-blest-05.jpg"],
   "rafting-frontera":["fotos/Raftin%2001.jpg","fotos/Rafting%2002.jpg","fotos/Rafting%2004.jpg","fotos/Rafting%2005.jpg"],
-  "rafting-villegas":["fotos/Rafting%2003.jpg","fotos/Raftin%2002.jpg"]
+  "rafting-villegas":["fotos/Rafting%2003.jpg","fotos/Raftin%2002.jpg"],
+  "kayak":["fotos/Kayak%201.jpeg","fotos/Kayak%202.jpeg","fotos/Kayak%203.jpeg","fotos/Kayak%204.jpg","fotos/Kayak%205.jpg"]
 };
 
 /* =================== DATOS ===================================== */
@@ -1412,6 +1413,37 @@ const EXC = {
     incluye:["Traslado desde los puntos de encuentro","Guías en español, portugués e inglés","Equipamiento: casco, chaleco y remo","Merienda","Seguros y cobertura médica"],
     notas:["Duración: Medio día.","Salida mañana — Pick up: 9 hs · Drop off: 14 hs aproximadamente.","Salida tarde — Pick up: 13 hs · Drop off: 18 hs aproximadamente.","Puntos de encuentro: Puerta Galería Paseo de la Catedral (Palacios 156) / Puerta Hotel NH Edelweiss.","Llevar malla, toalla y zapatillas de recambio.","La excursión no se suspende por lluvia.","Menores de edad deben estar acompañados por un adulto responsable.","Mujeres embarazadas o personas con cardiopatías: consultar antes de reservar.","Reservas con mínimo 24 hs de anticipación."],
     cats:[{key:'pp',label:'Por persona',min:1}],precios:{pp:100000}}]
+ },
+
+ /* ---------- KAYAK ---------- */
+ "kayak":{
+   nombre:"Kayak", subt:"Lago Gutiérrez · Salida de medio día", tag:"Kayak",
+   desc:"Travesía en kayak por el Lago Gutiérrez, con parada en una playa para un refrigerio. Grupos reducidos, apta para todas las edades.",
+   relacionadas:["rafting-villegas","san-ramon"],
+   detalle:"Te llevamos hasta el punto de embarque en el Camping Lago Gutiérrez, un rincón único a orillas del lago. Ahí te esperan los guías e instructores para la charla técnica antes de salir al agua.\n\nSon travesías pensadas para todas las edades y niveles de experiencia. Con un guía cada cuatro pasajeros (grupos de hasta 15 personas) podemos adaptar el recorrido al ritmo y las aptitudes físicas de cada grupo.\n\nLa salida de medio día recorre 6 km por la costa suroeste del lago. A mitad de camino paramos en una playa para un refrigerio, y después volvemos remando hasta la base para regresar a Bariloche.\n\nNavegamos en kayaks de travesía simples y dobles, de fibra de vidrio y fabricación nacional — embarcaciones estables y de fácil manejo, matriculadas y habilitadas por Prefectura Naval Argentina y por la Administración de Parques Nacionales para operar dentro del Parque Nacional Nahuel Huapi y Patagonia Norte.",
+   incluye:["Guías profesionales certificados","Kayaks de travesía habilitados, simples o dobles","Equipamiento: remos técnicos, chaleco salvavidas profesional, chaqueta térmica impermeable y cubre-cockpit de neoprene","Snacks y bebidas calientes"],
+   notas:["Horario de salida: 13 hs.","Punto de encuentro: Camping Lago Gutiérrez.","Grupos de hasta 15 personas, con un guía cada 4 pasajeros.","Traslado no incluido — se puede agregar arriba.","Reservas con mínimo 24 hs de anticipación."],
+   seasonal:false, traslado:true, horario:"13:00 hs",
+   opciones:[
+     {key:"kayak",label:null,
+      incluye_sin:[
+        "Guías profesionales certificados",
+        "Kayaks de travesía habilitados, simples o dobles",
+        "Equipamiento: remos técnicos, chaleco salvavidas profesional, chaqueta térmica impermeable y cubre-cockpit de neoprene",
+        "Snacks y bebidas calientes",
+      ],
+      incluye_con:[
+        "Pick up dentro del radio de búsqueda de la agencia",
+        "Guías profesionales certificados",
+        "Kayaks de travesía habilitados, simples o dobles",
+        "Equipamiento: remos técnicos, chaleco salvavidas profesional, chaqueta térmica impermeable y cubre-cockpit de neoprene",
+        "Snacks y bebidas calientes",
+      ],
+      notas_sin:["Horario de salida: 13 hs.","Punto de encuentro: Camping Lago Gutiérrez.","Grupos de hasta 15 personas, con un guía cada 4 pasajeros.","Traslado no incluido — se puede agregar arriba.","Reservas con mínimo 24 hs de anticipación."],
+      notas_con:["Horario de salida: 13 hs.","Punto de encuentro: Camping Lago Gutiérrez.","Grupos de hasta 15 personas, con un guía cada 4 pasajeros.","Reservas con mínimo 24 hs de anticipación."],
+      cats:[{key:'pp',label:'Por persona',min:1}],
+      precios:{pp:{sin:92500,con:99500}}},
+   ]
  },
 
  /* ---------- TRONADOR ---------- */
