@@ -1,0 +1,912 @@
+{
+  "la-cueva": {
+    "seasonal": false,
+    "temporadas": null,
+    "traslado": false,
+    "lagoFrias": false,
+    "opciones": {
+      "travesia": {
+        "cats": [
+          {
+            "key": "veh",
+            "min": 1,
+            "max": 6
+          }
+        ],
+        "precios": {
+          "veh": 270000
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      },
+      "afterski": {
+        "cats": [
+          {
+            "key": "adulto",
+            "min": 1,
+            "max": null
+          },
+          {
+            "key": "menor",
+            "min": 0,
+            "max": null
+          },
+          {
+            "key": "nino",
+            "min": 0,
+            "max": null
+          }
+        ],
+        "precios": {
+          "adulto": 400000,
+          "menor": 360000,
+          "nino": 150000
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      },
+      "nocturno": {
+        "cats": [
+          {
+            "key": "adulto",
+            "min": 1,
+            "max": null
+          },
+          {
+            "key": "menor",
+            "min": 0,
+            "max": null
+          }
+        ],
+        "precios": {
+          "adulto": 450000,
+          "menor": 400000
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
+  },
+  "eas": {
+    "seasonal": false,
+    "temporadas": null,
+    "traslado": true,
+    "lagoFrias": false,
+    "opciones": {
+      "bautismo": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": null
+          }
+        ],
+        "precios": {
+          "pp": {
+            "sin": 143750,
+            "con": 193750
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      },
+      "excl1": {
+        "cats": [
+          {
+            "key": "grupo",
+            "min": 1,
+            "max": 1
+          }
+        ],
+        "precios": {
+          "grupo": {
+            "sin": 391000,
+            "con": 441000
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      },
+      "excl2": {
+        "cats": [
+          {
+            "key": "grupo",
+            "min": 1,
+            "max": 1
+          }
+        ],
+        "precios": {
+          "grupo": {
+            "sin": 460000,
+            "con": 560000
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      },
+      "excl3": {
+        "cats": [
+          {
+            "key": "grupo",
+            "min": 1,
+            "max": 1
+          }
+        ],
+        "precios": {
+          "grupo": {
+            "sin": 529000,
+            "con": 679000
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      },
+      "semi4": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": 1
+          }
+        ],
+        "precios": {
+          "pp": {
+            "sin": 644000,
+            "con": 844000
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      },
+      "semi5": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": 1
+          }
+        ],
+        "precios": {
+          "pp": {
+            "sin": 713000,
+            "con": 963000
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      },
+      "semi6": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": 1
+          }
+        ],
+        "precios": {
+          "pp": {
+            "sin": 782000,
+            "con": 1082000
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
+  },
+  "roca-negra": {
+    "seasonal": true,
+    "temporadas": [
+      {
+        "key": "mayjun",
+        "rangos": [
+          [
+            "05-01",
+            "06-30"
+          ]
+        ]
+      },
+      {
+        "key": "julago",
+        "rangos": [
+          [
+            "07-01",
+            "08-31"
+          ]
+        ]
+      }
+    ],
+    "traslado": false,
+    "lagoFrias": false,
+    "opciones": {
+      "queso": {
+        "cats": [
+          {
+            "key": "adulto",
+            "min": 1,
+            "max": null
+          },
+          {
+            "key": "menor",
+            "min": 0,
+            "max": null
+          },
+          {
+            "key": "bebe",
+            "min": 0,
+            "max": null
+          }
+        ],
+        "precios": {
+          "mayjun": {
+            "adulto": 250000,
+            "menor": 200000,
+            "bebe": 0
+          },
+          "julago": {
+            "adulto": 300000,
+            "menor": 250000,
+            "bebe": 0
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      },
+      "choco": {
+        "cats": [
+          {
+            "key": "adulto",
+            "min": 1,
+            "max": null
+          },
+          {
+            "key": "menor",
+            "min": 0,
+            "max": null
+          },
+          {
+            "key": "bebe",
+            "min": 0,
+            "max": null
+          }
+        ],
+        "precios": {
+          "mayjun": {
+            "adulto": 250000,
+            "menor": 200000,
+            "bebe": 0
+          },
+          "julago": {
+            "adulto": 300000,
+            "menor": 250000,
+            "bebe": 0
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
+  },
+  "san-ramon": {
+    "seasonal": false,
+    "temporadas": null,
+    "traslado": true,
+    "lagoFrias": false,
+    "opciones": {
+      "cab": {
+        "cats": [
+          {
+            "key": "mayor",
+            "min": 1,
+            "max": null
+          },
+          {
+            "key": "menor",
+            "min": 0,
+            "max": null
+          }
+        ],
+        "precios": {
+          "mayor": {
+            "sin": 230000,
+            "con": 240000
+          },
+          "menor": {
+            "sin": 220000,
+            "con": 220000
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
+  },
+  "cabalgata-wesley": {
+    "seasonal": false,
+    "temporadas": null,
+    "traslado": false,
+    "lagoFrias": false,
+    "opciones": {
+      "campanario": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": null
+          }
+        ],
+        "precios": {
+          "pp": 14400
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      },
+      "lago-moreno": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": null
+          }
+        ],
+        "precios": {
+          "pp": 22575
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
+  },
+  "neumeyer": {
+    "seasonal": true,
+    "temporadas": [
+      {
+        "key": "media",
+        "rangos": [
+          [
+            "06-01",
+            "06-30"
+          ],
+          [
+            "09-01",
+            "09-30"
+          ]
+        ]
+      },
+      {
+        "key": "alta",
+        "rangos": [
+          [
+            "07-01",
+            "08-31"
+          ]
+        ]
+      }
+    ],
+    "traslado": false,
+    "lagoFrias": false,
+    "opciones": {
+      "lag-a": {
+        "cats": [
+          {
+            "key": "adulto",
+            "min": 1,
+            "max": null
+          },
+          {
+            "key": "menor",
+            "min": 0,
+            "max": null
+          }
+        ],
+        "precios": {
+          "media": {
+            "adulto": 250000,
+            "menor": 230000
+          },
+          "alta": {
+            "adulto": 280000,
+            "menor": 250000
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      },
+      "lag-b": {
+        "cats": [
+          {
+            "key": "adulto",
+            "min": 1,
+            "max": null
+          },
+          {
+            "key": "menor",
+            "min": 0,
+            "max": null
+          }
+        ],
+        "precios": {
+          "media": {
+            "adulto": 250000,
+            "menor": 230000
+          },
+          "alta": {
+            "adulto": 280000,
+            "menor": 250000
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      },
+      "viv": {
+        "cats": [
+          {
+            "key": "adulto",
+            "min": 1,
+            "max": null
+          },
+          {
+            "key": "menor",
+            "min": 0,
+            "max": null
+          }
+        ],
+        "precios": {
+          "media": {
+            "adulto": 250000,
+            "menor": 230000
+          },
+          "alta": {
+            "adulto": 280000,
+            "menor": 250000
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
+  },
+  "circuito-chico": {
+    "seasonal": true,
+    "temporadas": [
+      {
+        "key": "base",
+        "rangos": [
+          [
+            "2026-01-01",
+            "2026-06-30"
+          ]
+        ]
+      },
+      {
+        "key": "alta",
+        "rangos": [
+          [
+            "2026-07-01",
+            "2027-12-31"
+          ]
+        ]
+      }
+    ],
+    "traslado": false,
+    "lagoFrias": false,
+    "opciones": {
+      "tour": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": null
+          }
+        ],
+        "precios": {
+          "base": {
+            "pp": 35000
+          },
+          "alta": {
+            "pp": 45000
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
+  },
+  "circuito-chico-campanario": {
+    "seasonal": true,
+    "temporadas": [
+      {
+        "key": "base",
+        "rangos": [
+          [
+            "2026-01-01",
+            "2026-06-30"
+          ]
+        ]
+      },
+      {
+        "key": "alta",
+        "rangos": [
+          [
+            "2026-07-01",
+            "2027-12-31"
+          ]
+        ]
+      }
+    ],
+    "traslado": false,
+    "lagoFrias": false,
+    "opciones": {
+      "tour": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": null
+          }
+        ],
+        "precios": {
+          "base": {
+            "pp": 35000
+          },
+          "alta": {
+            "pp": 45000
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
+  },
+  "villa-bayo": {
+    "seasonal": true,
+    "temporadas": [
+      {
+        "key": "unica",
+        "rangos": [
+          [
+            "2026-06-06",
+            "2027-12-31"
+          ]
+        ]
+      }
+    ],
+    "traslado": false,
+    "lagoFrias": false,
+    "opciones": {
+      "tour": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": null
+          }
+        ],
+        "precios": {
+          "unica": {
+            "pp": 93000
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
+  },
+  "campo-tulipanes": {
+    "seasonal": false,
+    "temporadas": null,
+    "traslado": false,
+    "lagoFrias": false,
+    "opciones": {
+      "tour": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": null
+          }
+        ],
+        "precios": {
+          "pp": 360000
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
+  },
+  "san-martin": {
+    "seasonal": true,
+    "temporadas": [
+      {
+        "key": "base",
+        "rangos": [
+          [
+            "2026-01-01",
+            "2026-06-30"
+          ]
+        ]
+      },
+      {
+        "key": "alta",
+        "rangos": [
+          [
+            "2026-07-01",
+            "2027-12-31"
+          ]
+        ]
+      }
+    ],
+    "traslado": false,
+    "lagoFrias": false,
+    "opciones": {
+      "tour": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": null
+          }
+        ],
+        "precios": {
+          "base": {
+            "pp": 75000
+          },
+          "alta": {
+            "pp": 110000
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
+  },
+  "circuito-grande": {
+    "seasonal": false,
+    "temporadas": null,
+    "traslado": false,
+    "lagoFrias": false,
+    "opciones": {
+      "tour": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": null
+          }
+        ],
+        "precios": {
+          "pp": 80000
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
+  },
+  "rafting-frontera": {
+    "seasonal": false,
+    "temporadas": null,
+    "traslado": false,
+    "lagoFrias": false,
+    "opciones": {
+      "tour": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": null
+          }
+        ],
+        "precios": {
+          "pp": 190000
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
+  },
+  "rafting-villegas": {
+    "seasonal": false,
+    "temporadas": null,
+    "traslado": false,
+    "lagoFrias": false,
+    "opciones": {
+      "tour": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": null
+          }
+        ],
+        "precios": {
+          "pp": 100000
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
+  },
+  "kayak": {
+    "seasonal": false,
+    "temporadas": null,
+    "traslado": true,
+    "lagoFrias": false,
+    "opciones": {
+      "kayak": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": null
+          }
+        ],
+        "precios": {
+          "pp": {
+            "sin": 92500,
+            "con": 99500
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
+  },
+  "tronador": {
+    "seasonal": true,
+    "temporadas": [
+      {
+        "key": "base",
+        "rangos": [
+          [
+            "2026-01-01",
+            "2026-06-30"
+          ]
+        ]
+      },
+      {
+        "key": "alta",
+        "rangos": [
+          [
+            "2026-07-01",
+            "2027-12-31"
+          ]
+        ]
+      }
+    ],
+    "traslado": false,
+    "lagoFrias": false,
+    "opciones": {
+      "tour": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": null
+          }
+        ],
+        "precios": {
+          "base": {
+            "pp": 67000
+          },
+          "alta": {
+            "pp": 100000
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
+  },
+  "isla-victoria": {
+    "seasonal": false,
+    "temporadas": null,
+    "traslado": true,
+    "lagoFrias": false,
+    "opciones": {
+      "tour": {
+        "cats": [
+          {
+            "key": "adulto",
+            "min": 1,
+            "max": null
+          },
+          {
+            "key": "menor",
+            "min": 0,
+            "max": null
+          },
+          {
+            "key": "jubilado",
+            "min": 0,
+            "max": null
+          },
+          {
+            "key": "infante",
+            "min": 0,
+            "max": null
+          }
+        ],
+        "precios": {
+          "adulto": {
+            "sin": 140000,
+            "con": 162000
+          },
+          "menor": {
+            "sin": 70000,
+            "con": 92000
+          },
+          "jubilado": {
+            "sin": 70000,
+            "con": 92000
+          },
+          "infante": {
+            "sin": 0,
+            "con": 0
+          }
+        },
+        "preciosLF": null,
+        "groupDiscount": {
+          "minPax": 4,
+          "pct": 0.1
+        }
+      }
+    }
+  },
+  "puerto-blest": {
+    "seasonal": false,
+    "temporadas": null,
+    "traslado": true,
+    "lagoFrias": true,
+    "opciones": {
+      "tour": {
+        "cats": [
+          {
+            "key": "adulto",
+            "min": 1,
+            "max": null
+          },
+          {
+            "key": "menor",
+            "min": 0,
+            "max": null
+          },
+          {
+            "key": "jubilado",
+            "min": 0,
+            "max": null
+          },
+          {
+            "key": "infante",
+            "min": 0,
+            "max": null
+          }
+        ],
+        "precios": {
+          "adulto": {
+            "sin": 140000,
+            "con": 162000
+          },
+          "menor": {
+            "sin": 70000,
+            "con": 92000
+          },
+          "jubilado": {
+            "sin": 70000,
+            "con": 92000
+          },
+          "infante": {
+            "sin": 0,
+            "con": 0
+          }
+        },
+        "preciosLF": {
+          "adulto": 54000,
+          "menor": 27000,
+          "jubilado": 27000,
+          "infante": 0
+        },
+        "groupDiscount": null
+      }
+    }
+  }
+}

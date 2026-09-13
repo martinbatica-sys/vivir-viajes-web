@@ -4,6 +4,7 @@
 // (+ SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY para el mini-CRM de leads)
 
 import { insertLead } from '../lib/supabase.js';
+import { computeTotal } from '../lib/pricing.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -16,14 +17,29 @@ export default async function handler(req, res) {
   }
 
   const {
-    excursionId, excursion, opcion, fecha, horario, traslado, pickup, lagoFrias,
-    pasajeros, total, nombre, dni, email, telefono, hospedaje,
+    excursionId, excursion, opcion, optionKey, fecha, fechaISO, horario, traslado, con, pickup, lagoFrias, lf,
+    pasajeros, counts, total, nombre, dni, email, telefono, hospedaje,
     utm_source, utm_medium, utm_campaign, utm_term, utm_content, gclid, fbclid,
   } = req.body || {};
 
   if (!excursion || !fecha || !total || !nombre || !dni || !email || !telefono || !hospedaje) {
     return res.status(400).json({ error: 'Faltan datos de la reserva' });
   }
+
+  // Nunca confiar en el "total" que manda el navegador: se recalcula aca a
+  // partir del mismo precio que ve el cliente (lib/pricing-data.json, un
+  // espejo de excursion.html generado por scripts/extract-pricing.mjs).
+  const priced = computeTotal({ excursionId, optionKey, counts, con, lf, fechaISO });
+  if (!priced.ok) {
+    console.error('No se pudo validar el precio de la reserva', { excursionId, optionKey, reason: priced.reason });
+    return res.status(400).json({ error: 'No se pudo validar el precio de la reserva', detail: priced.reason });
+  }
+  if (priced.total !== Number(total)) {
+    console.warn('Total recibido del cliente no coincide con el recalculado en el servidor — se usa el del servidor', {
+      excursionId, optionKey, clientTotal: total, serverTotal: priced.total,
+    });
+  }
+  const validatedTotal = priced.total;
 
   const proto = req.headers['x-forwarded-proto'] || 'https';
   const origin = `${proto}://${req.headers.host}`;
@@ -40,7 +56,7 @@ export default async function handler(req, res) {
       opcion: opcion || null,
       fecha,
       pasajeros: pasajeros || null,
-      total: Number(total),
+      total: validatedTotal,
       nombre,
       dni,
       email,
@@ -64,7 +80,7 @@ export default async function handler(req, res) {
   // MP_TEST_OVERRIDE_TOTAL esta seteada en Vercel; hay que sacarla despues.
   const { MP_TEST_OVERRIDE_TOTAL } = process.env;
   const isOverride = MP_TEST_OVERRIDE_TOTAL && Number(MP_TEST_OVERRIDE_TOTAL) > 0;
-  const unitPrice = isOverride ? Number(MP_TEST_OVERRIDE_TOTAL) : Number(total);
+  const unitPrice = isOverride ? Number(MP_TEST_OVERRIDE_TOTAL) : validatedTotal;
 
   const preference = {
     items: [
