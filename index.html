@@ -176,11 +176,25 @@
   .price b{font-family:var(--display);font-size:1.32rem;font-weight:700;color:var(--gold-dark)}
   .card-foot .btn-primary{padding:.6rem 1.15rem;font-size:.9rem}
 
-  /* ---------- Nosotros strip ---------- */
-  .strip{background:linear-gradient(145deg,#1A2F58,#0F1D38);color:#fff;border-radius:22px;padding:clamp(2.3rem,5vw,3.4rem);display:grid;grid-template-columns:repeat(3,1fr);gap:2.2rem}
-  .strip .item h4{font-family:var(--display);font-size:1.18rem;font-weight:600;margin-bottom:.55rem;display:flex;align-items:center;gap:.6rem}
-  .strip .item p{color:rgba(255,255,255,.74);font-size:.95rem}
-  .strip .ic{width:38px;height:38px;border-radius:11px;background:rgba(233,162,60,.16);display:grid;place-items:center;color:var(--gold);flex:0 0 auto}
+  /* ---------- Nosotros (historia) ---------- */
+  .historia-block{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.2rem);align-items:center;margin-bottom:clamp(3.2rem,6vw,4.6rem)}
+  .historia-block.reverse .historia-media{order:2}
+  .historia-block.reverse .historia-text{order:1}
+  .historia-media{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+  .historia-media.single{grid-template-columns:1fr;max-width:420px}
+  .historia-media img{width:100%;height:100%;aspect-ratio:4/5;object-fit:cover;border-radius:18px;box-shadow:var(--shadow)}
+  .historia-media .ph{width:100%;aspect-ratio:4/5;border-radius:18px;display:grid;place-items:center;gap:.6rem;text-align:center;padding:1rem;background:linear-gradient(145deg,#1A2F58,#0F1D38);color:rgba(255,255,255,.5);font-size:.82rem;font-weight:600}
+  .historia-media .ph svg{opacity:.6}
+  .historia-eyebrow{font-family:var(--body);font-size:.8rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:.7rem;display:block}
+  .historia-text p{color:var(--ink-soft);font-size:1.05rem;line-height:1.75}
+  #nosotros .bracketed{font-style:italic}
+  .historia-cierre{background:linear-gradient(145deg,#1A2F58,#0F1D38);border-radius:22px;padding:clamp(2.6rem,6vw,4rem) clamp(1.6rem,5vw,3rem);text-align:center}
+  .historia-cierre p{font-family:var(--display);font-style:italic;font-weight:500;color:#fff;font-size:clamp(1.3rem,2.8vw,1.75rem);line-height:1.55;max-width:44ch;margin:0 auto}
+  @media(max-width:760px){
+    .historia-block, .historia-block.reverse{grid-template-columns:1fr}
+    .historia-block.reverse .historia-media{order:1}
+    .historia-block.reverse .historia-text{order:2}
+  }
 
   /* ---------- Contacto ---------- */
   .contact{background:var(--panel);border-radius:22px;padding:clamp(2.6rem,6vw,4.2rem);text-align:center}
@@ -635,19 +649,55 @@
 <!-- ====================== NOSOTROS ====================== -->
 <section class="sec" id="nosotros">
   <div class="wrap">
-    <div class="strip reveal">
-      <div class="item">
-        <h4><span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.3-7-11a7 7 0 1114 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg></span> <span data-i18n="nosotros.item1.title">Operador local</span></h4>
-        <p data-i18n="nosotros.item1.text">Somos de Bariloche. Conocemos a cada proveedor, los horarios y la mejor opcion para cada pasajero.</p>
+    <div class="section-head reveal" style="text-align:center;margin-bottom:clamp(2.6rem,5vw,3.6rem)">
+      <h2 class="bracketed" style="justify-content:center"><span class="b">[</span> <span data-i18n="nosotros.title">Quiénes somos</span> <span class="b">]</span></h2>
+      <p class="section-sub" data-i18n="nosotros.sub" style="margin:.6rem auto 0">Una empresa de familia, desde 2001.</p>
+    </div>
+
+    <div class="historia-block reveal">
+      <div class="historia-media">
+        <img src="fotos/Nosotros%2001.jpeg" alt="Camionetas 4x4 de la primera epoca de Vivir Viajes en el Cerro Lopez">
+        <img src="fotos/Nosotros%2002.jpeg" alt="Camioneta 4x4 en un camino de montaña sobre el Nahuel Huapi">
       </div>
-      <div class="item">
-        <h4><span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></span> <span data-i18n="nosotros.item2.title">Reserva simple</span></h4>
-        <p data-i18n="nosotros.item2.text">Elegis tu excursion y coordinamos todo por WhatsApp o mail. Sin vueltas ni letra chica.</p>
+      <div class="historia-text">
+        <span class="historia-eyebrow" data-i18n="nosotros.b1.eyebrow">Nuestra historia</span>
+        <p data-i18n="nosotros.b1.text">Vivir Viajes nació en 2001, cuando Miguel y Cecilia decidieron mostrar la Patagonia tal como la conocían de memoria. Empezamos con camionetas 4x4, subiendo caminos de montaña que casi nadie más recorría — el Cerro López, los miradores escondidos, los atajos que solo un local sabe encontrar.</p>
       </div>
-      <div class="item">
-        <h4><span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4L12 17l-6.3 4.4L8 14 2 9.4h7.6z"/></svg></span> <span data-i18n="nosotros.item3.title">Experiencias reales</span></h4>
-        <p data-i18n="nosotros.item3.text">Proveedores de confianza, grupos cuidados y la libertad de armar tu viaje a tu manera.</p>
+    </div>
+
+    <div class="historia-block reverse reveal">
+      <div class="historia-media">
+        <img src="fotos/Nosotros%2003.jpeg" alt="Primera unidad de transporte de Vivir Viajes en el Llao Llao Hotel">
+        <img src="fotos/Nosotros%2004.jpeg" alt="Unidad de transporte de Vivir Viajes en una excursion junto a un rio">
       </div>
+      <div class="historia-text">
+        <span class="historia-eyebrow" data-i18n="nosotros.b2.eyebrow">Cómo crecimos</span>
+        <p data-i18n="nosotros.b2.text">En 2003 sumamos nuestra primera unidad de transporte: apenas 15 butacas. Con el tiempo esa apuesta se transformó en una flota propia de 150 butacas, siempre con el mismo eje: excelencia, calidad y tecnología en cada viaje.</p>
+      </div>
+    </div>
+
+    <div class="historia-block reveal">
+      <div class="historia-media single">
+        <div class="ph"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13.5" r="3.2"/></svg>Foto de la flota actual — próximamente</div>
+      </div>
+      <div class="historia-text">
+        <span class="historia-eyebrow" data-i18n="nosotros.b3.eyebrow">Quiénes somos hoy</span>
+        <p data-i18n="nosotros.b3.text">Hoy seguimos siendo una empresa de familia: Cecilia y Miguel al frente, y la segunda generación ya metida en el día a día. Lo que no cambió es el eje — conocer cada camino, cada proveedor, cada horario, como si Bariloche fuera nuestra casa. Porque lo es.</p>
+      </div>
+    </div>
+
+    <div class="historia-block reverse reveal">
+      <div class="historia-media single">
+        <div class="ph"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13.5" r="3.2"/></svg>Foto próximamente</div>
+      </div>
+      <div class="historia-text">
+        <span class="historia-eyebrow" data-i18n="nosotros.b4.eyebrow">Por qué elegirnos</span>
+        <p data-i18n="nosotros.b4.text">Cuando viajás con nosotros no sos un pasajero más: sos alguien a quien le mostramos la Patagonia que elegimos vivir. Veinte años después, seguimos haciéndolo así.</p>
+      </div>
+    </div>
+
+    <div class="historia-cierre reveal">
+      <p data-i18n="nosotros.cierre">"No vendemos excursiones. Compartimos la forma en la que elegimos vivir acá."</p>
     </div>
   </div>
 </section>
@@ -772,9 +822,12 @@ const I18N = {
     "card.cabalgata-wesley.title":"Cabalgata Wesley", "card.cabalgata-wesley.desc":"Cabalgatas guiadas en el campo de la familia Wesley, a los pies del Cerro Campanario. Elegí el paseo al Campanario, a la playa del lago Moreno, o la combinación de día completo.", "card.cabalgata-wesley.meta1":"Desde 1 h 30", "card.cabalgata-wesley.meta2":"3 recorridos a elegir",
     "card.rafting-frontera.title":"Rafting Frontera", "card.rafting-frontera.desc":"Dos horas de navegación intensa en aguas blancas por el río Manso, hasta el límite con Chile. Incluye almuerzo.", "card.rafting-frontera.meta1":"Día completo", "card.rafting-frontera.meta2":"Mín. 14 años",
     "card.rafting-villegas.title":"Rafting Villegas", "card.rafting-villegas.desc":"Medio día de descenso en la confluencia de los ríos Villegas y Manso, apto para toda la familia.", "card.rafting-villegas.meta2":"Apta familia",
-    "nosotros.item1.title":"Operador local", "nosotros.item1.text":"Somos de Bariloche. Conocemos a cada proveedor, los horarios y la mejor opcion para cada pasajero.",
-    "nosotros.item2.title":"Reserva simple", "nosotros.item2.text":"Elegis tu excursion y coordinamos todo por WhatsApp o mail. Sin vueltas ni letra chica.",
-    "nosotros.item3.title":"Experiencias reales", "nosotros.item3.text":"Proveedores de confianza, grupos cuidados y la libertad de armar tu viaje a tu manera.",
+    "nosotros.title":"Quiénes somos", "nosotros.sub":"Una empresa de familia, desde 2001.",
+    "nosotros.b1.eyebrow":"Nuestra historia", "nosotros.b1.text":"Vivir Viajes nació en 2001, cuando Miguel y Cecilia decidieron mostrar la Patagonia tal como la conocían de memoria. Empezamos con camionetas 4x4, subiendo caminos de montaña que casi nadie más recorría — el Cerro López, los miradores escondidos, los atajos que solo un local sabe encontrar.",
+    "nosotros.b2.eyebrow":"Cómo crecimos", "nosotros.b2.text":"En 2003 sumamos nuestra primera unidad de transporte: apenas 15 butacas. Con el tiempo esa apuesta se transformó en una flota propia de 150 butacas, siempre con el mismo eje: excelencia, calidad y tecnología en cada viaje.",
+    "nosotros.b3.eyebrow":"Quiénes somos hoy", "nosotros.b3.text":"Hoy seguimos siendo una empresa de familia: Cecilia y Miguel al frente, y la segunda generación ya metida en el día a día. Lo que no cambió es el eje — conocer cada camino, cada proveedor, cada horario, como si Bariloche fuera nuestra casa. Porque lo es.",
+    "nosotros.b4.eyebrow":"Por qué elegirnos", "nosotros.b4.text":"Cuando viajás con nosotros no sos un pasajero más: sos alguien a quien le mostramos la Patagonia que elegimos vivir. Veinte años después, seguimos haciéndolo así.",
+    "nosotros.cierre":"\"No vendemos excursiones. Compartimos la forma en la que elegimos vivir acá.\"",
     "contact.title":"Listos para vivir la Patagonia?", "contact.text":"Escribinos y armamos juntos tu itinerario. Te respondemos rapido y en tu idioma.", "contact.whatsapp":"Escribir por WhatsApp",
     "footer.text":"© 2026 Vivir Viajes · Bariloche, Patagonia Argentina",
   },
@@ -811,9 +864,6 @@ const I18N = {
     "common.dia-completo-cap":"Full day",
     "sec.aventura.title":"Bariloche Adventure", "sec.aventura.sub":"For those who want to get moving",
     "card.san-ramon.tag":"Horseback riding", "card.san-ramon.title":"Cabalgata La Fragua", "card.san-ramon.desc":"Half a day on horseback through the La Fragua Valley, with a criollo breakfast and Patagonian asado.", "card.san-ramon.meta2":"With asado",
-    "nosotros.item1.title":"Local operator", "nosotros.item1.text":"We're from Bariloche. We know every provider, every schedule and the best option for each traveler.",
-    "nosotros.item2.title":"Easy booking", "nosotros.item2.text":"Choose your excursion and we'll sort out the rest by WhatsApp or email. No hassle, no fine print.",
-    "nosotros.item3.title":"Real experiences", "nosotros.item3.text":"Trusted providers, well-run groups, and the freedom to plan your trip your way.",
     "contact.title":"Ready to live Patagonia?", "contact.text":"Message us and let's plan your itinerary together. We'll reply quickly, in your language.", "contact.whatsapp":"Message us on WhatsApp",
     "footer.text":"© 2026 Vivir Viajes · Bariloche, Argentine Patagonia",
     "cat.circuitos.title":"Tours & Viewpoints", "cat.circuitos.sub":"Vehicle tours with the best views in the region",
@@ -863,9 +913,6 @@ const I18N = {
     "common.dia-completo-cap":"Dia inteiro",
     "sec.aventura.title":"Bariloche Aventura", "sec.aventura.sub":"Para quem quer se mexer",
     "card.san-ramon.tag":"Cavalgada", "card.san-ramon.title":"Cabalgata La Fragua", "card.san-ramon.desc":"Meio dia a cavalo pelo Valle de La Fragua, com café da manhã criollo e churrasco patagônico na brasa.", "card.san-ramon.meta2":"Com churrasco",
-    "nosotros.item1.title":"Operador local", "nosotros.item1.text":"Somos de Bariloche. Conhecemos cada fornecedor, os horários e a melhor opção para cada passageiro.",
-    "nosotros.item2.title":"Reserva simples", "nosotros.item2.text":"Você escolhe o passeio e a gente combina tudo por WhatsApp ou e-mail. Sem enrolação e sem letras miúdas.",
-    "nosotros.item3.title":"Experiências reais", "nosotros.item3.text":"Fornecedores de confiança, grupos bem cuidados e a liberdade de montar sua viagem do seu jeito.",
     "contact.title":"Prontos para viver a Patagônia?", "contact.text":"Fale com a gente e vamos montar seu roteiro juntos. Respondemos rápido, no seu idioma.", "contact.whatsapp":"Falar no WhatsApp",
     "footer.text":"© 2026 Vivir Viajes · Bariloche, Patagônia Argentina",
     "cat.circuitos.title":"Circuitos & Mirantes", "cat.circuitos.sub":"Passeios de veículo com as melhores vistas da região",
