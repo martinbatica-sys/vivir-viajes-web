@@ -4,10 +4,19 @@
 // Variables de entorno necesarias en Vercel: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
 
 import { insertLead } from '../lib/supabase.js';
+import { rateLimit } from '../lib/rate-limit.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Metodo no permitido' });
+  }
+
+  // Mismo espiritu best-effort que el resto del archivo: si alguien floodea
+  // este endpoint no le mostramos un error, simplemente dejamos de guardar
+  // leads de esa IP por un rato.
+  const rl = rateLimit(req, 'log-lead', { max: 30, windowMs: 10 * 60 * 1000 });
+  if (!rl.allowed) {
+    return res.status(200).json({ ok: false, error: 'rate_limited' });
   }
 
   const b = req.body || {};

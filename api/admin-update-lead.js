@@ -6,6 +6,7 @@
 // (+ SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY)
 
 import { updateLeadById } from '../lib/supabase.js';
+import { rateLimit } from '../lib/rate-limit.js';
 
 const VALID_STATUSES = ['nuevo', 'contactado', 'cotizado', 'ganado', 'perdido'];
 
@@ -19,6 +20,13 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Falta configurar ADMIN_PASSWORD en Vercel' });
   }
   if (req.headers['x-admin-key'] !== ADMIN_PASSWORD) {
+    // Mismo contador que admin-leads.js: comparten credencial, asi que
+    // comparten tambien el limite de intentos fallidos.
+    const rl = rateLimit(req, 'admin-login', { max: 8, windowMs: 10 * 60 * 1000 });
+    if (!rl.allowed) {
+      res.setHeader('Retry-After', String(rl.retryAfterSeconds));
+      return res.status(429).json({ error: 'Demasiados intentos fallidos. Probá de nuevo en unos minutos.' });
+    }
     return res.status(401).json({ error: 'No autorizado' });
   }
 

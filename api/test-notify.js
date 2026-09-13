@@ -3,8 +3,17 @@
 // Variables de entorno necesarias en Vercel: RESEND_API_KEY, OPS_EMAIL_TO
 
 import { sendEmail } from '../lib/notify-email.js';
+import { rateLimit } from '../lib/rate-limit.js';
 
 export default async function handler(req, res) {
+  // Sin autenticacion y sin parametros: cualquiera que encuentre esta URL
+  // podria floodear el correo de operaciones y gastar la cuota de Resend.
+  const rl = rateLimit(req, 'test-notify', { max: 3, windowMs: 30 * 60 * 1000 });
+  if (!rl.allowed) {
+    res.setHeader('Retry-After', String(rl.retryAfterSeconds));
+    return res.status(429).json({ error: 'Demasiados intentos. Probá de nuevo en unos minutos.' });
+  }
+
   const body = [
     '🏔️ Nueva reserva - Vivir Viajes (PRUEBA)',
     'Excursion: Refugio Neumeyer',

@@ -5,10 +5,20 @@
 
 import { insertLead } from '../lib/supabase.js';
 import { computeTotal } from '../lib/pricing.js';
+import { rateLimit } from '../lib/rate-limit.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Metodo no permitido' });
+  }
+
+  // Limite generoso: es normal que un cliente real cree varias preferencias
+  // mientras ajusta pasajeros u opciones antes de pagar. Esto solo frena un
+  // flood/script insistiendo desde la misma IP.
+  const rl = rateLimit(req, 'create-preference', { max: 30, windowMs: 10 * 60 * 1000 });
+  if (!rl.allowed) {
+    res.setHeader('Retry-After', String(rl.retryAfterSeconds));
+    return res.status(429).json({ error: 'Demasiados intentos. Probá de nuevo en unos minutos.' });
   }
 
   const { MP_ACCESS_TOKEN } = process.env;
