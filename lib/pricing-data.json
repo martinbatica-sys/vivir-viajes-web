@@ -306,27 +306,8 @@
     }
   },
   "circuito-chico": {
-    "seasonal": true,
-    "temporadas": [
-      {
-        "key": "base",
-        "rangos": [
-          [
-            "2026-01-01",
-            "2026-06-30"
-          ]
-        ]
-      },
-      {
-        "key": "alta",
-        "rangos": [
-          [
-            "2026-07-01",
-            "2027-12-31"
-          ]
-        ]
-      }
-    ],
+    "seasonal": false,
+    "temporadas": null,
     "traslado": false,
     "lagoFrias": false,
     "opciones": {
@@ -339,12 +320,7 @@
           }
         ],
         "precios": {
-          "base": {
-            "pp": 35000
-          },
-          "alta": {
-            "pp": 45000
-          }
+          "pp": 50000
         },
         "preciosLF": null,
         "groupDiscount": null
@@ -352,27 +328,8 @@
     }
   },
   "circuito-chico-campanario": {
-    "seasonal": true,
-    "temporadas": [
-      {
-        "key": "base",
-        "rangos": [
-          [
-            "2026-01-01",
-            "2026-06-30"
-          ]
-        ]
-      },
-      {
-        "key": "alta",
-        "rangos": [
-          [
-            "2026-07-01",
-            "2027-12-31"
-          ]
-        ]
-      }
-    ],
+    "seasonal": false,
+    "temporadas": null,
     "traslado": false,
     "lagoFrias": false,
     "opciones": {
@@ -385,12 +342,7 @@
           }
         ],
         "precios": {
-          "base": {
-            "pp": 35000
-          },
-          "alta": {
-            "pp": 45000
-          }
+          "pp": 45000
         },
         "preciosLF": null,
         "groupDiscount": null
@@ -423,7 +375,7 @@
         ],
         "precios": {
           "unica": {
-            "pp": 93000
+            "pp": 80000
           }
         },
         "preciosLF": null,
@@ -454,27 +406,8 @@
     }
   },
   "san-martin": {
-    "seasonal": true,
-    "temporadas": [
-      {
-        "key": "base",
-        "rangos": [
-          [
-            "2026-01-01",
-            "2026-06-30"
-          ]
-        ]
-      },
-      {
-        "key": "alta",
-        "rangos": [
-          [
-            "2026-07-01",
-            "2027-12-31"
-          ]
-        ]
-      }
-    ],
+    "seasonal": false,
+    "temporadas": null,
     "traslado": false,
     "lagoFrias": false,
     "opciones": {
@@ -487,12 +420,7 @@
           }
         ],
         "precios": {
-          "base": {
-            "pp": 75000
-          },
-          "alta": {
-            "pp": 110000
-          }
+          "pp": 82000
         },
         "preciosLF": null,
         "groupDiscount": null
@@ -613,27 +541,8 @@
     }
   },
   "tronador": {
-    "seasonal": true,
-    "temporadas": [
-      {
-        "key": "base",
-        "rangos": [
-          [
-            "2026-01-01",
-            "2026-06-30"
-          ]
-        ]
-      },
-      {
-        "key": "alta",
-        "rangos": [
-          [
-            "2026-07-01",
-            "2027-12-31"
-          ]
-        ]
-      }
-    ],
+    "seasonal": false,
+    "temporadas": null,
     "traslado": false,
     "lagoFrias": false,
     "opciones": {
@@ -646,12 +555,7 @@
           }
         ],
         "precios": {
-          "base": {
-            "pp": 67000
-          },
-          "alta": {
-            "pp": 100000
-          }
+          "pp": 75000
         },
         "preciosLF": null,
         "groupDiscount": null
