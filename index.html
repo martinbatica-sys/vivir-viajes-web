@@ -160,6 +160,8 @@
   .card-img{height:190px;position:relative;display:flex;align-items:flex-end;padding:14px;background-size:cover;background-position:center}
   .card-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(15,29,56,.35))}
   .card-img .tag{position:relative;z-index:1;background:rgba(255,255,255,.94);color:var(--navy);font-family:var(--body);font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:.32rem .68rem;border-radius:7px}
+  .cards[data-filter-target] .card-img .tag{cursor:pointer}
+  .cards[data-filter-target] .card-img .tag:hover{background:#fff}
   .card-img .discount{position:absolute;top:12px;right:12px;z-index:1;background:var(--gold);color:var(--navy);font-family:var(--body);font-size:.72rem;font-weight:700;letter-spacing:.02em;padding:.3rem .6rem;border-radius:7px;box-shadow:0 2px 8px rgba(15,29,56,.25)}
   .g-snow{background:linear-gradient(155deg,#bcd6e6,#6f9fc0 55%,#3a6fa0)}
   .g-ski{background:linear-gradient(155deg,#9fd0e6,#3fa9d6 55%,#1e6fa3)}
@@ -484,8 +486,12 @@
         <h2 class="bracketed"><span class="b">[</span> <span data-i18n="cat.navegacion.title">Navegación Lacustre</span> <span class="b">]</span></h2>
         <p class="section-sub" data-i18n="cat.navegacion.sub">Descubri el Nahuel Huapi desde el agua</p>
       </div>
-      <div class="cards">
-      <article class="card">
+      <div class="temporada-filter" data-filter-group="navegacion">
+        <button type="button" class="active" data-filter="todos" data-i18n="filtro.todos">Todos</button>
+        <button type="button" data-filter="todo-el-ano" data-i18n="filtro.todo-el-ano">Todo el año</button>
+      </div>
+      <div class="cards" data-filter-target="navegacion">
+      <article class="card" data-temporada="todo-el-ano">
         <div class="card-img" style="background-image:url('fotos/isla-victoria.jpg');background-size:cover;background-position:center"><span class="tag" data-i18n="filtro.todo-el-ano">Todo el año</span><span class="discount" data-i18n="card.isla-victoria.discount">-10% grupo 4+</span></div>
         <div class="card-body">
           <h3 data-i18n="card.isla-victoria.title">Isla Victoria y Bosque de Arrayanes</h3>
@@ -499,7 +505,7 @@
       <a class="card-link" href="excursion.html?exc=isla-victoria" tabindex="-1" aria-hidden="true"></a>
       </article>
 
-      <article class="card">
+      <article class="card" data-temporada="todo-el-ano">
         <div class="card-img" style="background-image:url('fotos/puerto-blest.jpg');background-size:cover;background-position:center"><span class="tag" data-i18n="filtro.todo-el-ano">Todo el año</span></div>
         <div class="card-body">
           <h3 data-i18n="card.puerto-blest.title">Puerto Blest y Cascada Los Cántaros</h3>
@@ -520,8 +526,12 @@
         <h2 class="bracketed"><span class="b">[</span> <span data-i18n="cat.nieve.title">Nieve &amp; Montaña</span> <span class="b">]</span></h2>
         <p class="section-sub" data-i18n="cat.nieve.sub">Motos de nieve, clases y raquetas en la montaña</p>
       </div>
-      <div class="cards">
-      <article class="card">
+      <div class="temporada-filter" data-filter-group="nieve">
+        <button type="button" class="active" data-filter="todos" data-i18n="filtro.todos">Todos</button>
+        <button type="button" data-filter="invierno" data-i18n="filtro.invierno">Invierno</button>
+      </div>
+      <div class="cards" data-filter-target="nieve">
+      <article class="card" data-temporada="invierno">
         <div class="card-img" style="background-image:url('fotos/eas.jpg')"><span class="tag" data-i18n="filtro.invierno">Invierno</span></div>
         <div class="card-body">
           <h3 data-i18n="card.eas.title">EAS &middot; Ski &amp; Snowboard</h3>
@@ -535,7 +545,7 @@
       <a class="card-link" href="excursion.html?exc=eas" tabindex="-1" aria-hidden="true"></a>
       </article>
 
-      <article class="card">
+      <article class="card" data-temporada="invierno">
         <div class="card-img" style="background-image:url('fotos/la-cueva-02.jpg')"><span class="tag" data-i18n="filtro.invierno">Invierno</span></div>
         <div class="card-body">
           <h3 data-i18n="card.la-cueva-diurna.title">La Cueva &middot; Travesía Diurna</h3>
@@ -548,7 +558,7 @@
       <a class="card-link" href="excursion.html?exc=la-cueva&amp;opt=travesia" tabindex="-1" aria-hidden="true"></a>
       </article>
 
-      <article class="card">
+      <article class="card" data-temporada="invierno">
         <div class="card-img" style="background-image:url('fotos/la-cueva-04.jpg')"><span class="tag" data-i18n="filtro.invierno">Invierno</span></div>
         <div class="card-body">
           <h3 data-i18n="card.la-cueva-afterski.title">La Cueva &middot; After Ski</h3>
@@ -561,7 +571,7 @@
       <a class="card-link" href="excursion.html?exc=la-cueva&amp;opt=afterski" tabindex="-1" aria-hidden="true"></a>
       </article>
 
-      <article class="card">
+      <article class="card" data-temporada="invierno">
         <div class="card-img" style="background-image:url('fotos/la-cueva-06.jpg')"><span class="tag" data-i18n="filtro.invierno">Invierno</span></div>
         <div class="card-body">
           <h3 data-i18n="card.la-cueva-nocturno.title">La Cueva &middot; Nocturno &amp; Cena</h3>
@@ -574,7 +584,7 @@
       <a class="card-link" href="excursion.html?exc=la-cueva&amp;opt=nocturno" tabindex="-1" aria-hidden="true"></a>
       </article>
 
-      <article class="card">
+      <article class="card" data-temporada="invierno">
         <div class="card-img" style="background-image:url('fotos/roca-negra.jpg')"><span class="tag" data-i18n="filtro.invierno">Invierno</span></div>
         <div class="card-body">
           <h3 data-i18n="card.roca-negra.title">Roca Negra &middot; Refugio</h3>
@@ -594,8 +604,13 @@
         <h2 class="bracketed"><span class="b">[</span> <span data-i18n="cat.aventura.title">Aventura</span> <span class="b">]</span></h2>
         <p class="section-sub" data-i18n="cat.aventura.sub">Para los que quieren mover el cuerpo</p>
       </div>
-      <div class="cards">
-      <article class="card">
+      <div class="temporada-filter" data-filter-group="aventura">
+        <button type="button" class="active" data-filter="todos" data-i18n="filtro.todos">Todos</button>
+        <button type="button" data-filter="todo-el-ano" data-i18n="filtro.todo-el-ano">Todo el año</button>
+        <button type="button" data-filter="verano" data-i18n="filtro.verano">Verano</button>
+      </div>
+      <div class="cards" data-filter-target="aventura">
+      <article class="card" data-temporada="todo-el-ano">
         <div class="card-img" style="background-image:url('fotos/san-ramon.jpg')"><span class="tag" data-i18n="filtro.todo-el-ano">Todo el año</span></div>
         <div class="card-body">
           <h3 data-i18n="card.san-ramon.title">Cabalgata La Fragua</h3>
@@ -609,7 +624,7 @@
       <a class="card-link" href="excursion.html?exc=san-ramon" tabindex="-1" aria-hidden="true"></a>
       </article>
 
-      <article class="card">
+      <article class="card" data-temporada="todo-el-ano">
         <div class="card-img" style="background-image:url('fotos/Cabalgata%20Wesley%2008.jpg');background-size:cover;background-position:center"><span class="tag" data-i18n="filtro.todo-el-ano">Todo el año</span></div>
         <div class="card-body">
           <h3 data-i18n="card.cabalgata-wesley.title">Cabalgata Wesley</h3>
@@ -623,7 +638,7 @@
       <a class="card-link" href="excursion.html?exc=cabalgata-wesley" tabindex="-1" aria-hidden="true"></a>
       </article>
 
-      <article class="card">
+      <article class="card" data-temporada="verano">
         <div class="card-img" style="background-image:url('fotos/Kayak%203.jpeg');background-size:cover;background-position:center"><span class="tag" data-i18n="filtro.verano">Verano</span></div>
         <div class="card-body">
           <h3 data-i18n="card.kayak.title">Kayak</h3>
@@ -637,7 +652,7 @@
       <a class="card-link" href="excursion.html?exc=kayak" tabindex="-1" aria-hidden="true"></a>
       </article>
 
-      <article class="card">
+      <article class="card" data-temporada="verano">
         <div class="card-img" style="background-image:url('fotos/Raftin%2001.jpg');background-size:cover;background-position:center"><span class="tag" data-i18n="filtro.verano">Verano</span></div>
         <div class="card-body">
           <h3 data-i18n="card.rafting-frontera.title">Rafting Frontera</h3>
@@ -651,7 +666,7 @@
       <a class="card-link" href="excursion.html?exc=rafting-frontera" tabindex="-1" aria-hidden="true"></a>
       </article>
 
-      <article class="card">
+      <article class="card" data-temporada="verano">
         <div class="card-img" style="background-image:url('fotos/Rafting%2002.jpg');background-size:cover;background-position:center"><span class="tag" data-i18n="filtro.verano">Verano</span></div>
         <div class="card-body">
           <h3 data-i18n="card.rafting-villegas.title">Rafting Villegas</h3>
@@ -969,6 +984,22 @@ document.querySelectorAll(".temporada-filter").forEach(group => {
         card.hidden = f !== "todos" && card.dataset.temporada !== f;
       });
     });
+  });
+});
+
+document.querySelectorAll('.cards[data-filter-target] .card-img .tag').forEach(tag => {
+  tag.addEventListener("click", e => {
+    const card = tag.closest(".card");
+    const cardsWrap = tag.closest(".cards[data-filter-target]");
+    const temporada = card && card.dataset.temporada;
+    if (!cardsWrap || !temporada) return;
+    const group = document.querySelector(`.temporada-filter[data-filter-group="${cardsWrap.dataset.filterTarget}"]`);
+    const btn = group && group.querySelector(`button[data-filter="${temporada}"]`);
+    if (!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+    btn.click();
+    group.scrollIntoView({behavior:"smooth", block:"start"});
   });
 });
 
