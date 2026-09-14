@@ -111,6 +111,7 @@
     <input type="date" id="f-to" title="Hasta">
     <button type="button" id="f-clear-dates">Limpiar fechas</button>
     <button type="button" id="refresh-btn">↻ Actualizar</button>
+    <button type="button" id="export-btn">⬇ Descargar planilla</button>
   </div>
 
   <div class="stats" id="stats"></div>
@@ -150,6 +151,7 @@
   try { ROLE = sessionStorage.getItem('vv-admin-role') || 'admin'; } catch (e) {}
 
   let allLeads = [];
+  let filteredLeads = [];
 
   function fmtDate(iso) {
     if (!iso) return '-';
@@ -259,6 +261,7 @@
       }
       return true;
     });
+    filteredLeads = leads;
 
     const stats = document.getElementById('stats');
     const counts = { nuevo: 0, contactado: 0, cotizado: 0, ganado: 0, perdido: 0 };
@@ -353,6 +356,45 @@
     }
   }
 
+  function csvCell(v) {
+    const s = v == null ? '' : String(v);
+    return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+  }
+
+  function exportCsv() {
+    const STATUS_LABELS = { nuevo: 'Nuevo', contactado: 'Contactado', cotizado: 'Cotizado', ganado: 'Ganado', perdido: 'Perdido' };
+    const headers = ['Fecha', 'Canal', 'Excursión', 'Opción', 'Fecha del paseo', 'Cliente', 'DNI', 'Teléfono', 'Email', 'Hospedaje', 'Pasajeros', 'Total', 'Estado', 'Origen', 'Notas'];
+    const rows = filteredLeads.map(l => [
+      l.created_at ? new Date(l.created_at).toLocaleString('es-AR') : '',
+      l.channel === 'mercadopago' ? 'Pago' : 'Consulta',
+      l.excursion || '',
+      l.opcion || '',
+      l.fecha || '',
+      l.nombre || '',
+      l.dni || '',
+      l.telefono || '',
+      l.email || '',
+      l.hospedaje || '',
+      l.pasajeros || '',
+      l.total || '',
+      STATUS_LABELS[l.status] || l.status || '',
+      originText(l).replace(/<[^>]+>/g, ''),
+      l.notes || '',
+    ]);
+    const csv = '﻿' + [headers, ...rows].map(r => r.map(csvCell).join(',')).join('\r\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const stamp = new Date().toISOString().slice(0, 10);
+    a.href = url;
+    a.download = `vivir-viajes-reservas-${stamp}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  document.getElementById('export-btn').addEventListener('click', exportCsv);
   document.getElementById('f-status').addEventListener('change', render);
   document.getElementById('f-channel').addEventListener('change', render);
   document.getElementById('f-search').addEventListener('input', render);
