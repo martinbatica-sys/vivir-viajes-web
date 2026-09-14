@@ -496,7 +496,7 @@ const EXC = {
    relacionadas:["roca-negra","eas"],
    incluye:["Paseo en moto de nieve por el Cerro Catedral","Charla tecnica de manejo","After Ski y Nocturno: incluyen traslados y experiencia gastronomica"],
    notas:["Conduccion exclusiva para mayores de 18 (o 17 con registro).","Cascos incluidos. No incluye ropa de nieve.","La Travesia Diurna no incluye traslados al cerro.","Reservas con mínimo 24 hs de anticipación."],
-   seasonal:false, traslado:false,
+   seasonal:false, traslado:false, cotizar:true,
    i18n:{
      en:{
        nombre:"La Cueva · Snowmobiles", subt:"Cerro Catedral · Bariloche", tag:"Snowmobiles",
@@ -869,7 +869,7 @@ const EXC = {
    detalle:"Los pasajeros son recogidos y trasladados a la base del Cerro López. Desde allí iniciamos el ascenso en vehículos 4x4, por un escarpado camino de montaña entre bosques de coihues centenarios y altas lengas. Las curvas del camino son miradores naturales hacia la inmensidad del Parque Nacional Nahuel Huapi, con sus lagos, islas y montañas.\n\nDespués de las primeras fotos, iniciamos la caminata. Nos equipamos con raquetas de nieve y el guía explica el funcionamiento y la técnica para caminar con ellas — un instrumento que se ajusta al calzado y permite transitar por zonas nevadas sin hundirse. Durante el recorrido (aproximadamente una hora) el guía comparte la historia del lugar mientras disfrutamos de la belleza natural que esta montaña tiene para ofrecer.\n\nFinalizada la caminata, una cálida bienvenida nos espera en Roca Negra: fondue de queso o de chocolate, según el horario elegido. Allí en lo alto, con una impresionante vista de la región, compartimos el momento en torno a la fondue. El descenso es nuevamente en los vehículos 4x4, hasta la base del cerro, donde finaliza la excursión.",
    incluye:["Traslado ida y vuelta desde y hacia el centro","Ascenso y descenso en Land Rover 4x4","Caminata guiada con raquetas","Fondue a elección — 1 por reserva (queso o chocolate)"],
    notas:["Días de salida: lunes a sábado. Domingo cerrado.","Apto para toda la familia: dificultad baja.","Niños de 0-3 años sin costo.","Bebidas frías no incluidas.","Pick up en Galería del Sol / NH Edelweiss (centro).","Reservas con mínimo 24 hs de anticipación."],
-   seasonal:true, traslado:false, closedDow:[0], horario:"10:00 hs",
+   seasonal:true, traslado:false, closedDow:[0], horario:"10:00 hs", cotizar:true,
    leyenda:"Mayo y junio: tarifa base · Julio y agosto: temporada alta",
    temporadas:[
      {key:"mayjun",nombre:"Mayo / Junio",cls:"media",rangos:[["05-01","06-30"]]},
@@ -1453,10 +1453,11 @@ const EXC = {
    nombre:"Rafting Frontera", subt:"Río Manso · Aguas blancas hasta el límite con Chile", tag:"Rafting",
    desc:"Dos horas de navegación intensa en aguas blancas por el río Manso, hasta el límite con Chile. Almuerzo incluido.",
    relacionadas:["rafting-villegas","san-ramon"],
+   startDate:"2026-10-01",
    detalle:"El traslado sale desde tu lugar de hospedaje o punto de encuentro en Bariloche, rumbo sur por la Ruta 40 hacia El Bolsón. Nos desviamos hacia el interior del valle inferior del río Manso hasta llegar a Patagonia Campestre, la base de operaciones de Punto Límite.\n\nAllí nos equipamos con traje de neoprene, casco, chaqueta seca y chaleco salvavidas, y una charla técnica nos prepara para lo que viene: dos horas de navegación intensa en aguas blancas, con rápidos y remansos en un entorno natural realmente maravilloso. El recorrido avanza hasta el límite con Chile, donde concluye la navegación.\n\nDe vuelta en la base, nos espera un almuerzo completo. Después, el tiempo libre es para disfrutar del intenso verde de la selva valdiviana o simplemente descansar en la ribera del río antes de emprender el regreso a Bariloche.",
    incluye:["Traslado desde hotel (opcional — ver información importante)","Guías en español, portugués e inglés","Equipamiento completo: traje de neoprene, casco, chaleco, remo y chaqueta seca","Kayak de seguridad","Desayuno y almuerzo","Seguros y cobertura médica"],
    notas:["Duración: Día completo.","Período: Octubre a Abril.","Pick up: 8 hs desde tu lugar de hospedaje o punto de encuentro.","Drop off: 18 hs aproximadamente.","Llevar malla, toalla, zapatillas de recambio y DNI o pasaporte.","La excursión no se suspende por lluvia.","Edad mínima: 14 años. Menores de edad deben estar acompañados por un adulto responsable.","Mujeres embarazadas o personas con cardiopatías: consultar antes de reservar.","Si no se contrata el traslado incluido, se debe abonar el traslado de recupero desde el punto de finalización hasta el inicio de la actividad.","Servicio operado por Tour Operador habilitado (Registro Nacional de Turismo).","Reservas con mínimo 24 hs de anticipación."],
-   seasonal:false, traslado:false, horario:"08:00 hs",
+   seasonal:false, traslado:false, horario:"08:00 hs", cotizar:true,
    i18n:{
      en:{
        nombre:"Rafting Frontera", subt:"Manso River · Whitewater to the Chilean border", tag:"Rafting",
@@ -1499,7 +1500,7 @@ const EXC = {
    detalle:"El traslado parte desde los puntos de encuentro en Bariloche — Puerta Galería Paseo de la Catedral (Palacios 156) y Puerta Hotel NH Edelweiss — y salimos por la Ruta 40 hacia el sur.\n\nEl camino atraviesa los lagos Gutiérrez, Mascardi y Guillelmo hasta llegar al punto de embarque en la confluencia de los ríos Villegas y Manso. Allí nos equipamos, los guías dan una breve charla de seguridad y comenzamos el descenso.\n\nAl finalizar la navegación, nos trasladamos al camping Puerto Manso para cambiarnos y disfrutar de una merienda antes de emprender el regreso a Bariloche.",
    incluye:["Traslado desde los puntos de encuentro","Guías en español, portugués e inglés","Equipamiento: casco, chaleco y remo","Merienda","Seguros y cobertura médica"],
    notas:["Duración: Medio día.","Período: Octubre a Abril.","Salida mañana — Pick up: 9 hs · Drop off: 14 hs aproximadamente.","Salida tarde — Pick up: 13 hs · Drop off: 18 hs aproximadamente.","Puntos de encuentro: Puerta Galería Paseo de la Catedral (Palacios 156) / Puerta Hotel NH Edelweiss.","Llevar malla, toalla y zapatillas de recambio.","La excursión no se suspende por lluvia.","Menores de edad deben estar acompañados por un adulto responsable.","Mujeres embarazadas o personas con cardiopatías: consultar antes de reservar.","Servicio operado por Tour Operador habilitado (Registro Nacional de Turismo).","Reservas con mínimo 24 hs de anticipación."],
-   seasonal:false, traslado:false, horario:"09:00 hs",
+   seasonal:false, traslado:false, horario:"09:00 hs", cotizar:true,
    i18n:{
      en:{
        nombre:"Rafting Villegas", subt:"Villegas & Manso rivers confluence · Half day", tag:"Rafting",
@@ -1943,14 +1944,14 @@ const UI = {
     "locale":"es-AR", "sin-costo":"Sin costo", "cu-suffix":" c/u",
     "badge.elegi-fecha":"Elegi una fecha para ver el precio", "badge.fuera-temporada":"Fuera de temporada — consultanos", "badge.temporada":"Temporada ", "badge.disponible-desde":"Disponible a partir del ",
     "pb.subtotal":"Subtotal", "pb.descuento":"Descuento grupo familiar (", "pb.pax-suffix":"+ pax)",
-    "hint.clases-arrancan":"Las clases arrancan el ", "hint.elegi-posterior":". Elegí una fecha posterior.",
+    "hint.clases-arrancan":"Disponible a partir del ", "hint.elegi-posterior":". Elegí una fecha posterior.",
     "hint.fuera-temporada":"Esa fecha está fuera de temporada. Escribinos para ver disponibilidad.",
     "hint.agrega-pasajero":"Agregá al menos un pasajero.", "hint.elegi-pickup":"Seleccioná tu punto de pick up.",
     "hint.completa-datos":"Completá tus datos de contacto para reservar.", "hint.acepta-tc":"Aceptá los términos y condiciones para continuar.",
     "hint.elegi-fecha-cotizar":"Elegi una fecha para pedir tu cotizacion.", "hint.agrega-pasajero-cotizar":"Agrega al menos un pasajero.",
     "hint.whatsapp-instant":"Te pasamos el precio al instante por WhatsApp.",
     "btn.pagar-reservar":"Pagar y reservar", "btn.consultar-whatsapp":"Consultar por WhatsApp",
-    "btn.pedir-cotizacion":"Pedir cotizacion", "btn.pedir-cotizacion-wa":"Pedir cotizacion por WhatsApp",
+    "btn.pedir-cotizacion":"Consultar disponibilidad", "btn.pedir-cotizacion-wa":"Consultar disponibilidad",
     "btn.redirigiendo":"Redirigiendo a Mercado Pago...", "total.a-cotizar":"A cotizar",
     "err.pago":"Hubo un problema iniciando el pago:\n\n", "err.pago-generico":"No se pudo iniciar el pago",
     "wa.cotizacion-header":"Hola Vivir Viajes! Quiero una cotización para:", "wa.reserva-header":"Hola Vivir Viajes! Quiero reservar:",
@@ -2019,14 +2020,14 @@ const UI = {
     "locale":"en-US", "sin-costo":"Free", "cu-suffix":" each",
     "badge.elegi-fecha":"Choose a date to see the price", "badge.fuera-temporada":"Off season — get in touch", "badge.temporada":"Season: ", "badge.disponible-desde":"Available from ",
     "pb.subtotal":"Subtotal", "pb.descuento":"Family/group discount (", "pb.pax-suffix":"+ pax)",
-    "hint.clases-arrancan":"Classes start on ", "hint.elegi-posterior":". Choose a later date.",
+    "hint.clases-arrancan":"Available from ", "hint.elegi-posterior":". Choose a later date.",
     "hint.fuera-temporada":"That date is off season. Message us to check availability.",
     "hint.agrega-pasajero":"Add at least one traveler.", "hint.elegi-pickup":"Select your pick-up point.",
     "hint.completa-datos":"Fill in your contact details to book.", "hint.acepta-tc":"Accept the terms and conditions to continue.",
     "hint.elegi-fecha-cotizar":"Choose a date to request your quote.", "hint.agrega-pasajero-cotizar":"Add at least one traveler.",
     "hint.whatsapp-instant":"We'll send you the price instantly on WhatsApp.",
     "btn.pagar-reservar":"Book now", "btn.consultar-whatsapp":"Ask on WhatsApp",
-    "btn.pedir-cotizacion":"Request quote", "btn.pedir-cotizacion-wa":"Request quote on WhatsApp",
+    "btn.pedir-cotizacion":"Check availability", "btn.pedir-cotizacion-wa":"Check availability",
     "btn.redirigiendo":"Redirecting to Mercado Pago...", "total.a-cotizar":"Quote on request",
     "err.pago":"There was a problem starting the payment:\n\n", "err.pago-generico":"Could not start the payment",
     "wa.cotizacion-header":"Hi Vivir Viajes! I'd like a quote for:", "wa.reserva-header":"Hi Vivir Viajes! I'd like to book:",
@@ -2095,14 +2096,14 @@ const UI = {
     "locale":"pt-BR", "sin-costo":"Sem custo", "cu-suffix":" cada",
     "badge.elegi-fecha":"Escolha uma data para ver o preço", "badge.fuera-temporada":"Fora de temporada — fale com a gente", "badge.temporada":"Temporada ", "badge.disponible-desde":"Disponível a partir de ",
     "pb.subtotal":"Subtotal", "pb.descuento":"Desconto grupo/família (", "pb.pax-suffix":"+ pax)",
-    "hint.clases-arrancan":"As aulas começam em ", "hint.elegi-posterior":". Escolha uma data posterior.",
+    "hint.clases-arrancan":"Disponível a partir de ", "hint.elegi-posterior":". Escolha uma data posterior.",
     "hint.fuera-temporada":"Essa data está fora de temporada. Fale com a gente para checar disponibilidade.",
     "hint.agrega-pasajero":"Adicione pelo menos um passageiro.", "hint.elegi-pickup":"Selecione seu ponto de embarque.",
     "hint.completa-datos":"Preencha seus dados de contato para reservar.", "hint.acepta-tc":"Aceite os termos e condições para continuar.",
     "hint.elegi-fecha-cotizar":"Escolha uma data para pedir seu orçamento.", "hint.agrega-pasajero-cotizar":"Adicione pelo menos um passageiro.",
     "hint.whatsapp-instant":"Enviamos o preço na hora pelo WhatsApp.",
     "btn.pagar-reservar":"Pagar e reservar", "btn.consultar-whatsapp":"Consultar no WhatsApp",
-    "btn.pedir-cotizacion":"Pedir orçamento", "btn.pedir-cotizacion-wa":"Pedir orçamento pelo WhatsApp",
+    "btn.pedir-cotizacion":"Consultar disponibilidade", "btn.pedir-cotizacion-wa":"Consultar disponibilidade",
     "btn.redirigiendo":"Redirecionando para o Mercado Pago...", "total.a-cotizar":"A orçar",
     "err.pago":"Houve um problema ao iniciar o pagamento:\n\n", "err.pago-generico":"Não foi possível iniciar o pagamento",
     "wa.cotizacion-header":"Olá Vivir Viajes! Quero um orçamento para:", "wa.reserva-header":"Olá Vivir Viajes! Quero reservar:",
@@ -2656,6 +2657,7 @@ function render(){
   if(cotizar){
     totalEl.textContent = pax>0 ? t("total.a-cotizar") : "—";
     if(noDate){ hint.textContent=t("hint.elegi-fecha-cotizar"); go.disabled=true; go.textContent=t("btn.pedir-cotizacion"); }
+    else if(beforeStart){ hint.textContent=t("hint.clases-arrancan")+e.startDate.split("-").reverse().join("/")+t("hint.elegi-posterior"); go.disabled=true; go.textContent=t("btn.pedir-cotizacion"); }
     else if(pax<=0){ hint.textContent=t("hint.agrega-pasajero-cotizar"); go.disabled=true; go.textContent=t("btn.pedir-cotizacion"); }
     else { hint.textContent=t("hint.whatsapp-instant"); go.disabled=false; go.textContent=t("btn.pedir-cotizacion-wa"); }
     return;
