@@ -166,9 +166,16 @@
     return '$' + Number(n).toLocaleString('es-AR');
   }
 
-  const CHANNEL_LABELS = { mercadopago: { cls: 'mercadopago', label: 'Pago' }, receptivo: { cls: 'receptivo', label: 'Agencia' } };
-  function channelInfo(channel) {
-    return CHANNEL_LABELS[channel] || { cls: 'whatsapp', label: 'Consulta' };
+  // Los leads de Receptivo se identifican por excursion, no por channel: la
+  // columna channel en Supabase solo acepta 'whatsapp' / 'mercadopago', asi
+  // que estos leads viajan como channel:'whatsapp' con esta excursion fija.
+  function isReceptivo(lead) {
+    return lead.excursion === 'Receptivo & Agencias';
+  }
+  function channelInfo(lead) {
+    if (isReceptivo(lead)) return { cls: 'receptivo', label: 'Agencia' };
+    if (lead.channel === 'mercadopago') return { cls: 'mercadopago', label: 'Pago' };
+    return { cls: 'whatsapp', label: 'Consulta' };
   }
 
   function originText(lead) {
@@ -255,7 +262,8 @@
 
     let leads = allLeads.filter(l => {
       if (statusF && l.status !== statusF) return false;
-      if (channelF && l.channel !== channelF) return false;
+      if (channelF === 'receptivo' && !isReceptivo(l)) return false;
+      if (channelF && channelF !== 'receptivo' && (l.channel !== channelF || isReceptivo(l))) return false;
       if (searchF) {
         const hay = [l.nombre, l.email, l.excursion, l.telefono].filter(Boolean).join(' ').toLowerCase();
         if (!hay.includes(searchF)) return false;
@@ -299,7 +307,7 @@
     tbody.innerHTML = leads.map(l => `
       <tr data-id="${l.id}">
         <td>${fmtDate(l.created_at)}</td>
-        <td><span class="badge ${channelInfo(l.channel).cls}">${channelInfo(l.channel).label}</span></td>
+        <td><span class="badge ${channelInfo(l).cls}">${channelInfo(l).label}</span></td>
         <td>${l.excursion || '-'}${l.opcion ? '<br><span class="muted">' + l.opcion + '</span>' : ''}</td>
         <td>${l.fecha || '-'}</td>
         <td>${l.nombre || '<span class="muted">Sin nombre</span>'}${l.dni ? '<br><span class="muted">DNI ' + l.dni + '</span>' : ''}</td>
@@ -373,7 +381,7 @@
     const headers = ['Fecha', 'Canal', 'Excursión', 'Opción', 'Fecha del paseo', 'Cliente', 'DNI', 'Teléfono', 'Email', 'Hospedaje', 'Pasajeros', 'Total', 'Estado', 'Origen', 'Notas'];
     const rows = filteredLeads.map(l => [
       l.created_at ? new Date(l.created_at).toLocaleString('es-AR') : '',
-      channelInfo(l.channel).label,
+      channelInfo(l).label,
       l.excursion || '',
       l.opcion || '',
       l.fecha || '',

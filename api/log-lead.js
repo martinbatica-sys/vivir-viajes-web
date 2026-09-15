@@ -52,7 +52,10 @@ export default async function handler(req, res) {
     // resto de los leads, asi que ese "aviso instantaneo" no existe para
     // ellas — sin este mail, la unica forma de enterarse seria revisar el
     // mini-CRM a mano.
-    if (b.channel === 'receptivo') {
+    // Nota: se identifican por excursion (no por channel) porque la columna
+    // "channel" en Supabase solo acepta los valores ya existentes
+    // ('whatsapp' / 'mercadopago') — un valor nuevo ahi rompe el insert.
+    if (b.excursion === 'Receptivo & Agencias') {
       try {
         const body = [
           '🤝 Nueva consulta de agencia - Vivir Viajes',
