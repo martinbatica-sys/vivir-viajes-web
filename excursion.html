@@ -1638,7 +1638,7 @@ const EXC = {
    teaserPos:"center bottom",
    detalle:"Zarpamos desde Puerto Pañuelo, en la Península de Llao Llao, para navegar durante una hora rumbo a la Península de Quetrihue — el reino del Bosque de Arrayanes. El arrayán (Quetrihue, en lengua mapuche) es en cualquier otro lugar un arbusto; acá, gracias a un fenómeno único en el mundo, se yergue como un árbol de corteza fría y anaranjada, formando un bosque que parece sacado de un cuento: flores blancas, troncos que brillan al sol y un silencio que invita a caminar despacio.\n\nDesde ahí ponemos proa hacia Puerto Anchorena, en la Isla Victoria, donde la flora autóctona todavía manda. La caminata llega hasta Playa del Toro, una playa de arena volcánica donde se conservan pinturas rupestres que cuentan una historia mucho más antigua que cualquier otra cosa que veas en el viaje. Durante todo el recorrido, guías del Parque Nacional acompañan con información precisa en cada etapa.",
    notas_gen:["Salidas de lunes a domingo.","Horario: 14:00 a 18:30 hs.","Punto de embarque: Puerto Pañuelo, Península Llao Llao.","Reservas con mínimo 48 hs de anticipación."],
-   seasonal:false, traslado:true, horario:"14:00 hs",
+   seasonal:false, traslado:true, horario:"14:00 hs", minAdvanceHours:48,
    i18n:{
      en:{
        nombre:"Victoria Island & Arrayanes Forest", subt:"Sailing Lake Nahuel Huapi · 14:00 to 18:30", tag:"Boat trip",
@@ -1728,7 +1728,7 @@ const EXC = {
    relacionadas:["isla-victoria","tronador"],
    detalle:"Salimos de Puerto Pañuelo, en la Península de Llao Llao, y la primera parada es el islote Centinela: ahí descansan los restos del Perito Francisco Pascasio Moreno, el hombre que le dio forma a los Parques Nacionales argentinos. Un lugar pequeño, pero con peso propio.\n\nSeguimos navegando hacia la Cascada de los Cántaros, cruzando la selva valdiviana — densa, húmeda, distinta a todo lo que se ve en el resto de Bariloche — hasta el Lago Cántaros, donde nace la cascada y vive un alerce de más de 1.500 años. Cinco minutos más de navegación y llegamos a Puerto Blest, un rincón que maravilla a quien lo pisa por primera vez. Desde ahí, quien quiera puede sumar la visita a la bahía y al Lago Frías, con sus aguas de un verde glaciar que bajan directo del Cerro Tronador, la frontera natural entre Argentina y Chile.",
    notas_gen:["Salidas de lunes a domingo.","Horario: 10:00 a 17:00 hs.","Punto de embarque: Puerto Pañuelo, Península Llao Llao.","Reservas con mínimo 48 hs de anticipación."],
-   seasonal:false, traslado:true, lagoFrias:true, horario:"10:00 hs",
+   seasonal:false, traslado:true, lagoFrias:true, horario:"10:00 hs", minAdvanceHours:48,
    i18n:{
      en:{
        nombre:"Puerto Blest & Los Cántaros Waterfall", subt:"Sailing Lake Nahuel Huapi · 10:00 to 17:00", tag:"Boat trip",
@@ -1882,7 +1882,7 @@ const UI = {
     "form.tc-label":"He leído y estoy de acuerdo con los <span class=\"tc-link\" id=\"tc-link\">términos y condiciones</span> de la web",
     "form.reservar":"Reservar", "form.mp-note":"Pago 100% seguro con Mercado Pago",
     "footer.text":"© 2026 Vivir Viajes · Bariloche, Patagonia",
-    "modal24.title":"Reserva con menos de 24 hs", "modal24.body":"Para reservas de último momento comunicate directamente con nosotros por WhatsApp y te respondemos al instante.", "modal24.button":"Escribir por WhatsApp", "modal24.close":"Elegir otra fecha",
+    "modal24.title":"Reserva con menos de 24 hs", "modal24.title-48":"Reserva con menos de 48 hs", "modal24.body":"Para reservas de último momento comunicate directamente con nosotros por WhatsApp y te respondemos al instante.", "modal24.button":"Escribir por WhatsApp", "modal24.close":"Elegir otra fecha",
     "carousel.prev":"Anterior", "carousel.next":"Siguiente",
     "cal.dow0":"Do","cal.dow1":"Lu","cal.dow2":"Ma","cal.dow3":"Mi","cal.dow4":"Ju","cal.dow5":"Vi","cal.dow6":"Sa",
     "tc.title":"Términos y condiciones", "tc.close-aria":"Cerrar",
@@ -1939,7 +1939,7 @@ const UI = {
     "wa.cotizacion-header":"Hola Vivir Viajes! Quiero una cotización para:", "wa.reserva-header":"Hola Vivir Viajes! Quiero reservar:",
     "wa.opcion":"Opción: ", "wa.pickup":"Pick up: ", "wa.lagofrias":"Extensión Lago Frías: ", "wa.si":"Sí", "wa.no":"No",
     "wa.fecha":"Fecha: ", "wa.pasajeros":"Pasajeros: ", "wa.descuento":"Descuento grupo familiar: -", "wa.total":"Total estimado: ",
-    "wa.24hs":"Hola Vivir Viajes! Quiero reservar ", "wa.24hs-suffix":" para mañana. ¿Hay disponibilidad?",
+    "wa.24hs":"Hola Vivir Viajes! Quiero reservar ", "wa.24hs-fecha":" el ", "wa.24hs-suffix":". ¿Hay disponibilidad?",
     "title.reservar":"Reservar ", "title.suffix":" · Vivir Viajes", "date.na":"(a definir)",
   },
   en: {
@@ -1958,7 +1958,7 @@ const UI = {
     "form.tc-label":"I have read and agree to the <span class=\"tc-link\" id=\"tc-link\">terms and conditions</span> of the site",
     "form.reservar":"Book now", "form.mp-note":"100% secure payment with Mercado Pago",
     "footer.text":"© 2026 Vivir Viajes · Bariloche, Patagonia",
-    "modal24.title":"Booking with less than 24 hs notice", "modal24.body":"For last-minute bookings, reach out to us directly on WhatsApp and we'll get back to you right away.", "modal24.button":"Message us on WhatsApp", "modal24.close":"Choose another date",
+    "modal24.title":"Booking with less than 24 hs notice", "modal24.title-48":"Booking with less than 48 hs notice", "modal24.body":"For last-minute bookings, reach out to us directly on WhatsApp and we'll get back to you right away.", "modal24.button":"Message us on WhatsApp", "modal24.close":"Choose another date",
     "carousel.prev":"Previous", "carousel.next":"Next",
     "cal.dow0":"Su","cal.dow1":"Mo","cal.dow2":"Tu","cal.dow3":"We","cal.dow4":"Th","cal.dow5":"Fr","cal.dow6":"Sa",
     "tc.title":"Terms and conditions", "tc.close-aria":"Close",
@@ -2015,7 +2015,7 @@ const UI = {
     "wa.cotizacion-header":"Hi Vivir Viajes! I'd like a quote for:", "wa.reserva-header":"Hi Vivir Viajes! I'd like to book:",
     "wa.opcion":"Option: ", "wa.pickup":"Pick-up: ", "wa.lagofrias":"Lake Frías extension: ", "wa.si":"Yes", "wa.no":"No",
     "wa.fecha":"Date: ", "wa.pasajeros":"Travelers: ", "wa.descuento":"Family/group discount: -", "wa.total":"Estimated total: ",
-    "wa.24hs":"Hi Vivir Viajes! I'd like to book ", "wa.24hs-suffix":" for tomorrow. Is it available?",
+    "wa.24hs":"Hi Vivir Viajes! I'd like to book ", "wa.24hs-fecha":" on ", "wa.24hs-suffix":". Is it available?",
     "title.reservar":"Book ", "title.suffix":" · Vivir Viajes", "date.na":"(to be defined)",
   },
   pt: {
@@ -2034,7 +2034,7 @@ const UI = {
     "form.tc-label":"Li e concordo com os <span class=\"tc-link\" id=\"tc-link\">termos e condições</span> do site",
     "form.reservar":"Reservar", "form.mp-note":"Pagamento 100% seguro com Mercado Pago",
     "footer.text":"© 2026 Vivir Viajes · Bariloche, Patagônia",
-    "modal24.title":"Reserva com menos de 24 hs", "modal24.body":"Para reservas de última hora, fale diretamente com a gente pelo WhatsApp e respondemos na hora.", "modal24.button":"Falar no WhatsApp", "modal24.close":"Escolher outra data",
+    "modal24.title":"Reserva com menos de 24 hs", "modal24.title-48":"Reserva com menos de 48 hs", "modal24.body":"Para reservas de última hora, fale diretamente com a gente pelo WhatsApp e respondemos na hora.", "modal24.button":"Falar no WhatsApp", "modal24.close":"Escolher outra data",
     "carousel.prev":"Anterior", "carousel.next":"Próximo",
     "cal.dow0":"Do","cal.dow1":"2ª","cal.dow2":"3ª","cal.dow3":"4ª","cal.dow4":"5ª","cal.dow5":"6ª","cal.dow6":"Sá",
     "tc.title":"Termos e condições", "tc.close-aria":"Fechar",
@@ -2091,7 +2091,7 @@ const UI = {
     "wa.cotizacion-header":"Olá Vivir Viajes! Quero um orçamento para:", "wa.reserva-header":"Olá Vivir Viajes! Quero reservar:",
     "wa.opcion":"Opção: ", "wa.pickup":"Embarque: ", "wa.lagofrias":"Extensão Lago Frías: ", "wa.si":"Sim", "wa.no":"Não",
     "wa.fecha":"Data: ", "wa.pasajeros":"Passageiros: ", "wa.descuento":"Desconto grupo/família: -", "wa.total":"Total estimado: ",
-    "wa.24hs":"Olá Vivir Viajes! Quero reservar ", "wa.24hs-suffix":" para amanhã. Tem disponibilidade?",
+    "wa.24hs":"Olá Vivir Viajes! Quero reservar ", "wa.24hs-fecha":" no dia ", "wa.24hs-suffix":". Tem disponibilidade?",
     "title.reservar":"Reservar ", "title.suffix":" · Vivir Viajes", "date.na":"(a definir)",
   },
 };
@@ -2283,16 +2283,16 @@ function renderCal(){
   const now = new Date();
   const todayStr = now.toISOString().slice(0,10);
 
-  // "tomorrow" = today + 1 day
-  const tomorrowD = new Date(now); tomorrowD.setDate(tomorrowD.getDate()+1);
-  const tomorrowStr = tomorrowD.toISOString().slice(0,10);
-
-  // Minimum selectable without popup: today + 2 days
-  const minD = new Date(now); minD.setDate(minD.getDate()+2);
-  const minStr = minD.toISOString().slice(0,10);
-
   // startDate restriction (e.g. EAS)
   const startStr = exc.startDate || null;
+
+  // Minimum notice: compare "now" against the excursion's actual departure
+  // time on each day, not just the calendar date — a departure at 10hs needs
+  // to block more of "the day after tomorrow" than one at 18hs.
+  const minAdvanceHours = exc.minAdvanceHours || 24;
+  const horarioMatch = /(\d{1,2}):(\d{2})/.exec(exc.horario || "");
+  const depHour = horarioMatch ? parseInt(horarioMatch[1],10) : 9;
+  const depMin = horarioMatch ? parseInt(horarioMatch[2],10) : 0;
 
   const first = new Date(calYear, calMonth, 1);
   const last  = new Date(calYear, calMonth+1, 0);
@@ -2315,17 +2315,18 @@ function renderCal(){
     btn.textContent = d;
 
     const isPast = dateStr <= todayStr;
-    const isTomorrow = dateStr === tomorrowStr;
+    const departureDT = new Date(calYear, calMonth, d, depHour, depMin, 0);
+    const insideAdvanceWindow = !isPast && (departureDT - now) / 3600000 < minAdvanceHours;
     const beforeStart = startStr && dateStr < startStr;
     const isClosedDow = exc.closedDow && exc.closedDow.includes(new Date(calYear, calMonth, d).getDay());
     const isNotAllowed = exc.allowedDates && !exc.allowedDates.includes(dateStr);
 
     if(isPast || beforeStart || isClosedDow || isNotAllowed){
       btn.disabled = true;
-    } else if(isTomorrow){
+    } else if(insideAdvanceWindow){
       btn.classList.add("cal-tomorrow");
       if(dateStr === state.fecha) btn.classList.add("cal-selected");
-      btn.onclick = () => { showModal24hs(); };
+      btn.onclick = () => { showModal24hs(dateStr, minAdvanceHours); };
     } else {
       if(dateStr === state.fecha) btn.classList.add("cal-selected");
       btn.onclick = () => {
@@ -2340,10 +2341,15 @@ function renderCal(){
   }
 }
 
-function showModal24hs(){
+function showModal24hs(dateStr, minAdvanceHours){
   closeCal();
-  const msg = encodeURIComponent(t("wa.24hs")+trE("nombre")+t("wa.24hs-suffix"));
+  const fechaTxt = dateStr ? new Date(dateStr+"T12:00:00").toLocaleDateString(t("locale"),{day:"numeric",month:"long"}) : "";
+  const msg = encodeURIComponent(t("wa.24hs")+trE("nombre")+(fechaTxt?t("wa.24hs-fecha")+fechaTxt:"")+t("wa.24hs-suffix"));
   document.getElementById("modal-wa").href = "https://wa.me/"+WHATSAPP+"?text="+msg;
+  const titleKey = minAdvanceHours===48 ? "modal24.title-48" : "modal24.title";
+  const titleEl = document.querySelector("#modal-24hs .modal-title");
+  titleEl.setAttribute("data-i18n", titleKey);
+  titleEl.textContent = t(titleKey);
   document.getElementById("modal-24hs").classList.add("show");
 }
 
