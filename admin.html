@@ -66,6 +66,8 @@
   .badge.status.cotizado{background:#FBEEDD;color:var(--gold-dark)}
   .badge.status.ganado{background:#E6F4EC;color:#2E7D4F}
   .badge.status.perdido{background:#FDE9E7;color:#B5462E}
+  .badge.abandonado{background:#FFF1DE;color:#B5622E}
+  .abandonado-hint{display:block;font-size:.7rem;color:#B5622E;font-weight:700;margin-top:.3rem}
   .role-badge{font-size:.72rem;font-weight:700;padding:.2rem .55rem;border-radius:6px;background:rgba(255,255,255,.15);letter-spacing:.02em}
   .notes-input{width:160px;font-family:var(--body);font-size:.8rem;border:1.5px solid var(--line);border-radius:6px;padding:.35rem .5rem}
   .save-hint{font-size:.7rem;color:var(--ink-soft);margin-left:.3rem}
@@ -97,6 +99,7 @@
     <select id="f-status">
       <option value="">Todos los estados</option>
       <option value="nuevo">Nuevo</option>
+      <option value="abandonado">Carrito abandonado</option>
       <option value="contactado">Contactado</option>
       <option value="cotizado">Cotizado</option>
       <option value="ganado">Ganado</option>
@@ -171,6 +174,14 @@
   // que estos leads viajan como channel:'whatsapp' con esta excursion fija.
   function isReceptivo(lead) {
     return lead.excursion === 'Receptivo & Agencias';
+  }
+
+  // Un lead de Mercado Pago que sigue en "nuevo" es alguien que llegó hasta
+  // la pantalla de pago pero nunca la completó (create-preference.js crea
+  // el lead ANTES de redirigir a Mercado Pago; el webhook lo pasa a "ganado"
+  // solo si el pago se aprueba — si no, queda así, sin que nadie lo cambie).
+  function isAbandonedCheckout(lead) {
+    return lead.channel === 'mercadopago' && lead.status === 'nuevo';
   }
   function channelInfo(lead) {
     if (isReceptivo(lead)) return { cls: 'receptivo', label: 'Agencia' };
@@ -261,7 +272,9 @@
     const toF = document.getElementById('f-to').value;
 
     let leads = allLeads.filter(l => {
-      if (statusF && l.status !== statusF) return false;
+      if (statusF === 'abandonado' && !isAbandonedCheckout(l)) return false;
+      if (statusF === 'nuevo' && (l.status !== 'nuevo' || isAbandonedCheckout(l))) return false;
+      if (statusF && statusF !== 'abandonado' && statusF !== 'nuevo' && l.status !== statusF) return false;
       if (channelF === 'receptivo' && !isReceptivo(l)) return false;
       if (channelF && channelF !== 'receptivo' && (l.channel !== channelF || isReceptivo(l))) return false;
       if (searchF) {
@@ -280,10 +293,15 @@
 
     const stats = document.getElementById('stats');
     const counts = { nuevo: 0, contactado: 0, cotizado: 0, ganado: 0, perdido: 0 };
-    allLeads.forEach(l => { if (counts[l.status] != null) counts[l.status]++; });
+    let abandonados = 0;
+    allLeads.forEach(l => {
+      if (counts[l.status] != null) counts[l.status]++;
+      if (isAbandonedCheckout(l)) abandonados++;
+    });
     stats.innerHTML = `
       <div class="stat"><b>${allLeads.length}</b>Total</div>
-      <div class="stat"><b>${counts.nuevo}</b>Nuevos</div>
+      <div class="stat"><b>${counts.nuevo - abandonados}</b>Nuevos</div>
+      <div class="stat"><b>${abandonados}</b>Carritos abandonados</div>
       <div class="stat"><b>${counts.contactado + counts.cotizado}</b>En proceso</div>
       <div class="stat"><b>${counts.ganado}</b>Ganados</div>
       <div class="stat"><b>${counts.perdido}</b>Perdidos</div>
@@ -316,14 +334,16 @@
         <td>${fmtMoney(l.total)}</td>
         <td>
           ${readOnly
-            ? `<span class="badge status ${l.status}">${STATUS_LABELS[l.status] || l.status}</span>`
+            ? (isAbandonedCheckout(l)
+              ? `<span class="badge abandonado">Carrito abandonado</span>`
+              : `<span class="badge status ${l.status}">${STATUS_LABELS[l.status] || l.status}</span>`)
             : `<select class="status ${l.status}" data-field="status">
             <option value="nuevo" ${l.status === 'nuevo' ? 'selected' : ''}>Nuevo</option>
             <option value="contactado" ${l.status === 'contactado' ? 'selected' : ''}>Contactado</option>
             <option value="cotizado" ${l.status === 'cotizado' ? 'selected' : ''}>Cotizado</option>
             <option value="ganado" ${l.status === 'ganado' ? 'selected' : ''}>Ganado</option>
             <option value="perdido" ${l.status === 'perdido' ? 'selected' : ''}>Perdido</option>
-          </select>`}
+          </select>${isAbandonedCheckout(l) ? '<span class="abandonado-hint">⚠ Carrito abandonado</span>' : ''}`}
         </td>
         <td>
           ${readOnly
@@ -392,7 +412,7 @@
       l.hospedaje || '',
       l.pasajeros || '',
       l.total || '',
-      STATUS_LABELS[l.status] || l.status || '',
+      isAbandonedCheckout(l) ? 'Carrito abandonado' : (STATUS_LABELS[l.status] || l.status || ''),
       originText(l).replace(/<[^>]+>/g, ''),
       l.notes || '',
     ]);
