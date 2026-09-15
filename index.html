@@ -205,6 +205,23 @@
   .contact p{color:var(--ink-soft);max-width:48ch;margin:0 auto 2rem}
   .contact .hero-cta{justify-content:center}
 
+  /* ---------- Receptivo & Agencias ---------- */
+  .receptivo-box{background:var(--panel);border-radius:22px;padding:clamp(2rem,5vw,3.2rem)}
+  .receptivo-form{display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.2rem;max-width:760px;margin:0 auto}
+  .receptivo-form .field-full{grid-column:1/-1}
+  .receptivo-form label{display:block;font-family:var(--body);font-weight:700;font-size:.82rem;color:var(--navy);margin-bottom:.35rem}
+  .receptivo-form input[type=text],.receptivo-form input[type=email],.receptivo-form input[type=tel],.receptivo-form textarea{width:100%;font-family:var(--body);font-size:.95rem;border:1.5px solid var(--line);border-radius:10px;padding:.65rem .8rem;background:#fff;color:var(--ink)}
+  .receptivo-form input:focus,.receptivo-form textarea:focus{outline:none;border-color:var(--gold)}
+  .receptivo-form textarea{min-height:100px;resize:vertical}
+  .receptivo-services{display:flex;flex-wrap:wrap;gap:.5rem .9rem}
+  .receptivo-services label{display:flex;align-items:center;gap:.4rem;font-weight:500;font-size:.9rem;color:var(--ink);margin-bottom:0}
+  .receptivo-services input{width:auto}
+  .receptivo-form button[type=submit]{grid-column:1/-1;justify-self:center;margin-top:.4rem}
+  .receptivo-status{grid-column:1/-1;text-align:center;font-size:.88rem;min-height:1.2em}
+  .receptivo-status.ok{color:#2E7D4F}
+  .receptivo-status.err{color:#B5462E}
+  @media(max-width:640px){.receptivo-form{grid-template-columns:1fr}}
+
   /* ---------- Avalan (entidades) ---------- */
   .avalan{background:#fff;padding:2.8rem 0;border-top:1px solid var(--line);overflow:hidden}
   .avalan h3{text-align:center;font-family:var(--display);font-weight:700;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;color:var(--cyan);margin-bottom:1.8rem}
@@ -271,6 +288,7 @@
         </div>
       </div>
       <a href="#nosotros" data-i18n="nav.nosotros">Nosotros</a>
+      <a href="#receptivo" data-i18n="nav.receptivo">Agencias</a>
       <a href="#contacto" data-i18n="nav.contacto">Contacto</a>
     </nav>
     <div class="actions">
@@ -754,6 +772,52 @@
   </div>
 </section>
 
+<!-- ====================== RECEPTIVO & AGENCIAS ====================== -->
+<section class="sec" id="receptivo">
+  <div class="wrap">
+    <div class="section-head reveal" style="text-align:center;margin-bottom:clamp(2rem,4vw,2.6rem)">
+      <h2 class="bracketed" style="justify-content:center"><span class="b">[</span> <span data-i18n="receptivo.title">Receptivo &amp; Agencias</span> <span class="b">]</span></h2>
+      <p class="section-sub" data-i18n="receptivo.sub" style="margin:.6rem auto 0">¿Sos una agencia de viajes? Contanos qué necesitás y te contactamos a la brevedad.</p>
+    </div>
+    <div class="receptivo-box reveal">
+      <form class="receptivo-form" id="receptivo-form">
+        <div class="field-full">
+          <label for="rec-agencia" data-i18n="receptivo.agencia">Nombre de la agencia</label>
+          <input type="text" id="rec-agencia" required>
+        </div>
+        <div>
+          <label for="rec-nombre" data-i18n="receptivo.nombre">Nombre de contacto</label>
+          <input type="text" id="rec-nombre" required>
+        </div>
+        <div>
+          <label for="rec-telefono" data-i18n="receptivo.telefono">Teléfono / WhatsApp</label>
+          <input type="tel" id="rec-telefono" required>
+        </div>
+        <div class="field-full">
+          <label for="rec-email" data-i18n="receptivo.email">Email</label>
+          <input type="email" id="rec-email" required>
+        </div>
+        <div class="field-full">
+          <label data-i18n="receptivo.servicios">Servicios de interés</label>
+          <div class="receptivo-services">
+            <label><input type="checkbox" value="Excursión en avioneta" data-i18n-value="receptivo.servicio.avioneta"> <span data-i18n="receptivo.servicio.avioneta">Excursión en avioneta</span></label>
+            <label><input type="checkbox" value="Pesca" data-i18n-value="receptivo.servicio.pesca"> <span data-i18n="receptivo.servicio.pesca">Pesca</span></label>
+            <label><input type="checkbox" value="Navegación privada" data-i18n-value="receptivo.servicio.navegacion"> <span data-i18n="receptivo.servicio.navegacion">Navegación privada</span></label>
+            <label><input type="checkbox" value="Cruce Andino" data-i18n-value="receptivo.servicio.cruce"> <span data-i18n="receptivo.servicio.cruce">Cruce Andino</span></label>
+            <label><input type="checkbox" value="Otro" data-i18n-value="receptivo.servicio.otro"> <span data-i18n="receptivo.servicio.otro">Otro</span></label>
+          </div>
+        </div>
+        <div class="field-full">
+          <label for="rec-mensaje" data-i18n="receptivo.mensaje">Mensaje (cantidad de pax, fechas, detalle de lo que necesitás)</label>
+          <textarea id="rec-mensaje"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" data-i18n="receptivo.submit">Enviar consulta</button>
+        <div class="receptivo-status" id="receptivo-status"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- ====================== AVALAN ====================== -->
 <section class="avalan">
   <div class="wrap">
@@ -811,7 +875,12 @@ if(window.matchMedia("(min-width:761px)").matches){
 <script>
 const I18N = {
   es: {
-    "nav.excursiones":"Excursiones", "nav.nosotros":"Nosotros", "nav.contacto":"Contacto",
+    "nav.excursiones":"Excursiones", "nav.nosotros":"Nosotros", "nav.receptivo":"Agencias", "nav.contacto":"Contacto",
+    "receptivo.title":"Receptivo & Agencias", "receptivo.sub":"¿Sos una agencia de viajes? Contanos qué necesitás y te contactamos a la brevedad.",
+    "receptivo.agencia":"Nombre de la agencia", "receptivo.nombre":"Nombre de contacto", "receptivo.telefono":"Teléfono / WhatsApp", "receptivo.email":"Email",
+    "receptivo.servicios":"Servicios de interés", "receptivo.servicio.avioneta":"Excursión en avioneta", "receptivo.servicio.pesca":"Pesca", "receptivo.servicio.navegacion":"Navegación privada", "receptivo.servicio.cruce":"Cruce Andino", "receptivo.servicio.otro":"Otro",
+    "receptivo.mensaje":"Mensaje (cantidad de pax, fechas, detalle de lo que necesitás)", "receptivo.submit":"Enviar consulta",
+    "receptivo.enviando":"Enviando...", "receptivo.ok":"¡Gracias! Recibimos tu consulta, te contactamos pronto.", "receptivo.err":"Hubo un error. Probá de nuevo o escribinos por WhatsApp.",
     "hero.eyebrow":"Patagonia · San Carlos de Bariloche",
     "hero.title":"La aventura patagonica, <em>a tu medida.</em>",
     "hero.lead":"Tu próxima aventura empieza acá",
@@ -1002,6 +1071,69 @@ document.querySelectorAll('.cards[data-filter-target] .card-img .tag').forEach(t
     group.scrollIntoView({behavior:"smooth", block:"start"});
   });
 });
+
+function getTracking(){
+  let stored = {};
+  try { stored = JSON.parse(localStorage.getItem("vv-tracking") || "{}"); } catch(e) {}
+  return {
+    utm_source: stored.utm_source || null,
+    utm_medium: stored.utm_medium || null,
+    utm_campaign: stored.utm_campaign || null,
+    utm_term: stored.utm_term || null,
+    utm_content: stored.utm_content || null,
+    gclid: stored.gclid || null,
+    fbclid: stored.fbclid || null,
+  };
+}
+
+const recForm = document.getElementById("receptivo-form");
+if (recForm) {
+  recForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const statusEl = document.getElementById("receptivo-status");
+    const btn = recForm.querySelector("button[type=submit]");
+    const servicios = Array.from(recForm.querySelectorAll(".receptivo-services input:checked")).map(c => c.value);
+    const agencia = document.getElementById("rec-agencia").value.trim();
+    const mensaje = document.getElementById("rec-mensaje").value.trim();
+    const notes = [
+      "Agencia: " + agencia,
+      "Servicios de interés: " + (servicios.length ? servicios.join(", ") : "-"),
+      mensaje ? "Mensaje: " + mensaje : null,
+    ].filter(Boolean).join("\n");
+
+    btn.disabled = true;
+    btn.textContent = I18N[document.documentElement.lang]["receptivo.enviando"] || "Enviando...";
+    statusEl.className = "receptivo-status";
+    statusEl.textContent = "";
+
+    try {
+      const resp = await fetch("/api/log-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          channel: "receptivo",
+          nombre: document.getElementById("rec-nombre").value.trim(),
+          email: document.getElementById("rec-email").value.trim(),
+          telefono: document.getElementById("rec-telefono").value.trim(),
+          excursion: "Receptivo & Agencias",
+          notes,
+          ...getTracking(),
+        }),
+      });
+      const data = await resp.json();
+      if (!resp.ok || !data.ok) throw new Error(data.error || "Error");
+      statusEl.textContent = I18N[document.documentElement.lang]["receptivo.ok"] || "¡Gracias! Recibimos tu consulta, te contactamos pronto.";
+      statusEl.classList.add("ok");
+      recForm.reset();
+    } catch (err) {
+      statusEl.textContent = I18N[document.documentElement.lang]["receptivo.err"] || "Hubo un error. Probá de nuevo o escribinos por WhatsApp.";
+      statusEl.classList.add("err");
+    } finally {
+      btn.disabled = false;
+      btn.textContent = I18N[document.documentElement.lang]["receptivo.submit"] || "Enviar consulta";
+    }
+  });
+}
 
 function applyLang(lang){
   document.documentElement.lang = lang;

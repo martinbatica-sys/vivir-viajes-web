@@ -53,6 +53,7 @@
   .badge{display:inline-block;font-size:.72rem;font-weight:700;padding:.2rem .5rem;border-radius:6px;text-transform:uppercase;letter-spacing:.02em}
   .badge.mercadopago{background:#E6F4EC;color:#2E7D4F}
   .badge.whatsapp{background:#E7F1FB;color:#1E6FA3}
+  .badge.receptivo{background:#FBEEDD;color:#C9852A}
   select.status{font-family:var(--body);font-weight:700;font-size:.78rem;border-radius:6px;border:1.5px solid var(--line);padding:.3rem .4rem;cursor:pointer}
   select.status.nuevo{background:#F0F0F5;color:#4A4A66}
   select.status.contactado{background:#E7F1FB;color:#1E6FA3}
@@ -105,6 +106,7 @@
       <option value="">Todos los canales</option>
       <option value="mercadopago">Pago (Mercado Pago)</option>
       <option value="whatsapp">Consulta (WhatsApp)</option>
+      <option value="receptivo">Agencias (Receptivo)</option>
     </select>
     <input type="text" id="f-search" placeholder="Buscar por nombre, email o excursión...">
     <input type="date" id="f-from" title="Desde">
@@ -162,6 +164,11 @@
   function fmtMoney(n) {
     if (n == null || n === '') return '-';
     return '$' + Number(n).toLocaleString('es-AR');
+  }
+
+  const CHANNEL_LABELS = { mercadopago: { cls: 'mercadopago', label: 'Pago' }, receptivo: { cls: 'receptivo', label: 'Agencia' } };
+  function channelInfo(channel) {
+    return CHANNEL_LABELS[channel] || { cls: 'whatsapp', label: 'Consulta' };
   }
 
   function originText(lead) {
@@ -292,7 +299,7 @@
     tbody.innerHTML = leads.map(l => `
       <tr data-id="${l.id}">
         <td>${fmtDate(l.created_at)}</td>
-        <td><span class="badge ${l.channel === 'mercadopago' ? 'mercadopago' : 'whatsapp'}">${l.channel === 'mercadopago' ? 'Pago' : 'Consulta'}</span></td>
+        <td><span class="badge ${channelInfo(l.channel).cls}">${channelInfo(l.channel).label}</span></td>
         <td>${l.excursion || '-'}${l.opcion ? '<br><span class="muted">' + l.opcion + '</span>' : ''}</td>
         <td>${l.fecha || '-'}</td>
         <td>${l.nombre || '<span class="muted">Sin nombre</span>'}${l.dni ? '<br><span class="muted">DNI ' + l.dni + '</span>' : ''}</td>
@@ -366,7 +373,7 @@
     const headers = ['Fecha', 'Canal', 'Excursión', 'Opción', 'Fecha del paseo', 'Cliente', 'DNI', 'Teléfono', 'Email', 'Hospedaje', 'Pasajeros', 'Total', 'Estado', 'Origen', 'Notas'];
     const rows = filteredLeads.map(l => [
       l.created_at ? new Date(l.created_at).toLocaleString('es-AR') : '',
-      l.channel === 'mercadopago' ? 'Pago' : 'Consulta',
+      channelInfo(l.channel).label,
       l.excursion || '',
       l.opcion || '',
       l.fecha || '',

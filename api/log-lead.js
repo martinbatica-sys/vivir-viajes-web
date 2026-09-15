@@ -5,6 +5,7 @@
 
 import { insertLead } from '../lib/supabase.js';
 import { rateLimit } from '../lib/rate-limit.js';
+import { sendEmail } from '../lib/notify-email.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -44,7 +45,29 @@ export default async function handler(req, res) {
       gclid: b.gclid || null,
       fbclid: b.fbclid || null,
       external_reference: b.externalReference || null,
+      notes: b.notes || null,
     });
+
+    // Las consultas de agencias (Receptivo) no pasan por WhatsApp como el
+    // resto de los leads, asi que ese "aviso instantaneo" no existe para
+    // ellas — sin este mail, la unica forma de enterarse seria revisar el
+    // mini-CRM a mano.
+    if (b.channel === 'receptivo') {
+      try {
+        const body = [
+          '🤝 Nueva consulta de agencia - Vivir Viajes',
+          `Agencia/Contacto: ${b.nombre || '-'}`,
+          `Email: ${b.email || '-'}`,
+          `Tel: ${b.telefono || '-'}`,
+          '',
+          b.notes || '',
+        ].join('\n');
+        await sendEmail('Nueva consulta de agencia (Receptivo) - Vivir Viajes', body);
+      } catch (err) {
+        console.error('Error mandando el mail de consulta de agencia', err);
+      }
+    }
+
     return res.status(200).json({ ok: true, id: lead && lead.id });
   } catch (err) {
     console.error('Error guardando lead en Supabase', err);
