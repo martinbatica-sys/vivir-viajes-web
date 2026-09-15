@@ -205,6 +205,28 @@
   .contact p{color:var(--ink-soft);max-width:48ch;margin:0 auto 2rem}
   .contact .hero-cta{justify-content:center}
 
+  /* ---------- Calendario (portado de excursion.html) ---------- */
+  .cal-wrap{position:relative}
+  .date-trigger{width:100%;font-family:var(--body);font-size:.95rem;color:var(--navy);border:1.5px solid var(--line);border-radius:10px;padding:.65rem .8rem;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:border-color .2s}
+  .date-trigger:hover,.date-trigger.open{border-color:var(--gold)}
+  .date-trigger .dt-text{flex:1;text-align:left}
+  .date-trigger .dt-icon{color:var(--gold-dark);display:flex;align-items:center}
+  .cal-popup{position:absolute;top:calc(100% + 8px);left:0;right:0;background:#fff;border:1.5px solid var(--line);border-radius:16px;box-shadow:0 20px 50px -10px rgba(15,29,56,.25);z-index:100;overflow:hidden;display:none}
+  .cal-popup.open{display:block}
+  .cal-head{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1rem .7rem;background:linear-gradient(120deg,var(--navy),#1E3566);color:#fff}
+  .cal-head .cal-month{font-family:var(--display);font-weight:600;font-size:1rem}
+  .cal-nav{background:transparent;border:none;color:rgba(255,255,255,.8);font-size:1.3rem;cursor:pointer;padding:.2rem .5rem;border-radius:7px;transition:.15s;line-height:1}
+  .cal-nav:hover{background:rgba(255,255,255,.15);color:#fff}
+  .cal-grid{padding:.6rem .7rem .8rem}
+  .cal-dow{display:grid;grid-template-columns:repeat(7,32px);justify-content:center;gap:3px;margin-bottom:.3rem}
+  .cal-dow span{width:32px;text-align:center;font-size:.68rem;font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase;padding:.25rem 0}
+  .cal-days{display:grid;grid-template-columns:repeat(7,32px);justify-content:center;gap:3px}
+  .cal-day{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:.88rem;cursor:pointer;border:none;background:transparent;font-family:var(--body);color:var(--ink);transition:.15s;font-weight:500}
+  .cal-day:hover:not(:disabled):not(.cal-selected){background:var(--panel);color:var(--navy)}
+  .cal-day.cal-selected{background:var(--gold);color:var(--navy);font-weight:700;box-shadow:0 4px 10px -4px rgba(233,162,60,.6)}
+  .cal-day:disabled{color:#d0d8e4;cursor:not-allowed}
+  .cal-day.cal-other{color:#d0d8e4}
+
   /* ---------- Rent a Car ---------- */
   .rentacar-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,3.5rem);align-items:stretch}
   .rentacar-form-box{background:var(--panel);border-radius:22px;padding:clamp(1.8rem,4vw,2.6rem)}
@@ -743,12 +765,48 @@
             </select>
           </div>
           <div>
-            <label for="rac-fecha-retiro" data-i18n="rentacar.fecha-retiro">Fecha de retiro</label>
-            <input type="date" id="rac-fecha-retiro" required>
+            <label data-i18n="rentacar.fecha-retiro">Fecha de retiro</label>
+            <div class="cal-wrap">
+              <button type="button" class="date-trigger" id="rac-retiro-trigger">
+                <span class="dt-text" id="rac-retiro-text" data-i18n="rentacar.elegir-fecha">Elegir fecha</span>
+                <span class="dt-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                </span>
+              </button>
+              <div class="cal-popup" id="rac-retiro-popup">
+                <div class="cal-head">
+                  <button type="button" class="cal-nav" id="rac-retiro-prev">&#8249;</button>
+                  <span class="cal-month" id="rac-retiro-month"></span>
+                  <button type="button" class="cal-nav" id="rac-retiro-next">&#8250;</button>
+                </div>
+                <div class="cal-grid">
+                  <div class="cal-dow"><span>Do</span><span>Lu</span><span>Ma</span><span>Mi</span><span>Ju</span><span>Vi</span><span>Sa</span></div>
+                  <div class="cal-days" id="rac-retiro-days"></div>
+                </div>
+              </div>
+            </div>
           </div>
           <div>
-            <label for="rac-fecha-devolucion" data-i18n="rentacar.fecha-devolucion">Fecha de devolución</label>
-            <input type="date" id="rac-fecha-devolucion" required>
+            <label data-i18n="rentacar.fecha-devolucion">Fecha de devolución</label>
+            <div class="cal-wrap">
+              <button type="button" class="date-trigger" id="rac-devolucion-trigger">
+                <span class="dt-text" id="rac-devolucion-text" data-i18n="rentacar.elegir-fecha">Elegir fecha</span>
+                <span class="dt-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                </span>
+              </button>
+              <div class="cal-popup" id="rac-devolucion-popup">
+                <div class="cal-head">
+                  <button type="button" class="cal-nav" id="rac-devolucion-prev">&#8249;</button>
+                  <span class="cal-month" id="rac-devolucion-month"></span>
+                  <button type="button" class="cal-nav" id="rac-devolucion-next">&#8250;</button>
+                </div>
+                <div class="cal-grid">
+                  <div class="cal-dow"><span>Do</span><span>Lu</span><span>Ma</span><span>Mi</span><span>Ju</span><span>Vi</span><span>Sa</span></div>
+                  <div class="cal-days" id="rac-devolucion-days"></div>
+                </div>
+              </div>
+            </div>
           </div>
           <div>
             <label for="rac-hora-retiro" data-i18n="rentacar.hora-retiro">Hora de entrega</label>
@@ -966,13 +1024,14 @@ const I18N = {
     "nav.excursiones":"Excursiones", "nav.rentacar":"Rent a Car", "nav.nosotros":"Nosotros", "nav.receptivo":"Agencias", "nav.contacto":"Contacto",
     "rentacar.title":"Rent a Car", "rentacar.sub":"Alquilá un auto para moverte a tu ritmo por Bariloche y la Patagonia.",
     "rentacar.lugar":"Lugar de entrega", "rentacar.lugar-centro":"Oficina centro (Mitre 183)",
-    "rentacar.fecha-retiro":"Fecha de retiro", "rentacar.fecha-devolucion":"Fecha de devolución",
+    "rentacar.fecha-retiro":"Fecha de retiro", "rentacar.fecha-devolucion":"Fecha de devolución", "rentacar.elegir-fecha":"Elegir fecha",
     "rentacar.hora-retiro":"Hora de entrega", "rentacar.hora-devolucion":"Hora de devolución",
     "rentacar.nombre":"Nombre y Apellido", "rentacar.email":"Email", "rentacar.telefono":"Teléfono",
     "rentacar.submit":"Consultar Disponibilidad",
     "rentacar.promo-title":"Consulta por la promoción. 3x2", "rentacar.promo-text":"Alquilá 3 días y pagá solo 2. Escribinos y te contamos disponibilidad y tarifas.",
     "rentacar.incluye":"Incluye", "rentacar.incluye1":"Seguro", "rentacar.incluye2":"Kilometraje ilimitado",
     "rentacar.enviando":"Enviando...", "rentacar.ok":"¡Gracias! Te vamos a escribir por WhatsApp para confirmar disponibilidad.", "rentacar.err":"Hubo un error. Escribinos directo por WhatsApp.",
+    "rentacar.falta-fecha":"Elegí la fecha de retiro y de devolución.",
     "receptivo.title":"Receptivo & Agencias", "receptivo.sub":"¿Sos una agencia de viajes? Contanos qué necesitás y te contactamos a la brevedad.",
     "receptivo.agencia":"Nombre de la agencia", "receptivo.nombre":"Nombre de contacto", "receptivo.telefono":"Teléfono / WhatsApp", "receptivo.email":"Email",
     "receptivo.servicios":"Servicios de interés", "receptivo.servicio.avioneta":"Excursión en avioneta", "receptivo.servicio.pesca":"Pesca", "receptivo.servicio.navegacion":"Navegación privada", "receptivo.servicio.cruce":"Cruce Andino", "receptivo.servicio.otro":"Otro",
@@ -1232,12 +1291,80 @@ if (recForm) {
   });
 }
 
+const MESES_ES = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+
+function createDatePicker(prefix, minDateFn, onSelect) {
+  const trigger = document.getElementById(prefix + "-trigger");
+  const textEl = document.getElementById(prefix + "-text");
+  const popup = document.getElementById(prefix + "-popup");
+  const monthEl = document.getElementById(prefix + "-month");
+  const gridEl = document.getElementById(prefix + "-days");
+  if (!trigger) return null;
+
+  let selected = null;
+  const initMin = minDateFn();
+  const [minY, minM] = initMin.split("-").map(Number);
+  let calYear = minY, calMonth = minM - 1;
+
+  function close() {
+    popup.classList.remove("open");
+    trigger.classList.remove("open");
+  }
+  function toggle() {
+    if (popup.classList.contains("open")) close();
+    else { render(); popup.classList.add("open"); trigger.classList.add("open"); }
+  }
+  function render() {
+    monthEl.textContent = MESES_ES[calMonth] + " " + calYear;
+    gridEl.innerHTML = "";
+    const minStr = minDateFn();
+    const first = new Date(calYear, calMonth, 1);
+    const last = new Date(calYear, calMonth + 1, 0);
+    const startDow = first.getDay();
+    for (let i = 0; i < startDow; i++) {
+      const d = new Date(calYear, calMonth, -startDow + 1 + i);
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "cal-day cal-other";
+      btn.textContent = d.getDate();
+      btn.disabled = true;
+      gridEl.appendChild(btn);
+    }
+    for (let d = 1; d <= last.getDate(); d++) {
+      const dateStr = calYear + "-" + String(calMonth + 1).padStart(2, "0") + "-" + String(d).padStart(2, "0");
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "cal-day";
+      btn.textContent = d;
+      if (dateStr < minStr) {
+        btn.disabled = true;
+      } else {
+        if (dateStr === selected) btn.classList.add("cal-selected");
+        btn.onclick = () => {
+          selected = dateStr;
+          const dt = new Date(dateStr + "T12:00:00");
+          textEl.textContent = dt.toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long" }).replace(/^\w/, c => c.toUpperCase());
+          close();
+          if (onSelect) onSelect(dateStr);
+        };
+      }
+      gridEl.appendChild(btn);
+    }
+  }
+
+  document.getElementById(prefix + "-prev").onclick = () => { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } render(); };
+  document.getElementById(prefix + "-next").onclick = () => { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } render(); };
+  trigger.onclick = (e) => { e.stopPropagation(); toggle(); };
+  popup.addEventListener("click", e => e.stopPropagation());
+  document.addEventListener("click", () => close());
+
+  return { get value() { return selected; } };
+}
+
 const racForm = document.getElementById("rentacar-form");
 if (racForm) {
   const horaRetiro = document.getElementById("rac-hora-retiro");
   const horaDevolucion = document.getElementById("rac-hora-devolucion");
-  const fechaRetiro = document.getElementById("rac-fecha-retiro");
-  const fechaDevolucion = document.getElementById("rac-fecha-devolucion");
 
   const horas = [];
   for (let mins = 9 * 60 + 30; mins <= 20 * 60 + 30; mins += 30) {
@@ -1250,17 +1377,21 @@ if (racForm) {
   const minD = new Date();
   minD.setDate(minD.getDate() + 2);
   const minStr = minD.toISOString().slice(0, 10);
-  fechaRetiro.min = minStr;
-  fechaDevolucion.min = minStr;
-  fechaRetiro.addEventListener("change", () => {
-    fechaDevolucion.min = fechaRetiro.value > minStr ? fechaRetiro.value : minStr;
-  });
+
+  const retiroPicker = createDatePicker("rac-retiro", () => minStr);
+  const devolucionPicker = createDatePicker("rac-devolucion", () => (retiroPicker.value && retiroPicker.value > minStr) ? retiroPicker.value : minStr);
 
   racForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const statusEl = document.getElementById("rentacar-status");
     const btn = racForm.querySelector("button[type=submit]");
     const lang = document.documentElement.lang;
+
+    if (!retiroPicker.value || !devolucionPicker.value) {
+      statusEl.className = "rentacar-status err";
+      statusEl.textContent = I18N[lang]["rentacar.falta-fecha"] || "Elegí la fecha de retiro y de devolución.";
+      return;
+    }
 
     const fmtFecha = d => d ? new Date(d + "T12:00:00").toLocaleDateString("es-AR") : "-";
     const nombre = document.getElementById("rac-nombre").value.trim();
@@ -1270,8 +1401,8 @@ if (racForm) {
 
     const resumen = [
       `Lugar de entrega: ${lugar}`,
-      `Retiro: ${fmtFecha(fechaRetiro.value)} ${horaRetiro.value} hs`,
-      `Devolución: ${fmtFecha(fechaDevolucion.value)} ${horaDevolucion.value} hs`,
+      `Retiro: ${fmtFecha(retiroPicker.value)} ${horaRetiro.value} hs`,
+      `Devolución: ${fmtFecha(devolucionPicker.value)} ${horaDevolucion.value} hs`,
       `Nombre: ${nombre}`,
       `Teléfono: ${telefono}`,
       `Email: ${email}`,
