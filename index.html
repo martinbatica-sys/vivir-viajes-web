@@ -217,13 +217,15 @@
   .rentacar-status{grid-column:1/-1;font-size:.88rem;min-height:1.2em}
   .rentacar-status.ok{color:#2E7D4F}
   .rentacar-status.err{color:#B5462E}
-  .rentacar-promo{background:linear-gradient(145deg,#1A2F58,#0F1D38);border-radius:22px;padding:clamp(1.8rem,4vw,2.6rem);color:#fff;text-align:right}
+  .rentacar-promo{background:linear-gradient(145deg,#1A2F58,#0F1D38);border-radius:22px;padding:clamp(1.8rem,4vw,2.6rem);color:#fff;text-align:right;display:flex;flex-direction:column}
+  .rentacar-car{margin-top:auto;padding-top:2rem;display:flex;justify-content:flex-end}
+  .rentacar-car svg{width:min(280px,80%);height:auto;color:var(--gold)}
   .rentacar-promo h3{font-family:var(--display);font-weight:700;font-size:clamp(1.35rem,2.6vw,1.7rem);color:var(--gold);margin-bottom:.9rem}
   .rentacar-promo p{color:rgba(255,255,255,.85);font-size:.98rem;line-height:1.6;margin-bottom:1.3rem}
   .rentacar-promo .incluye-label{font-family:var(--body);font-weight:700;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.6rem;display:block}
   .rentacar-promo ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
   .rentacar-promo li{font-size:.98rem;display:flex;align-items:center;justify-content:flex-end;gap:.5rem}
-  @media(max-width:820px){.rentacar-grid{grid-template-columns:1fr}.rentacar-promo{text-align:left}.rentacar-promo li{justify-content:flex-start}}
+  @media(max-width:820px){.rentacar-grid{grid-template-columns:1fr}.rentacar-promo{text-align:left}.rentacar-promo li{justify-content:flex-start}.rentacar-car{justify-content:center}}
   @media(max-width:640px){.rentacar-form{grid-template-columns:1fr}}
 
   /* ---------- Receptivo & Agencias ---------- */
@@ -780,6 +782,17 @@
           <li data-i18n="rentacar.incluye1">Seguro</li>
           <li data-i18n="rentacar.incluye2">Kilometraje ilimitado</li>
         </ul>
+        <div class="rentacar-car" aria-hidden="true">
+          <svg viewBox="0 0 220 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 68 Q14 50 30 47 L52 47 Q64 26 88 26 L136 26 Q158 26 170 47 L190 47 Q206 50 206 68 L206 74 L14 74 Z" fill="currentColor"/>
+            <path d="M64 47 Q74 32 90 32 L118 32 L118 47 Z" fill="#0F1D38"/>
+            <path d="M122 32 L134 32 Q150 32 160 47 L122 47 Z" fill="#0F1D38"/>
+            <circle cx="56" cy="74" r="16" fill="#0F1D38"/>
+            <circle cx="56" cy="74" r="16" stroke="currentColor" stroke-width="5"/>
+            <circle cx="164" cy="74" r="16" fill="#0F1D38"/>
+            <circle cx="164" cy="74" r="16" stroke="currentColor" stroke-width="5"/>
+          </svg>
+        </div>
       </div>
     </div>
   </div>
