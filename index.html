@@ -205,6 +205,27 @@
   .contact p{color:var(--ink-soft);max-width:48ch;margin:0 auto 2rem}
   .contact .hero-cta{justify-content:center}
 
+  /* ---------- Rent a Car ---------- */
+  .rentacar-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,3.5rem);align-items:start}
+  .rentacar-form-box{background:var(--panel);border-radius:22px;padding:clamp(1.8rem,4vw,2.6rem)}
+  .rentacar-form{display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.2rem}
+  .rentacar-form .field-full{grid-column:1/-1}
+  .rentacar-form label{display:block;font-family:var(--body);font-weight:700;font-size:.82rem;color:var(--navy);margin-bottom:.35rem}
+  .rentacar-form input,.rentacar-form select{width:100%;font-family:var(--body);font-size:.95rem;border:1.5px solid var(--line);border-radius:10px;padding:.65rem .8rem;background:#fff;color:var(--ink)}
+  .rentacar-form input:focus,.rentacar-form select:focus{outline:none;border-color:var(--gold)}
+  .rentacar-form button[type=submit]{grid-column:1/-1;justify-self:start;margin-top:.4rem}
+  .rentacar-status{grid-column:1/-1;font-size:.88rem;min-height:1.2em}
+  .rentacar-status.ok{color:#2E7D4F}
+  .rentacar-status.err{color:#B5462E}
+  .rentacar-promo{background:linear-gradient(145deg,#1A2F58,#0F1D38);border-radius:22px;padding:clamp(1.8rem,4vw,2.6rem);color:#fff;text-align:right}
+  .rentacar-promo h3{font-family:var(--display);font-weight:700;font-size:clamp(1.35rem,2.6vw,1.7rem);color:var(--gold);margin-bottom:.9rem}
+  .rentacar-promo p{color:rgba(255,255,255,.85);font-size:.98rem;line-height:1.6;margin-bottom:1.3rem}
+  .rentacar-promo .incluye-label{font-family:var(--body);font-weight:700;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.6rem;display:block}
+  .rentacar-promo ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+  .rentacar-promo li{font-size:.98rem;display:flex;align-items:center;justify-content:flex-end;gap:.5rem}
+  @media(max-width:820px){.rentacar-grid{grid-template-columns:1fr}.rentacar-promo{text-align:left}.rentacar-promo li{justify-content:flex-start}}
+  @media(max-width:640px){.rentacar-form{grid-template-columns:1fr}}
+
   /* ---------- Receptivo & Agencias ---------- */
   .receptivo-box{background:var(--panel);border-radius:22px;padding:clamp(2rem,5vw,3.2rem)}
   .receptivo-form{display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.2rem;max-width:760px;margin:0 auto}
@@ -287,6 +308,7 @@
           <a href="#cat-aventura" data-i18n="cat.aventura.title">Aventura</a>
         </div>
       </div>
+      <a href="#rentacar" data-i18n="nav.rentacar">Rent a Car</a>
       <a href="#nosotros" data-i18n="nav.nosotros">Nosotros</a>
       <a href="#receptivo" data-i18n="nav.receptivo">Agencias</a>
       <a href="#contacto" data-i18n="nav.contacto">Contacto</a>
@@ -702,6 +724,67 @@
   </div>
 </section>
 
+<!-- ====================== RENT A CAR ====================== -->
+<section class="sec" id="rentacar">
+  <div class="wrap">
+    <div class="section-head reveal" style="text-align:center;margin-bottom:clamp(2rem,4vw,2.6rem)">
+      <h2 class="bracketed" style="justify-content:center"><span class="b">[</span> <span data-i18n="rentacar.title">Rent a Car</span> <span class="b">]</span></h2>
+      <p class="section-sub" data-i18n="rentacar.sub" style="margin:.6rem auto 0">Alquilá un auto para moverte a tu ritmo por Bariloche y la Patagonia.</p>
+    </div>
+    <div class="rentacar-grid reveal">
+      <div class="rentacar-form-box">
+        <form class="rentacar-form" id="rentacar-form">
+          <div class="field-full">
+            <label for="rac-lugar" data-i18n="rentacar.lugar">Lugar de entrega</label>
+            <select id="rac-lugar">
+              <option value="Oficina centro (Mitre 183)" data-i18n="rentacar.lugar-centro">Oficina centro (Mitre 183)</option>
+            </select>
+          </div>
+          <div>
+            <label for="rac-fecha-retiro" data-i18n="rentacar.fecha-retiro">Fecha de retiro</label>
+            <input type="date" id="rac-fecha-retiro" required>
+          </div>
+          <div>
+            <label for="rac-fecha-devolucion" data-i18n="rentacar.fecha-devolucion">Fecha de devolución</label>
+            <input type="date" id="rac-fecha-devolucion" required>
+          </div>
+          <div>
+            <label for="rac-hora-retiro" data-i18n="rentacar.hora-retiro">Hora de entrega</label>
+            <select id="rac-hora-retiro" required></select>
+          </div>
+          <div>
+            <label for="rac-hora-devolucion" data-i18n="rentacar.hora-devolucion">Hora de devolución</label>
+            <select id="rac-hora-devolucion" required></select>
+          </div>
+          <div class="field-full">
+            <label for="rac-nombre" data-i18n="rentacar.nombre">Nombre y Apellido</label>
+            <input type="text" id="rac-nombre" required>
+          </div>
+          <div>
+            <label for="rac-email" data-i18n="rentacar.email">Email</label>
+            <input type="email" id="rac-email" required>
+          </div>
+          <div>
+            <label for="rac-telefono" data-i18n="rentacar.telefono">Teléfono</label>
+            <input type="tel" id="rac-telefono" required>
+          </div>
+          <button type="submit" class="btn btn-primary" data-i18n="rentacar.submit">Consultar Disponibilidad</button>
+          <div class="rentacar-status" id="rentacar-status"></div>
+        </form>
+      </div>
+      <div class="rentacar-promo">
+        <h3 data-i18n="rentacar.promo-title">Consulta por la promoción. 3x2</h3>
+        <p data-i18n="rentacar.promo-text">Alquilá 3 días y pagá solo 2. Escribinos y te contamos disponibilidad y tarifas.</p>
+        <span class="incluye-label" data-i18n="rentacar.incluye">Incluye</span>
+        <ul>
+          <li data-i18n="rentacar.incluye1">Seguro</li>
+          <li data-i18n="rentacar.incluye2">Kilometraje ilimitado</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ====================== NOSOTROS ====================== -->
 <section class="sec" id="nosotros">
   <div class="wrap">
@@ -875,7 +958,16 @@ if(window.matchMedia("(min-width:761px)").matches){
 <script>
 const I18N = {
   es: {
-    "nav.excursiones":"Excursiones", "nav.nosotros":"Nosotros", "nav.receptivo":"Agencias", "nav.contacto":"Contacto",
+    "nav.excursiones":"Excursiones", "nav.rentacar":"Rent a Car", "nav.nosotros":"Nosotros", "nav.receptivo":"Agencias", "nav.contacto":"Contacto",
+    "rentacar.title":"Rent a Car", "rentacar.sub":"Alquilá un auto para moverte a tu ritmo por Bariloche y la Patagonia.",
+    "rentacar.lugar":"Lugar de entrega", "rentacar.lugar-centro":"Oficina centro (Mitre 183)",
+    "rentacar.fecha-retiro":"Fecha de retiro", "rentacar.fecha-devolucion":"Fecha de devolución",
+    "rentacar.hora-retiro":"Hora de entrega", "rentacar.hora-devolucion":"Hora de devolución",
+    "rentacar.nombre":"Nombre y Apellido", "rentacar.email":"Email", "rentacar.telefono":"Teléfono",
+    "rentacar.submit":"Consultar Disponibilidad",
+    "rentacar.promo-title":"Consulta por la promoción. 3x2", "rentacar.promo-text":"Alquilá 3 días y pagá solo 2. Escribinos y te contamos disponibilidad y tarifas.",
+    "rentacar.incluye":"Incluye", "rentacar.incluye1":"Seguro", "rentacar.incluye2":"Kilometraje ilimitado",
+    "rentacar.enviando":"Enviando...", "rentacar.ok":"¡Gracias! Te vamos a escribir por WhatsApp para confirmar disponibilidad.", "rentacar.err":"Hubo un error. Escribinos directo por WhatsApp.",
     "receptivo.title":"Receptivo & Agencias", "receptivo.sub":"¿Sos una agencia de viajes? Contanos qué necesitás y te contactamos a la brevedad.",
     "receptivo.agencia":"Nombre de la agencia", "receptivo.nombre":"Nombre de contacto", "receptivo.telefono":"Teléfono / WhatsApp", "receptivo.email":"Email",
     "receptivo.servicios":"Servicios de interés", "receptivo.servicio.avioneta":"Excursión en avioneta", "receptivo.servicio.pesca":"Pesca", "receptivo.servicio.navegacion":"Navegación privada", "receptivo.servicio.cruce":"Cruce Andino", "receptivo.servicio.otro":"Otro",
@@ -1132,6 +1224,84 @@ if (recForm) {
       btn.disabled = false;
       btn.textContent = I18N[document.documentElement.lang]["receptivo.submit"] || "Enviar consulta";
     }
+  });
+}
+
+const racForm = document.getElementById("rentacar-form");
+if (racForm) {
+  const horaRetiro = document.getElementById("rac-hora-retiro");
+  const horaDevolucion = document.getElementById("rac-hora-devolucion");
+  const fechaRetiro = document.getElementById("rac-fecha-retiro");
+  const fechaDevolucion = document.getElementById("rac-fecha-devolucion");
+
+  const horas = [];
+  for (let mins = 9 * 60 + 30; mins <= 20 * 60 + 30; mins += 30) {
+    horas.push(String(Math.floor(mins / 60)).padStart(2, "0") + ":" + String(mins % 60).padStart(2, "0"));
+  }
+  [horaRetiro, horaDevolucion].forEach(sel => {
+    sel.innerHTML = horas.map(h => `<option value="${h}">${h}</option>`).join("");
+  });
+
+  const minD = new Date();
+  minD.setDate(minD.getDate() + 2);
+  const minStr = minD.toISOString().slice(0, 10);
+  fechaRetiro.min = minStr;
+  fechaDevolucion.min = minStr;
+  fechaRetiro.addEventListener("change", () => {
+    fechaDevolucion.min = fechaRetiro.value > minStr ? fechaRetiro.value : minStr;
+  });
+
+  racForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const statusEl = document.getElementById("rentacar-status");
+    const btn = racForm.querySelector("button[type=submit]");
+    const lang = document.documentElement.lang;
+
+    const fmtFecha = d => d ? new Date(d + "T12:00:00").toLocaleDateString("es-AR") : "-";
+    const nombre = document.getElementById("rac-nombre").value.trim();
+    const email = document.getElementById("rac-email").value.trim();
+    const telefono = document.getElementById("rac-telefono").value.trim();
+    const lugar = document.getElementById("rac-lugar").value;
+
+    const resumen = [
+      `Lugar de entrega: ${lugar}`,
+      `Retiro: ${fmtFecha(fechaRetiro.value)} ${horaRetiro.value} hs`,
+      `Devolución: ${fmtFecha(fechaDevolucion.value)} ${horaDevolucion.value} hs`,
+      `Nombre: ${nombre}`,
+      `Teléfono: ${telefono}`,
+      `Email: ${email}`,
+    ].join("\n");
+
+    btn.disabled = true;
+    btn.textContent = I18N[lang]["rentacar.enviando"] || "Enviando...";
+    statusEl.className = "rentacar-status";
+    statusEl.textContent = "";
+
+    try {
+      await fetch("/api/log-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          channel: "whatsapp",
+          nombre,
+          email,
+          telefono,
+          excursion: "Rent a Car",
+          notes: resumen,
+          ...getTracking(),
+        }),
+      });
+    } catch (err) {
+      console.error("Error guardando consulta de Rent a Car", err);
+    }
+
+    const msg = encodeURIComponent("Hola Vivir Viajes! Quiero consultar por el alquiler de auto (promo 3x2):\n" + resumen + "\n¿Hay disponibilidad?");
+    window.open("https://wa.me/5492944539672?text=" + msg, "_blank");
+
+    statusEl.textContent = I18N[lang]["rentacar.ok"] || "¡Gracias! Te vamos a escribir por WhatsApp para confirmar disponibilidad.";
+    statusEl.classList.add("ok");
+    btn.disabled = false;
+    btn.textContent = I18N[lang]["rentacar.submit"] || "Consultar Disponibilidad";
   });
 }
 
