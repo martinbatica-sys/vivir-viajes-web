@@ -25,12 +25,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     var now = Date.now();
     var THIRTY_DAYS = 30*24*60*60*1000;
     if (stored._ts && now - stored._ts > THIRTY_DAYS) stored = {};
-    var changed = false;
-    keys.forEach(function(k){
-      var v = params.get(k);
-      if (v) { stored[k] = v; changed = true; }
-    });
-    if (changed || !stored._ts) stored._ts = now;
+    var hasNewTracking = keys.some(function(k){ return !!params.get(k); });
+    if (hasNewTracking) {
+      // Una visita nueva con parametros de campana reemplaza del todo al
+      // origen guardado antes, para no mezclar utm de una campana vieja
+      // con el gclid/fbclid de una visita distinta.
+      stored = {};
+      keys.forEach(function(k){
+        var v = params.get(k);
+        if (v) stored[k] = v;
+      });
+      stored._ts = now;
+    }
     localStorage.setItem('vv-tracking', JSON.stringify(stored));
   } catch(e) {}
 })();
