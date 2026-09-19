@@ -35,12 +35,12 @@
     { "source": "/excursion/paquete/", "destination": "/index.html", "permanent": true },
     { "source": "/terminos-y-condiciones/", "destination": "/index.html", "permanent": true },
 
-    { "source": "/excursion/cerro-catedral/", "destination": "/index.html", "permanent": true },
-    { "source": "/excursion/cerro-catedral-copia/", "destination": "/index.html", "permanent": true },
-    { "source": "/excursion/circuito-chico-y-cerro-catedral/", "destination": "/index.html", "permanent": true },
-    { "source": "/excursion/beer-experience/", "destination": "/index.html", "permanent": true },
-    { "source": "/excursion/nieve-al-limite/", "destination": "/index.html", "permanent": true },
-    { "source": "/excursion/nieve-al-limite", "destination": "/index.html", "permanent": true },
+    { "source": "/excursion/cerro-catedral/", "destination": "/excursion.html?exc=cerro-catedral", "permanent": true },
+    { "source": "/excursion/cerro-catedral-copia/", "destination": "/excursion.html?exc=cerro-catedral", "permanent": true },
+    { "source": "/excursion/circuito-chico-y-cerro-catedral/", "destination": "/excursion.html?exc=cerro-catedral", "permanent": true },
+    { "source": "/excursion/beer-experience/", "destination": "/excursion.html?exc=beer-experience-clasico", "permanent": true },
+    { "source": "/excursion/nieve-al-limite/", "destination": "/excursion.html?exc=nieve-al-limite", "permanent": true },
+    { "source": "/excursion/nieve-al-limite", "destination": "/excursion.html?exc=nieve-al-limite", "permanent": true },
     { "source": "/excursion/extremo-encantado/", "destination": "/index.html", "permanent": true },
     { "source": "/excursion/travesia-en-cuatriciclos-con-orugas/", "destination": "/index.html", "permanent": true }
   ],

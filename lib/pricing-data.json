@@ -673,5 +673,93 @@
         "groupDiscount": null
       }
     }
+  },
+  "cerro-catedral": {
+    "seasonal": false,
+    "temporadas": null,
+    "traslado": false,
+    "lagoFrias": false,
+    "opciones": {
+      "tour": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": null
+          }
+        ],
+        "precios": {
+          "pp": 45000
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
+  },
+  "beer-experience-clasico": {
+    "seasonal": false,
+    "temporadas": null,
+    "traslado": false,
+    "lagoFrias": false,
+    "opciones": {
+      "tour": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": null
+          }
+        ],
+        "precios": {
+          "pp": 280000
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
+  },
+  "beer-experience-sunset": {
+    "seasonal": false,
+    "temporadas": null,
+    "traslado": false,
+    "lagoFrias": false,
+    "opciones": {
+      "tour": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": null
+          }
+        ],
+        "precios": {
+          "pp": 235000
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
+  },
+  "nieve-al-limite": {
+    "seasonal": false,
+    "temporadas": null,
+    "traslado": false,
+    "lagoFrias": false,
+    "opciones": {
+      "tour": {
+        "cats": [
+          {
+            "key": "pp",
+            "min": 1,
+            "max": null
+          }
+        ],
+        "precios": {
+          "pp": 250000
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
   }
 }
