@@ -216,6 +216,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .contact{background:var(--panel);border-radius:22px;padding:clamp(2.6rem,6vw,4.2rem);text-align:center}
   .contact h2{font-family:var(--display);font-weight:700;font-size:clamp(1.9rem,4vw,2.8rem);letter-spacing:-.02em;margin-bottom:.8rem;color:var(--navy)}
   .contact p{color:var(--ink-soft);max-width:48ch;margin:0 auto 2rem}
+
+  .tailormade{position:relative;overflow:hidden;background:var(--navy-deep);color:#fff;padding:clamp(4.8rem,9vw,7.5rem) 0}
+  .tailormade-media{position:absolute;inset:0;z-index:0}
+  .tailormade-media img{width:100%;height:100%;object-fit:cover;opacity:.5}
+  .tailormade-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(15,29,56,.55) 0%, rgba(15,29,56,.92) 100%)}
+  .tailormade-inner{position:relative;z-index:1;max-width:680px;margin:0 auto;text-align:center}
+  .tailormade-inner .eyebrow{justify-content:center}
+  .tailormade-inner h2{font-family:var(--display);font-weight:700;font-size:clamp(2.1rem,4.6vw,3.3rem);letter-spacing:-.02em;line-height:1.1;margin-bottom:1.3rem}
+  .tailormade-inner h2 em{font-style:italic;color:var(--gold)}
+  .tailormade-inner .lead{color:rgba(255,255,255,.78);font-size:1.08rem;max-width:50ch;margin:0 auto 3.2rem}
+  .tailormade-pillars{display:flex;justify-content:center;margin-bottom:3.2rem;flex-wrap:wrap;gap:1.6rem 0}
+  .tailormade-pillars .pillar{flex:1;min-width:180px;max-width:230px;padding:0 1.3rem;border-left:1px solid rgba(255,255,255,.18)}
+  .tailormade-pillars .pillar:first-child{border-left:none}
+  .tailormade-pillars .pillar span{display:block;font-family:var(--display);color:var(--gold);font-size:.8rem;font-weight:700;letter-spacing:.14em;margin-bottom:.7rem}
+  .tailormade-pillars .pillar p{font-size:.92rem;color:rgba(255,255,255,.82);line-height:1.5}
+  @media(max-width:640px){.tailormade-pillars .pillar{border-left:none;border-top:1px solid rgba(255,255,255,.18);padding:1.4rem 0 0;flex:0 0 100%;max-width:340px}.tailormade-pillars .pillar:first-child{border-top:none;padding-top:0}}
   .contact .hero-cta{justify-content:center}
 
   /* ---------- Calendario (portado de excursion.html) ---------- */
@@ -349,7 +365,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="#rentacar" data-i18n="nav.rentacar">Rent a Car</a>
       <a href="#nosotros" data-i18n="nav.nosotros">Nosotros</a>
       <a href="#receptivo" data-i18n="nav.receptivo">Agencias</a>
-      <a href="#contacto" data-i18n="nav.contacto">Contacto</a>
+      <a href="#tailormade" data-i18n="nav.tailormade">Tailormade</a>
     </nav>
     <div class="actions">
       <div class="lang-switch" id="lang-switch">
@@ -971,19 +987,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- ====================== CONTACTO ====================== -->
-<section class="sec" id="contacto">
-  <div class="wrap">
-    <div class="contact reveal">
-      <h2 data-i18n="contact.title">Listos para vivir la Patagonia?</h2>
-      <p data-i18n="contact.text">Escribinos y armamos juntos tu itinerario. Te respondemos rapido y en tu idioma.</p>
-      <div class="hero-cta">
-        <!-- EDITAR-WHATSAPP -->
-        <a class="btn btn-primary" target="_blank" rel="noopener" href="https://wa.me/5492944539672?text=Hola%20Vivir%20Viajes!" data-i18n="contact.whatsapp">Escribir por WhatsApp</a>
-        <!-- EDITAR-CONTACTO: cambia el email -->
-        <a class="btn btn-ghost" href="mailto:info@vivirviajes.com.ar">info@vivirviajes.com.ar</a>
-      </div>
+<!-- ====================== TAILORMADE ====================== -->
+<section class="sec tailormade" id="tailormade">
+  <div class="tailormade-media">
+    <img src="fotos/chico-01.jpg" alt="">
+  </div>
+  <div class="wrap tailormade-inner reveal">
+    <span class="eyebrow"><span class="dot"></span> <span data-i18n="tailormade.eyebrow">Tailormade</span></span>
+    <h2 data-i18n-html="tailormade.title">Tu Patagonia, <em>a medida.</em></h2>
+    <p class="lead" data-i18n="tailormade.lead">Para quienes prefieren armar su viaje desde cero, sin ítems de catálogo: contanos qué imaginás y lo diseñamos juntos, a tu ritmo.</p>
+    <div class="tailormade-pillars">
+      <div class="pillar"><span>01</span><p data-i18n="tailormade.pillar1">Itinerario privado, armado desde cero para vos.</p></div>
+      <div class="pillar"><span>02</span><p data-i18n="tailormade.pillar2">Guías y vehículos exclusivos, sin compartir grupo.</p></div>
+      <div class="pillar"><span>03</span><p data-i18n="tailormade.pillar3">Un solo interlocutor, de principio a fin.</p></div>
     </div>
+    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://wa.me/5492944539672?text=Hola!%20Quiero%20armar%20un%20viaje%20a%20medida%20(Tailormade)." data-i18n="tailormade.cta">Contanos el viaje que imaginás</a>
   </div>
 </section>
 
@@ -1080,7 +1098,11 @@ if(window.matchMedia("(min-width:761px)").matches){
 <script>
 const I18N = {
   es: {
-    "nav.excursiones":"Excursiones", "nav.rentacar":"Rent a Car", "nav.nosotros":"Nosotros", "nav.receptivo":"Agencias", "nav.contacto":"Contacto",
+    "nav.excursiones":"Excursiones", "nav.rentacar":"Rent a Car", "nav.nosotros":"Nosotros", "nav.receptivo":"Agencias", "nav.tailormade":"Tailormade",
+    "tailormade.eyebrow":"Tailormade", "tailormade.title":"Tu Patagonia, <em>a medida.</em>",
+    "tailormade.lead":"Para quienes prefieren armar su viaje desde cero, sin ítems de catálogo: contanos qué imaginás y lo diseñamos juntos, a tu ritmo.",
+    "tailormade.pillar1":"Itinerario privado, armado desde cero para vos.", "tailormade.pillar2":"Guías y vehículos exclusivos, sin compartir grupo.", "tailormade.pillar3":"Un solo interlocutor, de principio a fin.",
+    "tailormade.cta":"Contanos el viaje que imaginás",
     "rentacar.title":"Rent a Car", "rentacar.sub":"Alquilá un auto para moverte a tu ritmo por Bariloche y la Patagonia.",
     "rentacar.lugar":"Lugar de entrega", "rentacar.lugar-centro":"Oficina centro (Mitre 183)",
     "rentacar.fecha-retiro":"Fecha de retiro", "rentacar.fecha-devolucion":"Fecha de devolución", "rentacar.elegir-fecha":"Elegir fecha",
