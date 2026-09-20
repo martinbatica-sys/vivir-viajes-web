@@ -69,6 +69,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .lang-switch button{font-family:var(--body);font-weight:700;font-size:.76rem;letter-spacing:.02em;border:none;background:transparent;color:var(--ink-soft);padding:.38rem .6rem;border-radius:999px;cursor:pointer;transition:.18s}
   .lang-switch button.active{background:var(--navy);color:#fff}
   .lang-switch button:hover:not(.active){color:var(--navy)}
+  .nav-whatsapp{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:var(--navy);font-family:var(--body);font-weight:700;font-size:.88rem;border-radius:999px;padding:.55rem 1.1rem;white-space:nowrap;transition:.18s}
+  .nav-whatsapp:hover{background:var(--gold-dark);transform:translateY(-1px)}
+  @media(max-width:640px){.nav-whatsapp .wa-text{display:none}.nav-whatsapp{padding:.55rem;gap:0}
+    .nav{flex-wrap:wrap;height:auto;row-gap:.5rem;padding:.7rem 0}
+    .back{display:none}
+    .switch{max-width:150px;text-overflow:ellipsis}}
 
   .banner{background:linear-gradient(120deg,#1A2F58,#0F1D38);color:#fff;padding:1.3rem 0 2.2rem}
   .banner-layout{display:flex;flex-direction:column;align-items:flex-start;gap:.6rem}
@@ -247,6 +253,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <button type="button" data-lang="en">EN</button>
         <button type="button" data-lang="pt">PT</button>
       </div>
+      <a class="nav-whatsapp" id="nav-whatsapp" target="_blank" rel="noopener" href="https://wa.me/5492944539672?text=Hola%20Vivir%20Viajes,%20quiero%20info%20sobre%20excursiones">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.1.1.3 0 .5l-.4.5c-.2.2-.3.4-.1.6.6 1 1.3 1.6 2.2 2.1.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.5 0 .8z"/></svg>
+        <span class="wa-text">WhatsApp</span>
+      </a>
     </div>
   </div>
 </header>
