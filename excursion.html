@@ -8,6 +8,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -110,20 +111,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .block{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.4rem 1.5rem;margin-bottom:1.2rem;transition:opacity .25s}
   .block h3{font-family:var(--display);font-weight:600;font-size:1.02rem;color:var(--navy);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
   .block p{font-size:.95rem;color:#33425e;line-height:1.65;margin:0;white-space:pre-line}
-  .ruta-map{background:var(--navy-deep);border-radius:12px;overflow:hidden;margin-bottom:1rem;position:relative}
-  .ruta-map svg{width:100%;height:auto;display:block}
-  .ruta-lake{fill:#3E6FA8;opacity:.55}
-  .ruta-lake-label{font-family:var(--body);font-size:10.5px;font-style:italic;fill:rgba(255,255,255,.5);letter-spacing:.2px}
-  .ruta-road{fill:none;stroke:#4A72B0;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;opacity:.5}
-  .ruta-trace{fill:none;stroke:var(--gold);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 4px rgba(233,162,60,.6))}
-  .ruta-stop-halo{fill:var(--navy-deep)}
-  .ruta-stop-dot{fill:rgba(255,255,255,.65);transition:fill .3s,r .3s}
-  .ruta-stop-dot.on{fill:var(--gold)}
-  .ruta-label{font-family:var(--body);font-size:12.5px;fill:rgba(255,255,255,.7);font-weight:700;transition:fill .3s;paint-order:stroke;stroke:rgba(15,29,56,.85);stroke-width:3px;stroke-linejoin:round}
-  .ruta-label.on{fill:#fff}
-  .ruta-btn{display:block;margin:0 auto;font-family:var(--body);font-weight:700;font-size:.92rem;background:var(--gold);color:var(--navy);border:none;border-radius:999px;padding:.75rem 1.7rem;cursor:pointer;transition:.18s}
-  .ruta-btn:hover{background:var(--gold-dark);transform:translateY(-1px)}
-  .ruta-btn:disabled{opacity:.55;cursor:default;transform:none}
+  .ruta-franja{background:var(--navy);color:#fff;display:flex;align-items:center;gap:1.2rem;padding:.7rem 1rem;flex-wrap:wrap;border-radius:12px 12px 0 0}
+  .ruta-live{display:flex;gap:1.4rem}
+  .ruta-live div{min-width:74px}
+  .ruta-live b{display:block;font-family:var(--body);font-weight:700;font-size:1.05rem;color:var(--gold)}
+  .ruta-live span{display:block;font-family:var(--body);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.62);margin-top:.15rem}
+  .ruta-spacer{flex:1}
+  .ruta-ctrls{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+  .ruta-seg{display:flex;border:1px solid rgba(255,255,255,.35);border-radius:8px;overflow:hidden}
+  .ruta-seg button{background:transparent;color:rgba(255,255,255,.72);font-family:var(--body);font-weight:700;font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;padding:.5rem .6rem;border:none;cursor:pointer;transition:.18s}
+  .ruta-seg button[aria-pressed="true"]{background:#fff;color:var(--navy)}
+  .ruta-seg button:hover:not([aria-pressed="true"]){background:var(--navy-2);color:#fff}
+  .ruta-btn-play,.ruta-btn-ghost{font-family:var(--body);font-weight:700;font-size:.78rem;border:none;cursor:pointer;padding:.55rem .9rem;border-radius:999px;transition:.18s;white-space:nowrap}
+  .ruta-btn-play{background:var(--gold);color:var(--navy)}
+  .ruta-btn-play:hover{background:var(--gold-dark)}
+  .ruta-btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)}
+  .ruta-btn-ghost:hover{background:var(--navy-2)}
+  .ruta-progress{height:4px;background:var(--navy-deep)}
+  .ruta-progress i{display:block;height:100%;width:0}
+  .ruta-progress i{background:var(--gold)}
+  .ruta-leaflet-map{height:380px;width:100%;background:var(--navy-deep);border-radius:0 0 12px 12px;overflow:hidden;margin-bottom:1rem}
+  .ruta-leaflet-map .leaflet-tile-pane{filter:saturate(.45) brightness(1.06) contrast(.94) hue-rotate(-12deg)}
+  .ruta-leaflet-map .leaflet-control-attribution{font-family:var(--body);font-size:.6rem}
+  .ruta-pin{position:relative}
+  .ruta-pin i{display:block;width:12px;height:12px;background:#fff;border:3px solid var(--navy);border-radius:50%;transform:translate(-50%,-50%);transition:background .3s,border-color .3s}
+  .ruta-pin.on i{border-color:var(--gold-dark);background:var(--gold)}
+  .ruta-pin.term i{width:16px;height:16px;border-color:var(--navy);background:var(--gold)}
+  .ruta-pin b{position:absolute;left:12px;top:-12px;white-space:nowrap;font-family:var(--body);font-weight:700;font-size:.7rem;background:var(--navy);color:#fff;padding:.25rem .5rem;border-radius:4px;opacity:0;transform:translateX(-4px);transition:opacity .35s,transform .35s}
+  .ruta-pin.on b,.ruta-pin.term b{opacity:1;transform:translateX(0)}
+  .ruta-car{width:16px;height:16px;background:var(--gold);border:3px solid #fff;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 2px var(--navy)}
+  @media(max-width:640px){.ruta-leaflet-map{height:300px}.ruta-live{gap:.8rem}.ruta-live div{min-width:60px}.ruta-franja{gap:.7rem}}
 
   .related{margin:2.6rem 0 3.2rem}
   .related h2{font-family:var(--display);font-weight:700;font-size:1.35rem;color:var(--navy);margin-bottom:1.1rem}
@@ -310,10 +327,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div class="block ruta-block" id="block-ruta" hidden>
         <h3 data-i18n="content.recorrido">Recorrido</h3>
-        <div class="ruta-map" id="ruta-map">
-          <svg id="ruta-svg" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid meet"></svg>
+        <div class="ruta-franja">
+          <div class="ruta-live">
+            <div><b id="ruta-stat-km">0 km</b><span data-i18n="content.ruta-km">Recorrido</span></div>
+            <div><b id="ruta-stat-time">0:00</b><span data-i18n="content.ruta-tiempo">Tiempo</span></div>
+          </div>
+          <div class="ruta-spacer"></div>
+          <div class="ruta-ctrls">
+            <div class="ruta-seg" role="group" aria-label="Camara">
+              <button type="button" data-cam="fit" aria-pressed="true" data-i18n="content.ruta-vista-completa">Vista completa</button>
+              <button type="button" data-cam="follow" aria-pressed="false" data-i18n="content.ruta-seguir">Seguir</button>
+            </div>
+            <button type="button" class="ruta-btn-ghost" id="ruta-reset" data-i18n="content.ruta-reiniciar">Reiniciar</button>
+            <button type="button" class="ruta-btn-play" id="ruta-play" data-i18n="content.ruta-recorrer">Recorrer el circuito</button>
+          </div>
         </div>
-        <button type="button" class="ruta-btn" id="ruta-btn" data-i18n="content.ver-recorrido">Ver recorrido</button>
+        <div class="ruta-progress" aria-hidden="true"><i id="ruta-bar"></i></div>
+        <div class="ruta-leaflet-map" id="ruta-leaflet-map"></div>
       </div>
       <div class="block" id="block-incluye">
         <h3>&#10003; <span data-i18n="content.incluye">Que incluye</span></h3>
@@ -1479,17 +1509,13 @@ const EXC = {
    notas:["Horario de Pick Up (estimado): 08:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:false, horario:"08:00 hs",
    ruta:{
-     viewBox:"0 0 1400 660",
-     path:"M766.9,594.6 C766.9,594.6 766.3,594.7 766.9,594.6 C767.6,594.5 768.6,608.9 770.6,593.9 C772.7,578.9 776.9,519.1 779.3,504.3 C781.8,489.5 783.6,504.9 785.4,505.2 C787.2,505.5 788.1,505.7 790.1,505.9 C792.2,506.1 794.4,506.4 797.6,506.5 C800.8,506.7 805.8,506.8 809.4,506.7 C813.1,506.7 814.5,506.7 819.3,506.4 C824.1,506.2 833.0,505.8 838.4,505.2 C843.8,504.6 847.7,505.0 851.6,502.8 C855.5,500.7 859.9,494.2 861.8,492.1 C863.7,490.1 858.2,495.0 863.0,490.4 C867.8,485.8 885.3,469.0 890.4,464.4 C895.6,459.8 891.7,463.9 893.9,462.6 C896.0,461.3 899.2,460.0 903.4,456.6 C907.5,453.1 914.8,446.4 919.0,442.1 C923.1,437.8 924.6,437.4 928.5,430.8 C932.3,424.2 939.5,409.0 941.9,402.4 C944.3,395.7 942.7,394.9 942.6,390.9 C942.5,386.9 941.7,381.1 941.4,378.1 C941.0,375.1 943.2,379.0 940.3,372.8 C937.5,366.7 927.5,347.1 924.1,341.2 C920.7,335.3 921.5,338.8 919.9,337.5 C918.3,336.2 918.1,336.8 914.4,333.1 C910.8,329.4 901.0,320.2 897.8,315.4 C894.6,310.7 896.5,308.3 895.3,304.8 C894.1,301.3 892.8,301.1 890.6,294.5 C888.3,288.0 883.4,271.7 881.9,265.5 C880.5,259.3 881.6,260.5 882.1,257.3 C882.6,254.0 884.2,248.7 885.0,245.9 C885.7,243.1 888.4,246.9 886.8,240.5 C885.2,234.0 877.5,212.8 875.4,207.3 C873.3,201.8 874.2,207.4 874.0,207.5 C873.8,207.5 877.6,211.3 874.0,207.5 C870.4,203.6 860.3,189.6 852.2,184.5 C844.0,179.4 833.8,176.1 825.1,176.8 C816.5,177.5 805.9,185.8 800.1,188.5 C794.3,191.2 794.8,192.6 790.5,192.8 C786.2,193.1 778.4,191.1 774.4,189.7 C770.5,188.4 769.2,186.5 767.0,185.0 C764.8,183.5 762.9,182.0 761.3,180.6 C759.8,179.2 763.6,180.0 757.5,176.7 C751.5,173.4 731.5,163.6 725.2,160.9 C718.9,158.2 723.0,160.9 719.9,160.5 C716.7,160.0 710.2,159.1 706.3,158.2 C702.5,157.2 702.1,156.8 696.9,154.8 C691.8,152.8 681.0,148.3 675.4,146.3 C669.9,144.2 667.4,143.9 663.6,142.3 C659.8,140.6 655.8,138.3 652.8,136.5 C649.9,134.8 650.6,133.8 645.7,131.7 C640.9,129.7 628.8,125.9 623.5,124.2 C618.2,122.6 617.3,123.0 613.7,121.9 C610.2,120.9 607.2,119.4 602.2,117.9 C597.3,116.5 589.0,113.9 583.9,113.2 C578.7,112.6 576.0,113.4 571.4,114.2 C566.8,114.9 560.1,117.1 556.3,117.9 C552.4,118.6 551.1,119.4 548.4,118.8 C545.6,118.2 545.8,115.6 540.0,114.1 C534.2,112.7 521.3,110.4 513.8,110.1 C506.3,109.8 500.0,112.6 495.2,112.4 C490.5,112.1 488.4,109.6 485.2,108.4 C482.1,107.2 478.5,105.3 476.4,105.2 C474.3,105.0 473.3,105.8 472.6,107.5 C472.0,109.3 472.6,111.0 472.6,115.7 C472.6,120.4 472.5,131.4 472.5,135.7 C472.6,140.0 471.7,135.2 472.9,141.7 C474.0,148.1 478.5,168.3 479.4,174.6 C480.3,180.8 478.7,177.6 478.3,179.2 C477.9,180.8 477.8,181.6 477.1,184.2 C476.5,186.7 471.7,187.6 474.5,194.5 C477.3,201.3 490.3,219.2 494.1,225.2 C497.8,231.2 495.8,228.6 496.9,230.5 C498.1,232.5 495.4,232.9 500.9,237.0 C506.4,241.1 525.2,252.2 529.9,255.3 C534.6,258.4 533.6,257.8 529.1,255.4 C524.6,252.9 507.2,243.3 502.9,240.9 C498.5,238.5 496.6,236.4 502.9,240.9 C509.1,245.4 533.6,262.6 540.3,267.7 C547.0,272.7 539.8,266.6 543.0,271.1 C546.3,275.7 555.8,289.4 559.8,294.9 C563.9,300.5 565.1,301.9 567.4,304.5 C569.8,307.2 572.7,309.7 573.9,310.9 C575.2,312.0 574.8,311.4 575.0,311.5 C575.2,311.6 568.4,303.3 575.0,311.5 C581.5,319.7 607.6,352.1 614.3,360.5 C620.9,368.9 614.6,361.3 614.8,361.7 C614.9,362.1 614.8,362.1 615.3,362.9 C615.8,363.7 617.4,365.8 617.8,366.4 C618.3,367.0 617.8,366.4 617.8,366.4 C617.8,366.4 612.0,362.0 617.8,366.4 C623.7,370.8 647.0,388.2 653.0,392.6 C658.9,397.0 652.0,391.9 653.5,393.0 C655.0,394.0 660.6,398.0 662.0,399.0 C663.4,400.0 659.6,397.6 662.0,399.0 C664.4,400.4 665.5,395.3 676.4,407.4 C687.4,419.4 718.6,458.0 727.8,471.1 C737.0,484.2 731.0,483.7 731.7,486.2 C732.3,488.7 731.7,486.2 731.7,486.2 C731.7,486.2 731.6,485.9 731.7,486.2 C731.8,486.5 731.9,487.3 732.3,488.1 C732.7,488.9 733.1,490.0 734.0,491.0 C735.0,492.1 736.0,493.3 737.9,494.4 C739.9,495.5 741.3,496.3 745.7,497.6 C750.1,498.8 761.4,501.1 764.5,501.9 C767.6,502.6 762.0,501.4 764.5,501.9 C767.0,502.3 777.7,489.1 779.3,504.3 C781.0,519.5 776.5,578.1 774.5,593.1 C772.4,608.2 768.2,594.3 766.9,594.6 C765.7,594.8 766.9,594.6 766.9,594.6",
-     lakes:[
-       {path:"M402,49 C395.5,57.5 407.8,75 396,87 C384.2,99 343.8,109.3 331,121 C318.2,132.7 306.5,152.2 319,157 C331.5,161.8 391.7,137.7 406,150 C420.3,162.3 397.3,214.3 405,231 C412.7,247.7 446.3,239.3 452,250 C457.7,260.7 436,286.3 439,295 C442,303.7 455,288.3 470,302 C485,315.7 521.3,360.8 529,377 C536.7,393.2 511,389.7 516,399 C521,408.3 554.7,418.5 559,433 C563.3,447.5 570.8,479.7 542,486 C513.2,492.3 410,461.5 386,471 C362,480.5 393.3,538.8 398,543 C402.7,547.2 389.3,500.2 414,496 C438.7,491.8 532.7,501.5 546,518 C559.3,534.5 508.8,583.5 494,595 C479.2,606.5 462.5,583.3 457,587 C451.5,590.7 465.2,612.3 461,617 C456.8,621.7 434.8,608 432,615 C429.2,622 423.5,670.8 444,659 C464.5,647.2 524.7,561 555,544 C585.3,527 611.2,549.3 626,557 C640.8,564.7 624.8,582.2 644,590 C663.2,597.8 722,607.2 741,604 C760,600.8 747.3,569.2 758,571 C768.7,572.8 787,623.8 805,615 C823,606.2 863.3,533.5 866,518 C868.7,502.5 826,525.5 821,522 C816,518.5 838.5,501.2 836,497 C833.5,492.8 811.5,492.8 806,497 C800.5,501.2 816.5,517 803,522 C789.5,527 738,529.7 725,527 C712,524.3 716.7,510.7 725,506 C733.3,501.3 775,503.5 775,499 C775,494.5 732,491.8 725,479 C718,466.2 746.2,437.5 733,422 C719.8,406.5 665,403 646,386 C627,369 634.7,334 619,320 C603.3,306 565.8,314.7 552,302 C538.2,289.3 539.2,250.3 536,244 C532.8,237.7 539.2,262 533,264 C526.8,266 499.8,259.7 499,256 C498.2,252.3 526.2,245 528,242 C529.8,239 512.2,278.3 510,238 C507.8,197.7 516.3,23.3 515,0 C513.7,-23.3 514.3,85.5 502,98 C489.7,110.5 452.2,85.3 441,75 C429.8,64.7 441.5,40.3 435,36 C428.5,31.7 408.5,40.5 402,49 Z",label:"Lago Nahuel Huapi",lx:600,ly:430,anchor:"middle"},
-       {path:"M547,0 C544.2,0.5 550.2,-3.2 554,3 C557.8,9.2 563.2,28.8 570,37 C576.8,45.2 588.5,46 595,52 C601.5,58 606.8,65.7 609,73 C611.2,80.3 612,91.8 608,96 C604,100.2 589,96.7 585,98 C581,99.3 587.7,102.2 584,104 C580.3,105.8 562.2,108.2 563,109 C563.8,109.8 584.5,106.7 589,109 C593.5,111.3 584.8,119.3 590,123 C595.2,126.7 615,127.5 620,131 C625,134.5 619.3,143.2 620,144 C620.7,144.8 619.8,137.3 624,136 C628.2,134.7 641.2,134.7 645,136 C648.8,137.3 643.2,142.5 647,144 C650.8,145.5 664.3,143 668,145 C671.7,147 665.8,154 669,156 C672.2,158 683.8,155.5 687,157 C690.2,158.5 685,163.7 688,165 C691,166.3 702,163.5 705,165 C708,166.5 704.8,174.2 706,174 C707.2,173.8 713.5,166.3 712,164 C710.5,161.7 699.3,163.5 697,160 C694.7,156.5 694,145.5 698,143 C702,140.5 716.8,143 721,145 C725.2,147 715.8,151.2 723,155 C730.2,158.8 756,168.2 764,168 C772,167.8 770.2,157.3 771,154 C771.8,150.7 771.2,149.2 769,148 C766.8,146.8 759.8,149.2 758,147 C756.2,144.8 761.7,136.3 758,135 C754.3,133.7 743.2,139.2 736,139 C728.8,138.8 719.8,136.7 715,134 C710.2,131.3 713.7,125 707,123 C700.3,121 686.5,126 675,122 C663.5,118 645.3,105.2 638,99 C630.7,92.8 632.2,90.2 631,85 C629.8,79.8 630,71.3 631,68 C632,64.7 638.5,66 637,65 C635.5,64 625,65.2 622,62 C619,58.8 621.5,49.3 619,46 C616.5,42.7 609,45.3 607,42 C605,38.7 612,30 607,26 C602,22 583,22.3 577,18 C571,13.7 576,3 571,0 C566,-3 549.8,-0.5 547,0 Z",label:"Lago Traful",lx:650,ly:45,anchor:"middle"},
-     ],
+     route:[[-41.13361,-71.31032],[-41.13455,-71.3104],[-41.1343,-71.31281],[-41.13272,-71.31099],[-41.13238,-71.30107],[-41.13368,-71.28767],[-41.13098,-71.27544],[-41.12973,-71.25817],[-41.12468,-71.23955],[-41.11729,-71.22634],[-41.11311,-71.22383],[-41.11045,-71.21671],[-41.1085,-71.21544],[-41.10484,-71.20159],[-41.10436,-71.19458],[-41.10187,-71.18832],[-41.10024,-71.18671],[-41.09261,-71.18327],[-41.08575,-71.18357],[-41.08367,-71.18258],[-41.06559,-71.16066],[-41.05744,-71.14931],[-41.0539,-71.14825],[-41.05035,-71.14991],[-41.04449,-71.15629],[-41.03238,-71.15304],[-41.03211,-71.15998],[-41.03973,-71.19173],[-41.03766,-71.2108],[-41.03952,-71.21465],[-41.03979,-71.22101],[-41.03674,-71.22392],[-41.03633,-71.22586],[-41.04008,-71.23063],[-41.04087,-71.23438],[-41.03537,-71.27221],[-41.03551,-71.2871],[-41.03155,-71.30146],[-41.02893,-71.32001],[-41.02685,-71.32476],[-41.02674,-71.32904],[-41.02532,-71.33275],[-41.01839,-71.34003],[-41.01336,-71.33849],[-41.00769,-71.33859],[-41.00283,-71.33987],[-40.9988,-71.34351],[-40.99547,-71.34277],[-40.97239,-71.34955],[-40.96448,-71.34605],[-40.96236,-71.34679],[-40.95896,-71.35011],[-40.95344,-71.35205],[-40.95125,-71.35467],[-40.94749,-71.35531],[-40.94375,-71.36051],[-40.94273,-71.36656],[-40.93943,-71.37337],[-40.94032,-71.37915],[-40.93941,-71.39739],[-40.93646,-71.40208],[-40.93381,-71.41248],[-40.92885,-71.41977],[-40.92498,-71.43467],[-40.92069,-71.43901],[-40.91468,-71.45181],[-40.90953,-71.45405],[-40.90235,-71.46727],[-40.89644,-71.47137],[-40.89672,-71.47485],[-40.90271,-71.47868],[-40.90243,-71.48544],[-40.90089,-71.48968],[-40.88951,-71.49732],[-40.88746,-71.50167],[-40.87836,-71.50722],[-40.8734,-71.50832],[-40.87048,-71.50771],[-40.86596,-71.50981],[-40.86214,-71.50988],[-40.85861,-71.51142],[-40.84925,-71.52228],[-40.84555,-71.52518],[-40.84239,-71.52624],[-40.84012,-71.53429],[-40.83739,-71.53711],[-40.83693,-71.54225],[-40.83416,-71.54342],[-40.8332,-71.55169],[-40.8314,-71.55541],[-40.83088,-71.55965],[-40.82369,-71.56674],[-40.82002,-71.56738],[-40.81854,-71.56935],[-40.81619,-71.57622],[-40.81094,-71.58076],[-40.80935,-71.58372],[-40.80268,-71.5867],[-40.79727,-71.59045],[-40.79344,-71.59501],[-40.79052,-71.59552],[-40.78934,-71.60016],[-40.78274,-71.60801],[-40.78087,-71.61248],[-40.77806,-71.61339],[-40.76875,-71.6199],[-40.76549,-71.63096],[-40.76274,-71.63455],[-40.76321,-71.64021],[-40.76192,-71.64569],[-40.76319,-71.64863],[-40.76142,-71.64776],[-40.75793,-71.65164],[-40.75097,-71.66671],[-40.74325,-71.66718],[-40.74086,-71.67132],[-40.73864,-71.67268],[-40.73466,-71.67298],[-40.73415,-71.67537],[-40.73154,-71.67931],[-40.72611,-71.68496],[-40.7253,-71.6872],[-40.72199,-71.68997],[-40.72228,-71.69313],[-40.72122,-71.69467],[-40.71396,-71.69804],[-40.71251,-71.70027],[-40.70619,-71.70145],[-40.70385,-71.70392],[-40.7013,-71.70464],[-40.69562,-71.70085],[-40.69204,-71.69649],[-40.69017,-71.69248],[-40.68454,-71.69139],[-40.68265,-71.6922],[-40.68181,-71.69446],[-40.68053,-71.6951],[-40.67438,-71.69728],[-40.66768,-71.69794],[-40.66108,-71.70495],[-40.65803,-71.70386],[-40.65614,-71.70434],[-40.654,-71.70306],[-40.6489,-71.7062],[-40.64769,-71.70527],[-40.64759,-71.70252],[-40.64597,-71.70183],[-40.64361,-71.70475],[-40.64045,-71.70564],[-40.6349,-71.70388],[-40.63287,-71.70437],[-40.6295,-71.70737],[-40.62494,-71.70632],[-40.62246,-71.70492],[-40.61839,-71.70639],[-40.61713,-71.70782],[-40.61288,-71.70765],[-40.61221,-71.70505],[-40.61031,-71.70937],[-40.60858,-71.71032],[-40.60664,-71.70915],[-40.6057,-71.70704],[-40.60171,-71.7053],[-40.60055,-71.70279],[-40.6052,-71.69044],[-40.60877,-71.68679],[-40.61135,-71.67976],[-40.6113,-71.67571],[-40.62148,-71.66538],[-40.62247,-71.66268],[-40.6267,-71.659],[-40.62833,-71.65356],[-40.62767,-71.65173],[-40.61914,-71.64691],[-40.61147,-71.6451],[-40.60894,-71.64535],[-40.60935,-71.6443],[-40.61118,-71.64377],[-40.60525,-71.6425],[-40.60498,-71.63896],[-40.60289,-71.635],[-40.60333,-71.625],[-40.6046,-71.62234],[-40.60486,-71.61747],[-40.60955,-71.61226],[-40.61657,-71.6084],[-40.61985,-71.60355],[-40.62107,-71.59656],[-40.62559,-71.59052],[-40.62323,-71.57989],[-40.62216,-71.57882],[-40.62074,-71.57919],[-40.62047,-71.57663],[-40.61697,-71.57426],[-40.61367,-71.56618],[-40.61504,-71.54773],[-40.61688,-71.5456],[-40.61582,-71.54038],[-40.61696,-71.53844],[-40.6167,-71.52783],[-40.62136,-71.52276],[-40.62263,-71.51955],[-40.62241,-71.51458],[-40.62482,-71.50654],[-40.62394,-71.50311],[-40.62611,-71.4994],[-40.62699,-71.49445],[-40.62847,-71.49319],[-40.62831,-71.48126],[-40.62975,-71.47727],[-40.62912,-71.47453],[-40.62998,-71.46314],[-40.63247,-71.45814],[-40.64217,-71.45105],[-40.64362,-71.44187],[-40.64858,-71.43498],[-40.65037,-71.42782],[-40.6495,-71.41885],[-40.65083,-71.41321],[-40.65042,-71.40963],[-40.65257,-71.40587],[-40.65245,-71.40194],[-40.65608,-71.39301],[-40.66008,-71.38744],[-40.66347,-71.37162],[-40.66521,-71.36761],[-40.66513,-71.35905],[-40.67028,-71.35677],[-40.66719,-71.34649],[-40.66545,-71.34489],[-40.66741,-71.33568],[-40.67092,-71.3311],[-40.67182,-71.32583],[-40.67398,-71.32286],[-40.67406,-71.31872],[-40.67599,-71.31193],[-40.6774,-71.31088],[-40.68344,-71.29946],[-40.68957,-71.29408],[-40.69121,-71.28991],[-40.694,-71.28917],[-40.69696,-71.28207],[-40.69822,-71.28107],[-40.7002,-71.27567],[-40.69931,-71.27042],[-40.70059,-71.26422],[-40.69758,-71.25063],[-40.69735,-71.24552],[-40.6954,-71.24149],[-40.69622,-71.23626],[-40.69486,-71.23021],[-40.69635,-71.22544],[-40.69596,-71.22253],[-40.69495,-71.21981],[-40.68828,-71.2157],[-40.68447,-71.20893],[-40.68197,-71.19589],[-40.68376,-71.18907],[-40.68385,-71.18309],[-40.68625,-71.17983],[-40.68916,-71.16889],[-40.69441,-71.16361],[-40.69701,-71.15359],[-40.70013,-71.14927],[-40.7009,-71.14547],[-40.70411,-71.13898],[-40.7079,-71.1356],[-40.71233,-71.1339],[-40.71607,-71.13644],[-40.71799,-71.13995],[-40.71919,-71.13894],[-40.71579,-71.12963],[-40.7163,-71.11625],[-40.71475,-71.10992],[-40.71558,-71.10507],[-40.71932,-71.10291],[-40.72116,-71.09729],[-40.72542,-71.0939],[-40.72984,-71.09879],[-40.74109,-71.10389],[-40.74625,-71.10458],[-40.74975,-71.10934],[-40.75359,-71.11887],[-40.75773,-71.12196],[-40.76453,-71.12161],[-40.77913,-71.12491],[-40.78635,-71.12062],[-40.80403,-71.12036],[-40.80627,-71.11835],[-40.81265,-71.10542],[-40.81588,-71.10349],[-40.82258,-71.10265],[-40.82731,-71.09788],[-40.82918,-71.09759],[-40.8323,-71.09875],[-40.83491,-71.1034],[-40.83664,-71.10462],[-40.84197,-71.10272],[-40.8446,-71.09358],[-40.85205,-71.08803],[-40.85344,-71.08538],[-40.85412,-71.07876],[-40.85129,-71.07101],[-40.85167,-71.0688],[-40.85412,-71.0673],[-40.85912,-71.06109],[-40.86581,-71.05921],[-40.87037,-71.05568],[-40.87188,-71.04749],[-40.87736,-71.04899],[-40.87852,-71.05342],[-40.88321,-71.05503],[-40.88588,-71.0459],[-40.88955,-71.03964],[-40.89309,-71.03941],[-40.89829,-71.04177],[-40.90157,-71.03765],[-40.90597,-71.03644],[-40.91414,-71.03651],[-40.91953,-71.0344],[-40.92362,-71.03706],[-40.93358,-71.03876],[-40.9411,-71.04296],[-40.94378,-71.04342],[-40.94619,-71.0479],[-40.94874,-71.04889],[-40.9515,-71.04768],[-40.95739,-71.05415],[-40.97434,-71.07641],[-40.98468,-71.08805],[-40.9871,-71.09632],[-40.9916,-71.10661],[-41.00515,-71.13137],[-41.01739,-71.14817],[-41.01978,-71.1496],[-41.04427,-71.15632],[-41.04999,-71.15011],[-41.0539,-71.14825],[-41.05718,-71.14918],[-41.08367,-71.18258],[-41.08575,-71.18357],[-41.09223,-71.18315],[-41.10157,-71.18792],[-41.10436,-71.19458],[-41.10484,-71.20159],[-41.1085,-71.21544],[-41.11033,-71.21652],[-41.11276,-71.22333],[-41.11753,-71.22748],[-41.12468,-71.23955],[-41.12973,-71.25817],[-41.13076,-71.27444],[-41.13354,-71.28721],[-41.1323,-71.30091],[-41.13265,-71.31019],[-41.133,-71.30943],[-41.13361,-71.31032]],
+     totalKm:240, totalMin:279,
      stops:[
-       {x:766.9,y:594.6,label:"Bariloche",dx:0,dy:-16,anchor:"middle",t:0},
-       {x:886.8,y:240.5,label:"Valle Encantado",dx:-14,dy:20,anchor:"end",t:.293},
-       {x:663.6,y:142.3,label:"Villa Traful",dx:0,dy:-14,anchor:"middle",t:.458},
-       {x:529.1,y:255.4,label:"Villa La Angostura",dx:14,dy:18,anchor:"start",t:.685},
+       {name:"Bariloche",ll:[-41.13361,-71.31032],term:true},
+       {name:"Villa La Angostura",ll:[-40.7635,-71.6486]},
+       {name:"Villa Traful",ll:[-40.6499,-71.4020]},
+       {name:"Valle Encantado",ll:[-40.7235,-71.0305]},
      ],
    },
    i18n:{
@@ -2203,6 +2229,8 @@ const UI = {
     "nav.volver":"← Volver a excursiones",
     "content.incluye":"Que incluye", "content.notas":"Informacion importante", "content.relacionadas":"También te puede interesar", "content.el-paseo":"El paseo",
     "content.recorrido":"Recorrido", "content.ver-recorrido":"Ver recorrido",
+    "content.ruta-km":"Recorrido", "content.ruta-tiempo":"Tiempo", "content.ruta-vista-completa":"Vista completa", "content.ruta-seguir":"Seguir",
+    "content.ruta-reiniciar":"Reiniciar", "content.ruta-recorrer":"Recorrer el circuito", "content.ruta-pausar":"Pausar", "content.ruta-continuar":"Continuar", "content.ruta-recorrer-de-nuevo":"Volver a recorrer",
     "form.reservar-online":"Reservar online", "form.opcion":"Experiencia / opcion", "form.traslado":"Traslado", "form.sin-traslado":"Sin traslado", "form.con-traslado":"Con traslado",
     "form.pickup":"Punto de pick up", "form.pickup-placeholder":"Seleccionar punto de pick up...",
     "form.lagofrias":"Extensión Lago Frías", "form.sin-lagofrias":"Sin Lago Frías", "form.con-lagofrias":"Con Lago Frías",
@@ -2280,6 +2308,8 @@ const UI = {
     "nav.volver":"← Back to excursions",
     "content.incluye":"What's included", "content.notas":"Important information", "content.relacionadas":"You might also like", "content.el-paseo":"The tour",
     "content.recorrido":"Route", "content.ver-recorrido":"See the route",
+    "content.ruta-km":"Traveled", "content.ruta-tiempo":"Time", "content.ruta-vista-completa":"Full view", "content.ruta-seguir":"Follow",
+    "content.ruta-reiniciar":"Reset", "content.ruta-recorrer":"Tour the circuit", "content.ruta-pausar":"Pause", "content.ruta-continuar":"Continue", "content.ruta-recorrer-de-nuevo":"Watch again",
     "form.reservar-online":"Book online", "form.opcion":"Experience / option", "form.traslado":"Transfer", "form.sin-traslado":"Without transfer", "form.con-traslado":"With transfer",
     "form.pickup":"Pick-up point", "form.pickup-placeholder":"Select a pick-up point...",
     "form.lagofrias":"Lake Frías extension", "form.sin-lagofrias":"Without Lake Frías", "form.con-lagofrias":"With Lake Frías",
@@ -2357,6 +2387,8 @@ const UI = {
     "nav.volver":"← Voltar aos passeios",
     "content.incluye":"O que inclui", "content.notas":"Informações importantes", "content.relacionadas":"Você também pode gostar", "content.el-paseo":"O passeio",
     "content.recorrido":"Percurso", "content.ver-recorrido":"Ver percurso",
+    "content.ruta-km":"Percorrido", "content.ruta-tiempo":"Tempo", "content.ruta-vista-completa":"Vista completa", "content.ruta-seguir":"Seguir",
+    "content.ruta-reiniciar":"Reiniciar", "content.ruta-recorrer":"Percorrer o circuito", "content.ruta-pausar":"Pausar", "content.ruta-continuar":"Continuar", "content.ruta-recorrer-de-nuevo":"Refazer o percurso",
     "form.reservar-online":"Reservar online", "form.opcion":"Experiência / opção", "form.traslado":"Traslado", "form.sin-traslado":"Sem traslado", "form.con-traslado":"Com traslado",
     "form.pickup":"Ponto de embarque", "form.pickup-placeholder":"Selecionar ponto de embarque...",
     "form.lagofrias":"Extensão Lago Frías", "form.sin-lagofrias":"Sem Lago Frías", "form.con-lagofrias":"Com Lago Frías",
@@ -2879,121 +2911,176 @@ function renderStatic(){
   renderRuta();
 }
 
-const RUTA_FEATURE_ENABLED = false;
+let rutaLeafletMap = null;
+let rutaLeafletLoading = null;
+function loadLeaflet(){
+  if(window.L) return Promise.resolve();
+  if(rutaLeafletLoading) return rutaLeafletLoading;
+  rutaLeafletLoading = new Promise((resolve, reject)=>{
+    const s = document.createElement("script");
+    s.src = "vendor/leaflet/leaflet.js";
+    s.onload = resolve;
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+  return rutaLeafletLoading;
+}
+
 function renderRuta(){
   const e = EXC[id];
   const block = document.getElementById("block-ruta");
-  if(!RUTA_FEATURE_ENABLED || !e.ruta){ block.hidden = true; return; }
+  if(!e.ruta || !Array.isArray(e.ruta.route)){ block.hidden = true; return; }
   block.hidden = false;
 
+  if(rutaLeafletMap){ return; }
+  loadLeaflet().then(initRutaMap).catch(()=>{ block.hidden = true; });
+}
+
+function initRutaMap(){
+  const e = EXC[id];
   const ruta = e.ruta;
-  const svg = document.getElementById("ruta-svg");
-  svg.setAttribute("viewBox", ruta.viewBox || "0 0 640 360");
-  svg.innerHTML = "";
+  const ROUTE = ruta.route;
+  const STOPS = ruta.stops;
+  const C_ROUTE = "#16284C", C_DONE = "#E9A23C";
 
-  const NS = "http://www.w3.org/2000/svg";
+  const R = 6371, rad = d => d * Math.PI / 180;
+  function hav(a, b){
+    const dLat = rad(b[0]-a[0]), dLon = rad(b[1]-a[1]);
+    const x = Math.sin(dLat/2)**2 + Math.cos(rad(a[0])) * Math.cos(rad(b[0])) * Math.sin(dLon/2)**2;
+    return 2 * R * Math.asin(Math.sqrt(x));
+  }
+  const CUM = [0];
+  for(let i=1;i<ROUTE.length;i++) CUM.push(CUM[i-1] + hav(ROUTE[i-1], ROUTE[i]));
+  const LEN = CUM[CUM.length-1];
+  const TOTAL_KM = ruta.totalKm || Math.round(LEN);
+  const TOTAL_MIN = ruta.totalMin || 0;
+  const SCALE = TOTAL_KM / LEN;
+  const DURATION = 18000;
 
-  if(ruta.bgImage){
-    const img = document.createElementNS(NS,"image");
-    img.setAttribute("href", ruta.bgImage);
-    img.setAttribute("x", 0); img.setAttribute("y", 0);
-    img.setAttribute("width", ruta.imgW); img.setAttribute("height", ruta.imgH);
-    svg.appendChild(img);
+  function atDistance(d){
+    if(d <= 0) return { ll: ROUTE[0], i: 0 };
+    if(d >= LEN) return { ll: ROUTE[ROUTE.length-1], i: ROUTE.length-1 };
+    let lo = 0, hi = CUM.length - 1;
+    while(lo < hi - 1){ const m = (lo+hi) >> 1; if(CUM[m] <= d){ lo = m; } else { hi = m; } }
+    const t = (d - CUM[lo]) / (CUM[hi] - CUM[lo] || 1);
+    return { ll: [ROUTE[lo][0] + (ROUTE[hi][0]-ROUTE[lo][0]) * t, ROUTE[lo][1] + (ROUTE[hi][1]-ROUTE[lo][1]) * t], i: lo };
   }
 
-  const lakesGroup = document.createElementNS(NS,"g");
-  (ruta.lakes || []).forEach(lk=>{
-    const shape = document.createElementNS(NS,"path");
-    shape.setAttribute("class","ruta-lake");
-    shape.setAttribute("d", lk.path);
-    lakesGroup.appendChild(shape);
-
-    if(lk.label){
-      const lbl = document.createElementNS(NS,"text");
-      lbl.setAttribute("class","ruta-lake-label");
-      lbl.setAttribute("x", String(lk.lx));
-      lbl.setAttribute("y", String(lk.ly));
-      lbl.setAttribute("text-anchor", lk.anchor || "middle");
-      lbl.textContent = lk.label;
-      lakesGroup.appendChild(lbl);
-    }
+  STOPS.forEach((s, n) => {
+    let best = Infinity, bi = 0;
+    ROUTE.forEach((p, i) => { const d = (p[0]-s.ll[0])**2 + (p[1]-s.ll[1])**2; if(d < best){ best = d; bi = i; } });
+    s.at = n === 0 ? 0 : CUM[bi];
   });
-  svg.appendChild(lakesGroup);
 
-  if(!ruta.bgImage){
-    const road = document.createElementNS(NS,"path");
-    road.setAttribute("class","ruta-road");
-    road.setAttribute("d", ruta.path);
-    svg.appendChild(road);
-  }
+  const mapEl = document.getElementById("ruta-leaflet-map");
+  const map = L.map(mapEl, { zoomControl: false, scrollWheelZoom: false });
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "&copy; OpenStreetMap contributors", maxZoom: 18
+  }).addTo(map);
+  L.control.zoom({ position: "bottomright" }).addTo(map);
 
-  const trace = document.createElementNS(NS,"path");
-  trace.setAttribute("class","ruta-trace");
-  trace.setAttribute("d", ruta.path);
-  svg.appendChild(trace);
+  const BOUNDS = L.latLngBounds(ROUTE);
+  const fitAll = () => map.fitBounds(BOUNDS, { padding: [30,30] });
+  fitAll();
 
-  const len = trace.getTotalLength();
-  trace.style.strokeDasharray = String(len);
-  trace.style.strokeDashoffset = String(len);
+  L.polyline(ROUTE, { color: C_ROUTE, weight: 2, opacity: .22, lineJoin: "round" }).addTo(map);
+  const casing = L.polyline([], { color: "#ffffff", weight: 9, opacity: .95, lineCap: "round", lineJoin: "round" }).addTo(map);
+  const trail  = L.polyline([], { color: C_ROUTE, weight: 5, opacity: 1, lineCap: "round", lineJoin: "round" }).addTo(map);
+  const glow   = L.polyline([], { color: C_DONE, weight: 5, opacity: 1, lineCap: "round", lineJoin: "round" }).addTo(map);
 
-  const stopsGroup = document.createElementNS(NS,"g");
-  const stops = ruta.stops || [];
-  stops.forEach(s=>{
-    const halo = document.createElementNS(NS,"circle");
-    halo.setAttribute("class","ruta-stop-halo");
-    halo.setAttribute("cx", s.x); halo.setAttribute("cy", s.y); halo.setAttribute("r", "7");
-    stopsGroup.appendChild(halo);
+  const pins = STOPS.map(s => L.marker(s.ll, {
+    icon: L.divIcon({ className: "", html: '<div class="ruta-pin'+(s.term?" term":"")+'"><i></i><b>'+s.name+"</b></div>", iconSize: [0,0] }),
+    interactive: false
+  }).addTo(map));
 
-    const dot = document.createElementNS(NS,"circle");
-    dot.setAttribute("class","ruta-stop-dot");
-    dot.setAttribute("cx", s.x); dot.setAttribute("cy", s.y); dot.setAttribute("r", "5");
-    stopsGroup.appendChild(dot);
+  const car = L.marker(ROUTE[0], { icon: L.divIcon({ className: "", html: '<div class="ruta-car"></div>', iconSize: [0,0] }), interactive: false, zIndexOffset: 1000 });
 
-    const label = document.createElementNS(NS,"text");
-    label.setAttribute("class","ruta-label");
-    label.setAttribute("x", String(s.x + (s.dx!=null?s.dx:8)));
-    label.setAttribute("y", String(s.y + (s.dy!=null?s.dy:4)));
-    label.setAttribute("text-anchor", s.anchor || "start");
-    label.textContent = s.label;
-    stopsGroup.appendChild(label);
-  });
-  svg.appendChild(stopsGroup);
+  const playBtn = document.getElementById("ruta-play");
+  const resetBtn = document.getElementById("ruta-reset");
+  const bar = document.getElementById("ruta-bar");
+  const statKm = document.getElementById("ruta-stat-km");
+  const statTime = document.getElementById("ruta-stat-time");
+  let raf = null, startedAt = 0, elapsed = 0, pstate = "idle", camMode = "fit";
 
-  const btn = document.getElementById("ruta-btn");
-  const getDots = () => svg.querySelectorAll(".ruta-stop-dot");
-  const getLabels = () => svg.querySelectorAll(".ruta-label");
+  const fmt = m => Math.floor(m/60) + ":" + String(Math.round(m%60)).padStart(2,"0");
 
-  function resetTrace(){
-    trace.style.transition = "none";
-    trace.style.strokeDashoffset = String(len);
-    getDots().forEach(d=>d.classList.remove("on"));
-    getLabels().forEach(l=>l.classList.remove("on"));
-    trace.getBoundingClientRect();
-  }
+  function renderFrame(p){
+    const d = LEN * p;
+    const { ll, i } = atDistance(d);
+    const pts = ROUTE.slice(0, i+1); pts.push(ll);
+    casing.setLatLngs(pts); trail.setLatLngs(pts);
+    glow.setLatLngs(pts.slice(Math.max(0, pts.length - 14)));
+    car.setLatLng(ll);
+    bar.style.width = (p*100).toFixed(2)+"%";
+    statKm.textContent = Math.round(d*SCALE)+" km";
+    statTime.textContent = TOTAL_MIN ? fmt(TOTAL_MIN*p) : "0:00";
 
-  function playTrace(){
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    btn.disabled = true;
-    resetTrace();
-    const DURATION = reduced ? 0 : 2800;
-    requestAnimationFrame(()=>{
-      requestAnimationFrame(()=>{
-        trace.style.transition = reduced ? "none" : "stroke-dashoffset "+DURATION+"ms cubic-bezier(.4,0,.2,1)";
-        trace.style.strokeDashoffset = "0";
-        stops.forEach((s,i)=>{
-          const frac = s.t!=null ? s.t : (i/((stops.length-1)||1));
-          setTimeout(()=>{
-            const d = getDots()[i], l = getLabels()[i];
-            if(d) d.classList.add("on");
-            if(l) l.classList.add("on");
-          }, frac*DURATION);
-        });
-        setTimeout(()=>{ btn.disabled = false; }, DURATION+150);
-      });
+    STOPS.forEach((s, n) => {
+      const on = d >= s.at - 0.4;
+      const el = pins[n].getElement();
+      if(el && el.firstChild) el.firstChild.classList.toggle("on", on && !s.term);
     });
+
+    if(camMode === "follow" && pstate === "playing"){
+      map.panTo(ll, { animate: true, duration: .6, easeLinearity: .4, noMoveStart: true });
+    }
   }
 
-  btn.onclick = playTrace;
+  function frame(ts){
+    if(!startedAt) startedAt = ts;
+    const t = Math.min(1, (elapsed + (ts - startedAt)) / DURATION);
+    renderFrame(t);
+    if(t < 1) raf = requestAnimationFrame(frame); else finish();
+  }
+
+  function finish(){
+    pstate = "done"; elapsed = DURATION;
+    cancelAnimationFrame(raf); raf = null;
+    playBtn.textContent = t("content.ruta-recorrer-de-nuevo");
+    glow.setLatLngs([]);
+    if(camMode === "follow") fitAll();
+  }
+
+  function play(){
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(reduced){ renderFrame(1); finish(); return; }
+    if(pstate === "done") reset();
+    if(pstate === "playing"){ pause(); return; }
+    pstate = "playing"; startedAt = 0;
+    map.addLayer(car);
+    if(camMode === "follow") map.setView(atDistance(LEN*(elapsed/DURATION)).ll, 11, { animate: true });
+    playBtn.textContent = t("content.ruta-pausar");
+    raf = requestAnimationFrame(frame);
+  }
+
+  function pause(){
+    pstate = "paused";
+    elapsed = Math.min(DURATION, elapsed + (performance.now() - startedAt));
+    cancelAnimationFrame(raf); raf = null;
+    playBtn.textContent = t("content.ruta-continuar");
+  }
+
+  function reset(){
+    cancelAnimationFrame(raf); raf = null;
+    pstate = "idle"; elapsed = 0; startedAt = 0;
+    renderFrame(0);
+    map.removeLayer(car);
+    playBtn.textContent = t("content.ruta-recorrer");
+    fitAll();
+  }
+
+  playBtn.addEventListener("click", play);
+  resetBtn.addEventListener("click", reset);
+  document.getElementById("block-ruta").querySelectorAll("[data-cam]").forEach(b => b.addEventListener("click", () => {
+    camMode = b.dataset.cam;
+    document.getElementById("block-ruta").querySelectorAll("[data-cam]").forEach(o => o.setAttribute("aria-pressed", String(o === b)));
+    if(camMode === "fit") fitAll();
+    else if(pstate === "playing") map.setView(car.getLatLng(), 11);
+  }));
+
+  renderFrame(0);
+  setTimeout(() => map.invalidateSize(), 200);
+  rutaLeafletMap = map;
 }
 
 function renderRelated(){
