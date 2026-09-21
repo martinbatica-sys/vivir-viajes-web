@@ -110,6 +110,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .block{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.4rem 1.5rem;margin-bottom:1.2rem;transition:opacity .25s}
   .block h3{font-family:var(--display);font-weight:600;font-size:1.02rem;color:var(--navy);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
   .block p{font-size:.95rem;color:#33425e;line-height:1.65;margin:0;white-space:pre-line}
+  .ruta-map{background:var(--navy-deep);border-radius:12px;overflow:hidden;margin-bottom:1rem;position:relative}
+  .ruta-map svg{width:100%;height:auto;display:block}
+  .ruta-road{fill:none;stroke:#4A72B0;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;opacity:.5}
+  .ruta-trace{fill:none;stroke:var(--gold);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 4px rgba(233,162,60,.6))}
+  .ruta-stop-halo{fill:var(--navy-deep)}
+  .ruta-stop-dot{fill:rgba(255,255,255,.65);transition:fill .3s,r .3s}
+  .ruta-stop-dot.on{fill:var(--gold)}
+  .ruta-label{font-family:var(--body);font-size:12.5px;fill:rgba(255,255,255,.55);font-weight:700;transition:fill .3s}
+  .ruta-label.on{fill:#fff}
+  .ruta-btn{display:block;margin:0 auto;font-family:var(--body);font-weight:700;font-size:.92rem;background:var(--gold);color:var(--navy);border:none;border-radius:999px;padding:.75rem 1.7rem;cursor:pointer;transition:.18s}
+  .ruta-btn:hover{background:var(--gold-dark);transform:translateY(-1px)}
+  .ruta-btn:disabled{opacity:.55;cursor:default;transform:none}
+
   .related{margin:2.6rem 0 3.2rem}
   .related h2{font-family:var(--display);font-weight:700;font-size:1.35rem;color:var(--navy);margin-bottom:1.1rem}
   .related-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
@@ -292,6 +305,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="block" id="block-detalle" hidden>
         <h3 id="c-detalle-titulo">El paseo</h3>
         <p id="c-detalle"></p>
+      </div>
+      <div class="block ruta-block" id="block-ruta" hidden>
+        <h3 data-i18n="content.recorrido">Recorrido</h3>
+        <div class="ruta-map" id="ruta-map">
+          <svg id="ruta-svg" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+        <button type="button" class="ruta-btn" id="ruta-btn" data-i18n="content.ver-recorrido">Ver recorrido</button>
       </div>
       <div class="block" id="block-incluye">
         <h3>&#10003; <span data-i18n="content.incluye">Que incluye</span></h3>
@@ -1201,6 +1221,17 @@ const EXC = {
    incluye:["Recorrido por los miradores del circuito","Parada en la historica Colonia Suiza","Guia acompanante"],
    notas:["Horario de Pick Up (estimado): 13:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Medio dia.","Salidas miércoles y domingo (por ahora).","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:false, horario:"13:00 hs",
+   ruta:{
+     viewBox:"0 0 640 360",
+     path:"M555,300 C500,292 460,278 430,260 C400,242 345,225 310,205 C275,185 235,168 205,145 C170,118 145,103 115,90",
+     stops:[
+       {x:555,y:300,label:"Bariloche",dx:0,dy:-16,anchor:"middle"},
+       {x:430,y:260,label:"Cerro Campanario",dx:0,dy:22,anchor:"middle"},
+       {x:310,y:205,label:"Capilla San Eduardo",dx:0,dy:-16,anchor:"middle"},
+       {x:205,y:145,label:"Punto Panorámico",dx:0,dy:22,anchor:"middle"},
+       {x:115,y:90,label:"Colonia Suiza",dx:0,dy:-16,anchor:"middle"},
+     ],
+   },
    i18n:{
      en:{
        nombre:"Circuito Chico & Colonia Suiza", subt:"Bariloche's classic tour", tag:"Classic",
@@ -1383,6 +1414,17 @@ const EXC = {
    incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
    notas:["Horario de Pick Up (estimado): 08:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:false, horario:"08:00 hs",
+   ruta:{
+     viewBox:"0 0 640 360",
+     path:"M60,300 C120,270 160,255 200,230 C245,205 290,195 330,170 C370,145 420,130 460,110 C500,90 545,80 580,60",
+     stops:[
+       {x:60,y:300,label:"Bariloche",dx:0,dy:24,anchor:"middle"},
+       {x:200,y:230,label:"Villa La Angostura",dx:0,dy:24,anchor:"middle"},
+       {x:330,y:170,label:"Lago Espejo",dx:0,dy:-16,anchor:"middle"},
+       {x:460,y:110,label:"Lago Falkner",dx:0,dy:24,anchor:"middle"},
+       {x:580,y:60,label:"San Martín de los Andes",dx:-8,dy:-16,anchor:"end"},
+     ],
+   },
    i18n:{
      en:{
        nombre:"San Martín de los Andes - 7 Lakes", subt:"Seven Lakes Route", tag:"Road trip",
@@ -1636,6 +1678,17 @@ const EXC = {
    incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
    notas:["Horario de Pick Up (estimado): 09:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Recomendamos averiguar previamente el valor del ingreso a Parques Nacionales. Se abona el día de la excursión, previo a llegar a Pampa Linda. Residentes argentinos tienen descuento presentando el DNI. Es importante contar con efectivo para realizar dicho pago, ya que no hay señal para pagos digitales.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:false, horario:"09:00 hs",
+   ruta:{
+     viewBox:"0 0 640 360",
+     path:"M555,60 C500,80 460,95 430,130 C400,165 380,180 350,210 C320,240 290,255 250,280 C210,305 185,310 150,320",
+     stops:[
+       {x:555,y:60,label:"Bariloche",dx:0,dy:-16,anchor:"middle"},
+       {x:430,y:130,label:"Lago Mascardi",dx:22,dy:4,anchor:"start"},
+       {x:350,y:210,label:"Pampa Linda",dx:22,dy:4,anchor:"start"},
+       {x:250,y:280,label:"Ventisquero Negro",dx:0,dy:24,anchor:"middle"},
+       {x:150,y:320,label:"Cerro Tronador",dx:0,dy:24,anchor:"middle"},
+     ],
+   },
    i18n:{
      en:{
        nombre:"Mount Tronador & Ventisquero Negro", subt:"An unmissable experience", tag:"Glacier",
@@ -2123,6 +2176,7 @@ const UI = {
   es: {
     "nav.volver":"← Volver a excursiones",
     "content.incluye":"Que incluye", "content.notas":"Informacion importante", "content.relacionadas":"También te puede interesar", "content.el-paseo":"El paseo",
+    "content.recorrido":"Recorrido", "content.ver-recorrido":"Ver recorrido",
     "form.reservar-online":"Reservar online", "form.opcion":"Experiencia / opcion", "form.traslado":"Traslado", "form.sin-traslado":"Sin traslado", "form.con-traslado":"Con traslado",
     "form.pickup":"Punto de pick up", "form.pickup-placeholder":"Seleccionar punto de pick up...",
     "form.lagofrias":"Extensión Lago Frías", "form.sin-lagofrias":"Sin Lago Frías", "form.con-lagofrias":"Con Lago Frías",
@@ -2199,6 +2253,7 @@ const UI = {
   en: {
     "nav.volver":"← Back to excursions",
     "content.incluye":"What's included", "content.notas":"Important information", "content.relacionadas":"You might also like", "content.el-paseo":"The tour",
+    "content.recorrido":"Route", "content.ver-recorrido":"See the route",
     "form.reservar-online":"Book online", "form.opcion":"Experience / option", "form.traslado":"Transfer", "form.sin-traslado":"Without transfer", "form.con-traslado":"With transfer",
     "form.pickup":"Pick-up point", "form.pickup-placeholder":"Select a pick-up point...",
     "form.lagofrias":"Lake Frías extension", "form.sin-lagofrias":"Without Lake Frías", "form.con-lagofrias":"With Lake Frías",
@@ -2275,6 +2330,7 @@ const UI = {
   pt: {
     "nav.volver":"← Voltar aos passeios",
     "content.incluye":"O que inclui", "content.notas":"Informações importantes", "content.relacionadas":"Você também pode gostar", "content.el-paseo":"O passeio",
+    "content.recorrido":"Percurso", "content.ver-recorrido":"Ver percurso",
     "form.reservar-online":"Reservar online", "form.opcion":"Experiência / opção", "form.traslado":"Traslado", "form.sin-traslado":"Sem traslado", "form.con-traslado":"Com traslado",
     "form.pickup":"Ponto de embarque", "form.pickup-placeholder":"Selecionar ponto de embarque...",
     "form.lagofrias":"Extensão Lago Frías", "form.sin-lagofrias":"Sem Lago Frías", "form.con-lagofrias":"Com Lago Frías",
@@ -2794,6 +2850,93 @@ function renderStatic(){
   resetCounts();
   renderContent(state.opt);
   renderRelated();
+  renderRuta();
+}
+
+function renderRuta(){
+  const e = EXC[id];
+  const block = document.getElementById("block-ruta");
+  if(!e.ruta){ block.hidden = true; return; }
+  block.hidden = false;
+
+  const ruta = e.ruta;
+  const svg = document.getElementById("ruta-svg");
+  svg.setAttribute("viewBox", ruta.viewBox || "0 0 640 360");
+  svg.innerHTML = "";
+
+  const NS = "http://www.w3.org/2000/svg";
+  const road = document.createElementNS(NS,"path");
+  road.setAttribute("class","ruta-road");
+  road.setAttribute("d", ruta.path);
+  svg.appendChild(road);
+
+  const trace = document.createElementNS(NS,"path");
+  trace.setAttribute("class","ruta-trace");
+  trace.setAttribute("d", ruta.path);
+  svg.appendChild(trace);
+
+  const len = trace.getTotalLength();
+  trace.style.strokeDasharray = String(len);
+  trace.style.strokeDashoffset = String(len);
+
+  const stopsGroup = document.createElementNS(NS,"g");
+  const stops = ruta.stops || [];
+  stops.forEach(s=>{
+    const halo = document.createElementNS(NS,"circle");
+    halo.setAttribute("class","ruta-stop-halo");
+    halo.setAttribute("cx", s.x); halo.setAttribute("cy", s.y); halo.setAttribute("r", "7");
+    stopsGroup.appendChild(halo);
+
+    const dot = document.createElementNS(NS,"circle");
+    dot.setAttribute("class","ruta-stop-dot");
+    dot.setAttribute("cx", s.x); dot.setAttribute("cy", s.y); dot.setAttribute("r", "5");
+    stopsGroup.appendChild(dot);
+
+    const label = document.createElementNS(NS,"text");
+    label.setAttribute("class","ruta-label");
+    label.setAttribute("x", String(s.x + (s.dx!=null?s.dx:8)));
+    label.setAttribute("y", String(s.y + (s.dy!=null?s.dy:4)));
+    label.setAttribute("text-anchor", s.anchor || "start");
+    label.textContent = s.label;
+    stopsGroup.appendChild(label);
+  });
+  svg.appendChild(stopsGroup);
+
+  const btn = document.getElementById("ruta-btn");
+  const getDots = () => svg.querySelectorAll(".ruta-stop-dot");
+  const getLabels = () => svg.querySelectorAll(".ruta-label");
+
+  function resetTrace(){
+    trace.style.transition = "none";
+    trace.style.strokeDashoffset = String(len);
+    getDots().forEach(d=>d.classList.remove("on"));
+    getLabels().forEach(l=>l.classList.remove("on"));
+    trace.getBoundingClientRect();
+  }
+
+  function playTrace(){
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    btn.disabled = true;
+    resetTrace();
+    const DURATION = reduced ? 0 : 2800;
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        trace.style.transition = reduced ? "none" : "stroke-dashoffset "+DURATION+"ms cubic-bezier(.4,0,.2,1)";
+        trace.style.strokeDashoffset = "0";
+        stops.forEach((s,i)=>{
+          const frac = s.t!=null ? s.t : (i/((stops.length-1)||1));
+          setTimeout(()=>{
+            const d = getDots()[i], l = getLabels()[i];
+            if(d) d.classList.add("on");
+            if(l) l.classList.add("on");
+          }, frac*DURATION);
+        });
+        setTimeout(()=>{ btn.disabled = false; }, DURATION+150);
+      });
+    });
+  }
+
+  btn.onclick = playTrace;
 }
 
 function renderRelated(){
