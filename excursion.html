@@ -112,6 +112,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .block p{font-size:.95rem;color:#33425e;line-height:1.65;margin:0;white-space:pre-line}
   .ruta-map{background:var(--navy-deep);border-radius:12px;overflow:hidden;margin-bottom:1rem;position:relative}
   .ruta-map svg{width:100%;height:auto;display:block}
+  .ruta-lake{fill:#3E6FA8;opacity:.55}
+  .ruta-lake-label{font-family:var(--body);font-size:10.5px;font-style:italic;fill:rgba(255,255,255,.5);letter-spacing:.2px}
   .ruta-road{fill:none;stroke:#4A72B0;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;opacity:.5}
   .ruta-trace{fill:none;stroke:var(--gold);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 4px rgba(233,162,60,.6))}
   .ruta-stop-halo{fill:var(--navy-deep)}
@@ -1223,13 +1225,17 @@ const EXC = {
    seasonal:false, traslado:false, horario:"13:00 hs",
    ruta:{
      viewBox:"0 0 640 360",
-     path:"M555,300 C500,292 460,278 430,260 C400,242 345,225 310,205 C275,185 235,168 205,145 C170,118 145,103 115,90",
+     path:"M585,297.4 C529.5,259.8 327.2,110.2 251.7,71.9 C176.2,33.6 164.6,68.8 131.8,67.3 C99,65.8 64.3,48.2 55,62.6 C45.7,77 -12.4,114.6 75.9,153.7 C164.2,192.8 500.1,273.4 585,297.4",
      stops:[
-       {x:555,y:300,label:"Bariloche",dx:0,dy:-16,anchor:"middle"},
-       {x:430,y:260,label:"Cerro Campanario",dx:0,dy:22,anchor:"middle"},
-       {x:310,y:205,label:"Capilla San Eduardo",dx:0,dy:-16,anchor:"middle"},
-       {x:205,y:145,label:"Punto Panorámico",dx:0,dy:22,anchor:"middle"},
-       {x:115,y:90,label:"Colonia Suiza",dx:0,dy:-16,anchor:"middle"},
+       {x:585,y:297.4,label:"Bariloche",dx:0,dy:-16,anchor:"middle",t:0},
+       {x:251.7,y:71.9,label:"Cerro Campanario",dx:0,dy:22,anchor:"middle",t:.329},
+       {x:131.8,y:67.3,label:"Capilla San Eduardo",dx:0,dy:26,anchor:"middle",t:.428},
+       {x:55,y:62.6,label:"Punto Panorámico",dx:10,dy:-8,anchor:"start",t:.491},
+       {x:75.9,y:153.7,label:"Colonia Suiza",dx:10,dy:4,anchor:"start",t:.567},
+     ],
+     lakes:[
+       {path:"M420,55 C415.8,58.2 410.3,68.5 394.5,74 C378.7,79.5 352.4,84.7 325,87.9 C297.6,91.1 261.7,93 230,93 C198.3,93 162.4,91.1 135,87.9 C107.6,84.7 81.3,79.5 65.5,74 C49.7,68.5 40,61.3 40,55 C40,48.7 49.7,41.5 65.5,36 C81.3,30.5 107.6,25.3 135,22.1 C162.4,18.9 198.3,17 230,17 C261.7,17 297.6,18.9 325,22.1 C352.4,25.3 378.7,30.5 394.5,36 C410.3,41.5 415.8,51.8 420,55 Z",label:"Lago Nahuel Huapi",lx:230,ly:50,anchor:"middle"},
+       {path:"M147,178 C145.7,180 143.8,186.6 139,189.8 C134.2,193 125.8,195.8 118,197 C110.2,198.2 99.8,198.2 92,197 C84.2,195.8 75.8,193 71,189.8 C66.2,186.6 63,181.9 63,178 C63,174.1 66.2,169.4 71,166.2 C75.8,163 84.2,160.2 92,159 C99.8,157.8 110.2,157.8 118,159 C125.8,160.2 134.2,163 139,166.2 C143.8,169.4 145.7,176 147,178 Z",label:"Lago Moreno",lx:105,ly:181,anchor:"middle"},
      ],
    },
    i18n:{
@@ -1416,13 +1422,20 @@ const EXC = {
    seasonal:false, traslado:false, horario:"08:00 hs",
    ruta:{
      viewBox:"0 0 640 360",
-     path:"M60,300 C120,270 160,255 200,230 C245,205 290,195 330,170 C370,145 420,130 460,110 C500,90 545,80 580,60",
+     path:"M352.7,305 C341.8,289.4 297.3,228.8 287.3,211.1 C277.3,193.4 289.4,204.1 292.5,199.1 C295.6,194.1 301.2,188.4 306.1,181.1 C311,173.8 318.4,161.9 321.7,155.5 C324.9,149.1 321.8,159.4 325.6,142.7 C329.4,125.9 341.4,69.6 344.5,55",
      stops:[
-       {x:60,y:300,label:"Bariloche",dx:0,dy:24,anchor:"middle"},
-       {x:200,y:230,label:"Villa La Angostura",dx:0,dy:24,anchor:"middle"},
-       {x:330,y:170,label:"Lago Espejo",dx:0,dy:-16,anchor:"middle"},
-       {x:460,y:110,label:"Lago Falkner",dx:0,dy:24,anchor:"middle"},
-       {x:580,y:60,label:"San Martín de los Andes",dx:-8,dy:-16,anchor:"end"},
+       {x:352.7,y:305,label:"Bariloche",dx:0,dy:-16,anchor:"middle",t:0},
+       {x:287.3,y:211.1,label:"Villa La Angostura",dx:-12,dy:-18,anchor:"end",t:.404},
+       {x:306.1,y:181.1,label:"Lago Espejo",dx:16,dy:-8,anchor:"start",t:.53},
+       {x:325.6,y:142.7,label:"Lago Falkner",dx:16,dy:-6,anchor:"start",t:.683},
+       {x:344.5,y:55,label:"San Martín de los Andes",dx:0,dy:22,anchor:"middle",t:1},
+     ],
+     lakes:[
+       {path:"M355,238.1 C353.2,240.6 350.8,249.2 344.5,253.3 C338.2,257.4 327.2,261.2 317,262.8 C306.8,264.4 293.2,264.4 283,262.8 C272.8,261.2 261.8,257.4 255.5,253.3 C249.2,249.2 245,243.2 245,238.1 C245,233 249.2,226.9 255.5,222.8 C261.8,218.7 272.8,214.9 283,213.3 C293.2,211.7 306.8,211.7 317,213.3 C327.2,214.9 338.2,218.7 344.5,222.8 C350.8,226.9 353.2,235.6 355,238.1 Z",label:"Lago Nahuel Huapi",lx:300,ly:246,anchor:"middle"},
+       {path:"M300.5,201.1 C299.3,202.8 297.5,208.7 293.5,211 C289.5,213.3 282.2,215.1 276.5,215.1 C270.8,215.1 263.5,213.3 259.5,211 C255.5,208.7 252.5,204.4 252.5,201.1 C252.5,197.8 255.5,193.5 259.5,191.2 C263.5,188.9 270.8,187.1 276.5,187.1 C282.2,187.1 289.5,188.9 293.5,191.2 C297.5,193.5 299.3,199.4 300.5,201.1 Z",label:"Lago Correntoso",lx:276,ly:203,anchor:"middle"},
+       {path:"M311.1,183.1 C310.1,184.5 308.5,189.6 305.2,191.6 C301.9,193.6 295.8,195.1 291.1,195.1 C286.4,195.1 280.3,193.6 277,191.6 C273.7,189.6 271.1,185.9 271.1,183.1 C271.1,180.3 273.7,176.6 277,174.6 C280.3,172.6 286.4,171.1 291.1,171.1 C295.8,171.1 301.9,172.6 305.2,174.6 C308.5,176.6 310.1,181.7 311.1,183.1 Z"},
+       {path:"M324.7,155.5 C323.8,156.8 322.4,161.5 319.4,163.3 C316.4,165.1 310.9,166.5 306.7,166.5 C302.5,166.5 297,165.1 294,163.3 C291,161.5 288.7,158.1 288.7,155.5 C288.7,152.9 291,149.5 294,147.7 C297,145.9 302.5,144.5 306.7,144.5 C310.9,144.5 316.4,145.9 319.4,147.7 C322.4,149.5 323.8,154.2 324.7,155.5 Z"},
+       {path:"M330.6,140.7 C329.6,142.1 328,147.2 324.7,149.2 C321.4,151.2 315.3,152.7 310.6,152.7 C305.9,152.7 299.8,151.2 296.5,149.2 C293.2,147.2 290.6,143.5 290.6,140.7 C290.6,137.9 293.2,134.2 296.5,132.2 C299.8,130.2 305.9,128.7 310.6,128.7 C315.3,128.7 321.4,130.2 324.7,132.2 C328,134.2 329.6,139.3 330.6,140.7 Z"},
      ],
    },
    i18n:{
@@ -1680,13 +1693,16 @@ const EXC = {
    seasonal:false, traslado:false, horario:"09:00 hs",
    ruta:{
      viewBox:"0 0 640 360",
-     path:"M555,60 C500,80 460,95 430,130 C400,165 380,180 350,210 C320,240 290,255 250,280 C210,305 185,310 150,320",
+     path:"M576.5,55 C570.6,69.7 579.7,101.4 541.2,143.1 C502.7,184.8 409.2,314.5 345.5,305 C281.8,295.5 197.2,120.8 158.7,86.3 C120.1,51.8 130.1,96.3 114.2,98.1 C98.3,99.9 72,97.2 63.5,97",
      stops:[
-       {x:555,y:60,label:"Bariloche",dx:0,dy:-16,anchor:"middle"},
-       {x:430,y:130,label:"Lago Mascardi",dx:22,dy:4,anchor:"start"},
-       {x:350,y:210,label:"Pampa Linda",dx:22,dy:4,anchor:"start"},
-       {x:250,y:280,label:"Ventisquero Negro",dx:0,dy:24,anchor:"middle"},
-       {x:150,y:320,label:"Cerro Tronador",dx:0,dy:24,anchor:"middle"},
+       {x:576.5,y:55,label:"Bariloche",dx:0,dy:22,anchor:"middle",t:0},
+       {x:345.5,y:305,label:"Lago Mascardi",dx:0,dy:-20,anchor:"middle",t:.476},
+       {x:158.7,y:86.3,label:"Pampa Linda",dx:12,dy:18,anchor:"start",t:.868},
+       {x:114.2,y:98.1,label:"Ventisquero Negro",dx:0,dy:32,anchor:"middle",t:.931},
+       {x:63.5,y:97,label:"Cerro Tronador",dx:10,dy:-14,anchor:"start",t:1},
+     ],
+     lakes:[
+       {path:"M393.5,280 C392.6,284 391.4,297.1 388.1,304 C384.8,310.9 379.3,317.6 373.5,321.6 C367.7,325.6 360.2,328 353.5,328 C346.8,328 339.3,325.6 333.5,321.6 C327.7,317.6 322.2,310.9 318.9,304 C315.6,297.1 313.5,288 313.5,280 C313.5,272 315.6,262.9 318.9,256 C322.2,249.1 327.7,242.4 333.5,238.4 C339.3,234.4 346.8,232 353.5,232 C360.2,232 367.7,234.4 373.5,238.4 C379.3,242.4 384.8,249.1 388.1,256 C391.4,262.9 392.6,276 393.5,280 Z"},
      ],
    },
    i18n:{
@@ -2865,6 +2881,26 @@ function renderRuta(){
   svg.innerHTML = "";
 
   const NS = "http://www.w3.org/2000/svg";
+
+  const lakesGroup = document.createElementNS(NS,"g");
+  (ruta.lakes || []).forEach(lk=>{
+    const shape = document.createElementNS(NS,"path");
+    shape.setAttribute("class","ruta-lake");
+    shape.setAttribute("d", lk.path);
+    lakesGroup.appendChild(shape);
+
+    if(lk.label){
+      const lbl = document.createElementNS(NS,"text");
+      lbl.setAttribute("class","ruta-lake-label");
+      lbl.setAttribute("x", String(lk.lx));
+      lbl.setAttribute("y", String(lk.ly));
+      lbl.setAttribute("text-anchor", lk.anchor || "middle");
+      lbl.textContent = lk.label;
+      lakesGroup.appendChild(lbl);
+    }
+  });
+  svg.appendChild(lakesGroup);
+
   const road = document.createElementNS(NS,"path");
   road.setAttribute("class","ruta-road");
   road.setAttribute("d", ruta.path);
