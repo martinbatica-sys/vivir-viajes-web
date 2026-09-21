@@ -330,6 +330,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   @keyframes rise{to{opacity:1;transform:none}}
   @media (prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none}}
 
+  /* ---------- Reveal al hacer scroll (cards) ---------- */
+  .cards .card{opacity:0;transform:translateY(22px) scale(.97);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1)}
+  .cards .card.in-view{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.cards .card{opacity:1;transform:none;transition:none}}
+
   /* ---------- Responsive ---------- */
   @media(max-width:900px){
     .cards{grid-template-columns:repeat(2,1fr)}
@@ -1638,6 +1643,24 @@ function applyLang(lang){
   document.querySelectorAll("#lang-switch button").forEach(b => {
     b.addEventListener("click", () => applyLang(b.getAttribute("data-lang")));
   });
+})();
+
+(function revealCardsOnScroll(){
+  const cards = document.querySelectorAll(".cards .card");
+  if(!cards.length) return;
+  if(!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+    cards.forEach(c => c.classList.add("in-view"));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add("in-view");
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: .15, rootMargin: "0px 0px -60px 0px" });
+  cards.forEach(c => io.observe(c));
 })();
 </script>
 
