@@ -125,6 +125,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .list li{display:flex;gap:.6rem;font-size:.95rem;color:#33425e}
   .list li svg{flex:0 0 auto;margin-top:3px}
   .notas li{color:var(--ink-soft);font-size:.92rem}
+  .notas li a{color:#2563EB;text-decoration:underline}
+  .notas li a:hover{color:#1D4ED8}
 
   /* ---- Reserva card ---- */
   .resv{position:sticky;top:92px;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
@@ -516,7 +518,8 @@ const GALLERY = {
   "cerro-catedral":["fotos/EAS%2001.jpg","fotos/Cate%2001.png","fotos/Cate%2002.png","fotos/Cate%2003.jpg","fotos/Cate%2004.jpg","fotos/Cate%2005.jpg","fotos/Cate%2006.jpg"],
   "beer-experience-clasico":["fotos/BBE%20Clasico%2006.jpg","fotos/BBE%20Clasico%2001.jpg","fotos/BBE%20Clasico%2002.jpg","fotos/BBE%20Clasico%2003.jpg","fotos/BBE%20Clasico%2004.jpg"],
   "beer-experience-sunset":["fotos/BBE%20Sunset%2001.jpg","fotos/BBE%20Sunset%2002.jpg","fotos/BBE%20Sunset%2003.jpg","fotos/BBE%20Sunset%2004.jpg","fotos/BBE%20Sunset%2005.jpg"],
-  "nieve-al-limite":["fotos/NIeve%20al%20limite%2001.webp","fotos/NIeve%20al%20limite%2002.webp","fotos/NIeve%20al%20limite%2003.jpeg","fotos/NIeve%20al%20limite%2004.jpeg","fotos/NIeve%20al%20limite%2005.jpeg"]
+  "nieve-al-limite":["fotos/NIeve%20al%20limite%2001.webp","fotos/NIeve%20al%20limite%2002.webp","fotos/NIeve%20al%20limite%2003.jpeg","fotos/NIeve%20al%20limite%2004.jpeg","fotos/NIeve%20al%20limite%2005.jpeg"],
+  "cerro-otto":["fotos/Cerro%20Otto%2001.jpg","fotos/Cerro%20Otto%2002.jpg","fotos/Cerro%20Otto%2003.jpg","fotos/Cerro%20Otto%2004.jpg","fotos/Cerro%20Otto%2005.jpg"]
 };
 
 /* =================== DATOS ===================================== */
@@ -2039,6 +2042,50 @@ const EXC = {
     incluye:["Transporte desde y hacia el punto de encuentro","Guía habilitado","Almuerzo en Villa La Angostura (4 empanadas por persona)","Actividades y merienda en el Límite"],
     notas:["Punto de encuentro: San Martín 56, centro de Bariloche.","Pick up: 10:00 hs.","Drop off: 19:00 hs.","Todos los pasajeros deben presentarse con el documento utilizado para ingresar al país, en buen estado y vigente. En caso de duda, se recomienda portar tanto pasaporte como DNI/RG.","Menores de edad: el documento debe incluir los nombres de ambos padres. Si viajan sin ellos, deben presentar permiso de viaje correspondiente.","La excursión cruza a territorio chileno — la documentación es obligatoria e indispensable para realizar el paseo.","No incluye ropa de nieve (disponible para alquiler como adicional), bebidas en el almuerzo ni traslado adicional al punto de encuentro."],
     cats:[{key:'pp',label:'Por persona',min:1}],precios:{pp:250000}}]
+ },
+
+ /* ---------- CERRO OTTO ---------- */
+ "cerro-otto":{
+   nombre:"Cerro Otto", subt:"Aerosilla y Confitería Giratoria", tag:"Todo el año",
+   desc:"Subí en aerosilla al Cerro Otto: la Confitería Giratoria, vistas 360° y traslado incluido desde el centro.",
+   relacionadas:["circuito-chico","circuito-chico-campanario"],
+   detalle:"El Cerro Otto es uno de los paseos más clásicos de Bariloche, con una vista de 360° sobre el lago Nahuel Huapi y la cordillera. Todo arranca en el complejo de la Base (km 5), abierto de 10:00 a 16:30 hs, donde comprás tu boleto de ingreso y subís en aerosilla hasta la cumbre — un viaje corto pero espectacular, con el paisaje cambiando en cada tramo.\n\nArriba te espera la histórica Confitería Giratoria, un clásico de la ciudad, además de un patio de comidas panorámico con las mejores vistas de Bariloche y el lago. Vale la pena tomarse un rato para disfrutar del lugar sin apuro, dentro del horario de funcionamiento.\n\nEl traslado en bus desde y hacia el centro está incluido: salen desde Villegas 196 hacia la Base y vuelven con frecuencia regular. Los horarios estimados son cada media hora, desde las 10:00 hasta el último bus a las 16:00 hs.",
+   incluye:["Traslado desde y hacia la base del Cerro Otto","Ascenso y descenso por medio de elevación"],
+   notas:["Horarios estimados: primer bus a las 10:00 hs, salidas cada media hora. Último bus a las 16:00 hs.","Punto de salida: <a href=\"https://www.google.com/maps/search/?api=1&query=Villegas+196%2C+R8400+San+Carlos+de+Bariloche%2C+R%C3%ADo+Negro\" target=\"_blank\" rel=\"noopener\">Villegas 196</a>.","El complejo de la Base abre de 10:00 a 16:30 hs.","Reservas con mínimo 24 hs de anticipación."],
+   seasonal:false, traslado:false, horario:"10:00 hs",
+   i18n:{
+     en:{
+       nombre:"Cerro Otto", subt:"Chairlift and Revolving Café", tag:"Year-round",
+       desc:"Ride the chairlift up Cerro Otto: the Revolving Café, 360° views and transfer from downtown included.",
+       detalle:"Cerro Otto is one of Bariloche's classic outings, with 360° views over Lake Nahuel Huapi and the mountains. It all starts at the Base complex (km 5), open from 10:00 to 16:30 hs, where you buy your entry ticket and ride the chairlift up to the summit — a short but spectacular trip, with the scenery changing at every turn.\n\nAt the top awaits the historic Revolving Café, a Bariloche classic, along with a panoramic food court with the best views of the city and the lake. It's worth taking your time to enjoy the place at your own pace, within opening hours.\n\nThe round-trip bus transfer from downtown is included: buses leave from Villegas 196 to the Base and return at a regular frequency. Estimated schedule is every half hour, from 10:00 until the last bus at 16:00 hs.",
+       incluye:["Round-trip transfer to the Cerro Otto base","Chairlift ride up and down"],
+       notas:["Estimated schedule: first bus at 10:00 hs, departures every half hour. Last bus at 16:00 hs.","Departure point: <a href=\"https://www.google.com/maps/search/?api=1&query=Villegas+196%2C+R8400+San+Carlos+de+Bariloche%2C+R%C3%ADo+Negro\" target=\"_blank\" rel=\"noopener\">Villegas 196</a>.","The Base complex is open from 10:00 to 16:30 hs.","Bookings require at least 24 hs notice."],
+       opciones:{
+         tour:{
+           incluye:["Round-trip transfer to the Cerro Otto base","Chairlift ride up and down"],
+           notas:["Estimated schedule: first bus at 10:00 hs, departures every half hour. Last bus at 16:00 hs.","Departure point: <a href=\"https://www.google.com/maps/search/?api=1&query=Villegas+196%2C+R8400+San+Carlos+de+Bariloche%2C+R%C3%ADo+Negro\" target=\"_blank\" rel=\"noopener\">Villegas 196</a>.","The Base complex is open from 10:00 to 16:30 hs.","Bookings require at least 24 hs notice."],
+           cats:{adulto:{label:"Ages 13+"}, menor:{label:"Children", sub:"6 to 12"}, jubilado:{label:"Seniors", sub:"65+"}, infante:{label:"Children under 5", sub:"free"}}},
+       },
+     },
+     pt:{
+       nombre:"Cerro Otto", subt:"Teleférico e Café Giratório", tag:"Ano todo",
+       desc:"Suba de teleférico ao Cerro Otto: o Café Giratório, vistas de 360° e traslado incluído desde o centro.",
+       detalle:"O Cerro Otto é um dos passeios mais clássicos de Bariloche, com uma vista de 360° sobre o lago Nahuel Huapi e a cordilheira. Tudo começa no complexo da Base (km 5), aberto das 10:00 às 16:30 hs, onde você compra o ingresso e sobe de teleférico até o cume — uma viagem curta, porém espetacular, com a paisagem mudando a cada trecho.\n\nLá em cima espera o histórico Café Giratório, um clássico da cidade, além de uma praça de alimentação panorâmica com as melhores vistas de Bariloche e do lago. Vale a pena aproveitar o lugar com calma, dentro do horário de funcionamento.\n\nO traslado de ônibus de ida e volta desde o centro está incluído: os ônibus saem da Villegas 196 até a Base e voltam com frequência regular. Os horários estimados são a cada meia hora, das 10:00 até o último ônibus às 16:00 hs.",
+       incluye:["Traslado de ida e volta até a base do Cerro Otto","Subida e descida por meio de elevação"],
+       notas:["Horários estimados: primeiro ônibus às 10:00 hs, saídas a cada meia hora. Último ônibus às 16:00 hs.","Ponto de saída: <a href=\"https://www.google.com/maps/search/?api=1&query=Villegas+196%2C+R8400+San+Carlos+de+Bariloche%2C+R%C3%ADo+Negro\" target=\"_blank\" rel=\"noopener\">Villegas 196</a>.","O complexo da Base abre das 10:00 às 16:30 hs.","Reservas com no mínimo 24 hs de antecedência."],
+       opciones:{
+         tour:{
+           incluye:["Traslado de ida e volta até a base do Cerro Otto","Subida e descida por meio de elevação"],
+           notas:["Horários estimados: primeiro ônibus às 10:00 hs, saídas a cada meia hora. Último ônibus às 16:00 hs.","Ponto de saída: <a href=\"https://www.google.com/maps/search/?api=1&query=Villegas+196%2C+R8400+San+Carlos+de+Bariloche%2C+R%C3%ADo+Negro\" target=\"_blank\" rel=\"noopener\">Villegas 196</a>.","O complexo da Base abre das 10:00 às 16:30 hs.","Reservas com no mínimo 24 hs de antecedência."],
+           cats:{adulto:{label:"Maiores de 13 anos"}, menor:{label:"Menores", sub:"6 a 12 anos"}, jubilado:{label:"Maiores de 65 anos"}, infante:{label:"Menores de 5 anos", sub:"sem custo"}}},
+       },
+     },
+   },
+   opciones:[{key:"tour",label:null,
+    incluye:["Traslado desde y hacia la base del Cerro Otto","Ascenso y descenso por medio de elevación"],
+    notas:["Horarios estimados: primer bus a las 10:00 hs, salidas cada media hora. Último bus a las 16:00 hs.","Punto de salida: <a href=\"https://www.google.com/maps/search/?api=1&query=Villegas+196%2C+R8400+San+Carlos+de+Bariloche%2C+R%C3%ADo+Negro\" target=\"_blank\" rel=\"noopener\">Villegas 196</a>.","El complejo de la Base abre de 10:00 a 16:30 hs.","Reservas con mínimo 24 hs de anticipación."],
+    cats:[{key:'adulto',label:'Mayores de 13 años',min:1},{key:'menor',label:'Menores',sub:'6 a 12 años',min:0},{key:'jubilado',label:'Mayores de 65 años',min:0},{key:'infante',label:'Menores de 5 años',sub:'sin cargo',min:0}],
+    precios:{adulto:60000,menor:30000,jubilado:30000,infante:0}}]
  },
 };
 

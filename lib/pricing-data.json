@@ -761,5 +761,45 @@
         "groupDiscount": null
       }
     }
+  },
+  "cerro-otto": {
+    "seasonal": false,
+    "temporadas": null,
+    "traslado": false,
+    "lagoFrias": false,
+    "opciones": {
+      "tour": {
+        "cats": [
+          {
+            "key": "adulto",
+            "min": 1,
+            "max": null
+          },
+          {
+            "key": "menor",
+            "min": 0,
+            "max": null
+          },
+          {
+            "key": "jubilado",
+            "min": 0,
+            "max": null
+          },
+          {
+            "key": "infante",
+            "min": 0,
+            "max": null
+          }
+        ],
+        "precios": {
+          "adulto": 60000,
+          "menor": 30000,
+          "jubilado": 30000,
+          "infante": 0
+        },
+        "preciosLF": null,
+        "groupDiscount": null
+      }
+    }
   }
 }
