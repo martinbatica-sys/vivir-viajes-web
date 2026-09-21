@@ -119,7 +119,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .ruta-stop-halo{fill:var(--navy-deep)}
   .ruta-stop-dot{fill:rgba(255,255,255,.65);transition:fill .3s,r .3s}
   .ruta-stop-dot.on{fill:var(--gold)}
-  .ruta-label{font-family:var(--body);font-size:12.5px;fill:rgba(255,255,255,.55);font-weight:700;transition:fill .3s}
+  .ruta-label{font-family:var(--body);font-size:12.5px;fill:rgba(255,255,255,.7);font-weight:700;transition:fill .3s;paint-order:stroke;stroke:rgba(15,29,56,.85);stroke-width:3px;stroke-linejoin:round}
   .ruta-label.on{fill:#fff}
   .ruta-btn{display:block;margin:0 auto;font-family:var(--body);font-weight:700;font-size:.92rem;background:var(--gold);color:var(--navy);border:none;border-radius:999px;padding:.75rem 1.7rem;cursor:pointer;transition:.18s}
   .ruta-btn:hover{background:var(--gold-dark);transform:translateY(-1px)}
@@ -1421,21 +1421,15 @@ const EXC = {
    notas:["Horario de Pick Up (estimado): 08:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:false, horario:"08:00 hs",
    ruta:{
-     viewBox:"0 0 640 360",
-     path:"M352.7,305 C341.8,289.4 297.3,228.8 287.3,211.1 C277.3,193.4 289.4,204.1 292.5,199.1 C295.6,194.1 301.2,188.4 306.1,181.1 C311,173.8 318.4,161.9 321.7,155.5 C324.9,149.1 321.8,159.4 325.6,142.7 C329.4,125.9 341.4,69.6 344.5,55",
+     bgImage:"fotos/ruta-sanmartin-map.jpg", imgW:913, imgH:881,
+     viewBox:"0 0 913 881",
+     path:"M485,733 C488.3,728.3 499.2,713.8 505,705 C510.8,696.2 520.8,689.2 520,680 C519.2,670.8 508.3,659.2 500,650 C491.7,640.8 478,632.2 470,625 C462,617.8 458.7,616.2 452,607 C445.3,597.8 438.7,582.8 430,570 C421.3,557.2 410.8,542.5 400,530 C389.2,517.5 375.8,503.3 365,495 C354.2,486.7 341.7,489.2 335,480 C328.3,470.8 327.5,453.3 325,440 C322.5,426.7 319.2,413.3 320,400 C320.8,386.7 325,373.3 330,360 C335,346.7 343.8,335.8 350,320 C356.2,304.2 362,280.8 367,265 C372,249.2 373.7,236.7 380,225 C386.3,213.3 396.7,202 405,195 C413.3,188 424.2,192.2 430,183 C435.8,173.8 436.7,153.8 440,140 C443.3,126.2 447.5,112.5 450,100 C452.5,87.5 454.2,70.8 455,65",
      stops:[
-       {x:352.7,y:305,label:"Bariloche",dx:0,dy:-16,anchor:"middle",t:0},
-       {x:287.3,y:211.1,label:"Villa La Angostura",dx:-12,dy:-18,anchor:"end",t:.404},
-       {x:306.1,y:181.1,label:"Lago Espejo",dx:16,dy:-8,anchor:"start",t:.53},
-       {x:325.6,y:142.7,label:"Lago Falkner",dx:16,dy:-6,anchor:"start",t:.683},
-       {x:344.5,y:55,label:"San Martín de los Andes",dx:0,dy:22,anchor:"middle",t:1},
-     ],
-     lakes:[
-       {path:"M355,238.1 C353.2,240.6 350.8,249.2 344.5,253.3 C338.2,257.4 327.2,261.2 317,262.8 C306.8,264.4 293.2,264.4 283,262.8 C272.8,261.2 261.8,257.4 255.5,253.3 C249.2,249.2 245,243.2 245,238.1 C245,233 249.2,226.9 255.5,222.8 C261.8,218.7 272.8,214.9 283,213.3 C293.2,211.7 306.8,211.7 317,213.3 C327.2,214.9 338.2,218.7 344.5,222.8 C350.8,226.9 353.2,235.6 355,238.1 Z",label:"Lago Nahuel Huapi",lx:300,ly:246,anchor:"middle"},
-       {path:"M300.5,201.1 C299.3,202.8 297.5,208.7 293.5,211 C289.5,213.3 282.2,215.1 276.5,215.1 C270.8,215.1 263.5,213.3 259.5,211 C255.5,208.7 252.5,204.4 252.5,201.1 C252.5,197.8 255.5,193.5 259.5,191.2 C263.5,188.9 270.8,187.1 276.5,187.1 C282.2,187.1 289.5,188.9 293.5,191.2 C297.5,193.5 299.3,199.4 300.5,201.1 Z",label:"Lago Correntoso",lx:276,ly:203,anchor:"middle"},
-       {path:"M311.1,183.1 C310.1,184.5 308.5,189.6 305.2,191.6 C301.9,193.6 295.8,195.1 291.1,195.1 C286.4,195.1 280.3,193.6 277,191.6 C273.7,189.6 271.1,185.9 271.1,183.1 C271.1,180.3 273.7,176.6 277,174.6 C280.3,172.6 286.4,171.1 291.1,171.1 C295.8,171.1 301.9,172.6 305.2,174.6 C308.5,176.6 310.1,181.7 311.1,183.1 Z"},
-       {path:"M324.7,155.5 C323.8,156.8 322.4,161.5 319.4,163.3 C316.4,165.1 310.9,166.5 306.7,166.5 C302.5,166.5 297,165.1 294,163.3 C291,161.5 288.7,158.1 288.7,155.5 C288.7,152.9 291,149.5 294,147.7 C297,145.9 302.5,144.5 306.7,144.5 C310.9,144.5 316.4,145.9 319.4,147.7 C322.4,149.5 323.8,154.2 324.7,155.5 Z"},
-       {path:"M330.6,140.7 C329.6,142.1 328,147.2 324.7,149.2 C321.4,151.2 315.3,152.7 310.6,152.7 C305.9,152.7 299.8,151.2 296.5,149.2 C293.2,147.2 290.6,143.5 290.6,140.7 C290.6,137.9 293.2,134.2 296.5,132.2 C299.8,130.2 305.9,128.7 310.6,128.7 C315.3,128.7 321.4,130.2 324.7,132.2 C328,134.2 329.6,139.3 330.6,140.7 Z"},
+       {x:485,y:733,label:"Bariloche",dx:0,dy:-16,anchor:"middle",t:0},
+       {x:335,y:480,label:"Villa La Angostura",dx:-14,dy:-4,anchor:"end",t:.428},
+       {x:350,y:320,label:"Lago Espejo",dx:14,dy:4,anchor:"start",t:.639},
+       {x:430,y:183,label:"Lago Falkner",dx:-14,dy:-6,anchor:"end",t:.848},
+       {x:455,y:65,label:"San Martín de los Andes",dx:-10,dy:24,anchor:"end",t:1},
      ],
    },
    i18n:{
@@ -1482,6 +1476,17 @@ const EXC = {
    incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
    notas:["Horario de Pick Up (estimado): 08:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:false, horario:"08:00 hs",
+   ruta:{
+     bgImage:"fotos/ruta-circuito-grande-map.jpg", imgW:1400, imgH:660,
+     viewBox:"0 0 1400 660",
+     path:"M750,578 C753.3,572.5 763.3,555.5 770,545 C776.7,534.5 781.7,522.5 790,515 C798.3,507.5 810,505.8 820,500 C830,494.2 840.8,486.7 850,480 C859.2,473.3 866.7,468.3 875,460 C883.3,451.7 892.5,440.8 900,430 C907.5,419.2 915.8,407.5 920,395 C924.2,382.5 925.8,367.5 925,355 C924.2,342.5 918.3,332.5 915,320 C911.7,307.5 908.3,291.7 905,280 C901.7,268.3 899.2,257.5 895,250 C890.8,242.5 887.5,240.8 880,235 C872.5,229.2 861.7,221.7 850,215 C838.3,208.3 823.3,200.3 810,195 C796.7,189.7 781.7,187.5 770,183 C758.3,178.5 751.7,172.7 740,168 C728.3,163.3 713.3,159.2 700,155 C686.7,150.8 673.3,147.2 660,143 C646.7,138.8 636.7,134.7 620,130 C603.3,125.3 578.3,119.2 560,115 C541.7,110.8 524.2,108.3 510,105 C495.8,101.7 482.5,95 475,95 C467.5,95 465.5,97.5 465,105 C464.5,112.5 468.7,127.5 472,140 C475.3,152.5 479.5,166.7 485,180 C490.5,193.3 499.2,208.3 505,220 C510.8,231.7 515,240 520,250 C525,260 534.2,270 535,280 C535.8,290 530,299.2 525,310 C520,320.8 510,333.3 505,345 C500,356.7 494.2,369.2 495,380 C495.8,390.8 502.5,400.8 510,410 C517.5,419.2 528.3,427.5 540,435 C551.7,442.5 565.8,449.2 580,455 C594.2,460.8 610,465 625,470 C640,475 655.8,480.3 670,485 C684.2,489.7 697.5,494.2 710,498 C722.5,501.8 735,504.3 745,508 C755,511.7 765.8,513.8 770,520 C774.2,526.2 773.3,535.3 770,545 C766.7,554.7 753.3,572.5 750,578",
+     stops:[
+       {x:750,y:578,label:"Bariloche",dx:0,dy:-16,anchor:"middle",t:0},
+       {x:880,y:235,label:"Valle Encantado",dx:-14,dy:20,anchor:"end",t:.275},
+       {x:660,y:143,label:"Villa Traful",dx:0,dy:-14,anchor:"middle",t:.429},
+       {x:520,y:250,label:"Villa La Angostura",dx:14,dy:18,anchor:"start",t:.662},
+     ],
+   },
    i18n:{
      en:{
        nombre:"Circuito Grande - Villa Traful", subt:"Valle Encantado · Lake Traful · Seven Lakes", tag:"Road trip",
@@ -1692,17 +1697,15 @@ const EXC = {
    notas:["Horario de Pick Up (estimado): 09:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Recomendamos averiguar previamente el valor del ingreso a Parques Nacionales. Se abona el día de la excursión, previo a llegar a Pampa Linda. Residentes argentinos tienen descuento presentando el DNI. Es importante contar con efectivo para realizar dicho pago, ya que no hay señal para pagos digitales.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:false, horario:"09:00 hs",
    ruta:{
-     viewBox:"0 0 640 360",
-     path:"M576.5,55 C570.6,69.7 579.7,101.4 541.2,143.1 C502.7,184.8 409.2,314.5 345.5,305 C281.8,295.5 197.2,120.8 158.7,86.3 C120.1,51.8 130.1,96.3 114.2,98.1 C98.3,99.9 72,97.2 63.5,97",
+     bgImage:"fotos/ruta-tronador-map.jpg", imgW:1318, imgH:842,
+     viewBox:"0 0 1318 842",
+     path:"M825,372 C823.3,375.8 819.2,387.3 815,395 C810.8,402.7 805.8,410.5 800,418 C794.2,425.5 786.7,433 780,440 C773.3,447 767.5,452.5 760,460 C752.5,467.5 744.2,476.7 735,485 C725.8,493.3 711.7,502.5 705,510 C698.3,517.5 701.7,523.3 695,530 C688.3,536.7 675,543.3 665,550 C655,556.7 644.5,563.7 635,570 C625.5,576.3 613.8,581.3 608,588 C602.2,594.7 602.2,602.2 600,610 C597.8,617.8 597,626.7 595,635 C593,643.3 593,651.7 588,660 C583,668.3 574.7,677.5 565,685 C555.3,692.5 541.7,698.3 530,705 C518.3,711.7 503.7,719.5 495,725 C486.3,730.5 484.7,737.2 478,738 C471.3,738.8 462.2,738.8 455,730 C447.8,721.2 440,699.2 435,685 C430,670.8 427.5,658 425,645 C422.5,632 424.2,614.8 420,607 C415.8,599.2 407.5,600.8 400,598 C392.5,595.2 383.3,593.3 375,590 C366.7,586.7 359.2,581.7 350,578 C340.8,574.3 330,571.8 320,568 C310,564.2 300.8,560.5 290,555 C279.2,549.5 265.8,541.7 255,535 C244.2,528.3 233.3,521.2 225,515 C216.7,508.8 211.2,503.3 205,498 C198.8,492.7 190.8,485.5 188,483",
      stops:[
-       {x:576.5,y:55,label:"Bariloche",dx:0,dy:22,anchor:"middle",t:0},
-       {x:345.5,y:305,label:"Lago Mascardi",dx:0,dy:-20,anchor:"middle",t:.476},
-       {x:158.7,y:86.3,label:"Pampa Linda",dx:12,dy:18,anchor:"start",t:.868},
-       {x:114.2,y:98.1,label:"Ventisquero Negro",dx:0,dy:32,anchor:"middle",t:.931},
-       {x:63.5,y:97,label:"Cerro Tronador",dx:10,dy:-14,anchor:"start",t:1},
-     ],
-     lakes:[
-       {path:"M393.5,280 C392.6,284 391.4,297.1 388.1,304 C384.8,310.9 379.3,317.6 373.5,321.6 C367.7,325.6 360.2,328 353.5,328 C346.8,328 339.3,325.6 333.5,321.6 C327.7,317.6 322.2,310.9 318.9,304 C315.6,297.1 313.5,288 313.5,280 C313.5,272 315.6,262.9 318.9,256 C322.2,249.1 327.7,242.4 333.5,238.4 C339.3,234.4 346.8,232 353.5,232 C360.2,232 367.7,234.4 373.5,238.4 C379.3,242.4 384.8,249.1 388.1,256 C391.4,262.9 392.6,276 393.5,280 Z"},
+       {x:825,y:372,label:"Bariloche",dx:0,dy:-16,anchor:"middle",t:0},
+       {x:478,y:738,label:"Lago Mascardi",dx:0,dy:22,anchor:"middle",t:.555},
+       {x:350,y:578,label:"Pampa Linda",dx:14,dy:-10,anchor:"start",t:.799},
+       {x:205,y:498,label:"Ventisquero Negro",dx:14,dy:-8,anchor:"start",t:.976},
+       {x:188,y:483,label:"Cerro Tronador",dx:14,dy:14,anchor:"start",t:1},
      ],
    },
    i18n:{
@@ -2882,6 +2885,14 @@ function renderRuta(){
 
   const NS = "http://www.w3.org/2000/svg";
 
+  if(ruta.bgImage){
+    const img = document.createElementNS(NS,"image");
+    img.setAttribute("href", ruta.bgImage);
+    img.setAttribute("x", 0); img.setAttribute("y", 0);
+    img.setAttribute("width", ruta.imgW); img.setAttribute("height", ruta.imgH);
+    svg.appendChild(img);
+  }
+
   const lakesGroup = document.createElementNS(NS,"g");
   (ruta.lakes || []).forEach(lk=>{
     const shape = document.createElementNS(NS,"path");
@@ -2901,10 +2912,12 @@ function renderRuta(){
   });
   svg.appendChild(lakesGroup);
 
-  const road = document.createElementNS(NS,"path");
-  road.setAttribute("class","ruta-road");
-  road.setAttribute("d", ruta.path);
-  svg.appendChild(road);
+  if(!ruta.bgImage){
+    const road = document.createElementNS(NS,"path");
+    road.setAttribute("class","ruta-road");
+    road.setAttribute("d", ruta.path);
+    svg.appendChild(road);
+  }
 
   const trace = document.createElementNS(NS,"path");
   trace.setAttribute("class","ruta-trace");
