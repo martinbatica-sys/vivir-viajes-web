@@ -2879,10 +2879,11 @@ function renderStatic(){
   renderRuta();
 }
 
+const RUTA_FEATURE_ENABLED = false;
 function renderRuta(){
   const e = EXC[id];
   const block = document.getElementById("block-ruta");
-  if(!e.ruta){ block.hidden = true; return; }
+  if(!RUTA_FEATURE_ENABLED || !e.ruta){ block.hidden = true; return; }
   block.hidden = false;
 
   const ruta = e.ruta;
