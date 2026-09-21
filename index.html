@@ -331,7 +331,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   @media (prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none}}
 
   /* ---------- Reveal al hacer scroll (cards) ---------- */
-  .cards .card{opacity:0;transform:translateY(22px) scale(.97);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1)}
+  .cards .card{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.16,.8,.24,1),transform 1s cubic-bezier(.16,.8,.24,1);transition-delay:var(--reveal-delay,0ms)}
   .cards .card.in-view{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){.cards .card{opacity:1;transform:none;transition:none}}
 
@@ -1646,10 +1646,8 @@ function applyLang(lang){
 })();
 
 (function revealCardsOnScroll(){
-  const cards = document.querySelectorAll(".cards .card");
-  if(!cards.length) return;
   if(!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches){
-    cards.forEach(c => c.classList.add("in-view"));
+    document.querySelectorAll(".cards .card").forEach(c => c.classList.add("in-view"));
     return;
   }
   const io = new IntersectionObserver((entries) => {
@@ -1659,8 +1657,13 @@ function applyLang(lang){
         io.unobserve(entry.target);
       }
     });
-  }, { threshold: .15, rootMargin: "0px 0px -60px 0px" });
-  cards.forEach(c => io.observe(c));
+  }, { threshold: .25, rootMargin: "0px 0px -100px 0px" });
+  document.querySelectorAll(".cards").forEach(grid => {
+    Array.from(grid.children).forEach((card, i) => {
+      card.style.setProperty("--reveal-delay", (i % 3) * 110 + "ms");
+      io.observe(card);
+    });
+  });
 })();
 </script>
 
