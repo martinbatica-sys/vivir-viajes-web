@@ -130,7 +130,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .ruta-progress{height:4px;background:var(--navy-deep)}
   .ruta-progress i{display:block;height:100%;width:0}
   .ruta-progress i{background:var(--gold)}
-  .ruta-leaflet-map{height:380px;width:100%;background:var(--navy-deep);border-radius:0 0 12px 12px;overflow:hidden;margin-bottom:1rem}
+  .ruta-leaflet-map{height:380px;width:100%;background:var(--navy-deep);border-radius:0 0 12px 12px;overflow:hidden;margin-bottom:1rem;isolation:isolate;position:relative;z-index:0}
   .ruta-leaflet-map .leaflet-tile-pane{filter:saturate(.45) brightness(1.06) contrast(.94) hue-rotate(-12deg)}
   .ruta-leaflet-map .leaflet-control-attribution{font-family:var(--body);font-size:.6rem}
   .ruta-nota{font-family:var(--body);font-size:.78rem;line-height:1.5;color:var(--ink-soft);margin:.9rem 0 0}
