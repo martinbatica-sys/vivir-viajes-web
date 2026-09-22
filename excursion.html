@@ -331,7 +331,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="ruta-franja">
           <div class="ruta-live">
             <div><b id="ruta-stat-km">0 km</b><span data-i18n="content.ruta-km">Recorrido</span></div>
-            <div><b id="ruta-stat-time">0:00</b><span data-i18n="content.ruta-tiempo">Tiempo</span></div>
           </div>
           <div class="ruta-spacer"></div>
           <div class="ruta-ctrls">
@@ -2247,7 +2246,7 @@ const UI = {
     "nav.volver":"← Volver a excursiones",
     "content.incluye":"Que incluye", "content.notas":"Informacion importante", "content.relacionadas":"También te puede interesar", "content.el-paseo":"El paseo",
     "content.recorrido":"Recorrido", "content.ver-recorrido":"Ver recorrido",
-    "content.ruta-km":"Recorrido", "content.ruta-tiempo":"Tiempo", "content.ruta-vista-completa":"Vista completa", "content.ruta-seguir":"Seguir",
+    "content.ruta-km":"Recorrido", "content.ruta-vista-completa":"Vista completa", "content.ruta-seguir":"Seguir",
     "content.ruta-reiniciar":"Reiniciar", "content.ruta-recorrer":"Recorrer", "content.ruta-pausar":"Pausar", "content.ruta-continuar":"Continuar", "content.ruta-recorrer-de-nuevo":"Volver a recorrer",
     "form.reservar-online":"Reservar online", "form.opcion":"Experiencia / opcion", "form.traslado":"Traslado", "form.sin-traslado":"Sin traslado", "form.con-traslado":"Con traslado",
     "form.pickup":"Punto de pick up", "form.pickup-placeholder":"Seleccionar punto de pick up...",
@@ -2326,7 +2325,7 @@ const UI = {
     "nav.volver":"← Back to excursions",
     "content.incluye":"What's included", "content.notas":"Important information", "content.relacionadas":"You might also like", "content.el-paseo":"The tour",
     "content.recorrido":"Route", "content.ver-recorrido":"See the route",
-    "content.ruta-km":"Traveled", "content.ruta-tiempo":"Time", "content.ruta-vista-completa":"Full view", "content.ruta-seguir":"Follow",
+    "content.ruta-km":"Traveled", "content.ruta-vista-completa":"Full view", "content.ruta-seguir":"Follow",
     "content.ruta-reiniciar":"Reset", "content.ruta-recorrer":"Play route", "content.ruta-pausar":"Pause", "content.ruta-continuar":"Continue", "content.ruta-recorrer-de-nuevo":"Watch again",
     "form.reservar-online":"Book online", "form.opcion":"Experience / option", "form.traslado":"Transfer", "form.sin-traslado":"Without transfer", "form.con-traslado":"With transfer",
     "form.pickup":"Pick-up point", "form.pickup-placeholder":"Select a pick-up point...",
@@ -2405,7 +2404,7 @@ const UI = {
     "nav.volver":"← Voltar aos passeios",
     "content.incluye":"O que inclui", "content.notas":"Informações importantes", "content.relacionadas":"Você também pode gostar", "content.el-paseo":"O passeio",
     "content.recorrido":"Percurso", "content.ver-recorrido":"Ver percurso",
-    "content.ruta-km":"Percorrido", "content.ruta-tiempo":"Tempo", "content.ruta-vista-completa":"Vista completa", "content.ruta-seguir":"Seguir",
+    "content.ruta-km":"Percorrido", "content.ruta-vista-completa":"Vista completa", "content.ruta-seguir":"Seguir",
     "content.ruta-reiniciar":"Reiniciar", "content.ruta-recorrer":"Percorrer", "content.ruta-pausar":"Pausar", "content.ruta-continuar":"Continuar", "content.ruta-recorrer-de-nuevo":"Refazer o percurso",
     "form.reservar-online":"Reservar online", "form.opcion":"Experiência / opção", "form.traslado":"Traslado", "form.sin-traslado":"Sem traslado", "form.con-traslado":"Com traslado",
     "form.pickup":"Ponto de embarque", "form.pickup-placeholder":"Selecionar ponto de embarque...",
@@ -2971,7 +2970,6 @@ function initRutaMap(){
   for(let i=1;i<ROUTE.length;i++) CUM.push(CUM[i-1] + hav(ROUTE[i-1], ROUTE[i]));
   const LEN = CUM[CUM.length-1];
   const TOTAL_KM = ruta.totalKm || Math.round(LEN);
-  const TOTAL_MIN = ruta.totalMin || 0;
   const SCALE = TOTAL_KM / LEN;
   const DURATION = ruta.dur || 18000;
 
@@ -3027,10 +3025,7 @@ function initRutaMap(){
   const resetBtn = document.getElementById("ruta-reset");
   const bar = document.getElementById("ruta-bar");
   const statKm = document.getElementById("ruta-stat-km");
-  const statTime = document.getElementById("ruta-stat-time");
   let raf = null, startedAt = 0, elapsed = 0, pstate = "idle", camMode = "fit";
-
-  const fmt = m => Math.floor(m/60) + ":" + String(Math.round(m%60)).padStart(2,"0");
 
   function renderFrame(p){
     const d = LEN * p;
@@ -3041,7 +3036,6 @@ function initRutaMap(){
     car.setLatLng(ll);
     bar.style.width = (p*100).toFixed(2)+"%";
     statKm.textContent = Math.round(d*SCALE)+" km";
-    statTime.textContent = TOTAL_MIN ? fmt(TOTAL_MIN*p) : "0:00";
 
     STOPS.forEach((s, n) => {
       const on = s.fin ? p >= 0.999 : d >= s.at - 0.4;
