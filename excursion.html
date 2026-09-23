@@ -563,6 +563,7 @@ const GALLERY = {
   "tronador":["fotos/tronador-08.jpg","fotos/tronador-02.jpg","fotos/tronador-03.jpg","fotos/tronador-06.jpg","fotos/tronador-05.jpg","fotos/tronador-07.jpg","fotos/tronador-09.jpg"],
   "isla-victoria":["fotos/isla-victoria-01.jpg","fotos/isla-victoria-02.jpg","fotos/isla-victoria-03.jpg","fotos/isla-victoria-04.jpg","fotos/isla-victoria-05.jpg"],
   "puerto-blest":["fotos/puerto-blest-01.jpg","fotos/puerto-blest-02.jpg","fotos/puerto-blest-03.jpg","fotos/puerto-blest-04.jpg","fotos/puerto-blest-05.jpg"],
+  "mini-cat":["fotos/mini-cat-01.jpg","fotos/mini-cat-02.jpg","fotos/mini-cat-03.jpg","fotos/mini-cat-04.jpg","fotos/mini-cat-05.jpg","fotos/mini-cat-06.jpg","fotos/mini-cat-07.jpg"],
   "rafting-frontera":["fotos/Raftin%2001.jpg","fotos/Rafting%2002.jpg","fotos/Rafting%2004.jpg","fotos/Rafting%2005.jpg"],
   "rafting-villegas":["fotos/Rafting%2003.jpg","fotos/Raftin%2002.jpg"],
   "kayak":["fotos/Kayak%201.jpeg","fotos/Kayak%202.jpeg","fotos/Kayak%203.jpeg","fotos/Kayak%204.jpg","fotos/Kayak%205.jpg"],
@@ -1991,6 +1992,68 @@ const EXC = {
      ],
      precios:{adulto:{sin:140000,con:162000},menor:{sin:70000,con:92000},jubilado:{sin:70000,con:92000},infante:{sin:0,con:0}},
      preciosLF:{adulto:54000,menor:27000,jubilado:27000,infante:0},
+   }]
+ },
+
+ /* ---------- MINI CAT · LAGO MORENO ---------- */
+ "mini-cat":{
+   nombre:"Navegación Privada · Lago Moreno", subt:"En Mini Cat · 2 horas de navegación", tag:"Navegación",
+   desc:"Navegación privada e íntima en Mini Cat por el Lago Moreno, con vistas al Parque Llao Llao y los cerros de la región.",
+   relacionadas:["isla-victoria","puerto-blest"],
+   detalle:"La navegación privada en Mini Cat es una experiencia íntima por las aguas tranquilas del Lago Moreno, ideal para descubrir el entorno del Circuito Chico desde una perspectiva distinta. Zarpamos desde la Marina del Hotel Llao Llao con un grupo reducido: la embarcación tiene capacidad para 10 personas, aunque recomendamos grupos más chicos para una experiencia más cómoda y personalizada.\n\nDurante las dos horas de navegación se disfrutan vistas privilegiadas del Parque Municipal Llao Llao, la Isla de los Conejos y los cerros Campanario, López, Otto y Tronador, entre otros. En el camino, con algo de suerte, es posible observar aves y fauna local en su hábitat natural.\n\nA bordo se ofrecen bebidas con y sin alcohol junto con un snack. También se puede sumar, como opción adicional a consultar, una propuesta gastronómica a bordo.",
+   seasonal:false, traslado:true, cotizar:true,
+   i18n:{
+     en:{
+       nombre:"Private Navigation · Lake Moreno", subt:"Aboard the Mini Cat · 2-hour sail", tag:"Boat trip",
+       desc:"A private, intimate sailing trip aboard the Mini Cat across Lake Moreno, with views of the Llao Llao area and the region's mountains.",
+       detalle:"The private Mini Cat sailing trip is an intimate experience across the calm waters of Lake Moreno, perfect for discovering the Circuito Chico area from a different perspective. We set sail from the Marina at Hotel Llao Llao with a small group — the boat holds up to 10 people, though we recommend smaller groups for a more comfortable, personalized experience.\n\nDuring the two-hour sail you'll enjoy privileged views of Llao Llao Municipal Park, Conejos Island and the Campanario, López, Otto and Tronador mountains, among others. Along the way, with a bit of luck, it's possible to spot birds and local wildlife in their natural habitat.\n\nOn board we offer alcoholic and non-alcoholic drinks along with a snack. You can also add, as an optional extra on request, an onboard dining experience.",
+       opciones:{
+         tour:{
+           incluye_sin:["2-hour private sail aboard the Mini Cat on Lake Moreno","Alcoholic and non-alcoholic drinks + snack on board","Maximum capacity 10 people (smaller groups recommended)"],
+           incluye_con:["Round-trip transfer to the Marina at Hotel Llao Llao","2-hour private sail aboard the Mini Cat on Lake Moreno","Alcoholic and non-alcoholic drinks + snack on board","Maximum capacity 10 people (smaller groups recommended)"],
+           notas_sin:["Departure from the Marina at Hotel Llao Llao.","Onboard dining available as an optional extra — on request.","Transfer not included — you can add it above.","Bookings require at least 24 hs notice."],
+           notas_con:["Departure from the Marina at Hotel Llao Llao.","Onboard dining available as an optional extra — on request.","Bookings require at least 24 hs notice."],
+           cats:{pp:{label:"People", sub:"Max. 10 people"}}},
+       },
+     },
+     pt:{
+       nombre:"Navegação Privada · Lago Moreno", subt:"Em Mini Cat · 2 horas de navegação", tag:"Navegação",
+       desc:"Navegação privada e íntima em Mini Cat pelo Lago Moreno, com vistas do Parque Llao Llao e das montanhas da região.",
+       detalle:"A navegação privada em Mini Cat é uma experiência íntima pelas águas tranquilas do Lago Moreno, ideal para descobrir o entorno do Circuito Chico de uma perspectiva diferente. Zarpamos da Marina do Hotel Llao Llao com um grupo reduzido: a embarcação tem capacidade para 10 pessoas, embora recomendemos grupos menores para uma experiência mais confortável e personalizada.\n\nDurante as duas horas de navegação você aproveita vistas privilegiadas do Parque Municipal Llao Llao, da Isla de los Conejos e dos cerros Campanario, López, Otto e Tronador, entre outros. No caminho, com um pouco de sorte, é possível observar aves e fauna local em seu habitat natural.\n\nA bordo são oferecidas bebidas com e sem álcool junto com um snack. Também é possível incluir, como opção adicional sob consulta, uma proposta gastronômica a bordo.",
+       opciones:{
+         tour:{
+           incluye_sin:["2 horas de navegação privada em Mini Cat pelo Lago Moreno","Bebidas com e sem álcool + snack a bordo","Capacidade máxima de 10 pessoas (grupos reduzidos recomendados)"],
+           incluye_con:["Traslado de ida e volta até a Marina do Hotel Llao Llao","2 horas de navegação privada em Mini Cat pelo Lago Moreno","Bebidas com e sem álcool + snack a bordo","Capacidade máxima de 10 pessoas (grupos reduzidos recomendados)"],
+           notas_sin:["Saída da Marina do Hotel Llao Llao.","Gastronomia a bordo disponível como opção adicional — sob consulta.","Traslado não incluído — pode ser adicionado acima.","Reservas com no mínimo 24 hs de antecedência."],
+           notas_con:["Saída da Marina do Hotel Llao Llao.","Gastronomia a bordo disponível como opção adicional — sob consulta.","Reservas com no mínimo 24 hs de antecedência."],
+           cats:{pp:{label:"Pessoas", sub:"Máx. 10 pessoas"}}},
+       },
+     },
+   },
+   opciones:[{key:"tour",label:null,
+     incluye_sin:[
+       "2 horas de navegación privada en Mini Cat por el Lago Moreno",
+       "Bebidas con y sin alcohol + snack a bordo",
+       "Capacidad máxima 10 personas (grupos reducidos recomendados)",
+     ],
+     incluye_con:[
+       "Traslado ida y vuelta hasta la Marina del Hotel Llao Llao",
+       "2 horas de navegación privada en Mini Cat por el Lago Moreno",
+       "Bebidas con y sin alcohol + snack a bordo",
+       "Capacidad máxima 10 personas (grupos reducidos recomendados)",
+     ],
+     notas_sin:[
+       "Zarpe desde la Marina del Hotel Llao Llao.",
+       "Gastronomía a bordo disponible como opción adicional — a consultar.",
+       "Traslado no incluido — se puede agregar arriba.",
+       "Reservas con mínimo 24 hs de anticipación.",
+     ],
+     notas_con:[
+       "Zarpe desde la Marina del Hotel Llao Llao.",
+       "Gastronomía a bordo disponible como opción adicional — a consultar.",
+       "Reservas con mínimo 24 hs de anticipación.",
+     ],
+     cats:[{key:'pp',label:'Personas',sub:'Máx. 10 personas',min:1,max:10}],
    }]
  },
 
