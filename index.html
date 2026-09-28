@@ -445,7 +445,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a class="card-link" href="excursion.html?exc=circuito-chico" tabindex="-1" aria-hidden="true"></a>
       </article>
 
-      <article class="card">
+      <article class="card" id="card-elcruce">
+        <div class="card-img" style="background-image:url('fotos/card-elcruce.jpg')"><span class="tag" data-i18n="card.elcruce.tag">Transporte oficial</span><span class="discount" data-i18n="card.elcruce.discount">El Cruce 2026</span></div>
+        <div class="card-body">
+          <h3 data-i18n="card.elcruce.title">Traslado El Cruce &middot; Aeropuerto &harr; Cerro Catedral</h3>
+          <p class="desc" data-i18n="card.elcruce.desc">Traslados regulares entre el Aeropuerto de Bariloche y el Cerro Catedral para corredores de El Cruce.</p>
+          <div class="meta"><span>&#9201; <span data-i18n="card.elcruce.meta1">5 al 11 de diciembre</span></span><span>&#9733; <span data-i18n="card.elcruce.meta2">Ida o ida y vuelta</span></span></div>
+          <div class="card-foot">
+            <div class="price"><small data-i18n="common.desde">Desde</small><b>$30.000</b></div>
+            <a class="btn btn-primary" href="elcruce" data-i18n="common.reservar">Reservar</a>
+          </div>
+        </div>
+      <a class="card-link" href="elcruce" tabindex="-1" aria-hidden="true"></a>
+      </article>
+
+      <article class="card" id="card-san-martin-destacado" hidden>
         <div class="card-img" style="background-image:url('fotos/san-martin.jpg')"><span class="tag" data-i18n="filtro.todo-el-ano">Todo el año</span></div>
         <div class="card-body">
           <h3 data-i18n="card.san-martin.title">San Martin de los Andes &middot; 7 Lagos</h3>
@@ -458,6 +472,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       <a class="card-link" href="excursion.html?exc=san-martin" tabindex="-1" aria-hidden="true"></a>
       </article>
+      <script>
+        // Card temporal de El Cruce (hasta el 14/12/2026): pasada esa fecha,
+        // vuelve a mostrarse la card de San Martin que reemplaza.
+        (function(){
+          var CUTOFF = new Date('2026-12-14T00:00:00-03:00');
+          if (new Date() >= CUTOFF) {
+            document.getElementById('card-elcruce').hidden = true;
+            document.getElementById('card-san-martin-destacado').hidden = false;
+          }
+        })();
+      </script>
 
       <article class="card">
         <div class="card-img" style="background-image:url('fotos/campo-tulipanes-01.jpg')"><span class="tag" data-i18n="card.campo-tulipanes.tag">Dia completo</span></div>
@@ -1198,6 +1223,7 @@ const I18N = {
     "common.medio":"Medio",
     "common.medio-dia":"Medio día",
     "card.san-martin.tag":"Ruta", "card.san-martin.title":"San Martin de los Andes · 7 Lagos", "card.san-martin.desc":"El mitico Camino de los Siete Lagos hasta San Martin de los Andes, entre lagos, bosques y miradores.",
+    "card.elcruce.tag":"Transporte oficial", "card.elcruce.discount":"El Cruce 2026", "card.elcruce.title":"Traslado El Cruce · Aeropuerto ↔ Cerro Catedral", "card.elcruce.desc":"Traslados regulares entre el Aeropuerto de Bariloche y el Cerro Catedral para corredores de El Cruce.", "card.elcruce.meta1":"5 al 11 de diciembre", "card.elcruce.meta2":"Ida o ida y vuelta",
     "card.circuito-grande.title":"Circuito Grande - Villa Traful", "card.circuito-grande.desc":"Un dia completo por el Valle Encantado, el lago Traful y el regreso por la Ruta de los Siete Lagos via Villa La Angostura.",
     "card.bolson-lago-puelo.title":"El Bolsón y Lago Puelo", "card.bolson-lago-puelo.desc":"Un dia completo rumbo a la Comarca Andina: la feria artesanal de El Bolson, sabores de produccion local y el Lago Puelo.",
     "sec.invierno.title":"Bariloche Invierno", "sec.invierno.sub":"Aventura sobre la nieve",
@@ -1282,6 +1308,7 @@ const I18N = {
     "card.tronador.tag":"Glacier", "card.tronador.title":"Mount Tronador & Ventisquero Negro", "card.tronador.desc":"A full day at the tallest mountain in the region: the glacier, the Garganta del Diablo waterfall and the ventisquero.",
     "common.medio":"Moderate",
     "card.san-martin.tag":"Road trip", "card.san-martin.title":"San Martín de los Andes · 7 Lakes", "card.san-martin.desc":"The legendary Seven Lakes Route to San Martín de los Andes, through lakes, forests and viewpoints.",
+    "card.elcruce.tag":"Official transport", "card.elcruce.discount":"El Cruce 2026", "card.elcruce.title":"El Cruce Transfer · Airport ↔ Cerro Catedral", "card.elcruce.desc":"Regular transfers between Bariloche Airport and Cerro Catedral for El Cruce runners.", "card.elcruce.meta1":"December 5 to 11", "card.elcruce.meta2":"One way or round trip",
     "card.circuito-grande.title":"Circuito Grande - Villa Traful", "card.circuito-grande.desc":"A full day through the Valle Encantado and Lake Traful, returning via the Seven Lakes Route through Villa La Angostura.",
     "sec.invierno.title":"Bariloche Winter", "sec.invierno.sub":"Adventure on the snow",
     "card.roca-negra.tag":"Snowshoeing & Fondue", "card.roca-negra.title":"Roca Negra · Mountain Lodge", "card.roca-negra.desc":"A snowshoe hike to a mountain lodge, followed by cheese or chocolate fondue. Suitable for the whole family.", "card.roca-negra.meta2":"Easy difficulty",
@@ -1359,6 +1386,7 @@ const I18N = {
     "card.tronador.tag":"Glaciar", "card.tronador.title":"Cerro Tronador e Ventisquero Negro", "card.tronador.desc":"Um dia inteiro na montanha mais alta da região: a geleira, a cachoeira Garganta del Diablo e o ventisquero.",
     "common.medio":"Médio",
     "card.san-martin.tag":"Rota", "card.san-martin.title":"San Martín de los Andes · 7 Lagos", "card.san-martin.desc":"A mítica Estrada dos Sete Lagos até San Martín de los Andes, entre lagos, florestas e mirantes.",
+    "card.elcruce.tag":"Transporte oficial", "card.elcruce.discount":"El Cruce 2026", "card.elcruce.title":"Traslado El Cruce · Aeroporto ↔ Cerro Catedral", "card.elcruce.desc":"Traslados regulares entre o Aeroporto de Bariloche e o Cerro Catedral para corredores de El Cruce.", "card.elcruce.meta1":"5 a 11 de dezembro", "card.elcruce.meta2":"Ida ou ida e volta",
     "card.circuito-grande.title":"Circuito Grande - Villa Traful", "card.circuito-grande.desc":"Um dia inteiro pelo Valle Encantado e o lago Traful, com volta pela Estrada dos Sete Lagos via Villa La Angostura.",
     "sec.invierno.title":"Bariloche no Inverno", "sec.invierno.sub":"Aventura na neve",
     "card.roca-negra.tag":"Raquetes de neve & Fondue", "card.roca-negra.title":"Roca Negra · Refúgio", "card.roca-negra.desc":"Caminhada com raquetes de neve até um refúgio de montanha e fondue de queijo ou chocolate. Ideal para toda a família.", "card.roca-negra.meta2":"Dificuldade baixa",

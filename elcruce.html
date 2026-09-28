@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Traslado El Cruce 2026 · Vivir Viajes</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N2986QP');</script>
+<!-- End Google Tag Manager -->
+<script>
+// Guarda utm_source/medium/campaign/term/content + gclid/fbclid apenas llegan
+// en la URL, igual que index.html / excursion.html.
+(function(){
+  try {
+    var params = new URLSearchParams(location.search);
+    var keys = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid'];
+    var stored = {};
+    try { stored = JSON.parse(localStorage.getItem('vv-tracking') || '{}'); } catch(e) {}
+    var now = Date.now();
+    var THIRTY_DAYS = 30*24*60*60*1000;
+    if (stored._ts && now - stored._ts > THIRTY_DAYS) stored = {};
+    var hasNewTracking = keys.some(function(k){ return !!params.get(k); });
+    if (hasNewTracking) {
+      stored = {};
+      keys.forEach(function(k){ var v = params.get(k); if (v) stored[k] = v; });
+      stored._ts = now;
+    }
+    localStorage.setItem('vv-tracking', JSON.stringify(stored));
+  } catch(e) {}
+})();
+// La landing es temporal: pasado el 14/12/2026 vuelve directo al sitio, sin
+// mostrar el formulario de reserva de un traslado que ya no se ofrece.
+(function(){
+  var CUTOFF = new Date('2026-12-14T00:00:00-03:00');
+  if (new Date() >= CUTOFF) location.replace('index.html');
+})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,600&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16284C;--navy-2:#1E3566;--navy-deep:#0F1D38;
+    --gold:#E9A23C;--gold-dark:#C9852A;
+    --paper:#F5F7FB;--panel:#E9EFFA;--ink:#16284C;--ink-soft:#5A6A86;
+    --line:rgba(22,40,76,.12);
+    --display:"Poppins",sans-serif;--body:"Mulish",-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  [hidden]{display:none!important}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);background:#fff;color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:78px}
+  .brand{display:flex;flex-direction:column;gap:.15rem;line-height:1;flex:0 0 auto}
+  .brand img{height:34px;display:block}
+  .brand small{font-size:.62rem;font-weight:600;color:var(--ink-soft)}
+  .nav-links{display:flex;gap:1.3rem;align-items:center;font-size:.96rem;font-weight:600;white-space:nowrap}
+  .nav-links a{color:var(--ink-soft)}
+  .nav-links a:hover{color:var(--navy)}
+  .nav-right{display:flex;align-items:center;gap:.7rem}
+  .lang-switch{display:flex;gap:.2rem;background:var(--panel);padding:.22rem;border-radius:999px;flex:0 0 auto}
+  .lang-switch button{font-family:var(--body);font-weight:700;font-size:.76rem;letter-spacing:.02em;border:none;background:transparent;color:var(--ink-soft);padding:.38rem .6rem;border-radius:999px;cursor:pointer;transition:.18s}
+  .lang-switch button.active{background:var(--navy);color:#fff}
+  .lang-switch button:hover:not(.active){color:var(--navy)}
+  .nav-whatsapp{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:var(--navy);font-family:var(--body);font-weight:700;font-size:.88rem;border-radius:999px;padding:.55rem 1.1rem;white-space:nowrap;transition:.18s}
+  .nav-whatsapp:hover{background:var(--gold-dark);transform:translateY(-1px)}
+  @media(max-width:900px){ .nav-links{display:none} }
+  @media(max-width:640px){ .nav{height:auto;flex-wrap:wrap;row-gap:.6rem;padding:.7rem 0} }
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;background:url('fotos/hero-video-poster.jpg') center 55%/cover no-repeat,#16284C;color:#fff}
+  .hero-overlay{position:absolute;inset:0;background:radial-gradient(820px 460px at 92% -12%,rgba(233,162,60,.16),transparent 60%),linear-gradient(95deg,rgba(15,29,56,.9) 0%,rgba(20,36,70,.7) 50%,rgba(15,29,56,.5) 100%)}
+  .hero-inner{position:relative;max-width:1180px;margin:0 auto;padding:clamp(2.4rem,5vw,4rem) 28px;display:flex;flex-wrap:wrap;gap:clamp(1.8rem,4vw,3.5rem);align-items:center}
+  .hero-copy{flex:1.1 1 340px;min-width:0}
+  .hero-badge-row{display:flex;align-items:center;gap:.9rem;margin-bottom:1.6rem}
+  .hero-logo-circle{width:64px;height:64px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
+  .hero-logo-circle img{width:86%;height:86%;object-fit:contain}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:.55rem;font-size:.8rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+  .hero-eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--gold)}
+  .hero-copy h1{font-family:var(--display);font-weight:700;font-size:clamp(2.1rem,4.4vw,3.6rem);line-height:1.04;letter-spacing:-.02em;margin:0 0 1.3rem}
+  .hero-copy h1 em{color:var(--gold);font-style:italic}
+  .hero-copy p{font-size:1.15rem;color:rgba(255,255,255,.82);max-width:42ch;margin:0}
+
+  /* ---------- RESERVA CARD ---------- */
+  #reservar{flex:.9 1 340px;min-width:0;scroll-margin-top:100px;background:#fff;color:var(--navy);border-radius:22px;padding:clamp(1.5rem,3.5vw,2rem);box-shadow:0 30px 60px -30px rgba(0,0,0,.6);display:flex;flex-direction:column;gap:1.1rem}
+  .rsv-head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+  .rsv-head b{font-family:var(--display);font-weight:600;font-size:1.3rem}
+  .rsv-step{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap;flex:none}
+
+  .field{display:flex;flex-direction:column;gap:.5rem}
+  .field>label{font-weight:700;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft)}
+  select,input[type=text],input[type=tel],input[type=email],input[type=time]{width:100%;font-family:var(--body);font-size:1rem;color:var(--navy);border:1.5px solid var(--line);border-radius:11px;padding:.7rem .8rem;background:#fff}
+  select{cursor:pointer}
+  select:focus,input:focus{outline:none;border-color:var(--gold)}
+
+  .toggle{display:flex;background:var(--paper);border:1.5px solid var(--line);border-radius:11px;padding:4px;gap:4px}
+  .toggle button{flex:1;font-family:var(--body);font-weight:600;font-size:.9rem;border:none;background:transparent;color:var(--ink-soft);padding:.65rem .5rem;border-radius:8px;cursor:pointer;transition:.2s}
+  .toggle button.on{background:var(--gold);color:var(--navy);box-shadow:0 3px 10px -3px rgba(233,162,60,.7)}
+
+  .pax-stepper{display:flex;align-items:center;justify-content:space-between;gap:1rem;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:.9rem 0}
+  .pax-info b{display:block;font-weight:700;font-size:.95rem}
+  .pax-info span{display:block;font-size:.8rem;color:var(--ink-soft);margin-top:.15rem}
+  .pax-stepper .stepper{display:flex;align-items:center;gap:.7rem;flex:none}
+  .pax-stepper .stepper button{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--line);background:#fff;font-size:1.1rem;font-weight:700;color:var(--navy);cursor:pointer;line-height:1}
+  .pax-stepper .stepper button:disabled{opacity:.35;cursor:not-allowed}
+  .pax-stepper .stepper .n{min-width:1.4rem;text-align:center;font-weight:700}
+
+  .rsv-total{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:1rem}
+  .rsv-total span{color:var(--ink-soft);font-weight:600}
+  .rsv-total b{font-family:var(--display);font-weight:700;font-size:1.7rem}
+
+  .btn{width:100%;font-family:var(--body);font-weight:700;font-size:1rem;border:none;cursor:pointer;border-radius:12px;padding:.9rem;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:.18s}
+  .btn-gold{background:var(--gold);color:var(--navy)}
+  .btn-gold:hover{background:var(--gold-dark)}
+  .btn-gold:disabled{background:#E6E9EF;color:#9AA6B8;cursor:not-allowed}
+  .btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--navy)}
+  .rsv-subtext{font-size:.82rem;color:var(--ink-soft);text-align:center}
+  .rsv-link{font-size:.88rem;font-weight:600;color:var(--ink-soft);text-align:center}
+  .rsv-link:hover{color:var(--gold-dark)}
+
+  .rsv-back{align-self:flex-start;display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem;font-weight:700;color:var(--navy);padding:.3rem 0;background:none;border:none;cursor:pointer;font-family:var(--body)}
+  .rsv-back:hover{color:var(--gold-dark)}
+  .rsv-resumen{background:var(--panel);border-radius:12px;padding:.8rem 1rem;font-size:.9rem;font-weight:600}
+  .rsv-row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem}
+  .step{display:flex;flex-direction:column;gap:1.1rem}
+
+  /* ---------- INFO SECTION ---------- */
+  .info-sec{background:var(--paper);padding:clamp(3.8rem,7vw,6rem) 0}
+  .bracketed{font-family:var(--display);font-weight:600;font-size:clamp(1.7rem,3.4vw,2.4rem);color:var(--navy);letter-spacing:-.015em;line-height:1.1;display:flex;align-items:baseline;gap:.45rem;flex-wrap:wrap}
+  .bracketed .b{color:var(--gold);font-weight:400;font-size:.95em;line-height:1}
+  .section-sub{color:var(--ink-soft);font-size:1rem;margin-top:.45rem;max-width:56ch}
+  .info-grid{margin-top:2.2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1.2rem}
+  .info-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.4rem 1.5rem;display:flex;flex-direction:column;gap:.6rem;align-items:flex-start}
+  .info-card b{font-family:var(--display);font-weight:600;font-size:1.08rem}
+  .info-card p{margin:0;color:var(--ink-soft);font-size:.93rem}
+  .info-card a{font-size:.9rem;font-weight:700;color:var(--gold-dark)}
+  .info-card a:hover{color:var(--navy)}
+  .info-card .tel{font-family:var(--display);font-weight:700;font-size:1.15rem;color:var(--navy)}
+  .info-card .tel:hover{color:var(--gold-dark)}
+  .check-list{list-style:none;display:flex;flex-direction:column;gap:.45rem;font-size:.9rem;color:var(--ink-soft)}
+  .check-list li{display:flex;gap:.5rem;align-items:flex-start}
+  .check-list li::before{content:"✓";color:var(--gold-dark);font-weight:700;flex:none}
+
+  /* ---------- GRUPOS ---------- */
+  .grupos-sec{padding:clamp(3.8rem,7vw,6rem) 0 0}
+  .grupos-panel{background:var(--panel);border-radius:22px;padding:clamp(2.2rem,5vw,3.2rem);display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap}
+  .grupos-panel p{color:var(--ink-soft);margin:.6rem 0 0;max-width:52ch}
+  .grupos-panel .btn{width:auto;padding:.8rem 1.6rem}
+
+  /* ---------- FAQ ---------- */
+  .faq-sec{padding:clamp(3.8rem,7vw,6rem) 0}
+  .faq-wrap{max-width:820px;margin:0 auto}
+  .faq-list{border-top:1px solid var(--line)}
+  .faq-list details{border-bottom:1px solid var(--line);padding:1.1rem 0}
+  .faq-list summary{display:flex;justify-content:space-between;align-items:center;gap:1rem;cursor:pointer;font-family:var(--display);font-weight:600;font-size:1.05rem;list-style:none}
+  .faq-list summary::-webkit-details-marker{display:none}
+  .faq-list summary .plus{color:var(--gold-dark);font-size:1.3rem;line-height:1;transition:.2s}
+  .faq-list details[open] summary .plus{transform:rotate(45deg)}
+  .faq-list p{margin:.7rem 0 0;color:var(--ink-soft);font-size:.96rem;max-width:62ch}
+
+  footer{background:var(--navy-deep);color:rgba(255,255,255,.7);padding:3.2rem 0 2.6rem}
+  .foot-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem}
+  .foot-top img{height:30px;display:block}
+  .foot-bottom{margin-top:2rem;padding-top:1.8rem;border-top:1px solid rgba(255,255,255,.12);font-size:.8rem;color:rgba(255,255,255,.55)}
+
+  /* ---------- MODAL ---------- */
+  .modal-overlay{position:fixed;inset:0;background:rgba(15,29,56,.5);z-index:200;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .2s}
+  .modal-overlay.show{opacity:1;pointer-events:all}
+  .modal-box{background:#fff;border-radius:20px;max-width:560px;width:100%;max-height:calc(100vh - 2rem);overflow-y:auto;padding:1.5rem 1.5rem 1.2rem;box-shadow:0 30px 60px -10px rgba(15,29,56,.35);transform:translateY(16px);transition:transform .2s}
+  .modal-overlay.show .modal-box{transform:none}
+  .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+  .modal-head b{font-family:var(--display);font-weight:700;font-size:1.15rem;color:var(--navy)}
+  .modal-close-x{background:none;border:none;font-size:1.3rem;line-height:1;color:var(--ink-soft);cursor:pointer;padding:.2rem}
+  .modal-close-x:hover{color:var(--navy)}
+  .map-box{width:100%;border-radius:14px;overflow:hidden;background:#E9EFFA;border:1px solid var(--line)}
+  .map-box svg{display:block;width:100%;height:auto;max-height:52vh;margin:0 auto}
+  .map-caption{margin-top:.9rem;font-size:.85rem;color:var(--ink)}
+
+  /* ---------- MOBILE STICKY BAR ---------- */
+  #sticky-bar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#0F1D38;padding:.8rem 1.2rem;display:none;justify-content:space-between;align-items:center;gap:1rem;box-shadow:0 -12px 30px -18px rgba(0,0,0,.6)}
+  #sticky-bar.show{display:flex}
+  #sticky-bar .sb-info{display:flex;flex-direction:column;line-height:1.2;color:#fff}
+  #sticky-bar .sb-info span{font-size:.78rem;color:rgba(255,255,255,.65)}
+  #sticky-bar .sb-info b{font-family:var(--display);font-size:1.2rem}
+  #sticky-bar .btn{width:auto;padding:.65rem 1.3rem;font-size:.9rem}
+  #sticky-spacer{display:none;height:76px}
+  #sticky-spacer.show{display:block}
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N2986QP"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><img src="logo-color.png" alt="Vivir Viajes"><small>Legajo N° 11502 Disp. 1816 – EVT</small></a>
+    <nav class="nav-links">
+      <a href="index.html#excursiones" data-i18n="nav.destinos">Destinos</a>
+      <a href="index.html#nosotros" data-i18n="nav.nosotros">Nosotros</a>
+      <a href="index.html#receptivo" data-i18n="nav.agencias">Agencias</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-switch" id="lang-switch">
+        <button type="button" data-lang="es">ES</button>
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="pt">PT</button>
+      </div>
+      <a class="nav-whatsapp" id="nav-whatsapp" target="_blank" rel="noopener" href="https://wa.me/5492944539672?text=Hola%20Vivir%20Viajes%2C%20quiero%20info%20sobre%20el%20traslado%20de%20El%20Cruce">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.1.1.3 0 .5l-.4.5c-.2.2-.3.4-.1.6.6 1 1.3 1.6 2.2 2.1.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.5 0 .8z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="hero-badge-row">
+        <div class="hero-logo-circle"><img src="elcruce-logo.png" alt="El Cruce"></div>
+        <div class="hero-eyebrow"><span class="dot"></span><span data-i18n="hero.eyebrow">Transporte oficial · El Cruce 2026</span></div>
+      </div>
+      <h1 data-i18n-html="hero.title">Del aeropuerto a la largada, <em>sin vueltas.</em></h1>
+      <p data-i18n="hero.lead">Traslados regulares entre el Aeropuerto de Bariloche y el Cerro Catedral para corredores de El Cruce.</p>
+    </div>
+
+    <div id="reservar">
+      <div class="rsv-head">
+        <b data-i18n="rsv.titulo">Reservá tu lugar</b>
+        <span class="rsv-step"><span data-i18n="rsv.paso">Paso</span> <span id="rsv-step-n">1</span> <span data-i18n="rsv.de2">de 2</span></span>
+      </div>
+
+      <div class="step" id="step1">
+        <div class="toggle" id="tramo-toggle">
+          <button type="button" data-tramo="ida"><span data-i18n="rsv.ida">Ida</span> · <span id="precio-ida">$30.000</span></button>
+          <button type="button" data-tramo="idavuelta" class="on"><span data-i18n="rsv.idavuelta">Ida y vuelta</span> · <span id="precio-idavuelta">$60.000</span></button>
+        </div>
+
+        <div class="field" id="f-sentido" hidden>
+          <label data-i18n="rsv.sentido">Sentido</label>
+          <select id="sentido-select">
+            <option value="0" data-i18n="rsv.sentido0">Aeropuerto → Cerro Catedral</option>
+            <option value="1" data-i18n="rsv.sentido1">Cerro Catedral → Aeropuerto</option>
+          </select>
+        </div>
+
+        <div class="pax-stepper">
+          <div class="pax-info">
+            <b data-i18n="rsv.corredores">Corredores</b>
+            <span id="pax-sub"></span>
+          </div>
+          <div class="stepper">
+            <button type="button" id="pax-minus">−</button>
+            <span class="n" id="pax-n">1</span>
+            <button type="button" id="pax-plus">+</button>
+          </div>
+        </div>
+
+        <div class="rsv-total">
+          <span data-i18n="rsv.total">Total</span>
+          <b id="total-step1">$60.000</b>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:.45rem">
+          <button type="button" class="btn btn-gold" id="btn-continuar" data-i18n="rsv.continuar">Continuar</button>
+          <span class="rsv-subtext" data-i18n="rsv.siguiente-paso">Siguiente paso: vuelos de llegada y regreso, y tus datos.</span>
+        </div>
+        <a href="#grupos" class="rsv-link" data-i18n="rsv.tarifa-grupal">¿Viajás con tu equipo? Consultá tarifa grupal</a>
+      </div>
+
+      <div class="step" id="step2" hidden>
+        <button type="button" class="rsv-back" id="btn-volver">← <span data-i18n="rsv.volver">Volver al paso 1</span></button>
+        <div class="rsv-resumen" id="rsv-resumen"></div>
+
+        <div class="field">
+          <label data-i18n="rsv.nombre">Nombre y Apellido</label>
+          <input type="text" id="f-nombre">
+        </div>
+
+        <div class="rsv-row2" id="f-llegada">
+          <div class="field">
+            <label data-i18n="rsv.vuelo-llegada">N° de vuelo de llegada</label>
+            <input type="text" id="f-vuelo-llegada">
+          </div>
+          <div class="field">
+            <label data-i18n="rsv.horario-llegada">Horario de llegada</label>
+            <input type="time" id="f-horario-llegada">
+          </div>
+        </div>
+
+        <div class="rsv-row2" id="f-regreso">
+          <div class="field">
+            <label data-i18n="rsv.vuelo-regreso">N° de vuelo de regreso</label>
+            <input type="text" id="f-vuelo-regreso">
+          </div>
+          <div class="field">
+            <label data-i18n="rsv.horario-salida">Horario de salida del vuelo</label>
+            <input type="time" id="f-horario-salida">
+          </div>
+        </div>
+
+        <div class="rsv-row2">
+          <div class="field">
+            <label data-i18n="rsv.email">Email</label>
+            <input type="email" id="f-email">
+          </div>
+          <div class="field">
+            <label data-i18n="rsv.tel">Teléfono / WhatsApp</label>
+            <input type="tel" id="f-tel">
+          </div>
+        </div>
+
+        <div class="field">
+          <label data-i18n="rsv.grupo">Tu grupo de carrera</label>
+          <select id="f-grupo">
+            <option value="0" data-i18n="rsv.grupo0">Grupo 1 · 5 al 7 dic</option>
+            <option value="1" data-i18n="rsv.grupo1">Grupo 2 · 6 al 8 dic</option>
+            <option value="2" data-i18n="rsv.grupo2">Grupo 3 · 7 al 9 dic</option>
+            <option value="3" data-i18n="rsv.grupo3">Grupo 4 · 8 al 10 dic</option>
+            <option value="4" data-i18n="rsv.grupo4">Grupo 5 · 9 al 11 dic</option>
+          </select>
+        </div>
+
+        <div class="hint" id="rsv-hint" style="font-size:.82rem;color:#C0392B;min-height:1.2em"></div>
+
+        <div style="display:flex;flex-direction:column;gap:.6rem;margin-top:.3rem">
+          <button type="button" class="btn btn-gold" id="btn-pagar">
+            <span data-i18n="rsv.pagar">Pagar</span> <span id="pagar-total">$60.000</span> <span data-i18n="rsv.con-mp">con Mercado Pago</span>
+          </button>
+          <button type="button" class="btn btn-ghost" id="btn-wa">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.1.1.3 0 .5l-.4.5c-.2.2-.3.4-.1.6.6 1 1.3 1.6 2.2 2.1.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.5 0 .8z"/></svg>
+            <span data-i18n="rsv.consultar-wa">Consultar por WhatsApp</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="info-sec">
+  <div class="wrap">
+    <h2 class="bracketed"><span class="b">[</span> <span data-i18n="info.titulo">Lo que tenés que saber</span> <span class="b">]</span></h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <b data-i18n="info.horarios.t">Horarios</b>
+        <p data-i18n="info.horarios.p">Indicá el horario de llegada, salida y número de vuelo. Uno de nuestros colaboradores se va a poner en contacto con vos para asignarte el traslado más conveniente.</p>
+      </div>
+      <div class="info-card">
+        <b data-i18n="info.pickup.t">Punto de pick up</b>
+        <p data-i18n="info.pickup.p">Playa de Estacionamiento bajando las escalinatas.</p>
+        <a href="#" id="open-map" data-i18n="info.pickup.link">Ver mapa →</a>
+      </div>
+      <div class="info-card">
+        <b data-i18n="info.equipaje.t">Equipaje por pasajero</b>
+        <ul class="check-list">
+          <li data-i18n="info.equipaje.li1">1 carry on: hasta 55 x 35 x 25 cm, aprox. 10 kg</li>
+          <li data-i18n="info.equipaje.li2">1 mochila o bolso de mano: hasta 40 x 30 x 15 cm</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <b data-i18n="info.atraso.t">Si tu vuelo se atrasa</b>
+        <p data-i18n="info.atraso.p">Comunicate inmediatamente a este número de teléfono:</p>
+        <a class="tel" href="tel:+5492944790182">+54 9 2944 790182</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="grupos-sec" id="grupos">
+  <div class="wrap">
+    <div class="grupos-panel">
+      <div>
+        <h2 class="bracketed"><span class="b">[</span> <span data-i18n="grupos.titulo">Equipos y grupos</span> <span class="b">]</span></h2>
+        <p data-i18n="grupos.texto">¿Viajás con tu equipo de running? Armamos el traslado para todo el grupo, con horario coordinado.</p>
+      </div>
+      <a class="btn btn-gold" id="btn-consulta-grupal" style="width:auto" target="_blank" rel="noopener" data-i18n="grupos.cta">Enviar consulta</a>
+    </div>
+  </div>
+</section>
+
+<section class="faq-sec">
+  <div class="wrap faq-wrap">
+    <h2 class="bracketed" style="margin-bottom:1.8rem"><span class="b">[</span> <span data-i18n="faq.titulo">Preguntas frecuentes</span> <span class="b">]</span></h2>
+    <div class="faq-list" id="faq-list"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <img src="logo-blanco.png" alt="Vivir Viajes">
+      <span data-i18n="footer.texto">Transporte oficial de El Cruce 2026</span>
+    </div>
+    <div class="foot-bottom" data-i18n="footer.legajo">Legajo N° 11502 Disp. 1816 – EVT</div>
+  </div>
+  <div id="sticky-spacer"></div>
+</footer>
+
+<div class="modal-overlay" id="map-modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <b data-i18n="modal.titulo">Punto de pick up</b>
+      <button type="button" class="modal-close-x" id="close-map">✕</button>
+    </div>
+    <div class="map-box">
+      <svg viewBox="0 0 400 300" font-family="Mulish, sans-serif">
+        <rect width="400" height="300" fill="#EEF2F8"></rect>
+        <g fill="#D5E3D6">
+          <circle cx="360" cy="40" r="14"></circle><circle cx="378" cy="62" r="10"></circle><circle cx="370" cy="250" r="16"></circle><circle cx="352" cy="272" r="10"></circle><circle cx="30" cy="20" r="10"></circle><circle cx="350" cy="150" r="9"></circle>
+        </g>
+        <rect x="0" y="262" width="400" height="38" fill="#D9E0EA"></rect>
+        <path d="M0 36 H300 Q336 36 336 72 V168 Q336 196 308 196" fill="none" stroke="#C9D3E3" stroke-width="18" stroke-linecap="round"></path>
+        <path d="M0 36 H300 Q336 36 336 72 V168 Q336 196 308 196" fill="none" stroke="#fff" stroke-width="13" stroke-linecap="round"></path>
+        <path d="M20 190 H320" stroke="#C9D3E3" stroke-width="18" stroke-linecap="round"></path>
+        <path d="M20 190 H320" stroke="#fff" stroke-width="13" stroke-linecap="round"></path>
+        <rect x="96" y="58" width="214" height="114" rx="8" fill="#fff" stroke="#C9D3E3" stroke-width="1.5"></rect>
+        <g stroke="#DCE3EE" stroke-width="1.5">
+          <path d="M110 84 H296 M110 112 H296 M110 140 H296"></path>
+        </g>
+        <g fill="#C9D3E3">
+          <rect x="118" y="70" width="10" height="8" rx="2"></rect><rect x="136" y="70" width="10" height="8" rx="2"></rect><rect x="172" y="70" width="10" height="8" rx="2"></rect><rect x="208" y="70" width="10" height="8" rx="2"></rect><rect x="262" y="70" width="10" height="8" rx="2"></rect>
+          <rect x="128" y="96" width="10" height="8" rx="2"></rect><rect x="164" y="96" width="10" height="8" rx="2"></rect><rect x="236" y="96" width="10" height="8" rx="2"></rect><rect x="272" y="96" width="10" height="8" rx="2"></rect>
+          <rect x="118" y="124" width="10" height="8" rx="2"></rect><rect x="154" y="124" width="10" height="8" rx="2"></rect><rect x="190" y="124" width="10" height="8" rx="2"></rect><rect x="280" y="124" width="10" height="8" rx="2"></rect>
+          <rect x="136" y="152" width="10" height="8" rx="2"></rect><rect x="172" y="152" width="10" height="8" rx="2"></rect><rect x="280" y="152" width="10" height="8" rx="2"></rect>
+        </g>
+        <text x="203" y="52" text-anchor="middle" font-size="10" font-weight="700" fill="#5A6B88" letter-spacing="1.2">ESTACIONAMIENTO</text>
+        <path d="M50 204 H256 L266 214 V262 H50 Z" fill="#16284C"></path>
+        <text x="150" y="238" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">Aeropuerto</text>
+        <text x="150" y="252" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.7)">Teniente Luis Candelaria</text>
+        <rect x="206" y="200" width="22" height="6" rx="2" fill="#E9A23C"></rect>
+        <text x="217" y="222" text-anchor="middle" font-size="8" font-weight="700" fill="#E9A23C">ARRIBOS</text>
+        <g fill="#16284C" opacity=".55">
+          <rect x="208" y="176" width="18" height="2.2"></rect><rect x="208" y="180" width="18" height="2.2"></rect><rect x="208" y="184" width="18" height="2.2"></rect><rect x="208" y="188" width="18" height="2.2"></rect><rect x="208" y="192" width="18" height="2.2"></rect>
+        </g>
+        <path d="M217 198 V172 Q217 164 226 162 L236 160" fill="none" stroke="#16284C" stroke-width="2" stroke-dasharray="3 3"></path>
+        <text x="186" y="186" text-anchor="end" font-size="8.5" font-weight="700" fill="#5A6B88">Escalinatas</text>
+        <circle cx="246" cy="156" r="15" fill="#E9A23C" stroke="#fff" stroke-width="3"></circle>
+        <path d="M240 150 L252 162 M252 150 L240 162" stroke="#16284C" stroke-width="3.2" stroke-linecap="round"></path>
+        <rect x="266" y="130" width="92" height="36" rx="8" fill="#16284C"></rect>
+        <path d="M266 150 L259 156 L266 158 Z" fill="#16284C"></path>
+        <text x="312" y="145" text-anchor="middle" font-size="9.5" font-weight="700" fill="#E9A23C">PICK UP</text>
+        <text x="312" y="158" text-anchor="middle" font-size="9" fill="#fff">Vivir Viajes</text>
+        <g transform="translate(372 108)">
+          <circle r="12" fill="#fff" stroke="#C9D3E3"></circle>
+          <path d="M0 -8 L4 3 L0 1 L-4 3 Z" fill="#16284C"></path>
+          <text y="-15" text-anchor="middle" font-size="8" font-weight="700" fill="#5A6B88">N</text>
+        </g>
+      </svg>
+    </div>
+    <p class="map-caption" data-i18n="modal.texto">Al salir de arribos, bajá las escalinatas: te esperamos en la playa de estacionamiento, frente a la terminal.</p>
+  </div>
+</div>
+
+<div id="sticky-bar">
+  <div class="sb-info"><span id="sb-tramo"></span><b id="sb-total"></b></div>
+  <a class="btn btn-gold" href="#reservar" data-i18n="rsv.reservar-btn">Reservar</a>
+</div>
+
+<script>
+const WHATSAPP = "5492944539672";
+const PRECIOS = { ida: 30000, idavuelta: 60000 };
+const SENTIDOS_TXT = { es:["Aeropuerto → Cerro Catedral","Cerro Catedral → Aeropuerto"], en:["Airport → Cerro Catedral","Cerro Catedral → Airport"], pt:["Aeroporto → Cerro Catedral","Cerro Catedral → Aeroporto"] };
+const GRUPOS_TXT = {
+  es:["Grupo 1 · 5 al 7 dic","Grupo 2 · 6 al 8 dic","Grupo 3 · 7 al 9 dic","Grupo 4 · 8 al 10 dic","Grupo 5 · 9 al 11 dic"],
+  en:["Group 1 · Dec 5-7","Group 2 · Dec 6-8","Group 3 · Dec 7-9","Group 4 · Dec 8-10","Group 5 · Dec 9-11"],
+  pt:["Grupo 1 · 5 a 7 dez","Grupo 2 · 6 a 8 dez","Grupo 3 · 7 a 9 dez","Grupo 4 · 8 a 10 dez","Grupo 5 · 9 a 11 dez"],
+};
+
+const UI = {
+  es: {
+    "nav.destinos":"Destinos","nav.nosotros":"Nosotros","nav.agencias":"Agencias",
+    "hero.eyebrow":"Transporte oficial · El Cruce 2026",
+    "hero.title":'Del aeropuerto a la largada, <em>sin vueltas.</em>',
+    "hero.lead":"Traslados regulares entre el Aeropuerto de Bariloche y el Cerro Catedral para corredores de El Cruce.",
+    "rsv.titulo":"Reservá tu lugar", "rsv.paso":"Paso", "rsv.de2":"de 2",
+    "rsv.ida":"Ida", "rsv.idavuelta":"Ida y vuelta",
+    "rsv.sentido":"Sentido", "rsv.sentido0":"Aeropuerto → Cerro Catedral", "rsv.sentido1":"Cerro Catedral → Aeropuerto",
+    "rsv.corredores":"Corredores", "rsv.total":"Total",
+    "rsv.continuar":"Continuar", "rsv.siguiente-paso":"Siguiente paso: vuelos de llegada y regreso, y tus datos.",
+    "rsv.tarifa-grupal":"¿Viajás con tu equipo? Consultá tarifa grupal",
+    "rsv.volver":"Volver al paso 1",
+    "rsv.nombre":"Nombre y Apellido",
+    "rsv.vuelo-llegada":"N° de vuelo de llegada", "rsv.horario-llegada":"Horario de llegada",
+    "rsv.vuelo-regreso":"N° de vuelo de regreso", "rsv.horario-salida":"Horario de salida del vuelo",
+    "rsv.email":"Email", "rsv.tel":"Teléfono / WhatsApp",
+    "rsv.grupo":"Tu grupo de carrera",
+    "rsv.grupo0":"Grupo 1 · 5 al 7 dic","rsv.grupo1":"Grupo 2 · 6 al 8 dic","rsv.grupo2":"Grupo 3 · 7 al 9 dic","rsv.grupo3":"Grupo 4 · 8 al 10 dic","rsv.grupo4":"Grupo 5 · 9 al 11 dic",
+    "rsv.pagar":"Pagar", "rsv.con-mp":"con Mercado Pago", "rsv.consultar-wa":"Consultar por WhatsApp",
+    "rsv.reservar-btn":"Reservar",
+    "rsv.corredor":"corredor","rsv.corredores-pl":"corredores",
+    "rsv.hint-vuelos":"Completá los datos de vuelo marcados.",
+    "rsv.hint-datos":"Completá nombre, email y teléfono.",
+    "rsv.hint-email":"Ingresá un email válido.",
+    "rsv.redirigiendo":"Redirigiendo...",
+    "info.titulo":"Lo que tenés que saber",
+    "info.horarios.t":"Horarios", "info.horarios.p":"Indicá el horario de llegada, salida y número de vuelo. Uno de nuestros colaboradores se va a poner en contacto con vos para asignarte el traslado más conveniente.",
+    "info.pickup.t":"Punto de pick up", "info.pickup.p":"Playa de Estacionamiento bajando las escalinatas.", "info.pickup.link":"Ver mapa →",
+    "info.equipaje.t":"Equipaje por pasajero", "info.equipaje.li1":"1 carry on: hasta 55 x 35 x 25 cm, aprox. 10 kg", "info.equipaje.li2":"1 mochila o bolso de mano: hasta 40 x 30 x 15 cm",
+    "info.atraso.t":"Si tu vuelo se atrasa", "info.atraso.p":"Comunicate inmediatamente a este número de teléfono:",
+    "grupos.titulo":"Equipos y grupos", "grupos.texto":"¿Viajás con tu equipo de running? Armamos el traslado para todo el grupo, con horario coordinado.", "grupos.cta":"Enviar consulta",
+    "faq.titulo":"Preguntas frecuentes",
+    "faq.q1":"¿El precio es por persona?", "faq.a1":"Sí. Ida $30.000 e ida y vuelta $60.000, por pasajero.",
+    "faq.q2":"¿Cómo pago?", "faq.a2":"Online con Mercado Pago al reservar, o dejanos tu consulta y te respondemos por WhatsApp.",
+    "faq.q3":"¿Puedo reservar para todo mi equipo?", "faq.a3":"Sí. Escribinos desde Equipos y grupos y armamos el traslado con horario coordinado.",
+    "faq.q4":"¿Puedo cancelar?", "faq.a4":"Sí. Con más de 24 hs de anticipación al traslado se retiene el 15% en concepto de gastos administrativos y se devuelve el resto. Con menos de 12 hs de anticipación, o sin aviso previo, no hay devolución. Podés cancelar escribiéndonos por WhatsApp o a info@vivirviajes.com.ar.",
+    "footer.texto":"Transporte oficial de El Cruce 2026", "footer.legajo":"Legajo N° 11502 Disp. 1816 – EVT",
+    "modal.titulo":"Punto de pick up", "modal.texto":"Al salir de arribos, bajá las escalinatas: te esperamos en la playa de estacionamiento, frente a la terminal.",
+    "wa.consulta-grupal":"Hola! Somos un equipo/grupo de El Cruce 2026 y queremos consultar por el traslado Aeropuerto ↔ Cerro Catedral.",
+    "wa.header":"Hola! Quiero reservar el traslado de El Cruce 2026:",
+    "err.pago":"No se pudo iniciar el pago: ",
+  },
+  en: {
+    "nav.destinos":"Destinations","nav.nosotros":"About us","nav.agencias":"Agencies",
+    "hero.eyebrow":"Official transport · El Cruce 2026",
+    "hero.title":'From the airport to the start line, <em>no detours.</em>',
+    "hero.lead":"Regular transfers between Bariloche Airport and Cerro Catedral for El Cruce runners.",
+    "rsv.titulo":"Book your spot", "rsv.paso":"Step", "rsv.de2":"of 2",
+    "rsv.ida":"One way", "rsv.idavuelta":"Round trip",
+    "rsv.sentido":"Direction", "rsv.sentido0":"Airport → Cerro Catedral", "rsv.sentido1":"Cerro Catedral → Airport",
+    "rsv.corredores":"Runners", "rsv.total":"Total",
+    "rsv.continuar":"Continue", "rsv.siguiente-paso":"Next step: arrival/departure flights, and your details.",
+    "rsv.tarifa-grupal":"Traveling with your team? Ask about group rates",
+    "rsv.volver":"Back to step 1",
+    "rsv.nombre":"Full name",
+    "rsv.vuelo-llegada":"Arrival flight number", "rsv.horario-llegada":"Arrival time",
+    "rsv.vuelo-regreso":"Return flight number", "rsv.horario-salida":"Flight departure time",
+    "rsv.email":"Email", "rsv.tel":"Phone / WhatsApp",
+    "rsv.grupo":"Your race group",
+    "rsv.grupo0":"Group 1 · Dec 5-7","rsv.grupo1":"Group 2 · Dec 6-8","rsv.grupo2":"Group 3 · Dec 7-9","rsv.grupo3":"Group 4 · Dec 8-10","rsv.grupo4":"Group 5 · Dec 9-11",
+    "rsv.pagar":"Pay", "rsv.con-mp":"with Mercado Pago", "rsv.consultar-wa":"Ask on WhatsApp",
+    "rsv.reservar-btn":"Book",
+    "rsv.corredor":"runner","rsv.corredores-pl":"runners",
+    "rsv.hint-vuelos":"Fill in the marked flight details.",
+    "rsv.hint-datos":"Fill in your name, email and phone.",
+    "rsv.hint-email":"Enter a valid email.",
+    "rsv.redirigiendo":"Redirecting...",
+    "info.titulo":"What you need to know",
+    "info.horarios.t":"Schedules", "info.horarios.p":"Tell us your arrival/departure time and flight number. One of our team members will contact you to assign the most convenient transfer.",
+    "info.pickup.t":"Pick-up point", "info.pickup.p":"Parking lot, down the stairs.", "info.pickup.link":"View map →",
+    "info.equipaje.t":"Luggage per passenger", "info.equipaje.li1":"1 carry-on: up to 55 x 35 x 25 cm, approx. 10 kg", "info.equipaje.li2":"1 backpack or handbag: up to 40 x 30 x 15 cm",
+    "info.atraso.t":"If your flight is delayed", "info.atraso.p":"Contact this phone number right away:",
+    "grupos.titulo":"Teams and groups", "grupos.texto":"Traveling with your running team? We'll arrange the transfer for the whole group, with a coordinated schedule.", "grupos.cta":"Send inquiry",
+    "faq.titulo":"Frequently asked questions",
+    "faq.q1":"Is the price per person?", "faq.a1":"Yes. One way $30,000 ARS and round trip $60,000 ARS, per passenger.",
+    "faq.q2":"How do I pay?", "faq.a2":"Online with Mercado Pago when booking, or leave us your inquiry and we'll reply on WhatsApp.",
+    "faq.q3":"Can I book for my whole team?", "faq.a3":"Yes. Write to us from Teams and groups and we'll arrange the transfer with a coordinated schedule.",
+    "faq.q4":"Can I cancel?", "faq.a4":"Yes. With more than 24 hs notice before the transfer, 15% is withheld as an administrative fee and the rest is refunded. With less than 12 hs notice, or without prior notice, there's no refund. You can cancel by writing to us on WhatsApp or at info@vivirviajes.com.ar.",
+    "footer.texto":"Official transport of El Cruce 2026", "footer.legajo":"Legajo N° 11502 Disp. 1816 – EVT",
+    "modal.titulo":"Pick-up point", "modal.texto":"After arrivals, go down the stairs: we'll be waiting at the parking lot, in front of the terminal.",
+    "wa.consulta-grupal":"Hi! We're an El Cruce 2026 team/group and would like to ask about the Airport ↔ Cerro Catedral transfer.",
+    "wa.header":"Hi! I'd like to book the El Cruce 2026 transfer:",
+    "err.pago":"Couldn't start the payment: ",
+  },
+  pt: {
+    "nav.destinos":"Destinos","nav.nosotros":"Sobre nós","nav.agencias":"Agências",
+    "hero.eyebrow":"Transporte oficial · El Cruce 2026",
+    "hero.title":'Do aeroporto até a largada, <em>sem voltas.</em>',
+    "hero.lead":"Traslados regulares entre o Aeroporto de Bariloche e o Cerro Catedral para corredores de El Cruce.",
+    "rsv.titulo":"Reserve seu lugar", "rsv.paso":"Passo", "rsv.de2":"de 2",
+    "rsv.ida":"Só ida", "rsv.idavuelta":"Ida e volta",
+    "rsv.sentido":"Sentido", "rsv.sentido0":"Aeroporto → Cerro Catedral", "rsv.sentido1":"Cerro Catedral → Aeroporto",
+    "rsv.corredores":"Corredores", "rsv.total":"Total",
+    "rsv.continuar":"Continuar", "rsv.siguiente-paso":"Próximo passo: voos de chegada e volta, e seus dados.",
+    "rsv.tarifa-grupal":"Viaja com sua equipe? Consulte a tarifa em grupo",
+    "rsv.volver":"Voltar ao passo 1",
+    "rsv.nombre":"Nome e sobrenome",
+    "rsv.vuelo-llegada":"N° do voo de chegada", "rsv.horario-llegada":"Horário de chegada",
+    "rsv.vuelo-regreso":"N° do voo de volta", "rsv.horario-salida":"Horário de saída do voo",
+    "rsv.email":"Email", "rsv.tel":"Telefone / WhatsApp",
+    "rsv.grupo":"Seu grupo de corrida",
+    "rsv.grupo0":"Grupo 1 · 5 a 7 dez","rsv.grupo1":"Grupo 2 · 6 a 8 dez","rsv.grupo2":"Grupo 3 · 7 a 9 dez","rsv.grupo3":"Grupo 4 · 8 a 10 dez","rsv.grupo4":"Grupo 5 · 9 a 11 dez",
+    "rsv.pagar":"Pagar", "rsv.con-mp":"com Mercado Pago", "rsv.consultar-wa":"Consultar pelo WhatsApp",
+    "rsv.reservar-btn":"Reservar",
+    "rsv.corredor":"corredor","rsv.corredores-pl":"corredores",
+    "rsv.hint-vuelos":"Preencha os dados de voo marcados.",
+    "rsv.hint-datos":"Preencha nome, email e telefone.",
+    "rsv.hint-email":"Digite um email válido.",
+    "rsv.redirigiendo":"Redirecionando...",
+    "info.titulo":"O que você precisa saber",
+    "info.horarios.t":"Horários", "info.horarios.p":"Informe o horário de chegada, saída e número do voo. Um dos nossos colaboradores vai entrar em contato para definir o traslado mais conveniente.",
+    "info.pickup.t":"Ponto de encontro", "info.pickup.p":"Estacionamento, descendo as escadarias.", "info.pickup.link":"Ver mapa →",
+    "info.equipaje.t":"Bagagem por passageiro", "info.equipaje.li1":"1 bagagem de mão: até 55 x 35 x 25 cm, aprox. 10 kg", "info.equipaje.li2":"1 mochila ou bolsa: até 40 x 30 x 15 cm",
+    "info.atraso.t":"Se seu voo atrasar", "info.atraso.p":"Entre em contato imediatamente com este número:",
+    "grupos.titulo":"Equipes e grupos", "grupos.texto":"Viaja com sua equipe de corrida? Organizamos o traslado para todo o grupo, com horário combinado.", "grupos.cta":"Enviar consulta",
+    "faq.titulo":"Perguntas frequentes",
+    "faq.q1":"O preço é por pessoa?", "faq.a1":"Sim. Ida $30.000 e ida e volta $60.000, por passageiro.",
+    "faq.q2":"Como eu pago?", "faq.a2":"Online com Mercado Pago ao reservar, ou deixe sua consulta e respondemos pelo WhatsApp.",
+    "faq.q3":"Posso reservar para toda a minha equipe?", "faq.a3":"Sim. Escreva pela seção Equipes e grupos e organizamos o traslado com horário combinado.",
+    "faq.q4":"Posso cancelar?", "faq.a4":"Sim. Com mais de 24 hs de antecedência ao traslado, retemos 15% a título de despesas administrativas e devolvemos o restante. Com menos de 12 hs de antecedência, ou sem aviso prévio, não há devolução. Você pode cancelar escrevendo pelo WhatsApp ou para info@vivirviajes.com.ar.",
+    "footer.texto":"Transporte oficial de El Cruce 2026", "footer.legajo":"Legajo N° 11502 Disp. 1816 – EVT",
+    "modal.titulo":"Ponto de encontro", "modal.texto":"Ao sair dos desembarques, desça as escadarias: esperamos você no estacionamento, em frente ao terminal.",
+    "wa.consulta-grupal":"Olá! Somos uma equipe/grupo de El Cruce 2026 e gostaríamos de consultar sobre o traslado Aeroporto ↔ Cerro Catedral.",
+    "wa.header":"Olá! Quero reservar o traslado de El Cruce 2026:",
+    "err.pago":"Não foi possível iniciar o pagamento: ",
+  },
+};
+
+let lang = "es";
+try { lang = localStorage.getItem("vv-lang") || "es"; } catch(e) {}
+if (!UI[lang]) lang = "es";
+function t(key){ return (UI[lang] && UI[lang][key]) ?? UI.es[key]; }
+function fmt(n){ return "$" + Number(n).toLocaleString("es-AR"); }
+
+const state = {
+  tramo: "idavuelta", // 'ida' | 'idavuelta'
+  sentido: 0,
+  pax: 1,
+  step: 1,
+  grupo: 0,
+  mapOpen: false,
+};
+
+function unitPrice(){ return PRECIOS[state.tramo]; }
+function total(){ return unitPrice() * state.pax; }
+
+function getTracking(){
+  let stored = {};
+  try { stored = JSON.parse(localStorage.getItem("vv-tracking") || "{}"); } catch(e) {}
+  return {
+    utm_source: stored.utm_source || null, utm_medium: stored.utm_medium || null,
+    utm_campaign: stored.utm_campaign || null, utm_term: stored.utm_term || null,
+    utm_content: stored.utm_content || null, gclid: stored.gclid || null, fbclid: stored.fbclid || null,
+  };
+}
+
+function applyStaticI18n(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const v = t(el.getAttribute("data-i18n"));
+    if (v != null) el.textContent = v;
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach(el=>{
+    const v = t(el.getAttribute("data-i18n-html"));
+    if (v != null) el.innerHTML = v;
+  });
+  document.querySelectorAll("#lang-switch button").forEach(b=>{
+    b.classList.toggle("active", b.getAttribute("data-lang")===lang);
+  });
+  document.getElementById("precio-ida").textContent = fmt(PRECIOS.ida);
+  document.getElementById("precio-idavuelta").textContent = fmt(PRECIOS.idavuelta);
+}
+
+function renderFaq(){
+  const items = [
+    [t("faq.q1"), t("faq.a1")], [t("faq.q2"), t("faq.a2")],
+    [t("faq.q3"), t("faq.a3")], [t("faq.q4"), t("faq.a4")],
+  ];
+  const box = document.getElementById("faq-list");
+  box.innerHTML = "";
+  items.forEach(([q,a])=>{
+    const d = document.createElement("details");
+    d.innerHTML = '<summary>'+q+'<span class="plus">+</span></summary><p>'+a+'</p>';
+    box.appendChild(d);
+  });
+}
+
+function render(){
+  // Toggle tramo
+  document.querySelectorAll("#tramo-toggle button").forEach(b=>{
+    b.classList.toggle("on", b.getAttribute("data-tramo")===state.tramo);
+  });
+  const isIda = state.tramo === "ida";
+  document.getElementById("f-sentido").hidden = !isIda;
+
+  const paxWord = state.pax === 1 ? t("rsv.corredor") : t("rsv.corredores-pl");
+  const tramoLabel = isIda ? t("rsv.ida") : t("rsv.idavuelta");
+  document.getElementById("pax-sub").textContent = tramoLabel + " · " + fmt(unitPrice()) + "/" + t("rsv.corredor");
+  document.getElementById("pax-n").textContent = state.pax;
+  document.getElementById("pax-minus").disabled = state.pax <= 1;
+  document.getElementById("pax-plus").disabled = state.pax >= 20;
+
+  document.getElementById("total-step1").textContent = fmt(total());
+  document.getElementById("pagar-total").textContent = fmt(total());
+
+  document.getElementById("rsv-step-n").textContent = state.step;
+  document.getElementById("step1").hidden = state.step !== 1;
+  document.getElementById("step2").hidden = state.step !== 2;
+
+  if (state.step === 2) {
+    const sentidoTxt = SENTIDOS_TXT[lang][state.sentido];
+    const resumen = (isIda ? sentidoTxt : tramoLabel) + " · " + state.pax + " " + paxWord + " · " + fmt(total());
+    document.getElementById("rsv-resumen").textContent = resumen;
+
+    const showLlegada = !isIda || state.sentido === 0;
+    const showRegreso = !isIda || state.sentido === 1;
+    document.getElementById("f-llegada").hidden = !showLlegada;
+    document.getElementById("f-regreso").hidden = !showRegreso;
+  }
+
+  // Sticky bar (mobile)
+  const narrow = window.innerWidth < 820;
+  const bar = document.getElementById("sticky-bar");
+  const spacer = document.getElementById("sticky-spacer");
+  bar.classList.toggle("show", narrow);
+  spacer.classList.toggle("show", narrow);
+  if (narrow) {
+    document.getElementById("sb-tramo").textContent = tramoLabel + " · " + state.pax + " pax";
+    document.getElementById("sb-total").textContent = fmt(total());
+  }
+
+  document.getElementById("map-modal").classList.toggle("show", state.mapOpen);
+}
+
+document.querySelectorAll("#tramo-toggle button").forEach(b=>{
+  b.addEventListener("click", ()=>{ state.tramo = b.getAttribute("data-tramo"); render(); });
+});
+document.getElementById("sentido-select").addEventListener("change", (e)=>{ state.sentido = Number(e.target.value); render(); });
+document.getElementById("pax-minus").addEventListener("click", ()=>{ if (state.pax>1){ state.pax--; render(); } });
+document.getElementById("pax-plus").addEventListener("click", ()=>{ if (state.pax<20){ state.pax++; render(); } });
+document.getElementById("btn-continuar").addEventListener("click", ()=>{ state.step = 2; render(); window.scrollTo({top: document.getElementById("reservar").offsetTop - 20, behavior:"smooth"}); });
+document.getElementById("btn-volver").addEventListener("click", ()=>{ state.step = 1; render(); });
+document.getElementById("f-grupo").addEventListener("change", (e)=>{ state.grupo = Number(e.target.value); });
+document.getElementById("open-map").addEventListener("click", (e)=>{ e.preventDefault(); state.mapOpen = true; render(); });
+document.getElementById("close-map").addEventListener("click", ()=>{ state.mapOpen = false; render(); });
+document.getElementById("map-modal").addEventListener("click", (e)=>{ if (e.target.id === "map-modal"){ state.mapOpen = false; render(); } });
+document.addEventListener("keydown", (e)=>{ if (e.key === "Escape" && state.mapOpen){ state.mapOpen = false; render(); } });
+window.addEventListener("resize", render);
+
+document.querySelectorAll("#lang-switch button").forEach(b=>{
+  b.addEventListener("click", ()=>{
+    lang = b.getAttribute("data-lang");
+    try { localStorage.setItem("vv-lang", lang); } catch(e) {}
+    applyStaticI18n();
+    renderFaq();
+    render();
+  });
+});
+
+document.getElementById("btn-consulta-grupal").href = "https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(t("wa.consulta-grupal"));
+
+function collectStep2(){
+  return {
+    nombre: document.getElementById("f-nombre").value.trim(),
+    vueloLlegada: document.getElementById("f-vuelo-llegada").value.trim(),
+    horarioLlegada: document.getElementById("f-horario-llegada").value,
+    vueloRegreso: document.getElementById("f-vuelo-regreso").value.trim(),
+    horarioSalida: document.getElementById("f-horario-salida").value,
+    email: document.getElementById("f-email").value.trim(),
+    tel: document.getElementById("f-tel").value.trim(),
+  };
+}
+
+function validateStep2(d){
+  const isIda = state.tramo === "ida";
+  const showLlegada = !isIda || state.sentido === 0;
+  const showRegreso = !isIda || state.sentido === 1;
+  if (!d.nombre || !d.email || !d.tel) return t("rsv.hint-datos");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) return t("rsv.hint-email");
+  if (showLlegada && (!d.vueloLlegada || !d.horarioLlegada)) return t("rsv.hint-vuelos");
+  if (showRegreso && (!d.vueloRegreso || !d.horarioSalida)) return t("rsv.hint-vuelos");
+  return null;
+}
+
+function buildDetalleWa(d){
+  const isIda = state.tramo === "ida";
+  const tramoLabel = isIda ? t("rsv.ida") : t("rsv.idavuelta");
+  const sentidoTxt = SENTIDOS_TXT[lang][state.sentido];
+  const lines = [t("wa.header")];
+  lines.push("• " + d.nombre);
+  lines.push("• " + (isIda ? sentidoTxt : tramoLabel));
+  lines.push("• " + state.pax + " " + (state.pax===1?t("rsv.corredor"):t("rsv.corredores-pl")));
+  if (d.vueloLlegada) lines.push("• " + t("rsv.vuelo-llegada") + ": " + d.vueloLlegada + " (" + d.horarioLlegada + ")");
+  if (d.vueloRegreso) lines.push("• " + t("rsv.vuelo-regreso") + ": " + d.vueloRegreso + " (" + d.horarioSalida + ")");
+  lines.push("• " + t("rsv.grupo") + ": " + GRUPOS_TXT[lang][state.grupo]);
+  lines.push("• " + t("rsv.email") + ": " + d.email);
+  lines.push("• " + t("rsv.tel") + ": " + d.tel);
+  lines.push("• " + t("rsv.total") + ": " + fmt(total()));
+  return lines.join("\n");
+}
+
+document.getElementById("btn-wa").addEventListener("click", ()=>{
+  const d = collectStep2();
+  const err = validateStep2(d);
+  if (err) { document.getElementById("rsv-hint").textContent = err; return; }
+  document.getElementById("rsv-hint").textContent = "";
+
+  const url = "https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(buildDetalleWa(d));
+  window.open(url, "_blank");
+
+  fetch("/api/log-lead", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({
+      channel: "whatsapp",
+      excursionId: "elcruce",
+      excursion: "Traslado El Cruce · " + (state.tramo==="ida" ? t("rsv.ida") : t("rsv.idavuelta")),
+      opcion: state.tramo==="ida" ? SENTIDOS_TXT[lang][state.sentido] : null,
+      fecha: GRUPOS_TXT[lang][state.grupo],
+      pasajeros: state.pax + " " + (state.pax===1?t("rsv.corredor"):t("rsv.corredores-pl")),
+      nombre: d.nombre,
+      dni: null,
+      email: d.email,
+      telefono: d.tel,
+      hospedaje: null,
+      ...getTracking(),
+    }),
+  }).catch(()=>{});
+});
+
+document.getElementById("btn-pagar").addEventListener("click", async ()=>{
+  const d = collectStep2();
+  const err = validateStep2(d);
+  if (err) { document.getElementById("rsv-hint").textContent = err; return; }
+  document.getElementById("rsv-hint").textContent = "";
+
+  const btn = document.getElementById("btn-pagar");
+  const prevHtml = btn.innerHTML;
+  btn.disabled = true;
+  btn.textContent = t("rsv.redirigiendo");
+
+  const isIda = state.tramo === "ida";
+  const payload = {
+    product: "elcruce",
+    tramo: isIda ? "Ida" : "Ida y vuelta",
+    sentido: isIda ? SENTIDOS_TXT[lang][state.sentido] : null,
+    pax: state.pax,
+    total: total(),
+    nombre: d.nombre,
+    email: d.email,
+    telefono: d.tel,
+    grupo: GRUPOS_TXT[lang][state.grupo],
+    vueloLlegada: d.vueloLlegada || null,
+    horarioLlegada: d.horarioLlegada || null,
+    vueloRegreso: d.vueloRegreso || null,
+    horarioSalida: d.horarioSalida || null,
+    ...getTracking(),
+  };
+
+  try{
+    const resp = await fetch("/api/create-preference", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify(payload),
+    });
+    const data = await resp.json();
+    if (!resp.ok || !data.init_point) throw new Error(data.error || "error");
+    window.location.href = data.init_point;
+  }catch(err){
+    alert(t("err.pago") + (err && err.message ? err.message : err));
+    btn.disabled = false;
+    btn.innerHTML = prevHtml;
+  }
+});
+
+applyStaticI18n();
+renderFaq();
+render();
+</script>
+</body>
+</html>

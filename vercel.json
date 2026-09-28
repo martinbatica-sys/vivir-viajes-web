@@ -1,4 +1,7 @@
 {
+  "rewrites": [
+    { "source": "/elcruce", "destination": "/elcruce.html" }
+  ],
   "redirects": [
     { "source": "/excursion/circuito-chico-cerro-campanario-y-colonia-suiza/", "destination": "/excursion.html?exc=circuito-chico", "permanent": true },
     { "source": "/excursion/circuito-chico/", "destination": "/excursion.html?exc=circuito-chico-campanario", "permanent": true },

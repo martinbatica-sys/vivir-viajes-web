@@ -106,11 +106,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h3 data-i18n="voucher.title">Voucher de reserva</h3>
         <div class="row"><span data-i18n="voucher.excursion">Excursión</span><span id="v-excursion">-</span></div>
         <div class="row" id="v-opcion-row" hidden><span data-i18n="voucher.opcion">Opción</span><span id="v-opcion"></span></div>
+        <div class="row" id="v-tramo-row" hidden><span data-i18n="voucher.tramo">Tramo</span><span id="v-tramo"></span></div>
         <div class="row"><span data-i18n="voucher.pasajero">Pasajero</span><span id="v-nombre">-</span></div>
         <div class="row" id="v-hotel-row" hidden><span data-i18n="voucher.hotel">Hotel</span><span id="v-hotel"></span></div>
         <div class="row"><span data-i18n="voucher.pax">Cant Pax</span><span id="v-pasajeros">-</span></div>
-        <div class="row"><span data-i18n="voucher.fecha">Fecha</span><span id="v-fecha">-</span></div>
+        <div class="row" id="v-fecha-row"><span data-i18n="voucher.fecha" id="v-fecha-label">Fecha</span><span id="v-fecha">-</span></div>
         <div class="row" id="v-horario-row" hidden><span data-i18n="voucher.horario">A partir de</span><span id="v-horario"></span></div>
+        <div class="row" id="v-llegada-row" hidden><span data-i18n="voucher.vuelo-llegada">Vuelo llegada</span><span id="v-llegada"></span></div>
+        <div class="row" id="v-regreso-row" hidden><span data-i18n="voucher.vuelo-regreso">Vuelo regreso</span><span id="v-regreso"></span></div>
+        <div class="row" id="v-pickup-row" hidden><span data-i18n="voucher.pickup">Punto de pick up</span><span id="v-pickup"></span></div>
         <div class="row total"><span data-i18n="voucher.total">Total pagado</span><span id="v-total">-</span></div>
         <div class="ref" id="v-ref"></div>
         <div class="legend" data-i18n="voucher.legend">No válido como factura</div>
@@ -129,6 +133,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       "voucher.pasajero":"Pasajero", "voucher.hotel":"Hotel", "voucher.pax":"Cant Pax", "voucher.fecha":"Fecha",
       "voucher.horario":"A partir de", "voucher.total":"Total pagado", "voucher.legend":"No válido como factura",
       "voucher.consultas":"Consultas:", "voucher.referencia":"Referencia: ",
+      "voucher.tramo":"Tramo", "voucher.grupo":"Grupo de carrera", "voucher.vuelo-llegada":"Vuelo llegada", "voucher.vuelo-regreso":"Vuelo regreso", "voucher.pickup":"Punto de pick up",
+      "voucher.elcruce-title":"Traslado El Cruce 2026", "voucher.elcruce-pickup":"Playa de Estacionamiento, Aeropuerto Bariloche",
       "footer.text":"© 2026 Vivir Viajes · Bariloche, Patagonia",
       "status.success.title":"¡Reserva confirmada!", "status.success.msg":"Tu pago se acreditó correctamente. En breve nuestro equipo se va a contactar para coordinar los detalles.",
       "status.pending.title":"Pago en proceso", "status.pending.msg":"Tu pago está siendo procesado. Te vamos a avisar apenas se confirme.",
@@ -140,6 +146,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       "voucher.pasajero":"Traveler", "voucher.hotel":"Hotel", "voucher.pax":"Pax count", "voucher.fecha":"Date",
       "voucher.horario":"Starting at", "voucher.total":"Total paid", "voucher.legend":"Not valid as an invoice",
       "voucher.consultas":"Questions:", "voucher.referencia":"Reference: ",
+      "voucher.tramo":"Leg", "voucher.grupo":"Race group", "voucher.vuelo-llegada":"Arrival flight", "voucher.vuelo-regreso":"Return flight", "voucher.pickup":"Pick-up point",
+      "voucher.elcruce-title":"El Cruce 2026 Transfer", "voucher.elcruce-pickup":"Parking lot, Bariloche Airport",
       "footer.text":"© 2026 Vivir Viajes · Bariloche, Patagonia",
       "status.success.title":"Booking confirmed!", "status.success.msg":"Your payment was successfully processed. Our team will be in touch shortly to coordinate the details.",
       "status.pending.title":"Payment in process", "status.pending.msg":"Your payment is being processed. We'll let you know as soon as it's confirmed.",
@@ -151,6 +159,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       "voucher.pasajero":"Passageiro", "voucher.hotel":"Hotel", "voucher.pax":"Qtd. Pax", "voucher.fecha":"Data",
       "voucher.horario":"A partir de", "voucher.total":"Total pago", "voucher.legend":"Não válido como fatura",
       "voucher.consultas":"Dúvidas:", "voucher.referencia":"Referência: ",
+      "voucher.tramo":"Trecho", "voucher.grupo":"Grupo de corrida", "voucher.vuelo-llegada":"Voo de chegada", "voucher.vuelo-regreso":"Voo de volta", "voucher.pickup":"Ponto de encontro",
+      "voucher.elcruce-title":"Traslado El Cruce 2026", "voucher.elcruce-pickup":"Estacionamento, Aeroporto de Bariloche",
       "footer.text":"© 2026 Vivir Viajes · Bariloche, Patagônia",
       "status.success.title":"Reserva confirmada!", "status.success.msg":"Seu pagamento foi processado com sucesso. Em breve nossa equipe vai entrar em contato para combinar os detalhes.",
       "status.pending.title":"Pagamento em processamento", "status.pending.msg":"Seu pagamento está sendo processado. Vamos avisar assim que for confirmado.",
@@ -213,37 +223,76 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
   renderStatus();
 
-  if(status === "success" && params.get("excursion")){
-    document.getElementById("v-excursion").textContent = params.get("excursion") || "-";
+  const isElCruce = params.get("producto") === "elcruce";
 
-    const opcion = params.get("opcion");
-    if(opcion){
-      document.getElementById("v-opcion-row").hidden = false;
-      document.getElementById("v-opcion").textContent = opcion;
-    }
+  if(status === "success" && (params.get("excursion") || isElCruce)){
+    if(isElCruce){
+      document.getElementById("v-excursion").textContent = t("voucher.elcruce-title");
 
-    const fecha = params.get("fecha");
-    document.getElementById("v-fecha").textContent = fecha ? fecha.split("-").reverse().join("/") : "-";
-    document.getElementById("v-pasajeros").textContent = params.get("pasajeros") || "-";
-    document.getElementById("v-nombre").textContent = params.get("nombre") || "-";
+      const tramo = params.get("tramo");
+      const sentido = params.get("sentido");
+      if(tramo){
+        document.getElementById("v-tramo-row").hidden = false;
+        document.getElementById("v-tramo").textContent = sentido || tramo;
+      }
 
-    const hotel = params.get("hospedaje");
-    if(hotel){
-      document.getElementById("v-hotel-row").hidden = false;
-      document.getElementById("v-hotel").textContent = hotel;
-    }
+      document.getElementById("v-fecha-label").textContent = t("voucher.grupo");
+      document.getElementById("v-fecha").textContent = params.get("grupo") || "-";
+      document.getElementById("v-pasajeros").textContent = params.get("pax") || "-";
+      document.getElementById("v-nombre").textContent = params.get("nombre") || "-";
 
-    const horario = params.get("horario");
-    if(horario){
-      document.getElementById("v-horario-row").hidden = false;
-      document.getElementById("v-horario").textContent = horario;
+      const vLlegada = params.get("vuelo_llegada");
+      if(vLlegada){
+        document.getElementById("v-llegada-row").hidden = false;
+        document.getElementById("v-llegada").textContent = vLlegada + (params.get("horario_llegada") ? " (" + params.get("horario_llegada") + ")" : "");
+      }
+      const vRegreso = params.get("vuelo_regreso");
+      if(vRegreso){
+        document.getElementById("v-regreso-row").hidden = false;
+        document.getElementById("v-regreso").textContent = vRegreso + (params.get("horario_salida") ? " (" + params.get("horario_salida") + ")" : "");
+      }
+
+      document.getElementById("v-pickup-row").hidden = false;
+      document.getElementById("v-pickup").textContent = t("voucher.elcruce-pickup");
+    } else {
+      document.getElementById("v-excursion").textContent = params.get("excursion") || "-";
+
+      const opcion = params.get("opcion");
+      if(opcion){
+        document.getElementById("v-opcion-row").hidden = false;
+        document.getElementById("v-opcion").textContent = opcion;
+      }
+
+      const fecha = params.get("fecha");
+      document.getElementById("v-fecha").textContent = fecha ? fecha.split("-").reverse().join("/") : "-";
+      document.getElementById("v-pasajeros").textContent = params.get("pasajeros") || "-";
+      document.getElementById("v-nombre").textContent = params.get("nombre") || "-";
+
+      const hotel = params.get("hospedaje");
+      if(hotel){
+        document.getElementById("v-hotel-row").hidden = false;
+        document.getElementById("v-hotel").textContent = hotel;
+      }
+
+      const horario = params.get("horario");
+      if(horario){
+        document.getElementById("v-horario-row").hidden = false;
+        document.getElementById("v-horario").textContent = horario;
+      }
     }
 
     const total = params.get("total");
     document.getElementById("v-total").textContent = total ? "$" + Number(total).toLocaleString("es-AR") : "-";
 
     const ref = params.get("external_reference") || params.get("payment_id") || "";
-    function refreshRef(){ document.getElementById("v-ref").textContent = ref ? t("voucher.referencia") + ref : ""; }
+    function refreshRef(){
+      document.getElementById("v-ref").textContent = ref ? t("voucher.referencia") + ref : "";
+      if(isElCruce){
+        document.getElementById("v-excursion").textContent = t("voucher.elcruce-title");
+        document.getElementById("v-fecha-label").textContent = t("voucher.grupo");
+        document.getElementById("v-pickup").textContent = t("voucher.elcruce-pickup");
+      }
+    }
     refreshRef();
     refreshVoucherRef = refreshRef;
 

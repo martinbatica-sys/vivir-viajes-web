@@ -52,7 +52,21 @@ export default async function handler(req, res) {
     }
 
     const m = payment.metadata || {};
-    const body = [
+    const isElCruce = m.excursion_id === 'elcruce';
+    const body = isElCruce ? [
+      '🏔️ Nueva reserva pagada - Vivir Viajes',
+      `Excursion: ${m.excursion || '-'}`,
+      m.sentido ? `Sentido: ${m.sentido}` : null,
+      `Grupo de carrera: ${m.grupo || '-'}`,
+      `Pasajeros: ${m.pax || '-'}`,
+      m.vuelo_llegada ? `Vuelo llegada: ${m.vuelo_llegada} (${m.horario_llegada || '-'})` : null,
+      m.vuelo_regreso ? `Vuelo regreso: ${m.vuelo_regreso} (${m.horario_salida || '-'})` : null,
+      `Total pagado: $${payment.transaction_amount}`,
+      `Cliente: ${m.nombre || '-'}`,
+      `E-mail: ${m.email || '-'}`,
+      `Tel: ${m.telefono || '-'}`,
+      `Referencia: ${payment.external_reference || '-'}`,
+    ].filter(Boolean).join('\n') : [
       '🏔️ Nueva reserva pagada - Vivir Viajes',
       `Excursion: ${m.excursion || '-'}`,
       m.opcion ? `Opcion: ${m.opcion}` : null,

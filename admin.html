@@ -58,6 +58,7 @@
   .badge.mercadopago{background:#E6F4EC;color:#2E7D4F}
   .badge.whatsapp{background:#E7F1FB;color:#1E6FA3}
   .badge.receptivo{background:#FBEEDD;color:#C9852A}
+  .badge.elcruce{background:#EFEAFB;color:#6B4FC9}
   select.status{font-family:var(--body);font-weight:700;font-size:.78rem;border-radius:6px;border:1.5px solid var(--line);padding:.3rem .4rem;cursor:pointer}
   select.status.nuevo{background:#F0F0F5;color:#4A4A66}
   select.status.contactado{background:#E7F1FB;color:#1E6FA3}
@@ -114,6 +115,7 @@
       <option value="mercadopago">Pago (Mercado Pago)</option>
       <option value="whatsapp">Consulta (WhatsApp)</option>
       <option value="receptivo">Agencias (Receptivo)</option>
+      <option value="elcruce">El Cruce</option>
     </select>
     <input type="text" id="f-search" placeholder="Buscar por nombre, email o excursión...">
     <input type="date" id="f-from" title="Desde">
@@ -180,6 +182,12 @@
     return lead.excursion === 'Receptivo & Agencias';
   }
 
+  // Los leads del traslado El Cruce (temporal, dic 2026) se identifican por
+  // excursion_id, para poder filtrarlos aparte de las excursiones normales.
+  function isElCruce(lead) {
+    return lead.excursion_id === 'elcruce';
+  }
+
   // Un lead de Mercado Pago que sigue en "nuevo" es alguien que llegó hasta
   // la pantalla de pago pero nunca la completó (create-preference.js crea
   // el lead ANTES de redirigir a Mercado Pago; el webhook lo pasa a "ganado"
@@ -189,6 +197,7 @@
   }
   function channelInfo(lead) {
     if (isReceptivo(lead)) return { cls: 'receptivo', label: 'Agencia' };
+    if (isElCruce(lead)) return { cls: 'elcruce', label: 'El Cruce' };
     if (lead.channel === 'mercadopago') return { cls: 'mercadopago', label: 'Pago' };
     return { cls: 'whatsapp', label: 'Consulta' };
   }
@@ -280,7 +289,8 @@
       if (statusF === 'nuevo' && (l.status !== 'nuevo' || isAbandonedCheckout(l))) return false;
       if (statusF && statusF !== 'abandonado' && statusF !== 'nuevo' && l.status !== statusF) return false;
       if (channelF === 'receptivo' && !isReceptivo(l)) return false;
-      if (channelF && channelF !== 'receptivo' && (l.channel !== channelF || isReceptivo(l))) return false;
+      if (channelF === 'elcruce' && !isElCruce(l)) return false;
+      if (channelF && channelF !== 'receptivo' && channelF !== 'elcruce' && (l.channel !== channelF || isReceptivo(l) || isElCruce(l))) return false;
       if (searchF) {
         const hay = [l.nombre, l.email, l.excursion, l.telefono].filter(Boolean).join(' ').toLowerCase();
         if (!hay.includes(searchF)) return false;
