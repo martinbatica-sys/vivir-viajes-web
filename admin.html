@@ -254,11 +254,16 @@
   };
   pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') pwBtn.click(); });
 
+  let autoRefreshStarted = false;
   function showApp() {
     gate.style.display = 'none';
     app.style.display = 'block';
     document.getElementById('role-badge').hidden = ROLE !== 'viewer';
     render();
+    if (!autoRefreshStarted) {
+      autoRefreshStarted = true;
+      setInterval(() => { loadLeads().catch(() => {}); }, 5 * 60 * 1000);
+    }
   }
 
   async function loadLeads() {
