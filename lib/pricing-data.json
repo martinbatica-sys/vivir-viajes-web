@@ -342,7 +342,7 @@
           }
         ],
         "precios": {
-          "pp": 45000
+          "pp": 35000
         },
         "preciosLF": null,
         "groupDiscount": null
@@ -420,7 +420,7 @@
           }
         ],
         "precios": {
-          "pp": 82000
+          "pp": 77000
         },
         "preciosLF": null,
         "groupDiscount": null
@@ -442,7 +442,7 @@
           }
         ],
         "precios": {
-          "pp": 80000
+          "pp": 70000
         },
         "preciosLF": null,
         "groupDiscount": null
@@ -464,7 +464,7 @@
           }
         ],
         "precios": {
-          "pp": 75000
+          "pp": 70000
         },
         "preciosLF": null,
         "groupDiscount": null
@@ -555,7 +555,7 @@
           }
         ],
         "precios": {
-          "pp": 75000
+          "pp": 70000
         },
         "preciosLF": null,
         "groupDiscount": null
