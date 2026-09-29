@@ -172,10 +172,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .faq-list details[open] summary .plus{transform:rotate(45deg)}
   .faq-list p{margin:.7rem 0 0;color:var(--ink-soft);font-size:.96rem;max-width:62ch}
 
+  /* ---------- AVALAN ---------- */
+  .avalan{background:#fff;padding:2.8rem 0;border-top:1px solid var(--line);overflow:hidden}
+  .avalan h3{text-align:center;font-family:var(--display);font-weight:700;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;color:#3FA9D6;margin-bottom:1.8rem}
+  .avalan-track{width:100%;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+  .avalan-strip{display:flex;align-items:center;gap:4.2rem;width:max-content;animation:avalan-scroll 32s linear infinite}
+  .avalan-strip:hover{animation-play-state:paused}
+  .avalan-strip img{height:92px;width:auto;filter:grayscale(1);opacity:.65;transition:.2s;flex:0 0 auto}
+  .avalan-strip img:hover{opacity:1;filter:grayscale(0)}
+  @keyframes avalan-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){.avalan-strip{animation:none;flex-wrap:wrap;justify-content:center;width:auto}}
+
   footer{background:var(--navy-deep);color:rgba(255,255,255,.7);padding:3.2rem 0 2.6rem}
-  .foot-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem}
+  .foot-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem;font-size:.9rem}
   .foot-top img{height:30px;display:block}
-  .foot-bottom{margin-top:2rem;padding-top:1.8rem;border-top:1px solid rgba(255,255,255,.12);font-size:.8rem;color:rgba(255,255,255,.55)}
+  .foot-addr{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1.2rem;margin-top:1.6rem;font-size:.86rem;color:rgba(255,255,255,.65)}
+  .foot-offices{display:flex;flex-direction:column;gap:.35rem}
+  .foot-offices strong{color:#fff;font-weight:700}
+  .foot-social{display:flex;gap:.9rem;flex:0 0 auto}
+  .foot-social a{color:rgba(255,255,255,.75);display:flex;transition:.18s}
+  .foot-social a:hover{color:var(--gold)}
+  .foot-legal{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.4rem;margin-top:2rem;padding-top:1.8rem;border-top:1px solid rgba(255,255,255,.12);font-size:.8rem;color:rgba(255,255,255,.55)}
+  .foot-legal .legajo{display:flex;align-items:center;gap:.7rem}
+  .foot-legal .legajo img{height:52px;width:auto;display:block;border-radius:4px}
+  .foot-legal .credit{text-align:right}
 
   /* ---------- MODAL ---------- */
   .modal-overlay{position:fixed;inset:0;background:rgba(15,29,56,.5);z-index:200;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .2s}
@@ -425,13 +445,59 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<footer>
+<section class="avalan">
   <div class="wrap">
-    <div class="foot-top">
-      <img src="logo-blanco.png" alt="Vivir Viajes">
-      <span data-i18n="footer.texto">Transporte oficial de El Cruce 2026</span>
+    <h3 data-i18n="avalan.titulo">Estas entidades nos avalan</h3>
+    <div class="avalan-track">
+      <div class="avalan-strip">
+        <img src="fotos/ministerio-1.png" alt="Ministerio de Turismo y Deportes - Argentina" loading="lazy">
+        <img src="fotos/aavytuba-1.png" alt="AAVYTUBA - Asociacion de Agencias de Viajes y Turismo de Bariloche" loading="lazy">
+        <img src="fotos/aetap-1.png" alt="AETAP" loading="lazy">
+        <img src="fotos/argentina-1.png" alt="Argentina" loading="lazy">
+        <img src="fotos/bariloche-1.png" alt="Bariloche" loading="lazy">
+        <img src="fotos/catedral-1.png" alt="Catedral Alta Patagonia" loading="lazy">
+        <img src="fotos/cerro-bayo-1.png" alt="Cerro Bayo Ski Boutique" loading="lazy">
+        <img src="fotos/emprotur-1.png" alt="EMPROTUR - Ente Mixto de Promocion Turistica" loading="lazy">
+        <img src="fotos/faevit-1.png" alt="FAEVYT" loading="lazy">
+        <img src="fotos/ministerio-1.png" alt="" aria-hidden="true" loading="lazy">
+        <img src="fotos/aavytuba-1.png" alt="" aria-hidden="true" loading="lazy">
+        <img src="fotos/aetap-1.png" alt="" aria-hidden="true" loading="lazy">
+        <img src="fotos/argentina-1.png" alt="" aria-hidden="true" loading="lazy">
+        <img src="fotos/bariloche-1.png" alt="" aria-hidden="true" loading="lazy">
+        <img src="fotos/catedral-1.png" alt="" aria-hidden="true" loading="lazy">
+        <img src="fotos/cerro-bayo-1.png" alt="" aria-hidden="true" loading="lazy">
+        <img src="fotos/emprotur-1.png" alt="" aria-hidden="true" loading="lazy">
+        <img src="fotos/faevit-1.png" alt="" aria-hidden="true" loading="lazy">
+      </div>
     </div>
-    <div class="foot-bottom" data-i18n="footer.legajo">Legajo N° 11502 Disp. 1816 – EVT</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-top">
+    <img src="logo-blanco.png" alt="Vivir Viajes">
+    <span data-i18n="footer.texto">Transporte oficial de El Cruce 2026</span>
+  </div>
+  <div class="wrap foot-addr">
+    <div class="foot-offices">
+      <div><strong data-i18n="footer.casa-central">Casa Central:</strong> Mitre 183</div>
+      <div><strong data-i18n="footer.sucursales">Sucursales:</strong> Av. San Martín (Lobby NH Edelweiss) y Mitre 315</div>
+    </div>
+    <div class="foot-social">
+      <a href="https://www.instagram.com/vivirviajesbariloche/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@barilochevivirviajes5417?si=e1IqGZWRnQEQS5q5&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaf5QYW5Y-XFQ_6vR_xZsqOMsB4SYzpFna96zQSt6jGJaS9pAgK1qVLeIvQ9yQ_aem_DMHUHKKU4vMEQpaaqxjWJQ" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="wrap foot-legal">
+    <div class="legajo">
+      <img src="fotos/DATAWEB.jpg" alt="Data Fiscal AFIP">
+      <span data-i18n="footer.legajo">Legajo N° 11502 Disp. 1816 – EVT</span>
+    </div>
+    <div class="credit" data-i18n="footer.credit">Diseño y Desarrollo Web: Martín Batica</div>
   </div>
   <div id="sticky-spacer"></div>
 </footer>
@@ -612,6 +678,7 @@ const UI = {
     "faq.q3":"¿Puedo reservar para todo mi equipo?", "faq.a3":"Sí. Escribinos desde Equipos y grupos y armamos el traslado con horario coordinado.",
     "faq.q4":"¿Puedo cancelar?", "faq.a4":"Sí. Con más de 24 hs de anticipación al traslado se retiene el 15% en concepto de gastos administrativos y se devuelve el resto. Con menos de 12 hs de anticipación, o sin aviso previo, no hay devolución. Podés cancelar escribiéndonos por WhatsApp o a info@vivirviajes.com.ar.",
     "footer.texto":"Transporte oficial de El Cruce 2026", "footer.legajo":"Legajo N° 11502 Disp. 1816 – EVT",
+    "avalan.titulo":"Estas entidades nos avalan", "footer.casa-central":"Casa Central:", "footer.sucursales":"Sucursales:", "footer.credit":"Diseño y Desarrollo Web: Martín Batica",
     "modal.titulo":"Punto de pick up", "modal.texto":"Al salir de arribos, bajá las escalinatas: te esperamos en la playa de estacionamiento, frente a la terminal.",
     "wa.consulta-grupal":"Hola! Somos un equipo/grupo de El Cruce 2026 y queremos consultar por el traslado Aeropuerto ↔ Cerro Catedral.",
     "wa.header":"Hola! Quiero reservar el traslado de El Cruce 2026:",
@@ -693,6 +760,7 @@ const UI = {
     "faq.q3":"Can I book for my whole team?", "faq.a3":"Yes. Write to us from Teams and groups and we'll arrange the transfer with a coordinated schedule.",
     "faq.q4":"Can I cancel?", "faq.a4":"Yes. With more than 24 hs notice before the transfer, 15% is withheld as an administrative fee and the rest is refunded. With less than 12 hs notice, or without prior notice, there's no refund. You can cancel by writing to us on WhatsApp or at info@vivirviajes.com.ar.",
     "footer.texto":"Official transport of El Cruce 2026", "footer.legajo":"Legajo N° 11502 Disp. 1816 – EVT",
+    "avalan.titulo":"These organizations back us", "footer.casa-central":"Head Office:", "footer.sucursales":"Branches:", "footer.credit":"Design and Web Development: Martín Batica",
     "modal.titulo":"Pick-up point", "modal.texto":"After arrivals, go down the stairs: we'll be waiting at the parking lot, in front of the terminal.",
     "wa.consulta-grupal":"Hi! We're an El Cruce 2026 team/group and would like to ask about the Airport ↔ Cerro Catedral transfer.",
     "wa.header":"Hi! I'd like to book the El Cruce 2026 transfer:",
@@ -774,6 +842,7 @@ const UI = {
     "faq.q3":"Posso reservar para toda a minha equipe?", "faq.a3":"Sim. Escreva pela seção Equipes e grupos e organizamos o traslado com horário combinado.",
     "faq.q4":"Posso cancelar?", "faq.a4":"Sim. Com mais de 24 hs de antecedência ao traslado, retemos 15% a título de despesas administrativas e devolvemos o restante. Com menos de 12 hs de antecedência, ou sem aviso prévio, não há devolução. Você pode cancelar escrevendo pelo WhatsApp ou para info@vivirviajes.com.ar.",
     "footer.texto":"Transporte oficial de El Cruce 2026", "footer.legajo":"Legajo N° 11502 Disp. 1816 – EVT",
+    "avalan.titulo":"Estas entidades nos avalizam", "footer.casa-central":"Sede Central:", "footer.sucursales":"Filiais:", "footer.credit":"Design e Desenvolvimento Web: Martín Batica",
     "modal.titulo":"Ponto de encontro", "modal.texto":"Ao sair dos desembarques, desça as escadarias: esperamos você no estacionamento, em frente ao terminal.",
     "wa.consulta-grupal":"Olá! Somos uma equipe/grupo de El Cruce 2026 e gostaríamos de consultar sobre o traslado Aeroporto ↔ Cerro Catedral.",
     "wa.header":"Olá! Quero reservar o traslado de El Cruce 2026:",
