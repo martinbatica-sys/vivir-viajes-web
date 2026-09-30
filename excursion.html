@@ -2615,7 +2615,17 @@ function pricingFor(opt,sk,con){
   opt.cats.forEach(c=>{ pax+=state.counts[c.key]; subtotal+=state.counts[c.key]*priceFor(opt,c.key,sk,con); });
   let discount=0;
   const gd = opt.groupDiscount;
-  if(gd && pax>=gd.minPax) discount = Math.round(subtotal*gd.pct);
+  if(gd && pax>=gd.minPax){
+    // El descuento por grupo aplica solo sobre el precio base de navegacion
+    // (sin traslado ni Lago Frias), nunca sobre los adicionales.
+    let discountBase=0;
+    opt.cats.forEach(c=>{
+      const v=leaf(opt,c.key,sk);
+      const base=(v&&typeof v==="object")?v.sin:(v||0);
+      discountBase += state.counts[c.key]*base;
+    });
+    discount = Math.round(discountBase*gd.pct);
+  }
   return {pax, subtotal, discount, total: subtotal-discount};
 }
 
