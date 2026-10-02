@@ -357,6 +357,118 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .nav .actions{gap:.3rem}
   }
   svg{display:block}
+
+  /* ================================================================
+     MOBILE (<=760px) — rediseño de home mobile. Desktop no se toca:
+     casi todo lo de abajo vive dentro de este media query. Estas
+     reglas base van antes para que los overrides del media query
+     (misma especificidad) ganen por orden de cascada.
+     ================================================================ */
+  .menu-toggle{display:none;width:44px;height:44px;border:1.5px solid var(--line);border-radius:12px;background:#fff;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;padding:0}
+  .menu-toggle span{width:18px;height:2px;border-radius:2px;background:var(--navy);display:block}
+  .mobile-menu{display:none}
+  .historia-toggle{display:none}
+  .chip-bar{display:none}
+  @media(min-width:761px){
+    #historia-extra[hidden]{display:block}
+  }
+
+  @media(max-width:760px){
+    html{scroll-padding-top:120px}
+
+    /* ---- Header ---- */
+    .nav{height:64px}
+    header .wrap{padding:0 20px}
+    .nav .brand img{height:28px}
+    .nav .brand .brand-legajo{font-size:.55rem}
+    .nav .actions{gap:.5rem}
+    #lang-switch{display:none}
+    #nav-whatsapp{width:40px;height:40px;padding:0;border-radius:50%;justify-content:center}
+    #nav-whatsapp .wa-text{display:none}
+    .menu-toggle{display:flex}
+
+    /* ---- Mobile menu panel ---- */
+    .mobile-menu{position:fixed;top:64px;left:0;right:0;bottom:0;z-index:45;background:#fff;flex-direction:column;overflow-y:auto;border-top:1px solid var(--line)}
+    .mobile-menu:not([hidden]){display:flex}
+    body.menu-open{overflow:hidden}
+    .mobile-menu-nav{display:flex;flex-direction:column;padding:.6rem 20px 1rem}
+    .mm-eyebrow{display:block;font-family:var(--body);font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dark);padding:.9rem 0 .3rem}
+    .mm-cat-link{display:flex;justify-content:space-between;align-items:center;gap:.6rem;padding:.85rem 0;border-bottom:1px solid var(--line);font-family:var(--display);font-weight:600;font-size:1.05rem;color:var(--navy)}
+    .mm-count{font-size:.8rem;color:var(--ink-soft);font-family:var(--body);font-weight:600;white-space:nowrap}
+    .mm-main-link{display:block;padding:1rem 0;border-bottom:1px solid var(--line);font-family:var(--display);font-weight:600;font-size:1.15rem;color:var(--navy)}
+    .mobile-menu-foot{margin-top:auto;padding:1.2rem 20px 1.6rem;display:flex;flex-direction:column;gap:1rem;background:var(--paper)}
+    .mobile-menu-foot .btn{justify-content:center}
+
+    /* ---- Chip bar ---- */
+    .chip-bar{display:block;position:sticky;top:64px;z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
+    .chip-row{display:flex;gap:.45rem;overflow-x:auto;padding:.7rem 20px;scrollbar-width:none;-ms-overflow-style:none}
+    .chip-row::-webkit-scrollbar{display:none}
+    .chip{flex:none;font-family:var(--body);font-weight:700;font-size:.8rem;padding:.45rem .85rem;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--navy);white-space:nowrap;transition:background .2s,color .2s,border-color .2s}
+    .chip.active{background:var(--navy);border-color:var(--navy);color:#fff}
+
+    /* ---- Section titles con corchetes ---- */
+    .bracketed{display:block;font-size:1.5rem;line-height:1.15;letter-spacing:-.015em;text-wrap:balance}
+    .bracket-nowrap{white-space:nowrap}
+    .section-sub{font-size:.92rem;margin-top:.35rem}
+
+    /* ---- Destacados / categorias: carrusel horizontal ---- */
+    .sec{padding:0}
+    #excursiones{background:transparent}
+    .sec-group{margin-bottom:0;padding:2.4rem 0 2rem}
+    #excursiones .sec-group{padding:1.8rem 0 2.4rem;background:var(--paper)}
+    #cat-circuitos{background:#fff}
+    #cat-navegacion{background:var(--paper)}
+    #cat-nieve{background:#fff}
+    #cat-aventura{background:var(--paper)}
+    #excursiones .wrap,#explora-tipo .wrap{padding:0}
+    #excursiones .section-head,#explora-tipo .section-head{padding:0 20px;margin-bottom:0}
+    #excursiones .temporada-filter,#explora-tipo .temporada-filter{padding:0 20px;margin:1rem 0 .9rem}
+    .cat-count{display:block;padding:0 20px;font-size:.78rem;font-weight:700;color:var(--ink-soft);margin-bottom:.7rem}
+    .cards{display:flex;grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding:4px 20px 10px;scroll-padding:0 20px;scrollbar-width:none;-ms-overflow-style:none}
+    .cards::-webkit-scrollbar{display:none}
+    .cards .card{flex:0 0 84%}
+
+    /* ---- Rent a Car ---- */
+    #rentacar{background:#fff;padding:2.4rem 0}
+    .rentacar-grid{display:flex;flex-direction:column;gap:1rem}
+    .rentacar-promo{order:-1;border-radius:18px;padding:1.4rem;min-height:200px;text-align:left}
+    .rentacar-promo li{justify-content:flex-start}
+    .rentacar-form-box{border-radius:18px;padding:1.3rem}
+    .rentacar-form{grid-template-columns:1fr 1fr;gap:.8rem}
+    .rentacar-form div:has(#rac-retiro-trigger){order:1}
+    .rentacar-form div:has(#rac-hora-retiro){order:2}
+    .rentacar-form div:has(#rac-devolucion-trigger){order:3}
+    .rentacar-form div:has(#rac-hora-devolucion){order:4}
+    .rentacar-form div:has(#rac-nombre){order:5}
+    .rentacar-form div:has(#rac-email){order:6;grid-column:1/-1}
+    .rentacar-form div:has(#rac-telefono){order:7;grid-column:1/-1}
+    .rentacar-form button[type=submit]{order:8}
+    .rentacar-form .rentacar-status{order:9}
+
+    /* ---- Nosotros ---- */
+    #nosotros{background:var(--paper);padding:2.4rem 0}
+    .historia-block{margin-bottom:1rem}
+    .historia-toggle{display:flex;width:fit-content;margin:0 auto}
+    #historia-extra .historia-block:first-child{margin-top:0}
+
+    /* ---- Agencias (receptivo) ---- */
+    #receptivo{background:#fff;padding:2.4rem 0}
+    .receptivo-form{grid-template-columns:1fr}
+
+    /* ---- Nos avalan: grilla en vez de marquee ---- */
+    .avalan{padding:1.8rem 0}
+    .avalan h3{font-size:.85rem;margin-bottom:1.2rem}
+    .avalan-track{-webkit-mask-image:none;mask-image:none}
+    .avalan-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;width:auto;animation:none}
+    .avalan-strip img{height:46px;width:100%;object-fit:contain}
+    .avalan-strip img:nth-child(n+10){display:none}
+
+    /* ---- Footer ---- */
+    footer{padding:2.2rem 0 2rem;font-size:.86rem}
+  }
+  @media(max-width:760px) and (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+  }
 </style>
 </head>
 <body>
@@ -395,9 +507,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.1.1.3 0 .5l-.4.5c-.2.2-.3.4-.1.6.6 1 1.3 1.6 2.2 2.1.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.5 0 .8z"/></svg>
         <span class="wa-text">WhatsApp</span>
       </a>
+      <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Menú" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </header>
+
+<div class="mobile-menu" id="mobile-menu" hidden>
+  <nav class="mobile-menu-nav">
+    <span class="mm-eyebrow" data-i18n="menu.excursiones">Excursiones</span>
+    <a href="#cat-circuitos" class="mm-cat-link" data-scroll>
+      <span data-i18n="cat.circuitos.title">Circuitos &amp; Miradores</span>
+      <span class="mm-count" data-count-for-menu="circuitos"></span>
+    </a>
+    <a href="#cat-navegacion" class="mm-cat-link" data-scroll>
+      <span data-i18n="cat.navegacion.title">Navegación Lacustre</span>
+      <span class="mm-count" data-count-for-menu="navegacion"></span>
+    </a>
+    <a href="#cat-nieve" class="mm-cat-link" data-scroll>
+      <span data-i18n="cat.nieve.title">Nieve &amp; Montaña</span>
+      <span class="mm-count" data-count-for-menu="nieve"></span>
+    </a>
+    <a href="#cat-aventura" class="mm-cat-link" data-scroll>
+      <span data-i18n="cat.aventura.title">Aventura</span>
+      <span class="mm-count" data-count-for-menu="aventura"></span>
+    </a>
+    <a href="#rentacar" class="mm-main-link" data-scroll data-i18n="nav.rentacar">Rent a Car</a>
+    <a href="#nosotros" class="mm-main-link" data-scroll data-i18n="nav.nosotros">Nosotros</a>
+    <a href="#receptivo" class="mm-main-link" data-scroll data-i18n="nav.receptivo">Agencias</a>
+  </nav>
+  <div class="mobile-menu-foot">
+    <div class="lang-switch" id="lang-switch-mobile">
+      <button type="button" data-lang="es">ES</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="pt">PT</button>
+    </div>
+    <a class="btn btn-primary" target="_blank" rel="noopener" href="https://wa.me/5492944539672?text=Hola%20Vivir%20Viajes,%20quiero%20info%20sobre%20excursiones" data-i18n="menu.whatsapp">Hablar por WhatsApp</a>
+  </div>
+</div>
 
 <!-- ====================== HERO ====================== -->
 <section class="hero">
@@ -421,6 +569,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <svg class="ridge" viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 90 L0 52 L210 24 L430 60 L660 18 L900 64 L1130 26 L1320 56 L1440 30 L1440 90Z" fill="#F5F7FB"/></svg>
 </section>
+
+<div class="chip-bar" id="chip-bar">
+  <div class="chip-row" id="chip-row">
+    <a href="#excursiones" class="chip" data-chip="excursiones" data-i18n="chip.destacados">Destacados</a>
+    <a href="#cat-circuitos" class="chip" data-chip="cat-circuitos" data-i18n="chip.circuitos">Circuitos</a>
+    <a href="#cat-navegacion" class="chip" data-chip="cat-navegacion" data-i18n="chip.navegacion">Navegación</a>
+    <a href="#cat-nieve" class="chip" data-chip="cat-nieve" data-i18n="chip.nieve">Nieve</a>
+    <a href="#cat-aventura" class="chip" data-chip="cat-aventura" data-i18n="chip.aventura">Aventura</a>
+    <a href="#rentacar" class="chip" data-chip="rentacar" data-i18n="nav.rentacar">Rent a Car</a>
+  </div>
+</div>
 
 <!-- ====================== EXCURSIONES ====================== -->
 <section class="sec excursiones" id="excursiones">
@@ -517,6 +676,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <button type="button" data-filter="verano" data-i18n="filtro.verano">Verano</button>
         <button type="button" data-filter="invierno" data-i18n="filtro.invierno">Invierno</button>
       </div>
+      <span class="cat-count" data-count-for="circuitos"></span>
       <div class="cards" data-filter-target="circuitos">
       <article class="card" data-temporada="todo-el-ano">
         <div class="card-img" style="background-image:url('fotos/circuito-chico.jpg')"><span class="tag" data-i18n="filtro.todo-el-ano">Todo el año</span></div>
@@ -682,6 +842,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <button type="button" class="active" data-filter="todos" data-i18n="filtro.todos">Todos</button>
         <button type="button" data-filter="todo-el-ano" data-i18n="filtro.todo-el-ano">Todo el año</button>
       </div>
+      <span class="cat-count" data-count-for="navegacion"></span>
       <div class="cards" data-filter-target="navegacion">
       <article class="card" data-temporada="todo-el-ano">
         <div class="card-img" style="background-image:url('fotos/isla-victoria.jpg');background-size:cover;background-position:center"><span class="tag" data-i18n="filtro.todo-el-ano">Todo el año</span><span class="discount" data-i18n="card.isla-victoria.discount">-10% grupo 4+</span></div>
@@ -735,6 +896,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <button type="button" class="active" data-filter="todos" data-i18n="filtro.todos">Todos</button>
         <button type="button" data-filter="invierno" data-i18n="filtro.invierno">Invierno</button>
       </div>
+      <span class="cat-count" data-count-for="nieve"></span>
       <div class="cards" data-filter-target="nieve">
       <article class="card" data-temporada="invierno">
         <div class="card-img" style="background-image:url('fotos/eas.jpg')"><span class="tag" data-i18n="filtro.invierno">Invierno</span></div>
@@ -826,6 +988,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <button type="button" data-filter="todo-el-ano" data-i18n="filtro.todo-el-ano">Todo el año</button>
         <button type="button" data-filter="verano" data-i18n="filtro.verano">Verano</button>
       </div>
+      <span class="cat-count" data-count-for="aventura"></span>
       <div class="cards" data-filter-target="aventura">
       <article class="card" data-temporada="todo-el-ano">
         <div class="card-img" style="background-image:url('fotos/san-ramon.jpg')"><span class="tag" data-i18n="filtro.todo-el-ano">Todo el año</span></div>
@@ -1016,39 +1179,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <div class="historia-block reverse reveal">
-      <div class="historia-media single">
-        <img src="fotos/Nosotros%2003.jpeg" alt="Primera unidad de transporte de Vivir Viajes en el Llao Llao Hotel">
+    <div class="historia-extra" id="historia-extra" hidden>
+      <div class="historia-block reverse reveal">
+        <div class="historia-media single">
+          <img src="fotos/Nosotros%2003.jpeg" alt="Primera unidad de transporte de Vivir Viajes en el Llao Llao Hotel">
+        </div>
+        <div class="historia-text">
+          <span class="historia-eyebrow" data-i18n="nosotros.b2.eyebrow">Cómo crecimos</span>
+          <p data-i18n="nosotros.b2.text">En 2003 sumamos nuestra primera unidad de transporte: apenas 15 butacas. Con el tiempo esa apuesta se transformó en una flota propia de 150 butacas, siempre con el mismo eje: excelencia, calidad y tecnología en cada viaje.</p>
+        </div>
       </div>
-      <div class="historia-text">
-        <span class="historia-eyebrow" data-i18n="nosotros.b2.eyebrow">Cómo crecimos</span>
-        <p data-i18n="nosotros.b2.text">En 2003 sumamos nuestra primera unidad de transporte: apenas 15 butacas. Con el tiempo esa apuesta se transformó en una flota propia de 150 butacas, siempre con el mismo eje: excelencia, calidad y tecnología en cada viaje.</p>
-      </div>
-    </div>
 
-    <div class="historia-block reveal">
-      <div class="historia-media single">
-        <img src="fotos/Nosotros%2006.jpeg" alt="Unidad actual de la flota de Vivir Viajes en otoño">
+      <div class="historia-block reveal">
+        <div class="historia-media single">
+          <img src="fotos/Nosotros%2006.jpeg" alt="Unidad actual de la flota de Vivir Viajes en otoño">
+        </div>
+        <div class="historia-text">
+          <span class="historia-eyebrow" data-i18n="nosotros.b3.eyebrow">Quiénes somos hoy</span>
+          <p data-i18n="nosotros.b3.text">Hoy seguimos siendo una empresa de familia: Cecilia y Miguel al frente, y la segunda generación ya metida en el día a día. Lo que no cambió es el eje — conocer cada camino, cada proveedor, cada horario, como si Bariloche fuera nuestra casa. Porque lo es.</p>
+        </div>
       </div>
-      <div class="historia-text">
-        <span class="historia-eyebrow" data-i18n="nosotros.b3.eyebrow">Quiénes somos hoy</span>
-        <p data-i18n="nosotros.b3.text">Hoy seguimos siendo una empresa de familia: Cecilia y Miguel al frente, y la segunda generación ya metida en el día a día. Lo que no cambió es el eje — conocer cada camino, cada proveedor, cada horario, como si Bariloche fuera nuestra casa. Porque lo es.</p>
-      </div>
-    </div>
 
-    <div class="historia-block reverse reveal">
-      <div class="historia-media single">
-        <img src="fotos/Nosotros%2007.jpg" alt="Viajeros disfrutando la vista del Nahuel Huapi desde el Cerro Campanario">
+      <div class="historia-block reverse reveal">
+        <div class="historia-media single">
+          <img src="fotos/Nosotros%2007.jpg" alt="Viajeros disfrutando la vista del Nahuel Huapi desde el Cerro Campanario">
+        </div>
+        <div class="historia-text">
+          <span class="historia-eyebrow" data-i18n="nosotros.b4.eyebrow">Por qué elegirnos</span>
+          <p data-i18n="nosotros.b4.text">Cuando viajás con nosotros no sos un pasajero más: sos alguien a quien le mostramos la Patagonia que elegimos vivir. Veinte años después, seguimos haciéndolo así.</p>
+        </div>
       </div>
-      <div class="historia-text">
-        <span class="historia-eyebrow" data-i18n="nosotros.b4.eyebrow">Por qué elegirnos</span>
-        <p data-i18n="nosotros.b4.text">Cuando viajás con nosotros no sos un pasajero más: sos alguien a quien le mostramos la Patagonia que elegimos vivir. Veinte años después, seguimos haciéndolo así.</p>
-      </div>
-    </div>
 
-    <div class="historia-cierre reveal">
-      <p data-i18n="nosotros.cierre">"No vendemos excursiones. Compartimos la forma en la que elegimos vivir acá."</p>
+      <div class="historia-cierre reveal">
+        <p data-i18n="nosotros.cierre">"No vendemos excursiones. Compartimos la forma en la que elegimos vivir acá."</p>
+      </div>
     </div>
+    <button type="button" class="btn btn-ghost historia-toggle" id="historia-toggle" aria-expanded="false" aria-controls="historia-extra">Leer nuestra historia</button>
   </div>
 </section>
 
@@ -1260,6 +1426,10 @@ const I18N = {
     "contact.title":"Listos para vivir la Patagonia?", "contact.text":"Escribinos y armamos juntos tu itinerario. Te respondemos rapido y en tu idioma.", "contact.whatsapp":"Escribir por WhatsApp",
     "footer.text":"© 2026 Vivir Viajes · Bariloche, Patagonia Argentina",
     "footer.casa-central":"Casa Central:", "footer.sucursales":"Sucursales:",
+    "menu.excursiones":"Excursiones", "menu.whatsapp":"Hablar por WhatsApp",
+    "chip.destacados":"Destacados", "chip.circuitos":"Circuitos", "chip.navegacion":"Navegación", "chip.nieve":"Nieve", "chip.aventura":"Aventura",
+    "cat.count.excursion":"excursión", "cat.count.excursiones":"excursiones", "cat.count.desliza":"deslizá →",
+    "nosotros.leer-mas":"Leer nuestra historia", "nosotros.ver-menos":"Ver menos",
   },
   en: {
     "nav.excursiones":"Excursions", "nav.rentacar":"Rent a Car", "nav.nosotros":"About us", "nav.receptivo":"Agencies", "nav.contacto":"Contact",
@@ -1338,6 +1508,10 @@ const I18N = {
     "card.cabalgata-wesley.title":"Cabalgata Wesley", "card.cabalgata-wesley.desc":"Guided horseback rides on the Wesley family's ranch, at the foot of Cerro Campanario. Choose the ride to Campanario, to the Lake Moreno beach, or the full-day combination.", "card.cabalgata-wesley.meta1":"From 1 h 30 min", "card.cabalgata-wesley.meta2":"3 rides to choose from",
     "card.rafting-frontera.title":"Rafting Frontera", "card.rafting-frontera.desc":"Two hours of intense whitewater rafting on the Manso River, all the way to the Chilean border. Lunch included.", "card.rafting-frontera.meta1":"Full day", "card.rafting-frontera.meta2":"Min. age 14",
     "card.rafting-villegas.title":"Rafting Villegas", "card.rafting-villegas.desc":"A half-day descent at the confluence of the Villegas and Manso rivers, suitable for the whole family.", "card.rafting-villegas.meta2":"Family friendly",
+    "menu.excursiones":"Excursions", "menu.whatsapp":"Chat on WhatsApp",
+    "chip.destacados":"Highlights", "chip.circuitos":"Circuits", "chip.navegacion":"Boat trips", "chip.nieve":"Snow", "chip.aventura":"Adventure",
+    "cat.count.excursion":"excursion", "cat.count.excursiones":"excursions", "cat.count.desliza":"swipe →",
+    "nosotros.leer-mas":"Read our story", "nosotros.ver-menos":"Show less",
   },
   pt: {
     "nav.excursiones":"Passeios", "nav.rentacar":"Rent a Car", "nav.nosotros":"Sobre nós", "nav.receptivo":"Agências", "nav.contacto":"Contato",
@@ -1416,13 +1590,34 @@ const I18N = {
     "card.cabalgata-wesley.title":"Cabalgata Wesley", "card.cabalgata-wesley.desc":"Cavalgadas guiadas na fazenda da família Wesley, aos pés do Cerro Campanario. Escolha o passeio ao Campanario, à praia do lago Moreno, ou a combinação de dia inteiro.", "card.cabalgata-wesley.meta1":"A partir de 1 h 30", "card.cabalgata-wesley.meta2":"3 passeios à escolha",
     "card.rafting-frontera.title":"Rafting Frontera", "card.rafting-frontera.desc":"Duas horas de navegação intensa em corredeiras pelo rio Manso, até o limite com o Chile. Almoço incluído.", "card.rafting-frontera.meta1":"Dia inteiro", "card.rafting-frontera.meta2":"Mín. 14 anos",
     "card.rafting-villegas.title":"Rafting Villegas", "card.rafting-villegas.desc":"Meio dia de descida na confluência dos rios Villegas e Manso, indicado para toda a família.", "card.rafting-villegas.meta2":"Para toda a família",
+    "menu.excursiones":"Excursões", "menu.whatsapp":"Falar no WhatsApp",
+    "chip.destacados":"Destaques", "chip.circuitos":"Circuitos", "chip.navegacion":"Navegação", "chip.nieve":"Neve", "chip.aventura":"Aventura",
+    "cat.count.excursion":"excursão", "cat.count.excursiones":"excursões", "cat.count.desliza":"deslize →",
+    "nosotros.leer-mas":"Ler nossa história", "nosotros.ver-menos":"Ver menos",
   },
 };
+
+function updateCatCount(targetName){
+  const cardsWrap = document.querySelector(`.cards[data-filter-target="${targetName}"]`);
+  const countEl = document.querySelector(`.cat-count[data-count-for="${targetName}"]`);
+  const menuCountEl = document.querySelector(`.mm-count[data-count-for-menu="${targetName}"]`);
+  if (!cardsWrap) return;
+  const n = cardsWrap.querySelectorAll(".card:not([hidden])").length;
+  const total = cardsWrap.querySelectorAll(".card").length;
+  if (menuCountEl) menuCountEl.textContent = total;
+  if (!countEl) return;
+  const lang = document.documentElement.lang;
+  const dict = I18N[lang] || I18N.es;
+  const noun = n === 1 ? dict["cat.count.excursion"] : dict["cat.count.excursiones"];
+  const suffix = n > 1 ? " · " + dict["cat.count.desliza"] : "";
+  countEl.textContent = n + " " + noun + suffix;
+}
 
 document.querySelectorAll(".temporada-filter").forEach(group => {
   const targetName = group.dataset.filterGroup;
   const cards = document.querySelector(`.cards[data-filter-target="${targetName}"]`);
   if (!cards) return;
+  updateCatCount(targetName);
   group.querySelectorAll("button").forEach(btn => {
     btn.addEventListener("click", () => {
       group.querySelectorAll("button").forEach(b => b.classList.remove("active"));
@@ -1431,6 +1626,7 @@ document.querySelectorAll(".temporada-filter").forEach(group => {
       cards.querySelectorAll(".card").forEach(card => {
         card.hidden = f !== "todos" && card.dataset.temporada !== f;
       });
+      updateCatCount(targetName);
     });
   });
 });
@@ -1662,6 +1858,75 @@ if (racForm) {
   });
 }
 
+function makeBracket(ch){
+  const s = document.createElement("span");
+  s.className = "b";
+  s.textContent = ch;
+  return s;
+}
+
+// En mobile, el corchete de cada titulo ".bracketed" tiene que quedar
+// pegado a la primera y ultima palabra (nunca solo en un renglon). Se
+// reconstruye en cada cambio de idioma a partir del valor de I18N (no del
+// DOM, que puede estar ya envuelto de una pasada anterior). En desktop se
+// deja el span tal cual lo dejo el loop normal de data-i18n de mas arriba.
+function wrapBracketTitles(){
+  const isMobile = window.matchMedia("(max-width:760px)").matches;
+  document.querySelectorAll("h2.bracketed").forEach(h2 => {
+    const textSpan = h2.querySelector("span[data-i18n]");
+    const openB = h2.querySelector(":scope > .b:first-child");
+    const closeB = h2.querySelector(":scope > .b:last-child");
+    if(!textSpan || !openB || !closeB) return;
+    const key = textSpan.getAttribute("data-i18n");
+    const lang = document.documentElement.lang;
+    const raw = (I18N[lang] && I18N[lang][key]) != null ? I18N[lang][key] : textSpan.textContent;
+    if(!isMobile){
+      openB.hidden = false;
+      closeB.hidden = false;
+      textSpan.textContent = raw;
+      return;
+    }
+    openB.hidden = true;
+    closeB.hidden = true;
+    const words = raw.trim().split(/\s+/).filter(Boolean);
+    if(!words.length) return;
+    textSpan.innerHTML = "";
+    if(words.length === 1){
+      const wrap = document.createElement("span");
+      wrap.className = "bracket-nowrap";
+      wrap.append(makeBracket("["), " " + words[0] + " ", makeBracket("]"));
+      textSpan.appendChild(wrap);
+      return;
+    }
+    const first = words[0], last = words[words.length - 1];
+    const mid = words.slice(1, -1).join(" ");
+    const startWrap = document.createElement("span");
+    startWrap.className = "bracket-nowrap";
+    startWrap.append(makeBracket("["), " " + first);
+    const endWrap = document.createElement("span");
+    endWrap.className = "bracket-nowrap";
+    endWrap.append(last + " ", makeBracket("]"));
+    textSpan.appendChild(startWrap);
+    textSpan.appendChild(document.createTextNode(mid ? " " + mid + " " : " "));
+    textSpan.appendChild(endWrap);
+  });
+}
+
+function updateAllCatCounts(){
+  document.querySelectorAll(".cards[data-filter-target]").forEach(cards => {
+    updateCatCount(cards.dataset.filterTarget);
+  });
+}
+
+function updateHistoriaToggleLabel(){
+  const btn = document.getElementById("historia-toggle");
+  const extra = document.getElementById("historia-extra");
+  if(!btn || !extra) return;
+  const lang = document.documentElement.lang;
+  const dict = I18N[lang] || I18N.es;
+  btn.textContent = extra.hidden ? dict["nosotros.leer-mas"] : dict["nosotros.ver-menos"];
+}
+
 function applyLang(lang){
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-i18n]").forEach(el => {
@@ -1672,10 +1937,13 @@ function applyLang(lang){
     const val = I18N[lang] && I18N[lang][el.getAttribute("data-i18n-html")];
     if(val != null) el.innerHTML = val;
   });
-  document.querySelectorAll("#lang-switch button").forEach(b => {
+  document.querySelectorAll(".lang-switch button").forEach(b => {
     b.classList.toggle("active", b.getAttribute("data-lang") === lang);
   });
   try{ localStorage.setItem("vv-lang", lang); }catch(e){}
+  wrapBracketTitles();
+  updateAllCatCounts();
+  updateHistoriaToggleLabel();
 }
 
 (function initLang(){
@@ -1683,13 +1951,14 @@ function applyLang(lang){
   try{ saved = localStorage.getItem("vv-lang") || "es"; }catch(e){}
   if(!I18N[saved]) saved = "es";
   applyLang(saved);
-  document.querySelectorAll("#lang-switch button").forEach(b => {
+  document.querySelectorAll(".lang-switch button").forEach(b => {
     b.addEventListener("click", () => applyLang(b.getAttribute("data-lang")));
   });
 })();
 
 (function revealCardsOnScroll(){
-  if(!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+  const isMobile = window.matchMedia("(max-width:760px)").matches;
+  if(!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches || isMobile){
     document.querySelectorAll(".cards .card").forEach(c => c.classList.add("in-view"));
     return;
   }
@@ -1706,6 +1975,71 @@ function applyLang(lang){
       card.style.setProperty("--reveal-delay", (i % 3) * 110 + "ms");
       io.observe(card);
     });
+  });
+})();
+
+(function initMobileMenu(){
+  const btn = document.getElementById("menu-toggle");
+  const panel = document.getElementById("mobile-menu");
+  if(!btn || !panel) return;
+  function openMenu(){
+    panel.hidden = false;
+    btn.setAttribute("aria-expanded", "true");
+    document.body.classList.add("menu-open");
+  }
+  function closeMenu(){
+    panel.hidden = true;
+    btn.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("menu-open");
+  }
+  btn.addEventListener("click", () => {
+    if(panel.hidden) openMenu(); else closeMenu();
+  });
+  document.addEventListener("keydown", e => {
+    if(e.key === "Escape" && !panel.hidden) closeMenu();
+  });
+  panel.querySelectorAll("[data-scroll]").forEach(a => {
+    a.addEventListener("click", () => closeMenu());
+  });
+})();
+
+(function initChipSpy(){
+  const row = document.getElementById("chip-row");
+  if(!row) return;
+  const spyIds = ["excursiones", "cat-circuitos", "cat-navegacion", "cat-nieve", "cat-aventura", "rentacar"];
+  const nosotrosEl = document.getElementById("nosotros");
+  let active = undefined;
+  function topOf(el){
+    return el.getBoundingClientRect().top + window.scrollY;
+  }
+  function onScroll(){
+    let cur = null;
+    spyIds.forEach(id => {
+      const el = document.getElementById(id);
+      if(el && topOf(el) - 130 <= window.scrollY) cur = id;
+    });
+    if(nosotrosEl && topOf(nosotrosEl) - 130 <= window.scrollY) cur = null;
+    if(cur === active) return;
+    active = cur;
+    row.querySelectorAll("[data-chip]").forEach(ch => ch.classList.toggle("active", ch.dataset.chip === cur));
+    const activeChip = cur && row.querySelector(`[data-chip="${cur}"]`);
+    if(activeChip){
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      row.scrollTo({ left: activeChip.offsetLeft - 20, behavior: reduceMotion ? "auto" : "smooth" });
+    }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+})();
+
+(function initHistoriaToggle(){
+  const btn = document.getElementById("historia-toggle");
+  const extra = document.getElementById("historia-extra");
+  if(!btn || !extra) return;
+  btn.addEventListener("click", () => {
+    extra.hidden = !extra.hidden;
+    btn.setAttribute("aria-expanded", String(!extra.hidden));
+    updateHistoriaToggleLabel();
   });
 })();
 </script>
