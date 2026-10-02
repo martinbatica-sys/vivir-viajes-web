@@ -78,7 +78,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .nav-whatsapp{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:var(--navy);font-family:var(--body);font-weight:700;font-size:.88rem;border-radius:999px;padding:.55rem 1.1rem;white-space:nowrap;transition:.18s}
   .nav-whatsapp:hover{background:var(--gold-dark);transform:translateY(-1px)}
   @media(max-width:900px){ .nav-links{display:none} }
-  @media(max-width:640px){ .nav{height:auto;flex-wrap:wrap;row-gap:.6rem;padding:.7rem 0} }
 
   /* ---------- HERO ---------- */
   .hero{position:relative;background:url('fotos/hero-video-poster.jpg') center 55%/cover no-repeat,#16284C;color:#fff}
@@ -210,16 +209,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .map-box svg{display:block;width:100%;height:auto;max-height:52vh;margin:0 auto}
   .map-caption{margin-top:.9rem;font-size:.85rem;color:var(--ink)}
 
-  /* ---------- MOBILE STICKY BAR ---------- */
-  #sticky-bar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#0F1D38;padding:.8rem 1.2rem;display:none;justify-content:space-between;align-items:center;gap:1rem;box-shadow:0 -12px 30px -18px rgba(0,0,0,.6)}
-  #sticky-bar.show{display:flex}
-  #sticky-bar .sb-info{display:flex;flex-direction:column;line-height:1.2;color:#fff}
-  #sticky-bar .sb-info span{font-size:.78rem;color:rgba(255,255,255,.65)}
-  #sticky-bar .sb-info b{font-family:var(--display);font-size:1.2rem}
-  #sticky-bar .btn{width:auto;padding:.65rem 1.3rem;font-size:.9rem}
-  #sticky-spacer{display:none;height:76px}
-  #sticky-spacer.show{display:block}
-
   /* ---------- TERMINOS Y CONDICIONES ---------- */
   .tc-field{display:flex;align-items:flex-start;gap:.6rem;margin:.2rem 0}
   .tc-field input[type=checkbox]{margin-top:.2rem;width:17px;height:17px;flex:0 0 auto;accent-color:var(--gold);cursor:pointer}
@@ -237,6 +226,58 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .tc-scroll ul{margin:0 0 .3rem;padding-left:1.15rem}
   .tc-scroll li{margin-bottom:.45rem}
   .tc-scroll p{margin:0 0 .6rem}
+
+  /* ================================================================
+     MOBILE (<=760px). Desktop no cambia. Estas reglas base van antes
+     del media query para que sus overrides (misma especificidad)
+     ganen por orden de cascada.
+     ================================================================ */
+  .menu-toggle{display:none;width:44px;height:44px;border:1.5px solid var(--line);border-radius:12px;background:#fff;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;padding:0}
+  .menu-toggle span{width:18px;height:2px;border-radius:2px;background:var(--navy);display:block}
+  .mobile-menu{display:none}
+  .rsv-total-pagar{display:none}
+
+  @media(max-width:760px){
+    html{scroll-padding-top:120px}
+
+    /* ---- Header ---- */
+    .nav{height:64px;flex-wrap:nowrap}
+    .wrap.nav{padding:0 20px}
+    .brand img{height:28px}
+    .brand small{font-size:.55rem}
+    #lang-switch{display:none}
+    .nav-whatsapp{width:40px;height:40px;padding:0;border-radius:50%;justify-content:center}
+    .nav-whatsapp span{display:none}
+    .menu-toggle{display:flex}
+
+    /* ---- Mobile menu panel (compartido con home/excursion) ---- */
+    .mobile-menu{position:fixed;top:64px;left:0;right:0;bottom:0;z-index:45;background:#fff;flex-direction:column;overflow-y:auto;border-top:1px solid var(--line)}
+    .mobile-menu:not([hidden]){display:flex}
+    body.menu-open{overflow:hidden}
+    .mobile-menu-nav{display:flex;flex-direction:column;padding:.6rem 20px 1rem}
+    .mm-eyebrow{display:block;font-family:var(--body);font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dark);padding:.9rem 0 .3rem}
+    .mm-cat-link{display:flex;justify-content:space-between;align-items:center;gap:.6rem;padding:.85rem 0;border-bottom:1px solid var(--line);font-family:var(--display);font-weight:600;font-size:1.05rem;color:var(--navy)}
+    .mm-main-link{display:block;padding:1rem 0;border-bottom:1px solid var(--line);font-family:var(--display);font-weight:600;font-size:1.15rem;color:var(--navy)}
+    .mobile-menu-foot{margin-top:auto;padding:1.2rem 20px 1.6rem;display:flex;flex-direction:column;gap:1rem;background:var(--paper)}
+    .mobile-menu-foot .btn{justify-content:center}
+
+    /* ---- Toggle de tramo: sin precio en el label ---- */
+    .toggle-price{display:none}
+
+    /* ---- Paso 2: total a pagar + boton sin monto ---- */
+    #pagar-total{display:none}
+    .rsv-total-pagar{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:1rem}
+    .rsv-total-pagar span{color:var(--ink-soft);font-weight:600}
+    .rsv-total-pagar b{font-family:var(--display);font-weight:700;font-size:1.7rem;color:var(--navy)}
+
+    /* ---- Titulos con corchetes ---- */
+    .bracketed{display:block;font-size:1.5rem;line-height:1.15;letter-spacing:-.015em;text-wrap:balance}
+    .bracket-nowrap{white-space:nowrap}
+    .section-sub{font-size:.92rem;margin-top:.35rem}
+  }
+  @media(max-width:760px) and (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+  }
 </style>
 </head>
 <body>
@@ -263,9 +304,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.1.1.3 0 .5l-.4.5c-.2.2-.3.4-.1.6.6 1 1.3 1.6 2.2 2.1.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.5 0 .8z"/></svg>
         <span>WhatsApp</span>
       </a>
+      <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Menú" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </header>
+
+<div class="mobile-menu" id="mobile-menu" hidden>
+  <nav class="mobile-menu-nav">
+    <span class="mm-eyebrow" data-i18n="menu.excursiones">Excursiones</span>
+    <a href="index.html#cat-circuitos" class="mm-cat-link" data-i18n="cat.circuitos.title">Circuitos &amp; Miradores</a>
+    <a href="index.html#cat-navegacion" class="mm-cat-link" data-i18n="cat.navegacion.title">Navegación Lacustre</a>
+    <a href="index.html#cat-nieve" class="mm-cat-link" data-i18n="cat.nieve.title">Nieve &amp; Montaña</a>
+    <a href="index.html#cat-aventura" class="mm-cat-link" data-i18n="cat.aventura.title">Aventura</a>
+    <a href="index.html#rentacar" class="mm-main-link" data-i18n="nav.rentacar">Rent a Car</a>
+    <a href="index.html#nosotros" class="mm-main-link" data-i18n="nav.nosotros">Nosotros</a>
+    <a href="index.html#receptivo" class="mm-main-link" data-i18n="nav.agencias">Agencias</a>
+  </nav>
+  <div class="mobile-menu-foot">
+    <div class="lang-switch" id="lang-switch-mobile">
+      <button type="button" data-lang="es">ES</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="pt">PT</button>
+    </div>
+    <a class="btn btn-gold" target="_blank" rel="noopener" href="https://wa.me/5492944539672?text=Hola%20Vivir%20Viajes%2C%20quiero%20info%20sobre%20el%20traslado%20de%20El%20Cruce" data-i18n="menu.whatsapp">Hablar por WhatsApp</a>
+  </div>
+</div>
 
 <section class="hero">
   <div class="hero-overlay"></div>
@@ -287,8 +352,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="step" id="step1">
         <div class="toggle" id="tramo-toggle">
-          <button type="button" data-tramo="ida"><span data-i18n="rsv.ida">Ida</span> · <span id="precio-ida">$30.000</span></button>
-          <button type="button" data-tramo="idavuelta" class="on"><span data-i18n="rsv.idavuelta">Ida y vuelta</span> · <span id="precio-idavuelta">$60.000</span></button>
+          <button type="button" data-tramo="ida"><span data-i18n="rsv.ida">Ida</span><span class="toggle-price"> · <span id="precio-ida">$30.000</span></span></button>
+          <button type="button" data-tramo="idavuelta" class="on"><span data-i18n="rsv.idavuelta">Ida y vuelta</span><span class="toggle-price"> · <span id="precio-idavuelta">$60.000</span></span></button>
         </div>
 
         <div class="field" id="f-sentido" hidden>
@@ -334,22 +399,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <div class="rsv-row2" id="f-llegada">
           <div class="field">
-            <label data-i18n="rsv.vuelo-llegada">N° de vuelo de llegada</label>
+            <label data-i18n="rsv.vuelo-llegada">Vuelo de llegada</label>
             <input type="text" id="f-vuelo-llegada">
           </div>
           <div class="field">
-            <label data-i18n="rsv.horario-llegada">Horario de llegada</label>
+            <label data-i18n="rsv.horario-llegada">Hora de llegada</label>
             <input type="time" id="f-horario-llegada">
           </div>
         </div>
 
         <div class="rsv-row2" id="f-regreso">
           <div class="field">
-            <label data-i18n="rsv.vuelo-regreso">N° de vuelo de regreso</label>
+            <label data-i18n="rsv.vuelo-regreso">Vuelo de regreso</label>
             <input type="text" id="f-vuelo-regreso">
           </div>
           <div class="field">
-            <label data-i18n="rsv.horario-salida">Horario de salida del vuelo</label>
+            <label data-i18n="rsv.horario-salida">Hora de salida</label>
             <input type="time" id="f-horario-salida">
           </div>
         </div>
@@ -360,7 +425,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <input type="email" id="f-email">
           </div>
           <div class="field">
-            <label data-i18n="rsv.tel">Teléfono / WhatsApp</label>
+            <label data-i18n="rsv.tel">Teléfono</label>
             <input type="tel" id="f-tel">
           </div>
         </div>
@@ -383,9 +448,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <div class="hint" id="rsv-hint" style="font-size:.82rem;color:#C0392B;min-height:1.2em"></div>
 
+        <div class="rsv-total-pagar" id="rsv-total-pagar">
+          <span data-i18n="rsv.total-pagar">Total a pagar</span>
+          <b id="total-pagar-amount"></b>
+        </div>
+
         <div style="display:flex;flex-direction:column;gap:.6rem;margin-top:.3rem">
           <button type="button" class="btn btn-gold" id="btn-pagar">
-            <span data-i18n="rsv.pagar">Pagar</span> <span id="pagar-total">$60.000</span> <span data-i18n="rsv.con-mp">con Mercado Pago</span>
+            <span data-i18n="rsv.pagar">Pagar</span><span id="pagar-total"> $60.000</span> <span data-i18n="rsv.con-mp">con Mercado Pago</span>
           </button>
           <button type="button" class="btn btn-ghost" id="btn-wa">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.1.1.3 0 .5l-.4.5c-.2.2-.3.4-.1.6.6 1 1.3 1.6 2.2 2.1.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.5 0 .8z"/></svg>
@@ -499,7 +569,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="credit" data-i18n="footer.credit">Diseño y Desarrollo Web: Martín Batica</div>
   </div>
-  <div id="sticky-spacer"></div>
 </footer>
 
 <div class="modal-overlay" id="map-modal">
@@ -625,10 +694,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </div>
 
-<div id="sticky-bar">
-  <div class="sb-info"><span id="sb-tramo"></span><b id="sb-total"></b></div>
-  <a class="btn btn-gold" href="#reservar" data-i18n="rsv.reservar-btn">Reservar</a>
-</div>
 
 <script>
 const WHATSAPP = "5492944539672";
@@ -654,9 +719,9 @@ const UI = {
     "rsv.tarifa-grupal":"¿Viajás con tu equipo? Consultá tarifa grupal",
     "rsv.volver":"Volver al paso 1",
     "rsv.nombre":"Nombre y Apellido",
-    "rsv.vuelo-llegada":"N° de vuelo de llegada", "rsv.horario-llegada":"Horario de llegada",
-    "rsv.vuelo-regreso":"N° de vuelo de regreso", "rsv.horario-salida":"Horario de salida del vuelo",
-    "rsv.email":"Email", "rsv.tel":"Teléfono / WhatsApp",
+    "rsv.vuelo-llegada":"Vuelo de llegada", "rsv.horario-llegada":"Hora de llegada",
+    "rsv.vuelo-regreso":"Vuelo de regreso", "rsv.horario-salida":"Hora de salida",
+    "rsv.email":"Email", "rsv.tel":"Teléfono",
     "rsv.grupo":"Tu grupo de carrera",
     "rsv.grupo0":"Grupo 1 · 5 al 7 dic","rsv.grupo1":"Grupo 2 · 6 al 8 dic","rsv.grupo2":"Grupo 3 · 7 al 9 dic","rsv.grupo3":"Grupo 4 · 8 al 10 dic","rsv.grupo4":"Grupo 5 · 9 al 11 dic",
     "rsv.pagar":"Pagar", "rsv.con-mp":"con Mercado Pago", "rsv.consultar-wa":"Consultar por WhatsApp",
@@ -722,6 +787,10 @@ const UI = {
     "tc.h5.li2":"La aceptación de la factura de los servicios contratados.",
     "tc.h5.li3":"Mediante el uso de una porción cualquiera de los servicios contratados.",
     "tc.accept":"Entendido",
+    "menu.excursiones":"Excursiones", "menu.whatsapp":"Hablar por WhatsApp",
+    "cat.circuitos.title":"Circuitos & Miradores", "cat.navegacion.title":"Navegación Lacustre", "cat.nieve.title":"Nieve & Montaña", "cat.aventura.title":"Aventura",
+    "nav.rentacar":"Rent a Car",
+    "rsv.total-pagar":"Total a pagar",
   },
   en: {
     "nav.destinos":"Destinations","nav.nosotros":"About us","nav.agencias":"Agencies",
@@ -736,9 +805,9 @@ const UI = {
     "rsv.tarifa-grupal":"Traveling with your team? Ask about group rates",
     "rsv.volver":"Back to step 1",
     "rsv.nombre":"Full name",
-    "rsv.vuelo-llegada":"Arrival flight number", "rsv.horario-llegada":"Arrival time",
-    "rsv.vuelo-regreso":"Return flight number", "rsv.horario-salida":"Flight departure time",
-    "rsv.email":"Email", "rsv.tel":"Phone / WhatsApp",
+    "rsv.vuelo-llegada":"Arrival flight", "rsv.horario-llegada":"Arrival time",
+    "rsv.vuelo-regreso":"Return flight", "rsv.horario-salida":"Departure time",
+    "rsv.email":"Email", "rsv.tel":"Phone",
     "rsv.grupo":"Your race group",
     "rsv.grupo0":"Group 1 · Dec 5-7","rsv.grupo1":"Group 2 · Dec 6-8","rsv.grupo2":"Group 3 · Dec 7-9","rsv.grupo3":"Group 4 · Dec 8-10","rsv.grupo4":"Group 5 · Dec 9-11",
     "rsv.pagar":"Pay", "rsv.con-mp":"with Mercado Pago", "rsv.consultar-wa":"Ask on WhatsApp",
@@ -804,6 +873,10 @@ const UI = {
     "tc.h5.li2":"Acceptance of the invoice for the contracted services.",
     "tc.h5.li3":"Use of any portion of the contracted services.",
     "tc.accept":"Got it",
+    "menu.excursiones":"Excursions", "menu.whatsapp":"Chat on WhatsApp",
+    "cat.circuitos.title":"Tours & Viewpoints", "cat.navegacion.title":"Boat trips", "cat.nieve.title":"Snow & Mountain", "cat.aventura.title":"Adventure",
+    "nav.rentacar":"Rent a Car",
+    "rsv.total-pagar":"Total to pay",
   },
   pt: {
     "nav.destinos":"Destinos","nav.nosotros":"Sobre nós","nav.agencias":"Agências",
@@ -818,9 +891,9 @@ const UI = {
     "rsv.tarifa-grupal":"Viaja com sua equipe? Consulte a tarifa em grupo",
     "rsv.volver":"Voltar ao passo 1",
     "rsv.nombre":"Nome e sobrenome",
-    "rsv.vuelo-llegada":"N° do voo de chegada", "rsv.horario-llegada":"Horário de chegada",
-    "rsv.vuelo-regreso":"N° do voo de volta", "rsv.horario-salida":"Horário de saída do voo",
-    "rsv.email":"Email", "rsv.tel":"Telefone / WhatsApp",
+    "rsv.vuelo-llegada":"Voo de chegada", "rsv.horario-llegada":"Hora de chegada",
+    "rsv.vuelo-regreso":"Voo de volta", "rsv.horario-salida":"Hora de saída",
+    "rsv.email":"Email", "rsv.tel":"Telefone",
     "rsv.grupo":"Seu grupo de corrida",
     "rsv.grupo0":"Grupo 1 · 5 a 7 dez","rsv.grupo1":"Grupo 2 · 6 a 8 dez","rsv.grupo2":"Grupo 3 · 7 a 9 dez","rsv.grupo3":"Grupo 4 · 8 a 10 dez","rsv.grupo4":"Grupo 5 · 9 a 11 dez",
     "rsv.pagar":"Pagar", "rsv.con-mp":"com Mercado Pago", "rsv.consultar-wa":"Consultar pelo WhatsApp",
@@ -886,6 +959,10 @@ const UI = {
     "tc.h5.li2":"A aceitação da fatura dos serviços contratados.",
     "tc.h5.li3":"O uso de qualquer parte dos serviços contratados.",
     "tc.accept":"Entendi",
+    "menu.excursiones":"Excursões", "menu.whatsapp":"Falar no WhatsApp",
+    "cat.circuitos.title":"Circuitos & Mirantes", "cat.navegacion.title":"Navegação", "cat.nieve.title":"Neve & Montanha", "cat.aventura.title":"Aventura",
+    "nav.rentacar":"Rent a Car",
+    "rsv.total-pagar":"Total a pagar",
   },
 };
 
@@ -918,6 +995,56 @@ function getTracking(){
   };
 }
 
+function makeBracket(ch){
+  const s = document.createElement("span");
+  s.className = "b";
+  s.textContent = ch;
+  return s;
+}
+
+// En mobile el corchete de cada titulo ".bracketed" tiene que quedar pegado
+// a la primera y ultima palabra (nunca solo en un renglon). Se reconstruye
+// en cada cambio de idioma a partir de t(key), no del DOM.
+function wrapBracketTitles(){
+  const isMobile = window.matchMedia("(max-width:760px)").matches;
+  document.querySelectorAll("h2.bracketed").forEach(h2=>{
+    const textSpan = h2.querySelector("span[data-i18n]");
+    const openB = h2.querySelector(":scope > .b:first-child");
+    const closeB = h2.querySelector(":scope > .b:last-child");
+    if (!textSpan || !openB || !closeB) return;
+    const raw = t(textSpan.getAttribute("data-i18n"));
+    if (!isMobile){
+      openB.hidden = false;
+      closeB.hidden = false;
+      textSpan.textContent = raw;
+      return;
+    }
+    openB.hidden = true;
+    closeB.hidden = true;
+    const words = raw.trim().split(/\s+/).filter(Boolean);
+    if (!words.length) return;
+    textSpan.innerHTML = "";
+    if (words.length === 1){
+      const wrap = document.createElement("span");
+      wrap.className = "bracket-nowrap";
+      wrap.append(makeBracket("["), " " + words[0] + " ", makeBracket("]"));
+      textSpan.appendChild(wrap);
+      return;
+    }
+    const first = words[0], last = words[words.length-1];
+    const mid = words.slice(1,-1).join(" ");
+    const startWrap = document.createElement("span");
+    startWrap.className = "bracket-nowrap";
+    startWrap.append(makeBracket("["), " " + first);
+    const endWrap = document.createElement("span");
+    endWrap.className = "bracket-nowrap";
+    endWrap.append(last + " ", makeBracket("]"));
+    textSpan.appendChild(startWrap);
+    textSpan.appendChild(document.createTextNode(mid ? " " + mid + " " : " "));
+    textSpan.appendChild(endWrap);
+  });
+}
+
 function applyStaticI18n(){
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-i18n]").forEach(el=>{
@@ -928,10 +1055,11 @@ function applyStaticI18n(){
     const v = t(el.getAttribute("data-i18n-html"));
     if (v != null) el.innerHTML = v;
   });
-  document.querySelectorAll("#lang-switch button").forEach(b=>{
+  document.querySelectorAll(".lang-switch button").forEach(b=>{
     b.classList.toggle("active", b.getAttribute("data-lang")===lang);
   });
   document.getElementById("precio-ida").textContent = fmt(PRECIOS.ida);
+  wrapBracketTitles();
   document.getElementById("precio-idavuelta").textContent = fmt(PRECIOS.idavuelta);
 }
 
@@ -966,6 +1094,7 @@ function render(){
 
   document.getElementById("total-step1").textContent = fmt(total());
   document.getElementById("pagar-total").textContent = fmt(total());
+  document.getElementById("total-pagar-amount").textContent = fmt(total());
 
   document.getElementById("rsv-step-n").textContent = state.step;
   document.getElementById("step1").hidden = state.step !== 1;
@@ -980,17 +1109,6 @@ function render(){
     const showRegreso = !isIda || state.sentido === 1;
     document.getElementById("f-llegada").hidden = !showLlegada;
     document.getElementById("f-regreso").hidden = !showRegreso;
-  }
-
-  // Sticky bar (mobile)
-  const narrow = window.innerWidth < 820;
-  const bar = document.getElementById("sticky-bar");
-  const spacer = document.getElementById("sticky-spacer");
-  bar.classList.toggle("show", narrow);
-  spacer.classList.toggle("show", narrow);
-  if (narrow) {
-    document.getElementById("sb-tramo").textContent = tramoLabel + " · " + state.pax + " pax";
-    document.getElementById("sb-total").textContent = fmt(total());
   }
 
   document.getElementById("map-modal").classList.toggle("show", state.mapOpen);
@@ -1023,8 +1141,27 @@ document.getElementById("c-tc").addEventListener("change", (e)=>{
   document.getElementById("rsv-hint").textContent = "";
 });
 window.addEventListener("resize", render);
+window.addEventListener("resize", wrapBracketTitles);
 
-document.querySelectorAll("#lang-switch button").forEach(b=>{
+(function initMobileMenu(){
+  const btn = document.getElementById("menu-toggle");
+  const panel = document.getElementById("mobile-menu");
+  if (!btn || !panel) return;
+  function openMenu(){
+    panel.hidden = false;
+    btn.setAttribute("aria-expanded", "true");
+    document.body.classList.add("menu-open");
+  }
+  function closeMenu(){
+    panel.hidden = true;
+    btn.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("menu-open");
+  }
+  btn.addEventListener("click", ()=>{ if (panel.hidden) openMenu(); else closeMenu(); });
+  document.addEventListener("keydown", (e)=>{ if (e.key === "Escape" && !panel.hidden) closeMenu(); });
+})();
+
+document.querySelectorAll(".lang-switch button").forEach(b=>{
   b.addEventListener("click", ()=>{
     lang = b.getAttribute("data-lang");
     try { localStorage.setItem("vv-lang", lang); } catch(e) {}

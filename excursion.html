@@ -76,10 +76,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .lang-switch button:hover:not(.active){color:var(--navy)}
   .nav-whatsapp{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:var(--navy);font-family:var(--body);font-weight:700;font-size:.88rem;border-radius:999px;padding:.55rem 1.1rem;white-space:nowrap;transition:.18s}
   .nav-whatsapp:hover{background:var(--gold-dark);transform:translateY(-1px)}
-  @media(max-width:640px){.nav-whatsapp .wa-text{display:none}.nav-whatsapp{padding:.55rem;gap:0}
-    .nav{flex-wrap:wrap;height:auto;row-gap:.5rem;padding:.7rem 0}
-    .back{display:none}
-    .switch{max-width:150px;text-overflow:ellipsis}}
 
   .banner{background:linear-gradient(120deg,#1A2F58,#0F1D38);color:#fff;padding:1.3rem 0 2.2rem}
   .banner-layout{display:flex;flex-direction:column;align-items:flex-start;gap:.6rem}
@@ -274,6 +270,193 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .foot img{height:40px}
 
   @media(max-width:860px){.layout{grid-template-columns:1fr}.resv{position:static}}
+
+  /* ================================================================
+     MOBILE (<=760px). Desktop no cambia. Reglas base antes del media
+     query para que sus overrides (misma especificidad) ganen por
+     orden de cascada.
+     ================================================================ */
+  .menu-toggle{display:none;width:44px;height:44px;border:1.5px solid var(--line);border-radius:12px;background:#fff;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;padding:0}
+  .menu-toggle span{width:18px;height:2px;border-radius:2px;background:var(--navy);display:block}
+  .mobile-menu{display:none}
+  .price-row-mobile{display:none}
+  .car-back-pill{display:none}
+  .car-counter-pill{display:none}
+  .antes-reservar{display:none}
+  .ruta-timeline{display:none}
+  .ruta-mobile-ctrls{display:none}
+  .map-sheet-overlay{display:none}
+  .resv-step-label{display:none}
+  .resv-back-mobile{display:none}
+  .resv-resumen-mobile{display:none}
+  .btn-continuar-mobile{display:none}
+  .sticky-resv-bar{display:none}
+
+  @media(max-width:760px){
+    html{scroll-padding-top:120px}
+    .wrap{padding:0 20px}
+
+    /* ---- Header (compartido con home/elcruce) ---- */
+    .nav{height:64px;flex-wrap:nowrap;padding:0}
+    .nav .brand img{height:28px}
+    .back{display:none}
+    .switch{display:none}
+    #lang-switch{display:none}
+    .nav-whatsapp{width:40px;height:40px;padding:0;border-radius:50%;justify-content:center}
+    .nav-whatsapp .wa-text{display:none}
+    .menu-toggle{display:flex}
+
+    .mobile-menu{position:fixed;top:64px;left:0;right:0;bottom:0;z-index:45;background:#fff;flex-direction:column;overflow-y:auto;border-top:1px solid var(--line)}
+    .mobile-menu:not([hidden]){display:flex}
+    body.menu-open{overflow:hidden}
+    .mobile-menu-nav{display:flex;flex-direction:column;padding:.6rem 20px 1rem}
+    .mm-eyebrow{display:block;font-family:var(--body);font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dark);padding:.9rem 0 .3rem}
+    .mm-cat-link{display:flex;justify-content:space-between;align-items:center;gap:.6rem;padding:.85rem 0;border-bottom:1px solid var(--line);font-family:var(--display);font-weight:600;font-size:1.05rem;color:var(--navy)}
+    .mm-main-link{display:block;padding:1rem 0;border-bottom:1px solid var(--line);font-family:var(--display);font-weight:600;font-size:1.15rem;color:var(--navy)}
+    .mobile-menu-foot{margin-top:auto;padding:1.2rem 20px 1.6rem;display:flex;flex-direction:column;gap:1rem;background:var(--paper)}
+    .mobile-menu-foot .btn{margin-top:0;justify-content:center}
+
+    /* ---- Galeria full-bleed ---- */
+    .banner{background:transparent;padding:0 0 1.6rem;color:var(--ink)}
+    .banner .wrap{padding:0}
+    .banner-layout{gap:0}
+    .carousel{max-width:none;aspect-ratio:4/3;margin:0}
+    .car-slide{flex:0 0 100%;height:100%;margin-right:0;border-radius:0;transform:none!important;opacity:1!important;filter:none!important;box-shadow:none!important;cursor:default!important}
+    .carousel-track{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none}
+    .carousel-track::-webkit-scrollbar{display:none}
+    .carousel-track:not(.single) .car-slide{scroll-snap-align:start}
+    .car-nav{display:none!important}
+    .carousel-dots{display:none}
+    .car-back-pill{display:inline-flex;position:absolute;top:14px;left:14px;z-index:4;background:#fff;color:var(--navy);font-family:var(--body);font-weight:700;font-size:.8rem;padding:.4rem .75rem;border-radius:999px;align-items:center;gap:.3rem}
+    .car-counter-pill{display:block;position:absolute;bottom:14px;right:14px;z-index:4;background:rgba(15,29,56,.7);color:#fff;font-family:var(--body);font-weight:700;font-size:.75rem;padding:.3rem .6rem;border-radius:999px}
+    .banner-info{padding:1.4rem 20px 0}
+    .banner .tag{background:var(--panel);color:var(--navy)}
+    .banner h1{font-size:1.85rem;line-height:1.08;color:var(--navy)}
+    .banner .subt{color:var(--ink-soft)}
+
+    /* ---- Fila de precio (NUEVO) ---- */
+    .price-row-mobile{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:1.4rem}
+    .price-row-mobile .pr-label{display:block;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+    .price-row-mobile .pr-amount{font-family:var(--display);font-weight:700;font-size:1.6rem;color:var(--gold-dark)}
+    .price-row-mobile .pr-suffix{font-size:.82rem;color:var(--ink-soft);margin-left:.2rem}
+    .btn-sm-gold{flex:none;width:auto;margin-top:0;padding:.6rem 1.1rem;font-size:.88rem;font-family:var(--body);font-weight:700;border:none;border-radius:999px;cursor:pointer;background:var(--gold);color:var(--navy)}
+    .btn-sm-gold:hover{background:var(--gold-dark)}
+    .layout{padding:0 0 2.4rem;gap:0}
+    .content p.lead{margin-bottom:1.2rem}
+
+    /* ---- Antes de reservar (NUEVO) ---- */
+    .antes-reservar{display:block;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:1.4rem 1.5rem;margin-bottom:1.2rem}
+    .antes-reservar h3{font-family:var(--display);font-weight:600;font-size:1.15rem;color:var(--navy);margin-bottom:.9rem}
+    .antes-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+    .antes-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:.85rem .9rem}
+    .antes-card .al{display:block;font-size:.68rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:.3rem}
+    .antes-card .av{display:block;font-family:var(--display);font-weight:600;font-size:.98rem;color:var(--navy)}
+    .antes-extra{font-size:.8rem;color:var(--ink-soft);margin-top:.8rem;display:flex;flex-direction:column;gap:.3rem}
+    #block-notas{display:none}
+
+    /* ---- El recorrido: timeline + mapa en bottom sheet ---- */
+    .ruta-franja{display:none}
+    .ruta-progress{display:none}
+    #block-ruta .ruta-leaflet-map{display:none}
+    .ruta-nota{display:none}
+    #block-detalle:not(.mobile-open){display:none}
+    body.map-sheet-open{overflow:hidden}
+    .ruta-timeline{display:flex;flex-direction:column}
+    .ruta-tl-item{display:flex;gap:.8rem}
+    .ruta-tl-dot-col{display:flex;flex-direction:column;align-items:center;flex:none}
+    .ruta-tl-circle{width:28px;height:28px;border-radius:50%;border:3px solid var(--navy);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:.75rem;color:var(--navy);flex:none;background:#fff}
+    .ruta-tl-item.term .ruta-tl-circle{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+    .ruta-tl-line{width:2px;flex:1;background:rgba(22,40,76,.2);min-height:18px}
+    .ruta-tl-body{padding-bottom:1.1rem;padding-top:.1rem}
+    .ruta-tl-item:last-child .ruta-tl-body{padding-bottom:0}
+    .ruta-tl-title{font-family:var(--display);font-weight:600;font-size:1rem;color:var(--navy)}
+    .ruta-tl-sub{font-size:.85rem;color:var(--ink-soft);margin-top:.15rem}
+    .ruta-mobile-ctrls{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.8rem}
+    .ruta-mobile-ctrls button{flex:1;min-width:140px;font-family:var(--body);font-weight:700;font-size:.85rem;border:1.5px solid var(--line);background:#fff;color:var(--navy);padding:.6rem .9rem;border-radius:999px;cursor:pointer}
+
+    .map-sheet-overlay{position:fixed;inset:0;background:rgba(15,29,56,.55);z-index:200;align-items:flex-end;justify-content:center}
+    .map-sheet-overlay.show{display:flex}
+    .map-sheet{background:#fff;border-radius:22px 22px 0 0;width:100%;max-height:85vh;overflow-y:auto;padding:1.2rem 1.2rem 1.6rem}
+    .map-sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+    .map-sheet-head b{font-family:var(--display);font-weight:700;font-size:1.1rem;color:var(--navy)}
+    .map-sheet-close{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--line);background:#fff;font-size:1.2rem;line-height:1;cursor:pointer;color:var(--ink-soft)}
+    .map-sheet-close:hover{color:var(--navy)}
+    #map-sheet-body .ruta-leaflet-map{display:block!important;height:300px;margin-bottom:1rem;border-radius:12px}
+    .ruta-play-mobile{width:100%;font-family:var(--body);font-weight:700;font-size:1rem;border:none;cursor:pointer;border-radius:12px;padding:.9rem;background:var(--gold);color:var(--navy)}
+    .ruta-play-mobile:hover{background:var(--gold-dark)}
+
+    /* ---- Reserva en 2 pasos ---- */
+    .resv-step-label{display:block;margin-left:auto;font-size:.72rem;font-weight:700;color:rgba(255,255,255,.7);white-space:nowrap}
+    .resv-body{display:grid;grid-template-columns:1fr 1fr;gap:0 .8rem}
+    .resv-body>*{grid-column:1/-1}
+    .resv-body>.field:has(#c-dni),.resv-body>.field:has(#c-tel){grid-column:span 1}
+    .resv-body>#f-opcion{order:1}
+    .resv-body>#f-traslado{order:2}
+    .resv-body>#f-pickup{order:3}
+    .resv-body>#f-lagofrias{order:4}
+    .resv-body>.field:has(#date-trigger){order:5}
+    .resv-body>.field:has(#pax){order:6}
+    .resv-body>#price-breakdown{order:7}
+    .resv-body>.total{order:8}
+    .resv-body>.btn-continuar-mobile{order:9}
+    .resv-body>.resv-back-mobile{order:10}
+    .resv-body>.resv-resumen-mobile{order:11}
+    .resv-body>.field:has(#c-nombre){order:12}
+    .resv-body>.field:has(#c-dni){order:13}
+    .resv-body>.field:has(#c-tel){order:14}
+    .resv-body>.field:has(#c-email){order:15}
+    .resv-body>.field:has(#c-hosp){order:16}
+    .resv-body>.tc-field{order:17}
+    .resv-body>#hint{order:18}
+    .resv-body>#go{order:19}
+    .resv-body>.mp-note{order:20}
+
+    .btn-continuar-mobile{display:block;width:100%;font-family:var(--body);font-weight:700;font-size:1rem;border:none;cursor:pointer;border-radius:12px;padding:.9rem;background:var(--gold);color:var(--navy);margin-top:.3rem}
+    .btn-continuar-mobile:hover{background:var(--gold-dark)}
+    .btn-continuar-mobile:disabled{background:#E6E9EF;color:#9AA6B8;cursor:not-allowed}
+    .resv-back-mobile{display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem;font-weight:700;color:var(--navy);padding:.3rem 0;background:none;border:none;cursor:pointer;font-family:var(--body);margin-bottom:.6rem}
+    .resv-back-mobile:hover{color:var(--gold-dark)}
+    .resv-resumen-mobile{display:block;background:var(--panel);border-radius:12px;padding:.8rem 1rem;font-size:.88rem;font-weight:600;color:var(--navy);margin-bottom:1rem}
+
+    .resv-body[data-step="1"] .resv-back-mobile,
+    .resv-body[data-step="1"] .resv-resumen-mobile,
+    .resv-body[data-step="1"] .field:has(#c-nombre),
+    .resv-body[data-step="1"] .field:has(#c-dni),
+    .resv-body[data-step="1"] .field:has(#c-tel),
+    .resv-body[data-step="1"] .field:has(#c-email),
+    .resv-body[data-step="1"] .field:has(#c-hosp),
+    .resv-body[data-step="1"] .tc-field,
+    .resv-body[data-step="1"] #hint,
+    .resv-body[data-step="1"] #go,
+    .resv-body[data-step="1"] .mp-note{display:none}
+
+    .resv-body[data-step="2"] #f-opcion,
+    .resv-body[data-step="2"] #f-traslado,
+    .resv-body[data-step="2"] #f-pickup,
+    .resv-body[data-step="2"] #f-lagofrias,
+    .resv-body[data-step="2"] .field:has(#date-trigger),
+    .resv-body[data-step="2"] .field:has(#pax),
+    .resv-body[data-step="2"] #price-breakdown,
+    .resv-body[data-step="2"] .total,
+    .resv-body[data-step="2"] .btn-continuar-mobile{display:none}
+
+    /* ---- Barra fija de reserva (NUEVA) ---- */
+    .sticky-resv-bar.show{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;border-top:1px solid var(--line);box-shadow:0 -12px 30px -18px rgba(15,29,56,.45);padding:.75rem 16px calc(1rem + env(safe-area-inset-bottom));justify-content:space-between;align-items:center;gap:1rem}
+    .sticky-resv-bar .sb-price{display:flex;flex-direction:column;line-height:1.25}
+    .sticky-resv-bar .sb-price small{font-size:.68rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft)}
+    .sticky-resv-bar .sb-price b{font-family:var(--display);font-weight:700;font-size:1.25rem;color:var(--gold-dark)}
+    .sticky-resv-bar .sb-price span{font-size:.72rem;color:var(--ink-soft)}
+    body.has-sticky-bar footer{padding-bottom:5.6rem}
+
+    /* ---- Tambien te puede interesar ---- */
+    .related{margin:0 0 2rem;padding:0}
+    .related-cards{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:1rem;padding:4px 0 10px;scrollbar-width:none}
+    .related-cards::-webkit-scrollbar{display:none}
+    .related-card{flex:0 0 78%;scroll-snap-align:start}
+  }
+  @media(max-width:760px) and (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+  }
 </style>
 </head>
 <body>
@@ -296,9 +479,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.1.1.3 0 .5l-.4.5c-.2.2-.3.4-.1.6.6 1 1.3 1.6 2.2 2.1.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.5 0 .8z"/></svg>
         <span class="wa-text">WhatsApp</span>
       </a>
+      <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Menú" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </header>
+
+<div class="mobile-menu" id="mobile-menu" hidden>
+  <nav class="mobile-menu-nav">
+    <span class="mm-eyebrow" data-i18n="menu.excursiones">Excursiones</span>
+    <a href="index.html#cat-circuitos" class="mm-cat-link" data-i18n="cat.circuitos.title">Circuitos &amp; Miradores</a>
+    <a href="index.html#cat-navegacion" class="mm-cat-link" data-i18n="cat.navegacion.title">Navegación Lacustre</a>
+    <a href="index.html#cat-nieve" class="mm-cat-link" data-i18n="cat.nieve.title">Nieve &amp; Montaña</a>
+    <a href="index.html#cat-aventura" class="mm-cat-link" data-i18n="cat.aventura.title">Aventura</a>
+    <a href="index.html#rentacar" class="mm-main-link" data-i18n="nav.rentacar">Rent a Car</a>
+    <a href="index.html#nosotros" class="mm-main-link" data-i18n="nav.nosotros">Nosotros</a>
+    <a href="index.html#receptivo" class="mm-main-link" data-i18n="nav.agencias">Agencias</a>
+  </nav>
+  <div class="mobile-menu-foot">
+    <div class="lang-switch" id="lang-switch-mobile">
+      <button type="button" data-lang="es">ES</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="pt">PT</button>
+    </div>
+    <a class="nav-whatsapp" style="width:auto;justify-content:center" target="_blank" rel="noopener" href="https://wa.me/5492944539672?text=Hola%20Vivir%20Viajes,%20quiero%20info%20sobre%20excursiones" data-i18n="menu.whatsapp">Hablar por WhatsApp</a>
+  </div>
+</div>
 
 <section class="banner">
   <div class="wrap">
@@ -308,6 +515,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <button type="button" class="car-nav prev" id="car-prev" aria-label="Anterior" data-i18n-aria="carousel.prev">&#8249;</button>
         <button type="button" class="car-nav next" id="car-next" aria-label="Siguiente" data-i18n-aria="carousel.next">&#8250;</button>
         <div class="carousel-dots" id="carousel-dots"></div>
+        <a class="car-back-pill" href="index.html#excursiones" data-i18n="gallery.volver">&larr; Excursiones</a>
+        <span class="car-counter-pill" id="carousel-counter"></span>
       </div>
       <div class="banner-info">
         <span class="tag" id="b-tag"></span>
@@ -319,9 +528,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <div class="wrap">
+  <div class="price-row-mobile" id="price-row-mobile">
+    <div>
+      <span class="pr-label" id="pr-label" data-i18n="gallery.desde">DESDE</span>
+      <span class="pr-amount" id="pr-amount"></span>
+      <span class="pr-suffix" id="pr-suffix" data-i18n="gallery.por-persona">por persona</span>
+    </div>
+    <button type="button" class="btn-sm-gold" id="pr-reservar-btn" data-i18n="gallery.reservar">Reservar</button>
+  </div>
   <div class="layout">
     <div class="content">
       <p class="lead" id="c-desc"></p>
+      <div class="antes-reservar" id="antes-reservar" hidden>
+        <h3 data-i18n="gallery.antes-de-reservar">Antes de reservar</h3>
+        <div class="antes-grid" id="antes-grid"></div>
+        <div class="antes-extra" id="antes-extra"></div>
+      </div>
       <div class="block" id="block-detalle" hidden>
         <h3 id="c-detalle-titulo">El paseo</h3>
         <p id="c-detalle"></p>
@@ -343,6 +565,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </div>
         <div class="ruta-progress" aria-hidden="true"><i id="ruta-bar"></i></div>
+        <div class="ruta-timeline" id="ruta-timeline"></div>
+        <div class="ruta-mobile-ctrls">
+          <button type="button" id="ruta-leer-completo" data-i18n="gallery.leer-recorrido">Leer el recorrido completo</button>
+          <button type="button" id="ruta-ver-mapa" data-i18n="gallery.ver-mapa">Ver mapa</button>
+        </div>
         <div class="ruta-leaflet-map" id="ruta-leaflet-map"></div>
         <p class="ruta-nota" id="ruta-nota" hidden></p>
       </div>
@@ -358,8 +585,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <aside>
       <div class="resv">
-        <div class="resv-head">&#128197; <span data-i18n="form.reservar-online">Reservar online</span></div>
-        <div class="resv-body">
+        <div class="resv-head">&#128197; <span data-i18n="form.reservar-online">Reservar online</span><span class="resv-step-label" id="resv-step-label"></span></div>
+        <div class="resv-body" id="resv-body" data-step="1">
+          <button type="button" class="resv-back-mobile" id="resv-back-mobile">&larr; <span data-i18n="gallery.volver-paso1">Volver al paso 1</span></button>
+          <div class="resv-resumen-mobile" id="resv-resumen-mobile"></div>
           <div class="field" id="f-opcion" hidden>
             <label data-i18n="form.opcion">Experiencia / opcion</label>
             <select id="opcion"></select>
@@ -435,6 +664,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="price-breakdown" id="price-breakdown" hidden></div>
           <div class="total"><small data-i18n="form.total-estimado">Total estimado</small><b id="total">&mdash;</b></div>
+          <button type="button" class="btn-continuar-mobile" id="btn-continuar-mobile" data-i18n="gallery.continuar">Continuar</button>
           <div class="tc-field">
             <input type="checkbox" id="c-tc">
             <label for="c-tc" data-i18n-html="form.tc-label">He leído y estoy de acuerdo con los <span class="tc-link" id="tc-link">términos y condiciones</span> de la web</label>
@@ -459,7 +689,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
+<div class="sticky-resv-bar" id="sticky-resv-bar">
+  <div class="sb-price">
+    <small data-i18n="gallery.desde">DESDE</small>
+    <b id="sb-amount"></b>
+    <span id="sb-suffix" data-i18n="gallery.por-persona">por persona</span>
+  </div>
+  <button type="button" class="btn-sm-gold" id="sb-reservar-btn" data-i18n="gallery.reservar">Reservar</button>
+</div>
+
 <!-- Modal 24hs -->
+<div class="map-sheet-overlay" id="map-sheet-overlay">
+  <div class="map-sheet">
+    <div class="map-sheet-head">
+      <b data-i18n="gallery.mapa-del-recorrido">Mapa del recorrido</b>
+      <button type="button" class="map-sheet-close" id="map-sheet-close" aria-label="Cerrar">&times;</button>
+    </div>
+    <div id="map-sheet-body"></div>
+    <button type="button" class="ruta-play-mobile" id="ruta-play-mobile" data-i18n="gallery.recorrer-la-ruta">&#9654; Recorrer la ruta</button>
+  </div>
+</div>
+
 <div class="modal-overlay" id="modal-24hs">
   <div class="modal-box">
     <div class="modal-icon">⏰</div>
@@ -2383,6 +2633,15 @@ const UI = {
     "wa.fecha":"Fecha: ", "wa.pasajeros":"Pasajeros: ", "wa.descuento":"Descuento grupo familiar: -", "wa.total":"Total estimado: ",
     "wa.24hs":"Hola Vivir Viajes! Quiero reservar ", "wa.24hs-fecha":" el ", "wa.24hs-suffix":". ¿Hay disponibilidad?",
     "title.reservar":"Reservar ", "title.suffix":" · Vivir Viajes", "date.na":"(a definir)",
+    "menu.excursiones":"Excursiones", "menu.whatsapp":"Hablar por WhatsApp",
+    "cat.circuitos.title":"Circuitos & Miradores", "cat.navegacion.title":"Navegación Lacustre", "cat.nieve.title":"Nieve & Montaña", "cat.aventura.title":"Aventura",
+    "nav.rentacar":"Rent a Car", "nav.agencias":"Agencias",
+    "gallery.volver":"← Excursiones", "gallery.desde":"Desde", "gallery.por-persona":"por persona", "gallery.reservar":"Reservar", "gallery.consultar":"Consultar",
+    "gallery.antes-de-reservar":"Antes de reservar", "gallery.pickup":"Pick up", "gallery.dropoff":"Drop off", "gallery.duracion":"Duración", "gallery.reserva-con":"Reservá con",
+    "gallery.leer-recorrido":"Leer el recorrido completo", "gallery.ocultar-detalle":"Ocultar el detalle", "gallery.ver-mapa":"Ver mapa", "gallery.mapa-del-recorrido":"Mapa del recorrido",
+    "gallery.recorrer-la-ruta":"▶ Recorrer la ruta", "gallery.continuar":"Continuar", "gallery.volver-paso1":"Volver al paso 1",
+    "gallery.paso1de2":"PASO 1 DE 2", "gallery.paso2de2":"PASO 2 DE 2",
+    "gallery.pagar-y-reservar":"Pagar {total} y reservar",
   },
   en: {
     "nav.volver":"← Back to excursions",
@@ -2462,6 +2721,15 @@ const UI = {
     "wa.fecha":"Date: ", "wa.pasajeros":"Travelers: ", "wa.descuento":"Family/group discount: -", "wa.total":"Estimated total: ",
     "wa.24hs":"Hi Vivir Viajes! I'd like to book ", "wa.24hs-fecha":" on ", "wa.24hs-suffix":". Is it available?",
     "title.reservar":"Book ", "title.suffix":" · Vivir Viajes", "date.na":"(to be defined)",
+    "menu.excursiones":"Excursions", "menu.whatsapp":"Chat on WhatsApp",
+    "cat.circuitos.title":"Tours & Viewpoints", "cat.navegacion.title":"Boat trips", "cat.nieve.title":"Snow & Mountain", "cat.aventura.title":"Adventure",
+    "nav.rentacar":"Rent a Car", "nav.agencias":"Agencies",
+    "gallery.volver":"← Excursions", "gallery.desde":"From", "gallery.por-persona":"per person", "gallery.reservar":"Book", "gallery.consultar":"Inquire",
+    "gallery.antes-de-reservar":"Before you book", "gallery.pickup":"Pick up", "gallery.dropoff":"Drop off", "gallery.duracion":"Duration", "gallery.reserva-con":"Book with",
+    "gallery.leer-recorrido":"Read the full route", "gallery.ocultar-detalle":"Hide details", "gallery.ver-mapa":"View map", "gallery.mapa-del-recorrido":"Route map",
+    "gallery.recorrer-la-ruta":"▶ Play the route", "gallery.continuar":"Continue", "gallery.volver-paso1":"Back to step 1",
+    "gallery.paso1de2":"STEP 1 OF 2", "gallery.paso2de2":"STEP 2 OF 2",
+    "gallery.pagar-y-reservar":"Pay {total} and book",
   },
   pt: {
     "nav.volver":"← Voltar aos passeios",
@@ -2541,6 +2809,15 @@ const UI = {
     "wa.fecha":"Data: ", "wa.pasajeros":"Passageiros: ", "wa.descuento":"Desconto grupo/família: -", "wa.total":"Total estimado: ",
     "wa.24hs":"Olá Vivir Viajes! Quero reservar ", "wa.24hs-fecha":" no dia ", "wa.24hs-suffix":". Tem disponibilidade?",
     "title.reservar":"Reservar ", "title.suffix":" · Vivir Viajes", "date.na":"(a definir)",
+    "menu.excursiones":"Excursões", "menu.whatsapp":"Falar no WhatsApp",
+    "cat.circuitos.title":"Circuitos & Mirantes", "cat.navegacion.title":"Navegação", "cat.nieve.title":"Neve & Montanha", "cat.aventura.title":"Aventura",
+    "nav.rentacar":"Rent a Car", "nav.agencias":"Agências",
+    "gallery.volver":"← Excursões", "gallery.desde":"Desde", "gallery.por-persona":"por pessoa", "gallery.reservar":"Reservar", "gallery.consultar":"Consultar",
+    "gallery.antes-de-reservar":"Antes de reservar", "gallery.pickup":"Pick up", "gallery.dropoff":"Drop off", "gallery.duracion":"Duração", "gallery.reserva-con":"Reserve com",
+    "gallery.leer-recorrido":"Ler o percurso completo", "gallery.ocultar-detalle":"Ocultar detalhes", "gallery.ver-mapa":"Ver mapa", "gallery.mapa-del-recorrido":"Mapa do percurso",
+    "gallery.recorrer-la-ruta":"▶ Percorrer a rota", "gallery.continuar":"Continuar", "gallery.volver-paso1":"Voltar à etapa 1",
+    "gallery.paso1de2":"ETAPA 1 DE 2", "gallery.paso2de2":"ETAPA 2 DE 2",
+    "gallery.pagar-y-reservar":"Pagar {total} e reservar",
   },
 };
 
@@ -2585,7 +2862,7 @@ function applyStaticI18n(){
     const v = t(el.getAttribute("data-i18n-aria"));
     if(v!=null) el.setAttribute("aria-label", v);
   });
-  document.querySelectorAll("#lang-switch button").forEach(b=>{
+  document.querySelectorAll(".lang-switch button").forEach(b=>{
     b.classList.toggle("active", b.getAttribute("data-lang")===state.lang);
   });
 }
@@ -2680,6 +2957,9 @@ function updateCarousel(){
     track.style.transform = "translateX("+x+"px)";
   }
   document.querySelectorAll("#carousel-dots button").forEach((b,i)=>b.classList.toggle("on", i===carIdx));
+
+  const counter = document.getElementById("carousel-counter");
+  if(counter) counter.textContent = carImages.length ? (carIdx+1)+" / "+carImages.length : "";
 }
 function goToSlide(i){ carIdx=i; updateCarousel(); }
 function nextSlide(){ if(!carImages.length) return; carIdx=(carIdx+1)%carImages.length; updateCarousel(); }
@@ -2696,14 +2976,27 @@ function carouselInit(){
 
   let touchStartX=null;
   const track = document.getElementById("carousel-track");
-  track.addEventListener("touchstart", e=>{ touchStartX = e.touches[0].clientX; });
+  track.addEventListener("touchstart", e=>{ if(isMobile()) return; touchStartX = e.touches[0].clientX; });
   track.addEventListener("touchend", e=>{
-    if(touchStartX===null) return;
+    if(isMobile() || touchStartX===null) return;
     const dx = e.changedTouches[0].clientX - touchStartX;
     if(dx>40){ prevSlide(); stopAutoplay(); startAutoplay(); }
     else if(dx<-40){ nextSlide(); stopAutoplay(); startAutoplay(); }
     touchStartX=null;
   });
+
+  // En mobile el carrusel es full-bleed con scroll-snap nativo: el indice
+  // activo se sincroniza leyendo la posicion de scroll, no via transform.
+  track.addEventListener("scroll", ()=>{
+    if(!isMobile() || !carImages.length) return;
+    const i = Math.max(0, Math.min(carImages.length-1, Math.round(track.scrollLeft / Math.max(1, track.clientWidth))));
+    if(i !== carIdx){
+      carIdx = i;
+      document.querySelectorAll("#carousel-dots button").forEach((b,idx)=>b.classList.toggle("on", idx===carIdx));
+      const counter = document.getElementById("carousel-counter");
+      if(counter) counter.textContent = (carIdx+1)+" / "+carImages.length;
+    }
+  }, { passive:true });
 }
 
 /* =================== CALENDAR ================================= */
@@ -2834,7 +3127,7 @@ document.addEventListener("DOMContentLoaded", () => {
     render();
   });
 
-  document.querySelectorAll("#lang-switch button").forEach(b=>{
+  document.querySelectorAll(".lang-switch button").forEach(b=>{
     b.addEventListener("click", () => {
       state.lang = b.getAttribute("data-lang");
       try{ localStorage.setItem("vv-lang", state.lang); }catch(err){}
@@ -2895,6 +3188,8 @@ function renderContent(optIdx){
 
   const detalle = trOpt(opt,"detalle") || trE("detalle");
   document.getElementById("block-detalle").hidden = !detalle;
+  const leerBtn = document.getElementById("ruta-leer-completo");
+  if(leerBtn) leerBtn.hidden = !detalle;
   if(detalle) document.getElementById("c-detalle").textContent=detalle;
   const tituloCorto = trOpt(opt,"tituloCorto");
   document.getElementById("c-detalle-titulo").textContent = tituloCorto ? t("content.el-paseo")+" - "+tituloCorto : t("content.el-paseo");
@@ -2913,6 +3208,8 @@ function renderContent(optIdx){
   finalNotas.forEach(t=>{
     const li=document.createElement("li"); li.innerHTML=dot+"<span>"+t+"</span>"; notasEl.appendChild(li);
   });
+
+  renderAntesReservar(finalNotas);
 }
 
 function renderStatic(){
@@ -2925,6 +3222,7 @@ function renderStatic(){
   document.getElementById("c-desc").hidden=!e.desc;
   document.title=t("title.reservar")+trE("nombre")+t("title.suffix");
 
+  renderPriceRow();
   buildCarousel();
   startAutoplay();
 
@@ -3021,6 +3319,7 @@ function renderRuta(){
   const block = document.getElementById("block-ruta");
   if(!e.ruta || !Array.isArray(e.ruta.route)){ block.hidden = true; return; }
   block.hidden = false;
+  buildRutaTimeline(e);
 
   if(rutaLeafletMap){ return; }
   loadLeaflet().then(initRutaMap).catch(()=>{ block.hidden = true; });
@@ -3326,6 +3625,10 @@ function render(){
   else if(missingContact){ hint.textContent=t("hint.completa-datos"); go.disabled=true; go.textContent=t("btn.pagar-reservar"); }
   else if(!state.tc){ hint.textContent=t("hint.acepta-tc"); go.disabled=true; go.textContent=t("btn.pagar-reservar"); }
   else { hint.textContent=""; go.disabled=false; go.textContent=t("btn.pagar-reservar"); }
+
+  const btnContinuar = document.getElementById("btn-continuar-mobile");
+  if(btnContinuar) btnContinuar.disabled = !step1Ready();
+  if(mobileStep === 2) updateResumenMobile();
 }
 
 function reservar(){
@@ -3437,6 +3740,294 @@ async function pagarConMercadoPago(){
   }
 }
 
+/* =================== MOBILE (<=760px) =========================== */
+function isMobile(){ return window.matchMedia("(max-width:760px)").matches; }
+function reducedMotion(){ return window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
+
+function scrollToResv(){
+  const card = document.querySelector(".resv");
+  if(card) card.scrollIntoView({ behavior: reducedMotion() ? "auto" : "smooth", block:"start" });
+}
+
+/* ---- Menu hamburguesa (compartido con home/elcruce) ---- */
+function initMobileMenu(){
+  const btn = document.getElementById("menu-toggle");
+  const panel = document.getElementById("mobile-menu");
+  if(!btn || !panel) return;
+  function openMenu(){
+    panel.hidden = false;
+    btn.setAttribute("aria-expanded","true");
+    document.body.classList.add("menu-open");
+    updateStickyBar();
+  }
+  function closeMenu(){
+    panel.hidden = true;
+    btn.setAttribute("aria-expanded","false");
+    document.body.classList.remove("menu-open");
+    updateStickyBar();
+  }
+  btn.addEventListener("click", ()=>{ if(panel.hidden) openMenu(); else closeMenu(); });
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape" && !panel.hidden) closeMenu(); });
+}
+
+/* ---- Fila de precio (cabecera) + barra fija ---- */
+function startingPriceFor(e){
+  const opt = e.opciones && e.opciones[0];
+  if(!opt || !opt.cats || !opt.cats.length) return null;
+  const catKey = opt.cats[0].key;
+  const p = opt.precios;
+  if(!p) return null;
+  let v = p[catKey];
+  if(v === undefined){
+    for(const k in p){ if(p[k] && p[k][catKey] !== undefined){ v = p[k][catKey]; break; } }
+  }
+  if(v === undefined) return null;
+  return (v && typeof v==="object") ? (v.sin ?? v.con) : v;
+}
+
+function renderPriceRow(){
+  const e = EXC[id];
+  const price = e.cotizar ? null : startingPriceFor(e);
+  [
+    { amount:"pr-amount", label:"pr-label", suffix:"pr-suffix" },
+    { amount:"sb-amount", label:null, suffix:"sb-suffix" },
+  ].forEach(ids=>{
+    const amountEl = document.getElementById(ids.amount);
+    const suffixEl = ids.suffix && document.getElementById(ids.suffix);
+    const labelEl = ids.label && document.getElementById(ids.label);
+    if(!amountEl) return;
+    if(price != null){
+      if(labelEl) labelEl.hidden = false;
+      amountEl.textContent = fmt(price);
+      if(suffixEl) suffixEl.hidden = false;
+    } else {
+      if(labelEl) labelEl.hidden = true;
+      amountEl.textContent = t("gallery.consultar");
+      if(suffixEl) suffixEl.hidden = true;
+    }
+  });
+}
+
+function wireReservarButtons(){
+  [document.getElementById("pr-reservar-btn"), document.getElementById("sb-reservar-btn")].forEach(btn=>{
+    if(!btn) return;
+    btn.addEventListener("click", ()=>{
+      const e = EXC[id];
+      if(e.cotizar){
+        const wa = document.getElementById("nav-whatsapp");
+        if(wa) window.open(wa.href, "_blank");
+      } else {
+        scrollToResv();
+      }
+    });
+  });
+}
+
+let resvCardVisible = false;
+function anyOverlayOpen(){
+  const menu = document.getElementById("mobile-menu");
+  const sheet = document.getElementById("map-sheet-overlay");
+  return (menu && !menu.hidden) || (sheet && sheet.classList.contains("show"));
+}
+function updateStickyBar(){
+  const bar = document.getElementById("sticky-resv-bar");
+  if(!bar) return;
+  const show = isMobile() && !resvCardVisible && !anyOverlayOpen();
+  bar.classList.toggle("show", show);
+  document.body.classList.toggle("has-sticky-bar", show);
+}
+function initStickyBar(){
+  const bar = document.getElementById("sticky-resv-bar");
+  const resvCard = document.querySelector(".resv");
+  if(!bar || !resvCard || !("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{ resvCardVisible = entry.isIntersecting; });
+    updateStickyBar();
+  }, { threshold:.1 });
+  io.observe(resvCard);
+  window.addEventListener("resize", updateStickyBar);
+  updateStickyBar();
+}
+
+/* ---- Antes de reservar: parsea las notas de la excursion ---- */
+function parseNotasCards(notas){
+  const cards = {};
+  const leftover = [];
+  const rxPickup = /pick.?up[^:]*:\s*(.+)/i;
+  const rxDropoff = /drop.?off[^:]*:\s*(.+)/i;
+  const rxReservaTrigger = /anticipaci|notice|antecedênc/i;
+  const rxHs = /(\d+)\s*hs?\b/i;
+  const rxDuracion = /^(medio\s*d[ií]a|d[ií]a\s*completo|full\s*day|half\s*day|dia\s*inteiro|meio\s*dia)\.?$/i;
+  (notas||[]).forEach(n=>{
+    let m;
+    if(!cards.pickup && (m = rxPickup.exec(n))){ cards.pickup = m[1].replace(/\.$/,"").trim(); return; }
+    if(!cards.dropoff && (m = rxDropoff.exec(n))){ cards.dropoff = m[1].replace(/\.$/,"").trim(); return; }
+    if(!cards.reserva && rxReservaTrigger.test(n)){
+      const hm = rxHs.exec(n);
+      if(hm){ cards.reserva = hm[1]+" hs"; return; }
+    }
+    if(!cards.duracion && rxDuracion.test(n.trim())){ cards.duracion = n.replace(/\.$/,"").trim(); return; }
+    leftover.push(n);
+  });
+  return { cards, leftover };
+}
+
+function renderAntesReservar(finalNotas){
+  const wrap = document.getElementById("antes-reservar");
+  const grid = document.getElementById("antes-grid");
+  const extra = document.getElementById("antes-extra");
+  if(!wrap || !grid || !extra) return;
+  const { cards, leftover } = parseNotasCards(finalNotas);
+  const defs = [
+    [t("gallery.pickup"), cards.pickup],
+    [t("gallery.dropoff"), cards.dropoff],
+    [t("gallery.duracion"), cards.duracion],
+    [t("gallery.reserva-con"), cards.reserva],
+  ].filter(([,v])=>v);
+  grid.innerHTML = "";
+  defs.forEach(([label,value])=>{
+    const card = document.createElement("div");
+    card.className = "antes-card";
+    const al = document.createElement("span"); al.className="al"; al.textContent=label;
+    const av = document.createElement("span"); av.className="av"; av.textContent=value;
+    card.append(al,av);
+    grid.appendChild(card);
+  });
+  extra.innerHTML = "";
+  leftover.forEach(txt=>{
+    const p = document.createElement("div");
+    p.textContent = txt;
+    extra.appendChild(p);
+  });
+  wrap.hidden = defs.length===0 && leftover.length===0;
+}
+
+/* ---- El recorrido: linea de tiempo ---- */
+function buildRutaTimeline(e){
+  const el = document.getElementById("ruta-timeline");
+  if(!el) return;
+  el.innerHTML = "";
+  const stops = (e.ruta && e.ruta.stops) || [];
+  stops.forEach((s,i)=>{
+    const isLast = i === stops.length-1;
+    const item = document.createElement("div");
+    item.className = "ruta-tl-item"+(isLast?" term":"");
+    const dotCol = document.createElement("div"); dotCol.className="ruta-tl-dot-col";
+    const circle = document.createElement("div"); circle.className="ruta-tl-circle";
+    circle.textContent = isLast ? "✓" : String(i+1);
+    dotCol.appendChild(circle);
+    if(!isLast){ const line=document.createElement("div"); line.className="ruta-tl-line"; dotCol.appendChild(line); }
+    const body = document.createElement("div"); body.className="ruta-tl-body";
+    const title = document.createElement("div"); title.className="ruta-tl-title"; title.textContent=s.name;
+    body.appendChild(title);
+    item.append(dotCol, body);
+    el.appendChild(item);
+  });
+}
+
+/* ---- Leer el recorrido completo (despliega el-paseo) ---- */
+function initDetalleToggle(){
+  const btn = document.getElementById("ruta-leer-completo");
+  const block = document.getElementById("block-detalle");
+  if(!btn || !block) return;
+  btn.addEventListener("click", ()=>{
+    const open = block.classList.toggle("mobile-open");
+    btn.textContent = open ? t("gallery.ocultar-detalle") : t("gallery.leer-recorrido");
+  });
+}
+
+/* ---- Mapa en bottom sheet ---- */
+function initMapSheet(){
+  const overlay = document.getElementById("map-sheet-overlay");
+  const body = document.getElementById("map-sheet-body");
+  const openBtn = document.getElementById("ruta-ver-mapa");
+  const closeBtn = document.getElementById("map-sheet-close");
+  const playMobileBtn = document.getElementById("ruta-play-mobile");
+  if(!overlay || !body || !openBtn) return;
+  const mapEl = document.getElementById("ruta-leaflet-map");
+  const anchor = document.createComment("ruta-map-anchor");
+  if(mapEl && mapEl.parentNode) mapEl.parentNode.insertBefore(anchor, mapEl);
+
+  function openSheet(){
+    if(mapEl) body.appendChild(mapEl);
+    overlay.classList.add("show");
+    document.body.classList.add("map-sheet-open");
+    updateStickyBar();
+    setTimeout(()=>{ if(rutaLeafletMap) rutaLeafletMap.invalidateSize(); }, 60);
+  }
+  function closeSheet(){
+    overlay.classList.remove("show");
+    document.body.classList.remove("map-sheet-open");
+    if(mapEl && anchor.parentNode) anchor.parentNode.insertBefore(mapEl, anchor.nextSibling);
+    updateStickyBar();
+  }
+  openBtn.addEventListener("click", openSheet);
+  if(closeBtn) closeBtn.addEventListener("click", closeSheet);
+  overlay.addEventListener("click", e=>{ if(e.target===overlay) closeSheet(); });
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape" && overlay.classList.contains("show")) closeSheet(); });
+
+  if(playMobileBtn){
+    const originalPlay = document.getElementById("ruta-play");
+    playMobileBtn.addEventListener("click", ()=>{ const b=document.getElementById("ruta-play"); if(b) b.click(); });
+    if(originalPlay && "MutationObserver" in window){
+      new MutationObserver(()=>{ playMobileBtn.textContent = originalPlay.textContent; }).observe(originalPlay, { childList:true, characterData:true, subtree:true });
+    }
+  }
+}
+
+/* ---- Reserva en 2 pasos ---- */
+let mobileStep = 1;
+
+function step1Ready(){
+  const e = EXC[id], opt = curOpt();
+  const sk = seasonKeyFor(e, state.fecha);
+  if(!state.fecha) return false;
+  if(e.startDate && state.fecha < e.startDate) return false;
+  if(e.seasonal && sk==="__off__") return false;
+  let pax=0; opt.cats.forEach(c=>pax+=state.counts[c.key]);
+  if(pax<=0) return false;
+  if(state.con && e.pickupPoints && e.pickupPoints.length && !state.pickup) return false;
+  return true;
+}
+
+function updateResumenMobile(){
+  const resumen = document.getElementById("resv-resumen-mobile");
+  if(!resumen) return;
+  const e = EXC[id], opt = curOpt();
+  const sk = seasonKeyFor(e, state.fecha);
+  let pax=0; opt.cats.forEach(c=>pax+=state.counts[c.key]);
+  const fechaTxt = state.fecha ? state.fecha.split("-").reverse().join("/") : t("date.na");
+  const canPrice = !e.cotizar && (!e.seasonal || (state.fecha && sk!=="__off__"));
+  let totalTxt = "—";
+  if(canPrice){ const p=pricingFor(opt,sk,state.con); totalTxt=fmt(p.total); }
+  resumen.textContent = trE("nombre")+" · "+fechaTxt+" · "+pax+" "+t("form.pasajeros")+" · "+totalTxt;
+}
+
+function updateStepUI(){
+  const body = document.getElementById("resv-body");
+  if(!body) return;
+  body.dataset.step = String(mobileStep);
+  const label = document.getElementById("resv-step-label");
+  if(label) label.textContent = mobileStep===1 ? t("gallery.paso1de2") : t("gallery.paso2de2");
+  if(mobileStep===2) updateResumenMobile();
+}
+
+function initStepFlow(){
+  const btnContinuar = document.getElementById("btn-continuar-mobile");
+  const btnVolver = document.getElementById("resv-back-mobile");
+  if(btnContinuar) btnContinuar.addEventListener("click", ()=>{
+    if(!step1Ready()) return;
+    mobileStep = 2;
+    updateStepUI();
+    scrollToResv();
+  });
+  if(btnVolver) btnVolver.addEventListener("click", ()=>{
+    mobileStep = 1;
+    updateStepUI();
+  });
+  updateStepUI();
+}
+
 (function initLang(){
   let saved = "es";
   try{ saved = localStorage.getItem("vv-lang") || "es"; }catch(e){}
@@ -3449,6 +4040,12 @@ calInit();
 carouselInit();
 renderStatic();
 render();
+initMobileMenu();
+wireReservarButtons();
+initStickyBar();
+initDetalleToggle();
+initMapSheet();
+initStepFlow();
 </script>
 </body>
 </html>
