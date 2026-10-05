@@ -151,6 +151,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .hero-stats .s span{font-size:.85rem;color:rgba(255,255,255,.65)}
   .ridge{position:relative;z-index:2;display:block;width:100%;margin-top:-1px}
 
+  /* ---------- Hero promo jueves Galicia (temporal, 02/10/2026-30/11/2026) ---------- */
+  .hero--galicia{background:url('fotos/traful-02.jpg') center 55%/cover no-repeat, var(--navy-deep)}
+  .hero--galicia .hero-overlay{background:
+      radial-gradient(820px 460px at 92% -12%, rgba(233,162,60,.16), transparent 60%),
+      linear-gradient(95deg, rgba(15,29,56,.86) 0%, rgba(20,36,70,.6) 50%, rgba(15,29,56,.35) 100%)}
+  .hero--galicia .hero-inner{max-width:700px}
+  .hp-pill{display:inline-flex;align-items:center;gap:12px;margin-bottom:1.6rem;background:#fff;border-radius:999px;padding:7px 18px 7px 20px}
+  .hp-pill span{font-family:var(--body);font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--navy)}
+  .hp-pill img{height:30px;width:auto;display:block;border-radius:4px}
+  .hp-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;width:100%;margin:0 0 2rem;padding:1.4rem 0 0;border-top:1px solid rgba(255,255,255,.2);list-style:none}
+  .hp-steps li{display:flex;gap:10px;align-items:flex-start;font-family:var(--body);font-size:.95rem;line-height:1.4;font-weight:600;color:#fff}
+  .hp-steps b{flex:none;width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--navy);font-family:var(--display);font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+  .hp-steps li span{padding-top:3px}
+  .hp-legal{font-family:var(--body);font-size:.82rem;color:rgba(255,255,255,.65);margin-top:1.2rem}
+  @media(max-width:760px){
+    .hp-steps{grid-template-columns:1fr;gap:12px}
+    .hero--galicia .hero-cta{flex-direction:column;align-items:stretch}
+    .hero--galicia .hero-cta .btn{justify-content:center}
+  }
+
   /* ---------- Sections ---------- */
   .sec{padding:clamp(3.8rem,7vw,6rem) 0}
   .sec.excursiones{background:var(--paper)}
@@ -548,8 +568,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </div>
 
+<!-- ====================== HERO PROMO JUEVES GALICIA (temporal) ====================== -->
+<section class="hero hero--galicia" id="hero-galicia" hidden>
+  <div class="hero-overlay"></div>
+  <div class="wrap">
+    <div class="hero-inner reveal">
+      <div class="hp-pill">
+        <span data-i18n="hero.galicia.pill">Exclusivo clientes</span>
+        <img src="fotos/galicia-logo.png" alt="Banco Galicia">
+      </div>
+      <h1 data-i18n-html="hero.galicia.title">Los jueves, Bariloche <em>con 15% de ahorro.</em></h1>
+      <p class="lead" data-i18n="hero.galicia.sub">Con tarjetas Galicia Visa y Mastercard &middot; Tope de reintegro $10.000 por mes</p>
+      <ol class="hp-steps">
+        <li><b>1</b><span data-i18n="hero.galicia.paso1">Escribinos por WhatsApp</span></li>
+        <li><b>2</b><span data-i18n="hero.galicia.paso2">Te enviamos el link de pago</span></li>
+        <li><b>3</b><span data-i18n="hero.galicia.paso3">Pagalo un jueves</span></li>
+      </ol>
+      <div class="hero-cta">
+        <a class="btn btn-primary" id="promo_galicia_jueves" target="_blank" rel="noopener" href="https://wa.me/5492944539672?text=Hola%20Vivir%20Viajes!%20Soy%20cliente%20Galicia%20y%20quiero%20aprovechar%20la%20promo%20de%20los%20jueves%20(15%25).%20%C2%BFMe%20pasan%20el%20link%20de%20pago%3F">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.1.1.3 0 .5l-.4.5c-.2.2-.3.4-.1.6.6 1 1.3 1.6 2.2 2.1.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.5 0 .8z"/></svg>
+          <span data-i18n="hero.galicia.cta_wa">Pedir link de pago por WhatsApp</span>
+        </a>
+        <a href="#excursiones" class="btn btn-ghost-light" data-i18n="hero.cta_ver">Ver excursiones</a>
+      </div>
+      <p class="hp-legal" data-i18n="hero.galicia.legal">Válido del 02/10/2026 al 30/11/2026. El descuento aplica solo pagando con el link que te enviamos por WhatsApp.</p>
+    </div>
+  </div>
+  <svg class="ridge" viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 90 L0 52 L210 24 L430 60 L660 18 L900 64 L1130 26 L1320 56 L1440 30 L1440 90Z" fill="#F5F7FB"/></svg>
+</section>
+
 <!-- ====================== HERO ====================== -->
-<section class="hero">
+<section class="hero" id="hero-default">
   <video class="hero-video" id="hero-video" muted loop playsinline preload="none" poster="fotos/hero-video-poster.jpg"></video>
   <div class="hero-overlay"></div>
   <div class="wrap">
@@ -570,6 +619,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <svg class="ridge" viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 90 L0 52 L210 24 L430 60 L660 18 L900 64 L1130 26 L1320 56 L1440 30 L1440 90Z" fill="#F5F7FB"/></svg>
 </section>
+<script>
+  // Promo jueves Galicia: vigente del 02/10/2026 al 30/11/2026 inclusive.
+  // Pasada esa fecha, vuelve el hero de marca de siempre.
+  (function(){
+    var START = new Date('2026-10-02T00:00:00-03:00');
+    var END = new Date('2026-12-01T00:00:00-03:00');
+    var now = new Date();
+    var promoActive = now >= START && now < END;
+    document.getElementById('hero-galicia').hidden = !promoActive;
+    document.getElementById('hero-default').hidden = promoActive;
+  })();
+</script>
 
 <div class="chip-bar" id="chip-bar">
   <div class="chip-row" id="chip-row">
@@ -1332,7 +1393,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <script>
-if(window.matchMedia("(min-width:761px)").matches){
+if(window.matchMedia("(min-width:761px)").matches && !document.getElementById("hero-default").hidden){
   const v = document.getElementById("hero-video");
   v.innerHTML = '<source src="fotos/hero-video.webm" type="video/webm">'
     + '<source src="fotos/hero-video.mp4" type="video/mp4">';
@@ -1368,6 +1429,12 @@ const I18N = {
     "hero.lead":"Tu próxima aventura empieza acá",
     "hero.cta_ver":"Ver excursiones", "hero.cta_whatsapp":"Hablar por WhatsApp",
     "hero.stat2_num":"Local", "hero.stat2":"operador de Bariloche", "hero.stat3":"temporada de invierno",
+    "hero.galicia.pill":"Exclusivo clientes",
+    "hero.galicia.title":"Los jueves, Bariloche <em>con 15% de ahorro.</em>",
+    "hero.galicia.sub":"Con tarjetas Galicia Visa y Mastercard · Tope de reintegro $10.000 por mes",
+    "hero.galicia.paso1":"Escribinos por WhatsApp", "hero.galicia.paso2":"Te enviamos el link de pago", "hero.galicia.paso3":"Pagalo un jueves",
+    "hero.galicia.cta_wa":"Pedir link de pago por WhatsApp",
+    "hero.galicia.legal":"Válido del 02/10/2026 al 30/11/2026. El descuento aplica solo pagando con el link que te enviamos por WhatsApp.",
     "sec.destacados.title":"Destacados", "sec.destacados.sub":"Nuestras recomendaciones para esta temporada",
     "card.eas.tag":"Clases", "card.eas.title":"Clase de Ski y Snow · Cerro Catedral", "card.eas.desc":"Clases de ski y snowboard en el Cerro Catedral: bautismo, exclusivas y semi exclusivas. Equipo incluido.", "card.eas.meta1":"2 hs", "card.eas.meta2":"Todos los niveles",
     "common.desde":"Desde", "common.reservar":"Reservar",
@@ -1459,6 +1526,12 @@ const I18N = {
     "hero.lead":"Your next adventure starts here",
     "hero.cta_ver":"See excursions", "hero.cta_whatsapp":"Chat on WhatsApp",
     "hero.stat2_num":"Local", "hero.stat2":"tour operator in Bariloche", "hero.stat3":"winter season",
+    "hero.galicia.pill":"Exclusive for clients",
+    "hero.galicia.title":"Thursdays in Bariloche, <em>with 15% off.</em>",
+    "hero.galicia.sub":"With Galicia Visa and Mastercard cards · Monthly refund cap $10,000",
+    "hero.galicia.paso1":"Message us on WhatsApp", "hero.galicia.paso2":"We'll send you the payment link", "hero.galicia.paso3":"Pay it on a Thursday",
+    "hero.galicia.cta_wa":"Request payment link on WhatsApp",
+    "hero.galicia.legal":"Valid from 10/02/2026 to 11/30/2026. The discount only applies when paying with the link we send you on WhatsApp.",
     "sec.destacados.title":"Featured", "sec.destacados.sub":"Our picks for this season",
     "card.eas.tag":"Lessons", "card.eas.title":"Ski & Snowboard Lesson · Cerro Catedral", "card.eas.desc":"Ski and snowboard lessons at Cerro Catedral: group lessons for beginners, private and semi-private classes. Equipment included.", "card.eas.meta1":"2 hrs", "card.eas.meta2":"All levels",
     "common.desde":"From", "common.reservar":"Book now",
@@ -1541,6 +1614,12 @@ const I18N = {
     "hero.lead":"Sua próxima aventura começa aqui",
     "hero.cta_ver":"Ver passeios", "hero.cta_whatsapp":"Falar no WhatsApp",
     "hero.stat2_num":"Local", "hero.stat2":"operador de turismo em Bariloche", "hero.stat3":"temporada de inverno",
+    "hero.galicia.pill":"Exclusivo para clientes",
+    "hero.galicia.title":"Às quintas, Bariloche <em>com 15% de desconto.</em>",
+    "hero.galicia.sub":"Com cartões Galicia Visa e Mastercard · Teto de reembolso $10.000 por mês",
+    "hero.galicia.paso1":"Mande uma mensagem no WhatsApp", "hero.galicia.paso2":"Enviamos o link de pagamento", "hero.galicia.paso3":"Pague numa quinta-feira",
+    "hero.galicia.cta_wa":"Pedir link de pagamento pelo WhatsApp",
+    "hero.galicia.legal":"Válido de 02/10/2026 a 30/11/2026. O desconto vale só pagando com o link que enviamos pelo WhatsApp.",
     "sec.destacados.title":"Destaques", "sec.destacados.sub":"Nossas recomendações para esta temporada",
     "card.eas.tag":"Aulas", "card.eas.title":"Aula de Esqui e Snow · Cerro Catedral", "card.eas.desc":"Aulas de esqui e snowboard no Cerro Catedral: batismo em grupo, aulas exclusivas e semiexclusivas. Equipamento incluído.", "card.eas.meta1":"2 h", "card.eas.meta2":"Todos os níveis",
     "common.desde":"A partir de", "common.reservar":"Reservar",
