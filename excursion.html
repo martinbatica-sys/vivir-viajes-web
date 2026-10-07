@@ -84,6 +84,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .banner h1{font-family:var(--display);font-weight:700;font-size:clamp(1.8rem,4.2vw,2.8rem);letter-spacing:-.02em;line-height:1.06}
   .banner .subt{color:rgba(255,255,255,.7);margin-top:.4rem;font-size:1.02rem}
 
+  .promo-banner{display:flex;align-items:center;gap:.9rem;flex-wrap:wrap;background:linear-gradient(95deg,#FBEFDA,#F7E3C2);border:1px solid rgba(201,133,42,.3);border-radius:14px;padding:.9rem 1.2rem;margin:1.2rem 0}
+  .promo-banner[hidden]{display:none}
+  .pb-badge{flex:none;background:var(--gold);color:var(--navy);font-family:var(--display);font-weight:700;font-size:1.1rem;padding:.3rem .75rem;border-radius:9px;letter-spacing:-.01em}
+  .pb-text{flex:1;min-width:180px;font-family:var(--body);font-weight:600;font-size:.95rem;color:var(--navy)}
+  .pb-cta{flex:none;display:inline-flex;align-items:center;gap:.4rem;background:var(--navy);color:#fff;font-family:var(--body);font-weight:700;font-size:.88rem;border-radius:999px;padding:.6rem 1.1rem;white-space:nowrap;transition:.18s}
+  .pb-cta:hover{background:#1E3566;transform:translateY(-1px)}
+  @media(max-width:760px){
+    .promo-banner{padding:.85rem 1rem}
+    .pb-cta{width:100%;justify-content:center}
+  }
+
   .carousel{position:relative;width:100%;max-width:980px;aspect-ratio:19/9;margin:0 auto;overflow:hidden;background:transparent}
   .carousel-track{position:relative;display:flex;align-items:center;height:100%;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
   .car-slide{position:relative;flex:0 0 76%;height:88%;margin-right:16px;border-radius:18px;overflow:hidden;background:#0c1730;transform:scale(.92);opacity:.5;filter:brightness(.7);transition:transform .5s cubic-bezier(.2,.7,.2,1),opacity .5s,filter .5s,box-shadow .5s;cursor:pointer}
@@ -528,6 +539,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <div class="wrap">
+  <div class="promo-banner" id="promo-banner" hidden>
+    <span class="pb-badge" id="pb-badge"></span>
+    <span class="pb-text" id="pb-text"></span>
+    <a class="pb-cta" id="pb-cta" target="_blank" rel="noopener"></a>
+  </div>
   <div class="price-row-mobile" id="price-row-mobile">
     <div>
       <span class="pr-label" id="pr-label" data-i18n="gallery.desde">DESDE</span>
@@ -1655,6 +1671,13 @@ const EXC = {
    detalle:"Partiendo desde Bariloche, nos dirigimos hacia el sur por la emblemática Ruta 40, siempre acompañados por la majestuosidad de la Cordillera de los Andes, que enmarca el camino con paisajes imponentes y únicos de la Patagonia.\n\nLa primera parada es El Bolsón, en la provincia de Río Negro: un pintoresco pueblo reconocido por su belleza natural, su ambiente tranquilo y su producción artesanal, rodeado de montañas, ríos y bosques. Aquí realizaremos una breve pausa para desayunar y utilizar los baños antes de continuar la travesía.\n\nEl recorrido sigue hacia el sur, atravesando la provincia de Río Negro hasta adentrarnos en Chubut. Tras unas tres horas de viaje, llegaremos al magnífico pueblo de Trevelin, cuyo nombre significa \"Pueblo del Molino\" en galés. Rodeado de un fértil valle y paisajes cordilleranos, Trevelin se presenta como uno de los destinos más encantadores de la Patagonia.\n\nDurante el paseo, nuestro guía coordinará la parada para el almuerzo (no incluido), que podrá realizarse en Esquel o directamente en Trevelin, según el tiempo disponible y las preferencias del grupo.\n\nCampo de Tulipanes\nLa visita central es el Campo de Tulipanes, un espectáculo único en Argentina donde miles de flores transforman el paisaje en un manto de colores. El contraste entre los tulipanes y las montañas nevadas de fondo crea postales inolvidables. La entrada está incluida, y se dispondrá de tiempo para recorrer el lugar y tomar fotografías.\n\nCascadas Nant y Fall\nTambién visitaremos las Cascadas Nant y Fall, un conjunto de siete saltos de agua rodeados de naturaleza. A través de pasarelas estratégicamente ubicadas, podremos apreciar cuatro de ellos en todo su esplendor. Entrada incluida.",
    incluye:["Pick up y drop off en hoteles céntricos de Bariloche","Guía en español","Entrada al Campo de Tulipanes","Entrada a Cascadas Nant y Fall"],
    notas:["Duración: 15 horas.","Días de salida: 12, 20 y 26 de octubre 2026.","No incluye comidas ni bebidas.","Reservas con mínimo 24 hs de anticipación."],
+   promo:{
+     badge:"-10%",
+     text:"Grupo de 4 o más pasajeros · Válido hasta el 15/10/2026",
+     cta:"Consultar por WhatsApp",
+     wa:"https://wa.me/5492944539672?text=Hola%20Vivir%20Viajes!%20Somos%20un%20grupo%20de%204%20o%20m%C3%A1s%20pasajeros%20y%20queremos%20aprovechar%20el%2010%25%20de%20descuento%20en%20la%20excursi%C3%B3n%20al%20Campo%20de%20Tulipanes.",
+     end:"2026-10-16T00:00:00-03:00",
+   },
    seasonal:false, traslado:false,
    defaultMonth:"2026-10",
    allowedDates:["2026-10-12","2026-10-20","2026-10-26"],
@@ -1676,6 +1699,7 @@ const EXC = {
        detalle:"Setting out from Bariloche, we head south along the iconic Route 40, accompanied all the way by the majesty of the Andes mountain range, which frames the road with striking, one-of-a-kind Patagonian landscapes.\n\nThe first stop is El Bolsón, in Río Negro province: a picturesque town known for its natural beauty, relaxed atmosphere and artisanal production, surrounded by mountains, rivers and forests. Here we'll take a short break for breakfast and a restroom stop before continuing the journey.\n\nThe route continues south, crossing Río Negro province and into Chubut. After about three hours of travel, we'll arrive at the magnificent town of Trevelin, whose name means \"Mill Town\" in Welsh. Surrounded by a fertile valley and mountain scenery, Trevelin is one of Patagonia's most charming destinations.\n\nAlong the way, our guide will coordinate a lunch stop (not included), which can take place in Esquel or directly in Trevelin, depending on available time and the group's preferences.\n\nTulip Fields\nThe main visit is the Tulip Fields, a unique spectacle in Argentina where thousands of flowers turn the landscape into a blanket of color. The contrast between the tulips and the snow-capped mountains in the background creates unforgettable postcards. Admission is included, and there will be time to walk around and take photos.\n\nNant y Fall Waterfalls\nWe'll also visit the Nant y Fall Waterfalls, a set of seven waterfalls surrounded by nature. Through strategically placed walkways, we'll be able to admire four of them in all their splendor. Admission included.",
        incluye:["Pick-up and drop-off at downtown Bariloche hotels","Spanish-speaking guide","Admission to the Tulip Fields","Admission to the Nant y Fall Waterfalls"],
        notas:["Duration: 15 hours.","Departure days: October 12, 20 and 26, 2026.","Meals and drinks not included.","Bookings require at least 24 hs notice."],
+       promo:{text:"For groups of 4 or more passengers · Valid until 10/15/2026", cta:"Ask on WhatsApp"},
        opciones:{
          tour:{
            incluye:["Pick-up and drop-off at downtown Bariloche hotels","Spanish-speaking guide","Admission to the Tulip Fields","Admission to the Nant y Fall Waterfalls"],
@@ -1689,6 +1713,7 @@ const EXC = {
        detalle:"Partindo de Bariloche, seguimos rumo ao sul pela emblemática Rota 40, sempre acompanhados pela majestosidade da Cordilheira dos Andes, que emoldura o caminho com paisagens imponentes e únicas da Patagônia.\n\nA primeira parada é El Bolsón, na província de Río Negro: um pitoresco povoado reconhecido por sua beleza natural, seu ambiente tranquilo e sua produção artesanal, cercado por montanhas, rios e bosques. Aqui faremos uma breve pausa para tomar café da manhã e usar os banheiros antes de continuar a travessia.\n\nO trajeto segue rumo ao sul, atravessando a província de Río Negro até entrarmos em Chubut. Após cerca de três horas de viagem, chegaremos ao magnífico povoado de Trevelin, cujo nome significa \"Povoado do Moinho\" em galês. Cercado por um fértil vale e paisagens cordilheiranas, Trevelin se apresenta como um dos destinos mais encantadores da Patagônia.\n\nDurante o passeio, nosso guia vai coordenar a parada para o almoço (não incluído), que poderá ser feita em Esquel ou diretamente em Trevelin, de acordo com o tempo disponível e as preferências do grupo.\n\nCampo de Tulipas\nA visita central é o Campo de Tulipas, um espetáculo único na Argentina onde milhares de flores transformam a paisagem em um manto de cores. O contraste entre as tulipas e as montanhas nevadas ao fundo cria cartões-postais inesquecíveis. A entrada está incluída, e haverá tempo para percorrer o local e tirar fotos.\n\nCachoeiras Nant y Fall\nTambém visitaremos as Cachoeiras Nant y Fall, um conjunto de sete quedas d'água cercadas de natureza. Através de passarelas estrategicamente posicionadas, poderemos apreciar quatro delas em todo o seu esplendor. Entrada incluída.",
        incluye:["Pick up e drop off em hotéis do centro de Bariloche","Guia em espanhol","Entrada ao Campo de Tulipas","Entrada às Cachoeiras Nant y Fall"],
        notas:["Duração: 15 horas.","Dias de saída: 12, 20 e 26 de outubro de 2026.","Não inclui refeições nem bebidas.","Reservas com no mínimo 24 hs de antecedência."],
+       promo:{text:"Grupo de 4 ou mais passageiros · Válido até 15/10/2026", cta:"Falar no WhatsApp"},
        opciones:{
          tour:{
            incluye:["Pick up e drop off em hotéis do centro de Bariloche","Guia em espanhol","Entrada ao Campo de Tulipas","Entrada às Cachoeiras Nant y Fall"],
@@ -3223,6 +3248,7 @@ function renderStatic(){
   document.title=t("title.reservar")+trE("nombre")+t("title.suffix");
 
   renderPriceRow();
+  renderPromoBanner();
   buildCarousel();
   startAutoplay();
 
@@ -3806,6 +3832,31 @@ function renderPriceRow(){
       if(suffixEl) suffixEl.hidden = true;
     }
   });
+}
+
+function trPromo(field){
+  const e = EXC[id];
+  if(!e.promo) return null;
+  const v = e.i18n && e.i18n[state.lang] && e.i18n[state.lang].promo && e.i18n[state.lang].promo[field];
+  return v != null ? v : e.promo[field];
+}
+
+function renderPromoBanner(){
+  const e = EXC[id];
+  const banner = document.getElementById("promo-banner");
+  const promo = e.promo;
+  if(!promo){ banner.hidden = true; return; }
+  const now = new Date();
+  const start = promo.start ? new Date(promo.start) : null;
+  const end = promo.end ? new Date(promo.end) : null;
+  const active = (!start || now >= start) && (!end || now < end);
+  if(!active){ banner.hidden = true; return; }
+  banner.hidden = false;
+  document.getElementById("pb-badge").textContent = trPromo("badge");
+  document.getElementById("pb-text").textContent = trPromo("text");
+  const cta = document.getElementById("pb-cta");
+  cta.textContent = trPromo("cta");
+  cta.href = promo.wa;
 }
 
 function wireReservarButtons(){
