@@ -149,7 +149,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .hero-stats{display:flex;gap:2.6rem;margin-top:3rem;flex-wrap:wrap}
   .hero-stats .s b{font-family:var(--display);font-size:1.55rem;font-weight:700;display:block;line-height:1;color:#fff}
   .hero-stats .s span{font-size:.85rem;color:rgba(255,255,255,.65)}
-  .ridge{position:relative;z-index:2;display:block;width:100%;margin-top:-1px}
 
   /* ---------- Hero carrusel de promos (temporal: Galicia 02/10-30/11/2026, Tulipanes hasta 15/10/2026) ---------- */
   .hero-carousel{position:relative;overflow:hidden;color:#fff;background:var(--navy-deep)}
@@ -188,10 +187,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .hc-dots{display:flex;gap:8px}
   .hc-dot{height:8px;width:8px;border-radius:999px;border:0;padding:0;cursor:pointer;background:rgba(255,255,255,.55);transition:width .3s,background .3s}
   .hc-dot.is-active{width:28px;background:var(--gold)}
-  .hero-carousel .ridge{margin-top:-90px;z-index:2}
   @media(max-width:960px){
     .hc-nav{position:static;left:auto;right:auto;bottom:auto;justify-content:center;margin:0 0 18px;padding-top:14px}
-    .hero-carousel .ridge{margin-top:-1px}
   }
   @media(max-width:760px){
     .hp-steps{grid-template-columns:1fr;gap:12px}
@@ -651,7 +648,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="hc-dots" id="hc-dots"></div>
     <button class="hc-arrow" type="button" data-dir="1" aria-label="Siguiente">&rsaquo;</button>
   </div>
-  <svg class="ridge" viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 90 L0 52 L210 24 L430 60 L660 18 L900 64 L1130 26 L1320 56 L1440 30 L1440 90Z" fill="#F5F7FB"/></svg>
 </section>
 
 <!-- ====================== HERO ====================== -->
@@ -674,7 +670,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
   </div>
-  <svg class="ridge" viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 90 L0 52 L210 24 L430 60 L660 18 L900 64 L1130 26 L1320 56 L1440 30 L1440 90Z" fill="#F5F7FB"/></svg>
 </section>
 <script>
   // Carrusel de promos temporales. Cada slide tiene su propia fecha de vencimiento;
