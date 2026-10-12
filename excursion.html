@@ -3623,11 +3623,14 @@ function render(){
     pbEl.hidden=true; pbEl.innerHTML="";
   }
 
+  const missingContact = !state.nombre || !state.dni || !state.email || !state.tel || !state.hosp;
+
   if(cotizar){
     totalEl.textContent = pax>0 ? t("total.a-cotizar") : "—";
     if(noDate){ hint.textContent=t("hint.elegi-fecha-cotizar"); go.disabled=true; go.textContent=t("btn.pedir-cotizacion"); }
     else if(beforeStart){ hint.textContent=t("hint.clases-arrancan")+e.startDate.split("-").reverse().join("/")+t("hint.elegi-posterior"); go.disabled=true; go.textContent=t("btn.pedir-cotizacion"); }
     else if(pax<=0){ hint.textContent=t("hint.agrega-pasajero-cotizar"); go.disabled=true; go.textContent=t("btn.pedir-cotizacion"); }
+    else if(missingContact){ hint.textContent=t("hint.completa-datos"); go.disabled=true; go.textContent=t("btn.pedir-cotizacion"); }
     else { hint.textContent=t("hint.whatsapp-instant"); go.disabled=false; go.textContent=t("btn.pedir-cotizacion-wa"); }
     return;
   }
@@ -3636,13 +3639,16 @@ function render(){
 
   const needsPickup = state.con && EXC[id].pickupPoints && EXC[id].pickupPoints.length && !state.pickup;
 
-  const missingContact = !state.nombre || !state.dni || !state.email || !state.tel || !state.hosp;
-
   if(noDate){ hint.textContent=""; go.disabled=true; go.textContent=whatsappOnly?t("btn.pedir-cotizacion-wa"):t("btn.pagar-reservar"); }
   else if(beforeStart){ hint.textContent=t("hint.clases-arrancan")+e.startDate.split("-").reverse().join("/")+t("hint.elegi-posterior"); go.disabled=true; go.textContent=whatsappOnly?t("btn.pedir-cotizacion-wa"):t("btn.pagar-reservar"); }
-  else if(offSeason){ hint.textContent=t("hint.fuera-temporada"); go.disabled=false; go.textContent=t("btn.consultar-whatsapp"); }
+  else if(offSeason){
+    if(missingContact){ hint.textContent=t("hint.completa-datos"); go.disabled=true; }
+    else { hint.textContent=t("hint.fuera-temporada"); go.disabled=false; }
+    go.textContent=t("btn.consultar-whatsapp");
+  }
   else if(whatsappOnly){
     if(pax<=0){ hint.textContent=t("hint.agrega-pasajero"); go.disabled=true; }
+    else if(missingContact){ hint.textContent=t("hint.completa-datos"); go.disabled=true; }
     else { hint.textContent=t("hint.whatsapp-instant"); go.disabled=false; }
     go.textContent=t("btn.pedir-cotizacion-wa");
   }
