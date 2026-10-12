@@ -99,6 +99,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .rsv-head b{font-family:var(--display);font-weight:600;font-size:1.3rem}
   .rsv-step{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap;flex:none}
 
+  /* Honeypot anti-spam: invisible para personas, visible para bots. */
+  .hp-field{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden}
   .field{display:flex;flex-direction:column;gap:.5rem}
   .field>label{font-weight:700;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft)}
   select,input[type=text],input[type=tel],input[type=email],input[type=time]{width:100%;font-family:var(--body);font-size:1rem;color:var(--navy);border:1.5px solid var(--line);border-radius:11px;padding:.7rem .8rem;background:#fff}
@@ -392,6 +394,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <button type="button" class="rsv-back" id="btn-volver">← <span data-i18n="rsv.volver">Volver al paso 1</span></button>
         <div class="rsv-resumen" id="rsv-resumen"></div>
 
+        <div class="hp-field" aria-hidden="true">
+          <label for="f-website">Website</label>
+          <input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off">
+        </div>
         <div class="field">
           <label data-i18n="rsv.nombre">Nombre y Apellido</label>
           <input type="text" id="f-nombre">
@@ -1176,6 +1182,7 @@ document.getElementById("btn-consulta-grupal").href = "https://wa.me/"+WHATSAPP+
 function collectStep2(){
   return {
     nombre: document.getElementById("f-nombre").value.trim(),
+    hp: document.getElementById("f-website").value.trim(),
     vueloLlegada: document.getElementById("f-vuelo-llegada").value.trim(),
     horarioLlegada: document.getElementById("f-horario-llegada").value,
     vueloRegreso: document.getElementById("f-vuelo-regreso").value.trim(),
@@ -1237,6 +1244,7 @@ document.getElementById("btn-wa").addEventListener("click", ()=>{
       email: d.email,
       telefono: d.tel,
       hospedaje: null,
+      hp: d.hp,
       ...getTracking(),
     }),
   }).catch(()=>{});

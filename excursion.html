@@ -172,6 +172,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .resv{position:sticky;top:92px;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
   .resv-head{background:linear-gradient(120deg,var(--navy),#1E3566);color:#fff;padding:1rem 1.4rem;font-family:var(--display);font-weight:600;display:flex;align-items:center;gap:.5rem}
   .resv-body{padding:1.4rem}
+  /* Honeypot anti-spam: invisible para personas, visible para bots. */
+  .hp-field{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden}
   .field{margin-bottom:1.15rem}
   .field>label{display:block;font-weight:700;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.5rem}
   select{width:100%;font-family:var(--body);font-size:1rem;color:var(--navy);border:1.5px solid var(--line);border-radius:11px;padding:.7rem .8rem;background:#fff;cursor:pointer}
@@ -657,6 +659,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="field">
             <label data-i18n="form.pasajeros">Pasajeros</label>
             <div id="pax"></div>
+          </div>
+          <div class="hp-field" aria-hidden="true">
+            <label for="c-website">Website</label>
+            <input type="text" id="c-website" name="website" tabindex="-1" autocomplete="off">
           </div>
           <div class="field">
             <label data-i18n="form.nombre">Nombre y apellido</label>
@@ -3712,6 +3718,7 @@ function reservarPorWhatsApp(){
       email: state.email,
       telefono: state.tel,
       hospedaje: state.hosp,
+      hp: document.getElementById("c-website").value.trim(),
       ...getTracking(),
     }),
   }).catch(()=>{});

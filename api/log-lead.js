@@ -22,6 +22,25 @@ export default async function handler(req, res) {
 
   const b = req.body || {};
 
+  // Honeypot: campo invisible para usuarios reales que los bots que
+  // rellenan formularios completan igual. Si vino lleno, fingimos éxito
+  // sin guardar nada, para no delatar el filtro.
+  if (b.hp) {
+    return res.status(200).json({ ok: true, id: null });
+  }
+
+  // Un lead sin nombre ni forma de contacto no sirve para nada (no se
+  // puede volver a contactar a esa persona) y es la firma mas comun del
+  // spam que le pega directo a este endpoint sin pasar por ningun
+  // formulario del sitio. Los formularios reales siempre mandan estos
+  // datos, asi que esto nunca deberia filtrar una consulta legitima.
+  const nombre = (b.nombre || '').trim();
+  const email = (b.email || '').trim();
+  const telefono = (b.telefono || '').trim();
+  if (!nombre || (!email && !telefono)) {
+    return res.status(200).json({ ok: false, error: 'missing_required_fields' });
+  }
+
   try {
     const lead = await insertLead({
       channel: b.channel || 'whatsapp',

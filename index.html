@@ -333,6 +333,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   /* ---------- Receptivo & Agencias ---------- */
   .receptivo-box{background:var(--panel);border-radius:22px;padding:clamp(2rem,5vw,3.2rem)}
+  /* Honeypot anti-spam: invisible para personas, visible para bots que
+     rellenan todos los campos de un formulario. No usar display:none ni
+     type=hidden (algunos bots los ignoran a propósito). */
+  .hp-field{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden}
   .receptivo-form{display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.2rem;max-width:760px;margin:0 auto}
   .receptivo-form .field-full{grid-column:1/-1}
   .receptivo-form label{display:block;font-family:var(--body);font-weight:700;font-size:.82rem;color:var(--navy);margin-bottom:.35rem}
@@ -1240,6 +1244,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="rentacar-grid reveal">
       <div class="rentacar-form-box">
         <form class="rentacar-form" id="rentacar-form">
+          <div class="hp-field" aria-hidden="true">
+            <label for="rac-website">Website</label>
+            <input type="text" id="rac-website" name="website" tabindex="-1" autocomplete="off">
+          </div>
           <div class="field-full">
             <label for="rac-lugar" data-i18n="rentacar.lugar">Lugar de entrega</label>
             <select id="rac-lugar">
@@ -1411,6 +1419,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="receptivo-box reveal">
       <form class="receptivo-form" id="receptivo-form">
+        <div class="hp-field" aria-hidden="true">
+          <label for="rec-website">Website</label>
+          <input type="text" id="rec-website" name="website" tabindex="-1" autocomplete="off">
+        </div>
         <div class="field-full">
           <label for="rec-agencia" data-i18n="receptivo.agencia">Nombre de la agencia</label>
           <input type="text" id="rec-agencia" required>
@@ -1892,6 +1904,7 @@ if (recForm) {
           telefono: document.getElementById("rec-telefono").value.trim(),
           excursion: "Receptivo & Agencias",
           notes,
+          hp: document.getElementById("rec-website").value.trim(),
           ...getTracking(),
         }),
       });
@@ -2043,6 +2056,7 @@ if (racForm) {
           telefono,
           excursion: "Rent a Car",
           notes: resumen,
+          hp: document.getElementById("rac-website").value.trim(),
           ...getTracking(),
         }),
       });
