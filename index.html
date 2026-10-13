@@ -469,8 +469,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     #excursiones .sec-group{padding:1.8rem 0 2.4rem;background:var(--paper)}
     #cat-circuitos{background:#fff}
     #cat-navegacion{background:var(--paper)}
-    #cat-nieve{background:#fff}
-    #cat-aventura{background:var(--paper)}
+    #cat-aventura{background:#fff}
+    #cat-nieve{background:var(--paper)}
     #excursiones .wrap,#explora-tipo .wrap{padding:0}
     #excursiones .section-head,#explora-tipo .section-head{padding:0 20px;margin-bottom:0}
     #excursiones .temporada-filter,#explora-tipo .temporada-filter{padding:0 20px;margin:1rem 0 .9rem}
@@ -538,8 +538,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="dropdown">
           <a href="#cat-circuitos" data-i18n="cat.circuitos.title">Circuitos &amp; Miradores</a>
           <a href="#cat-navegacion" data-i18n="cat.navegacion.title">Navegación Lacustre</a>
-          <a href="#cat-nieve" data-i18n="cat.nieve.title">Nieve &amp; Montaña</a>
           <a href="#cat-aventura" data-i18n="cat.aventura.title">Aventura</a>
+          <a href="#cat-nieve" data-i18n="cat.nieve.title">Nieve &amp; Montaña</a>
         </div>
       </div>
       <a href="#rentacar" data-i18n="nav.rentacar">Rent a Car</a>
@@ -576,13 +576,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span data-i18n="cat.navegacion.title">Navegación Lacustre</span>
       <span class="mm-count" data-count-for-menu="navegacion"></span>
     </a>
-    <a href="#cat-nieve" class="mm-cat-link" data-scroll>
-      <span data-i18n="cat.nieve.title">Nieve &amp; Montaña</span>
-      <span class="mm-count" data-count-for-menu="nieve"></span>
-    </a>
     <a href="#cat-aventura" class="mm-cat-link" data-scroll>
       <span data-i18n="cat.aventura.title">Aventura</span>
       <span class="mm-count" data-count-for-menu="aventura"></span>
+    </a>
+    <a href="#cat-nieve" class="mm-cat-link" data-scroll>
+      <span data-i18n="cat.nieve.title">Nieve &amp; Montaña</span>
+      <span class="mm-count" data-count-for-menu="nieve"></span>
     </a>
     <a href="#rentacar" class="mm-main-link" data-scroll data-i18n="nav.rentacar">Rent a Car</a>
     <a href="#nosotros" class="mm-main-link" data-scroll data-i18n="nav.nosotros">Nosotros</a>
@@ -745,8 +745,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="#excursiones" class="chip" data-chip="excursiones" data-i18n="chip.destacados">Destacados</a>
     <a href="#cat-circuitos" class="chip" data-chip="cat-circuitos" data-i18n="chip.circuitos">Circuitos</a>
     <a href="#cat-navegacion" class="chip" data-chip="cat-navegacion" data-i18n="chip.navegacion">Navegación</a>
-    <a href="#cat-nieve" class="chip" data-chip="cat-nieve" data-i18n="chip.nieve">Nieve</a>
     <a href="#cat-aventura" class="chip" data-chip="cat-aventura" data-i18n="chip.aventura">Aventura</a>
+    <a href="#cat-nieve" class="chip" data-chip="cat-nieve" data-i18n="chip.nieve">Nieve</a>
     <a href="#rentacar" class="chip" data-chip="rentacar" data-i18n="nav.rentacar">Rent a Car</a>
   </div>
 </div>
@@ -1057,6 +1057,90 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
+    <div class="sec-group" id="cat-aventura">
+      <div class="section-head reveal">
+        <h2 class="bracketed"><span class="b">[</span> <span data-i18n="cat.aventura.title">Aventura</span> <span class="b">]</span></h2>
+        <p class="section-sub" data-i18n="cat.aventura.sub">Para los que quieren mover el cuerpo</p>
+      </div>
+      <div class="temporada-filter" data-filter-group="aventura">
+        <button type="button" class="active" data-filter="todos" data-i18n="filtro.todos">Todos</button>
+        <button type="button" data-filter="todo-el-ano" data-i18n="filtro.todo-el-ano">Todo el año</button>
+        <button type="button" data-filter="verano" data-i18n="filtro.verano">Verano</button>
+      </div>
+      <span class="cat-count" data-count-for="aventura"></span>
+      <div class="cards" data-filter-target="aventura">
+      <article class="card" data-temporada="todo-el-ano">
+        <div class="card-img" style="background-image:url('fotos/san-ramon.jpg')"><span class="tag" data-i18n="filtro.todo-el-ano">Todo el año</span></div>
+        <div class="card-body">
+          <h3 data-i18n="card.san-ramon.title">Cabalgata La Fragua</h3>
+          <p class="desc" data-i18n="card.san-ramon.desc">Medio dia a caballo por el Valle de La Fragua, con desayuno criollo y asado patagonico a las brasas.</p>
+          <div class="meta"><span>&#9201; <span data-i18n="card.circuito-chico.meta1">Medio dia</span></span><span>&#9733; <span data-i18n="card.san-ramon.meta2">Con asado</span></span></div>
+          <div class="card-foot">
+            <div class="price"><small data-i18n="common.desde">Desde</small><b>$230.000</b></div>
+            <a class="btn btn-primary" href="excursion.html?exc=san-ramon" data-i18n="common.reservar">Reservar</a>
+          </div>
+        </div>
+      <a class="card-link" href="excursion.html?exc=san-ramon" tabindex="-1" aria-hidden="true"></a>
+      </article>
+
+      <article class="card" data-temporada="todo-el-ano">
+        <div class="card-img" style="background-image:url('fotos/Cabalgata%20Wesley%2008.jpg');background-size:cover;background-position:center"><span class="tag" data-i18n="filtro.todo-el-ano">Todo el año</span></div>
+        <div class="card-body">
+          <h3 data-i18n="card.cabalgata-wesley.title">Cabalgata Wesley</h3>
+          <p class="desc" data-i18n="card.cabalgata-wesley.desc">Cabalgatas guiadas en el campo de la familia Wesley, a los pies del Cerro Campanario. Elegí el paseo al Campanario, a la playa del lago Moreno, o la combinación de día completo.</p>
+          <div class="meta"><span>&#9201; <span data-i18n="card.cabalgata-wesley.meta1">Desde 1 h 30</span></span><span>&#9733; <span data-i18n="card.cabalgata-wesley.meta2">3 recorridos a elegir</span></span></div>
+          <div class="card-foot">
+            <div class="price"><small data-i18n="common.desde">Desde</small><b>$60.000</b></div>
+            <a class="btn btn-primary" href="excursion.html?exc=cabalgata-wesley" data-i18n="common.reservar">Reservar</a>
+          </div>
+        </div>
+      <a class="card-link" href="excursion.html?exc=cabalgata-wesley" tabindex="-1" aria-hidden="true"></a>
+      </article>
+
+      <article class="card" data-temporada="verano">
+        <div class="card-img" style="background-image:url('fotos/Kayak%203.jpeg');background-size:cover;background-position:center"><span class="tag" data-i18n="filtro.verano">Verano</span></div>
+        <div class="card-body">
+          <h3 data-i18n="card.kayak.title">Kayak</h3>
+          <p class="desc" data-i18n="card.kayak.desc">Travesía en kayak por el Lago Gutiérrez, con parada en una playa para un refrigerio. Apta para todas las edades.</p>
+          <div class="meta"><span>&#9201; <span data-i18n="common.medio-dia">Medio día</span></span><span>&#9733; <span data-i18n="card.kayak.meta2">Grupos reducidos</span></span></div>
+          <div class="card-foot">
+            <div class="price"><small data-i18n="common.desde">Desde</small><b>$92.500</b></div>
+            <a class="btn btn-primary" href="excursion.html?exc=kayak" data-i18n="common.reservar">Reservar</a>
+          </div>
+        </div>
+      <a class="card-link" href="excursion.html?exc=kayak" tabindex="-1" aria-hidden="true"></a>
+      </article>
+
+      <article class="card" data-temporada="verano">
+        <div class="card-img" style="background-image:url('fotos/Raftin%2001.jpg');background-size:cover;background-position:center"><span class="tag" data-i18n="filtro.verano">Verano</span></div>
+        <div class="card-body">
+          <h3 data-i18n="card.rafting-frontera.title">Rafting Frontera</h3>
+          <p class="desc" data-i18n="card.rafting-frontera.desc">Dos horas de navegación intensa en aguas blancas por el río Manso, hasta el límite con Chile. Incluye almuerzo.</p>
+          <div class="meta"><span>&#9201; <span data-i18n="card.rafting-frontera.meta1">Día completo</span></span><span>&#9733; <span data-i18n="card.rafting-frontera.meta2">Mín. 14 años</span></span></div>
+          <div class="card-foot">
+            <div class="price"><small data-i18n="common.desde">Desde</small><b>$190.000</b></div>
+            <a class="btn btn-primary" href="excursion.html?exc=rafting-frontera" data-i18n="common.reservar">Reservar</a>
+          </div>
+        </div>
+      <a class="card-link" href="excursion.html?exc=rafting-frontera" tabindex="-1" aria-hidden="true"></a>
+      </article>
+
+      <article class="card" data-temporada="verano">
+        <div class="card-img" style="background-image:url('fotos/Rafting%2002.jpg');background-size:cover;background-position:center"><span class="tag" data-i18n="filtro.verano">Verano</span></div>
+        <div class="card-body">
+          <h3 data-i18n="card.rafting-villegas.title">Rafting Villegas</h3>
+          <p class="desc" data-i18n="card.rafting-villegas.desc">Medio día de descenso en la confluencia de los ríos Villegas y Manso, apto para toda la familia.</p>
+          <div class="meta"><span>&#9201; <span data-i18n="common.medio-dia">Medio día</span></span><span>&#9733; <span data-i18n="card.rafting-villegas.meta2">Apta familia</span></span></div>
+          <div class="card-foot">
+            <div class="price"><small data-i18n="common.desde">Desde</small><b>$100.000</b></div>
+            <a class="btn btn-primary" href="excursion.html?exc=rafting-villegas" data-i18n="common.reservar">Reservar</a>
+          </div>
+        </div>
+      <a class="card-link" href="excursion.html?exc=rafting-villegas" tabindex="-1" aria-hidden="true"></a>
+      </article>
+      </div>
+    </div>
+
     <div class="sec-group" id="cat-nieve">
       <div class="section-head reveal">
         <h2 class="bracketed"><span class="b">[</span> <span data-i18n="cat.nieve.title">Nieve &amp; Montaña</span> <span class="b">]</span></h2>
@@ -1144,90 +1228,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </div>
       <a class="card-link" href="excursion.html?exc=nieve-al-limite" tabindex="-1" aria-hidden="true"></a>
-      </article>
-      </div>
-    </div>
-
-    <div class="sec-group" id="cat-aventura">
-      <div class="section-head reveal">
-        <h2 class="bracketed"><span class="b">[</span> <span data-i18n="cat.aventura.title">Aventura</span> <span class="b">]</span></h2>
-        <p class="section-sub" data-i18n="cat.aventura.sub">Para los que quieren mover el cuerpo</p>
-      </div>
-      <div class="temporada-filter" data-filter-group="aventura">
-        <button type="button" class="active" data-filter="todos" data-i18n="filtro.todos">Todos</button>
-        <button type="button" data-filter="todo-el-ano" data-i18n="filtro.todo-el-ano">Todo el año</button>
-        <button type="button" data-filter="verano" data-i18n="filtro.verano">Verano</button>
-      </div>
-      <span class="cat-count" data-count-for="aventura"></span>
-      <div class="cards" data-filter-target="aventura">
-      <article class="card" data-temporada="todo-el-ano">
-        <div class="card-img" style="background-image:url('fotos/san-ramon.jpg')"><span class="tag" data-i18n="filtro.todo-el-ano">Todo el año</span></div>
-        <div class="card-body">
-          <h3 data-i18n="card.san-ramon.title">Cabalgata La Fragua</h3>
-          <p class="desc" data-i18n="card.san-ramon.desc">Medio dia a caballo por el Valle de La Fragua, con desayuno criollo y asado patagonico a las brasas.</p>
-          <div class="meta"><span>&#9201; <span data-i18n="card.circuito-chico.meta1">Medio dia</span></span><span>&#9733; <span data-i18n="card.san-ramon.meta2">Con asado</span></span></div>
-          <div class="card-foot">
-            <div class="price"><small data-i18n="common.desde">Desde</small><b>$230.000</b></div>
-            <a class="btn btn-primary" href="excursion.html?exc=san-ramon" data-i18n="common.reservar">Reservar</a>
-          </div>
-        </div>
-      <a class="card-link" href="excursion.html?exc=san-ramon" tabindex="-1" aria-hidden="true"></a>
-      </article>
-
-      <article class="card" data-temporada="todo-el-ano">
-        <div class="card-img" style="background-image:url('fotos/Cabalgata%20Wesley%2008.jpg');background-size:cover;background-position:center"><span class="tag" data-i18n="filtro.todo-el-ano">Todo el año</span></div>
-        <div class="card-body">
-          <h3 data-i18n="card.cabalgata-wesley.title">Cabalgata Wesley</h3>
-          <p class="desc" data-i18n="card.cabalgata-wesley.desc">Cabalgatas guiadas en el campo de la familia Wesley, a los pies del Cerro Campanario. Elegí el paseo al Campanario, a la playa del lago Moreno, o la combinación de día completo.</p>
-          <div class="meta"><span>&#9201; <span data-i18n="card.cabalgata-wesley.meta1">Desde 1 h 30</span></span><span>&#9733; <span data-i18n="card.cabalgata-wesley.meta2">3 recorridos a elegir</span></span></div>
-          <div class="card-foot">
-            <div class="price"><small data-i18n="common.desde">Desde</small><b>$60.000</b></div>
-            <a class="btn btn-primary" href="excursion.html?exc=cabalgata-wesley" data-i18n="common.reservar">Reservar</a>
-          </div>
-        </div>
-      <a class="card-link" href="excursion.html?exc=cabalgata-wesley" tabindex="-1" aria-hidden="true"></a>
-      </article>
-
-      <article class="card" data-temporada="verano">
-        <div class="card-img" style="background-image:url('fotos/Kayak%203.jpeg');background-size:cover;background-position:center"><span class="tag" data-i18n="filtro.verano">Verano</span></div>
-        <div class="card-body">
-          <h3 data-i18n="card.kayak.title">Kayak</h3>
-          <p class="desc" data-i18n="card.kayak.desc">Travesía en kayak por el Lago Gutiérrez, con parada en una playa para un refrigerio. Apta para todas las edades.</p>
-          <div class="meta"><span>&#9201; <span data-i18n="common.medio-dia">Medio día</span></span><span>&#9733; <span data-i18n="card.kayak.meta2">Grupos reducidos</span></span></div>
-          <div class="card-foot">
-            <div class="price"><small data-i18n="common.desde">Desde</small><b>$92.500</b></div>
-            <a class="btn btn-primary" href="excursion.html?exc=kayak" data-i18n="common.reservar">Reservar</a>
-          </div>
-        </div>
-      <a class="card-link" href="excursion.html?exc=kayak" tabindex="-1" aria-hidden="true"></a>
-      </article>
-
-      <article class="card" data-temporada="verano">
-        <div class="card-img" style="background-image:url('fotos/Raftin%2001.jpg');background-size:cover;background-position:center"><span class="tag" data-i18n="filtro.verano">Verano</span></div>
-        <div class="card-body">
-          <h3 data-i18n="card.rafting-frontera.title">Rafting Frontera</h3>
-          <p class="desc" data-i18n="card.rafting-frontera.desc">Dos horas de navegación intensa en aguas blancas por el río Manso, hasta el límite con Chile. Incluye almuerzo.</p>
-          <div class="meta"><span>&#9201; <span data-i18n="card.rafting-frontera.meta1">Día completo</span></span><span>&#9733; <span data-i18n="card.rafting-frontera.meta2">Mín. 14 años</span></span></div>
-          <div class="card-foot">
-            <div class="price"><small data-i18n="common.desde">Desde</small><b>$190.000</b></div>
-            <a class="btn btn-primary" href="excursion.html?exc=rafting-frontera" data-i18n="common.reservar">Reservar</a>
-          </div>
-        </div>
-      <a class="card-link" href="excursion.html?exc=rafting-frontera" tabindex="-1" aria-hidden="true"></a>
-      </article>
-
-      <article class="card" data-temporada="verano">
-        <div class="card-img" style="background-image:url('fotos/Rafting%2002.jpg');background-size:cover;background-position:center"><span class="tag" data-i18n="filtro.verano">Verano</span></div>
-        <div class="card-body">
-          <h3 data-i18n="card.rafting-villegas.title">Rafting Villegas</h3>
-          <p class="desc" data-i18n="card.rafting-villegas.desc">Medio día de descenso en la confluencia de los ríos Villegas y Manso, apto para toda la familia.</p>
-          <div class="meta"><span>&#9201; <span data-i18n="common.medio-dia">Medio día</span></span><span>&#9733; <span data-i18n="card.rafting-villegas.meta2">Apta familia</span></span></div>
-          <div class="card-foot">
-            <div class="price"><small data-i18n="common.desde">Desde</small><b>$100.000</b></div>
-            <a class="btn btn-primary" href="excursion.html?exc=rafting-villegas" data-i18n="common.reservar">Reservar</a>
-          </div>
-        </div>
-      <a class="card-link" href="excursion.html?exc=rafting-villegas" tabindex="-1" aria-hidden="true"></a>
       </article>
       </div>
     </div>
@@ -2222,7 +2222,7 @@ function applyLang(lang){
 (function initChipSpy(){
   const row = document.getElementById("chip-row");
   if(!row) return;
-  const spyIds = ["excursiones", "cat-circuitos", "cat-navegacion", "cat-nieve", "cat-aventura", "rentacar"];
+  const spyIds = ["excursiones", "cat-circuitos", "cat-navegacion", "cat-aventura", "cat-nieve", "rentacar"];
   const nosotrosEl = document.getElementById("nosotros");
   let active = undefined;
   function topOf(el){
