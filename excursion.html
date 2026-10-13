@@ -1731,7 +1731,8 @@ const EXC = {
    opciones:[{key:"tour",label:null,
     incluye:["Pick up y drop off en hoteles céntricos de Bariloche","Guía en español","Entrada al Campo de Tulipanes","Entrada a Cascadas Nant y Fall"],
     notas:["Duración: 15 horas.","Días de salida: 12, 20 y 26 de octubre 2026.","No incluye comidas ni bebidas.","Reservas con mínimo 24 hs de anticipación."],
-    cats:[{key:'pp',label:'Por persona',min:1}],precios:{pp:360000}}]
+    cats:[{key:'pp',label:'Por persona',min:1}],precios:{pp:360000},
+    groupDiscount:{minPax:4,pct:0.10,end:"2026-10-16T00:00:00-03:00"}}]
  },
 
  /* ---------- SAN MARTIN ---------- */
@@ -2923,7 +2924,8 @@ function pricingFor(opt,sk,con){
   opt.cats.forEach(c=>{ pax+=state.counts[c.key]; subtotal+=state.counts[c.key]*priceFor(opt,c.key,sk,con); });
   let discount=0;
   const gd = opt.groupDiscount;
-  if(gd && pax>=gd.minPax){
+  const gdActive = gd && (!gd.end || new Date() < new Date(gd.end));
+  if(gdActive && pax>=gd.minPax){
     // El descuento por grupo aplica solo sobre el precio base de navegacion
     // (sin traslado ni Lago Frias), nunca sobre los adicionales.
     let discountBase=0;
