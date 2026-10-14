@@ -281,6 +281,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   footer{background:var(--navy-deep);color:rgba(255,255,255,.7);padding:2.4rem 0}
   .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.88rem}
   .foot img{height:40px}
+  .foot-addr{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1.2rem;margin-top:1.6rem;font-size:.86rem;color:rgba(255,255,255,.65)}
+  .foot-offices{display:flex;flex-direction:column;gap:.35rem}
+  .foot-offices strong{color:#fff;font-weight:700}
+  .foot-social{display:flex;gap:.9rem;flex:0 0 auto}
+  .foot-social a{color:rgba(255,255,255,.75);display:flex;transition:.18s}
+  .foot-social a:hover{color:var(--gold)}
+  .foot-legal{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.4rem;margin-top:2rem;padding-top:1.8rem;border-top:1px solid rgba(255,255,255,.12);font-size:.8rem;color:rgba(255,255,255,.55)}
+  .foot-legal .legajo{display:flex;align-items:center;gap:.7rem}
+  .foot-legal .legajo img{height:52px;width:auto;display:block;border-radius:4px}
+  .foot-legal .credit{text-align:right}
 
   @media(max-width:860px){.layout{grid-template-columns:1fr}.resv{position:static}}
 
@@ -708,6 +718,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap foot">
     <img src="logo-blanco.png" alt="Vivir Viajes">
     <span data-i18n="footer.text">&copy; 2026 Vivir Viajes &middot; Bariloche, Patagonia</span>
+  </div>
+  <div class="wrap foot-addr">
+    <div class="foot-offices">
+      <div><strong data-i18n="footer.casa-central">Casa Central:</strong> Mitre 183</div>
+      <div><strong data-i18n="footer.sucursales">Sucursales:</strong> Av. San Martín (Lobby NH Edelweiss) y Mitre 315</div>
+    </div>
+    <div class="foot-social">
+      <a href="https://www.instagram.com/vivirviajesbariloche/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@barilochevivirviajes5417?si=e1IqGZWRnQEQS5q5&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaf5QYW5Y-XFQ_6vR_xZsqOMsB4SYzpFna96zQSt6jGJaS9pAgK1qVLeIvQ9yQ_aem_DMHUHKKU4vMEQpaaqxjWJQ" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="wrap foot-legal">
+    <div class="legajo">
+      <img src="fotos/DATAWEB.jpg" alt="Data Fiscal AFIP">
+      <span data-i18n="footer.legajo">Legajo N° 11502 Disp. 1816 – EVT</span>
+    </div>
+    <div class="credit" data-i18n="footer.credit">Diseño y Desarrollo Web: Martín Batica</div>
   </div>
 </footer>
 
@@ -2606,6 +2637,8 @@ const UI = {
     "form.tc-label":"He leído y estoy de acuerdo con los <span class=\"tc-link\" id=\"tc-link\">términos y condiciones</span> de la web",
     "form.reservar":"Reservar", "form.mp-note":"Pago 100% seguro con Mercado Pago",
     "footer.text":"© 2026 Vivir Viajes · Bariloche, Patagonia",
+    "footer.casa-central":"Casa Central:", "footer.sucursales":"Sucursales:",
+    "footer.legajo":"Legajo N° 11502 Disp. 1816 – EVT", "footer.credit":"Diseño y Desarrollo Web: Martín Batica",
     "modal24.title":"Reserva con menos de 24 hs", "modal24.title-48":"Reserva con menos de 48 hs", "modal24.body":"Para reservas de último momento comunicate directamente con nosotros por WhatsApp y te respondemos al instante.", "modal24.button":"Escribir por WhatsApp", "modal24.close":"Elegir otra fecha",
     "carousel.prev":"Anterior", "carousel.next":"Siguiente",
     "cal.dow0":"Do","cal.dow1":"Lu","cal.dow2":"Ma","cal.dow3":"Mi","cal.dow4":"Ju","cal.dow5":"Vi","cal.dow6":"Sa",
@@ -2694,6 +2727,8 @@ const UI = {
     "form.tc-label":"I have read and agree to the <span class=\"tc-link\" id=\"tc-link\">terms and conditions</span> of the site",
     "form.reservar":"Book now", "form.mp-note":"100% secure payment with Mercado Pago",
     "footer.text":"© 2026 Vivir Viajes · Bariloche, Patagonia",
+    "footer.casa-central":"Head Office:", "footer.sucursales":"Branches:",
+    "footer.legajo":"Legajo N° 11502 Disp. 1816 – EVT", "footer.credit":"Design and Web Development: Martín Batica",
     "modal24.title":"Booking with less than 24 hs notice", "modal24.title-48":"Booking with less than 48 hs notice", "modal24.body":"For last-minute bookings, reach out to us directly on WhatsApp and we'll get back to you right away.", "modal24.button":"Message us on WhatsApp", "modal24.close":"Choose another date",
     "carousel.prev":"Previous", "carousel.next":"Next",
     "cal.dow0":"Su","cal.dow1":"Mo","cal.dow2":"Tu","cal.dow3":"We","cal.dow4":"Th","cal.dow5":"Fr","cal.dow6":"Sa",
@@ -2782,6 +2817,8 @@ const UI = {
     "form.tc-label":"Li e concordo com os <span class=\"tc-link\" id=\"tc-link\">termos e condições</span> do site",
     "form.reservar":"Reservar", "form.mp-note":"Pagamento 100% seguro com Mercado Pago",
     "footer.text":"© 2026 Vivir Viajes · Bariloche, Patagônia",
+    "footer.casa-central":"Sede Central:", "footer.sucursales":"Filiais:",
+    "footer.legajo":"Legajo N° 11502 Disp. 1816 – EVT", "footer.credit":"Design e Desenvolvimento Web: Martín Batica",
     "modal24.title":"Reserva com menos de 24 hs", "modal24.title-48":"Reserva com menos de 48 hs", "modal24.body":"Para reservas de última hora, fale diretamente com a gente pelo WhatsApp e respondemos na hora.", "modal24.button":"Falar no WhatsApp", "modal24.close":"Escolher outra data",
     "carousel.prev":"Anterior", "carousel.next":"Próximo",
     "cal.dow0":"Do","cal.dow1":"2ª","cal.dow2":"3ª","cal.dow3":"4ª","cal.dow4":"5ª","cal.dow5":"6ª","cal.dow6":"Sá",

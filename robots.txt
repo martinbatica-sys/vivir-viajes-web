@@ -1,0 +1,36 @@
+# Vivir Viajes - robots.txt
+# El sitio es publico, no hay nada que bloquear para buscadores ni para los
+# crawlers de los asistentes de IA. Se listan por nombre para que quede
+# explicito que son bienvenidos.
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin.html
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
