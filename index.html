@@ -451,6 +451,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   @keyframes rise{to{opacity:1;transform:none}}
   @media (prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none}}
 
+  /* ---------- Revelado de titulos por palabra (mascara + GSAP) ---------- */
+  .wd{display:inline-block;overflow:hidden;vertical-align:top;padding:0.09em 0 0.12em;margin:-0.09em 0 -0.12em}
+  .wi{display:inline-block}
+
   /* ---------- Reveal al hacer scroll (cards) ---------- */
   .cards .card{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.16,.8,.24,1),transform 1s cubic-bezier(.16,.8,.24,1);transition-delay:var(--reveal-delay,0ms)}
   .cards .card.in-view{opacity:1;transform:none}
@@ -1579,6 +1583,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 if(window.matchMedia("(min-width:761px)").matches && !document.getElementById("hero-default").hidden){
   const v = document.getElementById("hero-video");
@@ -2199,6 +2205,74 @@ function wrapBracketTitles(){
   });
 }
 
+// Revelado de titulos: separa el texto en palabras, cada una envuelta en
+// .wd (mascara, overflow:hidden) > .wi (la palabra, se anima en Y). Recorre
+// los nodos de texto recursivamente sin romper los elementos que haya
+// adentro (los corchetes .b, los bracket-nowrap de wrapBracketTitles, etc).
+function splitWords(el){
+  el.setAttribute("data-split", "1");
+  const words = [];
+  (function walk(node){
+    Array.from(node.childNodes).forEach(child => {
+      if(child.nodeType === Node.TEXT_NODE){
+        const parts = child.textContent.split(/(\s+)/);
+        const frag = document.createDocumentFragment();
+        parts.forEach(part => {
+          if(!part) return;
+          if(/^\s+$/.test(part)){ frag.appendChild(document.createTextNode(part)); return; }
+          const wd = document.createElement("span"); wd.className = "wd";
+          const wi = document.createElement("span"); wi.className = "wi"; wi.textContent = part;
+          wd.appendChild(wi); frag.appendChild(wd); words.push(wi);
+        });
+        node.replaceChild(frag, child);
+      } else if(child.nodeType === Node.ELEMENT_NODE){
+        walk(child);
+      }
+    });
+  })(el);
+  return words;
+}
+
+const titleRevealState = new WeakMap();
+const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const hasGsap = () => typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined";
+
+// Se llama tras wrapBracketTitles() (carga inicial y cada cambio de idioma):
+// wrapBracketTitles reconstruye el contenido del h2 desde cero en cada
+// llamada, asi que las palabras de una vuelta anterior ya quedaron
+// descartadas — por eso siempre volvemos a separar en palabras. Si el
+// titulo ya se habia revelado antes, las nuevas palabras quedan visibles
+// de una (sin re-animar); si todavia no, se arma el ScrollTrigger de nuevo.
+function setupTitleReveal(h2){
+  if(!hasGsap()) return;
+  const words = splitWords(h2);
+  if(!words.length) return;
+  let state = titleRevealState.get(h2);
+  if(!state){ state = { revealed:false, st:null }; titleRevealState.set(h2, state); }
+  if(state.st){ state.st.kill(); state.st = null; }
+  if(prefersReducedMotion() || state.revealed) return; // texto queda visible tal cual
+  gsap.set(words, { yPercent: 108 });
+  state.st = ScrollTrigger.create({
+    trigger: h2, start: "top 78%", once: true,
+    onEnter: () => {
+      state.revealed = true;
+      gsap.to(words, { yPercent: 0, duration: 1.05, ease: "expo.out", stagger: 0.06, overwrite: true });
+    }
+  });
+}
+
+// El parrafo (.section-sub) no lo toca wrapBracketTitles, asi que esto se
+// arma una sola vez: el nodo persiste entre cambios de idioma.
+function setupLeadFade(header){
+  if(!hasGsap() || prefersReducedMotion()) return;
+  const lead = header.querySelector(".section-sub");
+  if(!lead) return;
+  gsap.from(lead, {
+    opacity: 0, y: 18, duration: 1, ease: "expo.out",
+    scrollTrigger: { trigger: header, start: "top 70%", once: true }
+  });
+}
+
 function updateAllCatCounts(){
   document.querySelectorAll(".cards[data-filter-target]").forEach(cards => {
     updateCatCount(cards.dataset.filterTarget);
@@ -2229,6 +2303,7 @@ function applyLang(lang){
   });
   try{ localStorage.setItem("vv-lang", lang); }catch(e){}
   wrapBracketTitles();
+  document.querySelectorAll("h2.bracketed").forEach(setupTitleReveal);
   updateAllCatCounts();
   updateHistoriaToggleLabel();
 }
@@ -2241,6 +2316,7 @@ function applyLang(lang){
   document.querySelectorAll(".lang-switch button").forEach(b => {
     b.addEventListener("click", () => applyLang(b.getAttribute("data-lang")));
   });
+  document.querySelectorAll(".section-head").forEach(setupLeadFade);
 })();
 
 (function revealCardsOnScroll(){
