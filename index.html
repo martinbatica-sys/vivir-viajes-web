@@ -2336,8 +2336,19 @@ function applyLang(lang){
 
 (function revealCardsOnScroll(){
   const isMobile = window.matchMedia("(max-width:760px)").matches;
-  if(!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches || isMobile){
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
     document.querySelectorAll(".cards .card").forEach(c => c.classList.add("in-view"));
+    return;
+  }
+  if(!("IntersectionObserver" in window) || isMobile){
+    // En mobile se revela al cargar (no al hacer scroll, la grilla es un
+    // carrusel horizontal), pero se espera un frame pintado para que la
+    // transicion CSS arranque desde el estado oculto y se vea el efecto
+    // (si se agrega la clase antes del primer paint, salta directo al
+    // estado final sin animar).
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      document.querySelectorAll(".cards .card").forEach(c => c.classList.add("in-view"));
+    }));
     return;
   }
   const io = new IntersectionObserver((entries) => {
