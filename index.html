@@ -209,7 +209,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .hero-stats .s b{font-family:var(--display);font-size:1.55rem;font-weight:700;display:block;line-height:1;color:#fff}
   .hero-stats .s span{font-size:.85rem;color:rgba(255,255,255,.65)}
 
-  /* ---------- Hero carrusel de promos (temporal: Galicia 02/10-30/11/2026, Tulipanes hasta 15/10/2026) ---------- */
+  /* ---------- Hero carrusel de promos (temporal: Galicia 02/10-30/11/2026, Tulipanes hasta 20/10/2026) ---------- */
   .hero-carousel{position:relative;overflow:hidden;color:#fff;background:var(--navy-deep)}
   .hc-track{display:grid}
   .hero-promo{grid-area:1/1;position:relative;opacity:0;visibility:hidden;transition:opacity .7s ease,visibility 0s linear .7s;
@@ -702,7 +702,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="hero-overlay"></div>
       <div class="wrap">
         <div class="hero-inner reveal">
-          <span class="hp-eyebrow" data-i18n="hero.tulipanes.eyebrow">Campo de Tulipanes &middot; Hasta el 15/10</span>
+          <span class="hp-eyebrow" data-i18n="hero.tulipanes.eyebrow">Campo de Tulipanes &middot; Hasta el 20/10</span>
           <h1 data-i18n-html="hero.tulipanes.title">Tulipanes en grupo, <em>10% de descuento.</em></h1>
           <p class="lead" data-i18n="hero.tulipanes.sub">Descuento del 10% en la excursión al Campo de Tulipanes, en grupo de 4 o más pasajeros.</p>
           <div class="hp-stat"><strong>10%</strong><span data-i18n-html="hero.tulipanes.stat_label">Desde 4 pasajeros<small>en la misma reserva</small></span></div>
@@ -713,7 +713,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </a>
             <a href="#excursiones" class="btn btn-ghost-light" data-i18n="hero.cta_ver">Ver excursiones</a>
           </div>
-          <p class="hp-legal" data-i18n="hero.tulipanes.legal">Válido hasta el 15/10/2026 para la excursión al Campo de Tulipanes.</p>
+          <p class="hp-legal" data-i18n="hero.tulipanes.legal">Válido hasta el 20/10/2026 para la excursión al Campo de Tulipanes.</p>
         </div>
       </div>
     </article>
@@ -749,13 +749,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
   // Carrusel de promos temporales. Cada slide tiene su propia fecha de vencimiento;
   // pasada esa fecha se la saca del carrusel sola, sin tocar nada a mano.
-  // Galicia: vigente 02/10/2026-30/11/2026. Tulipanes: vigente hasta 15/10/2026.
+  // Galicia: vigente 02/10/2026-30/11/2026. Tulipanes: vigente hasta 20/10/2026.
   // Sin slides vigentes, vuelve el hero de marca de siempre.
   (function(){
     var now = new Date();
     var ALL_SLIDES = [
       { id:'hero-slide-galicia', start:new Date('2026-10-02T00:00:00-03:00'), end:new Date('2026-12-01T00:00:00-03:00') },
-      { id:'hero-slide-tulipanes', start:null, end:new Date('2026-10-16T00:00:00-03:00') }
+      { id:'hero-slide-tulipanes', start:null, end:new Date('2026-10-21T00:00:00-03:00') }
     ];
     var root = document.getElementById('hero-carousel');
     var track = root.querySelector('.hc-track');
@@ -1622,12 +1622,12 @@ const I18N = {
     "hero.galicia.paso1":"Escribinos por WhatsApp", "hero.galicia.paso2":"Te enviamos el link de pago", "hero.galicia.paso3":"Pagalo un jueves",
     "hero.galicia.cta_wa":"Pedir link de pago por WhatsApp",
     "hero.galicia.legal":"Válido del 02/10/2026 al 30/11/2026. El descuento aplica solo pagando con el link que te enviamos por WhatsApp.",
-    "hero.tulipanes.eyebrow":"Campo de Tulipanes · Hasta el 15/10",
+    "hero.tulipanes.eyebrow":"Campo de Tulipanes · Hasta el 20/10",
     "hero.tulipanes.title":"Tulipanes en grupo, <em>10% de descuento.</em>",
     "hero.tulipanes.sub":"Descuento del 10% en la excursión al Campo de Tulipanes, en grupo de 4 o más pasajeros.",
     "hero.tulipanes.stat_label":"Desde 4 pasajeros<small>en la misma reserva</small>",
     "hero.tulipanes.cta_wa":"Consultar por WhatsApp",
-    "hero.tulipanes.legal":"Válido hasta el 15/10/2026 para la excursión al Campo de Tulipanes.",
+    "hero.tulipanes.legal":"Válido hasta el 20/10/2026 para la excursión al Campo de Tulipanes.",
     "sec.destacados.title":"Destacados", "sec.destacados.sub":"Nuestras recomendaciones para esta temporada",
     "card.eas.tag":"Clases", "card.eas.title":"Clase de Ski y Snow · Cerro Catedral", "card.eas.desc":"Clases de ski y snowboard en el Cerro Catedral: bautismo, exclusivas y semi exclusivas. Equipo incluido.", "card.eas.meta1":"2 hs", "card.eas.meta2":"Todos los niveles",
     "common.desde":"Desde", "common.reservar":"Reservar",
@@ -1725,12 +1725,12 @@ const I18N = {
     "hero.galicia.paso1":"Message us on WhatsApp", "hero.galicia.paso2":"We'll send you the payment link", "hero.galicia.paso3":"Pay it on a Thursday",
     "hero.galicia.cta_wa":"Request payment link on WhatsApp",
     "hero.galicia.legal":"Valid from 10/02/2026 to 11/30/2026. The discount only applies when paying with the link we send you on WhatsApp.",
-    "hero.tulipanes.eyebrow":"Tulip Fields · Until 10/15",
+    "hero.tulipanes.eyebrow":"Tulip Fields · Until 10/20",
     "hero.tulipanes.title":"Tulips with your group, <em>10% off.</em>",
     "hero.tulipanes.sub":"10% discount on the Tulip Fields excursion, for groups of 4 or more passengers.",
     "hero.tulipanes.stat_label":"From 4 passengers<small>on the same booking</small>",
     "hero.tulipanes.cta_wa":"Ask on WhatsApp",
-    "hero.tulipanes.legal":"Valid until 10/15/2026 for the Tulip Fields excursion.",
+    "hero.tulipanes.legal":"Valid until 10/20/2026 for the Tulip Fields excursion.",
     "sec.destacados.title":"Featured", "sec.destacados.sub":"Our picks for this season",
     "card.eas.tag":"Lessons", "card.eas.title":"Ski & Snowboard Lesson · Cerro Catedral", "card.eas.desc":"Ski and snowboard lessons at Cerro Catedral: group lessons for beginners, private and semi-private classes. Equipment included.", "card.eas.meta1":"2 hrs", "card.eas.meta2":"All levels",
     "common.desde":"From", "common.reservar":"Book now",
@@ -1819,12 +1819,12 @@ const I18N = {
     "hero.galicia.paso1":"Mande uma mensagem no WhatsApp", "hero.galicia.paso2":"Enviamos o link de pagamento", "hero.galicia.paso3":"Pague numa quinta-feira",
     "hero.galicia.cta_wa":"Pedir link de pagamento pelo WhatsApp",
     "hero.galicia.legal":"Válido de 02/10/2026 a 30/11/2026. O desconto vale só pagando com o link que enviamos pelo WhatsApp.",
-    "hero.tulipanes.eyebrow":"Campo de Tulipas · Até 15/10",
+    "hero.tulipanes.eyebrow":"Campo de Tulipas · Até 20/10",
     "hero.tulipanes.title":"Tulipas em grupo, <em>10% de desconto.</em>",
     "hero.tulipanes.sub":"Desconto de 10% no passeio ao Campo de Tulipas, em grupo de 4 ou mais passageiros.",
     "hero.tulipanes.stat_label":"A partir de 4 passageiros<small>na mesma reserva</small>",
     "hero.tulipanes.cta_wa":"Falar no WhatsApp",
-    "hero.tulipanes.legal":"Válido até 15/10/2026 para o passeio ao Campo de Tulipas.",
+    "hero.tulipanes.legal":"Válido até 20/10/2026 para o passeio ao Campo de Tulipas.",
     "sec.destacados.title":"Destaques", "sec.destacados.sub":"Nossas recomendações para esta temporada",
     "card.eas.tag":"Aulas", "card.eas.title":"Aula de Esqui e Snow · Cerro Catedral", "card.eas.desc":"Aulas de esqui e snowboard no Cerro Catedral: batismo em grupo, aulas exclusivas e semiexclusivas. Equipamento incluído.", "card.eas.meta1":"2 h", "card.eas.meta2":"Todos os níveis",
     "common.desde":"A partir de", "common.reservar":"Reservar",
