@@ -209,7 +209,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .hero-stats .s b{font-family:var(--display);font-size:1.55rem;font-weight:700;display:block;line-height:1;color:#fff}
   .hero-stats .s span{font-size:.85rem;color:rgba(255,255,255,.65)}
 
-  /* ---------- Hero carrusel de promos (temporal: Galicia 02/10-30/11/2026, Tulipanes hasta 20/10/2026) ---------- */
+  /* ---------- Hero carrusel de promos (temporal: Galicia jueves 02/10-30/11/2026, Tulipanes hasta 20/10/2026, Galicia viernes 6 cuotas 16/10-30/11/2026) ---------- */
   .hero-carousel{position:relative;overflow:hidden;color:#fff;background:var(--navy-deep)}
   .hc-track{display:grid}
   .hero-promo{grid-area:1/1;position:relative;opacity:0;visibility:hidden;transition:opacity .7s ease,visibility 0s linear .7s;
@@ -223,6 +223,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .hero-promo--tulipanes .hero-overlay{background:
       radial-gradient(820px 460px at 92% -12%, rgba(233,162,60,.16), transparent 60%),
       linear-gradient(95deg, rgba(15,29,56,.88) 0%, rgba(20,36,70,.66) 50%, rgba(15,29,56,.3) 100%)}
+  .hero-promo--cuotas{background-image:url('fotos/cuotas-lago.jpg');background-position:center 45%}
+  .hero-promo--cuotas .hero-overlay{background:
+      radial-gradient(820px 460px at 92% -12%, rgba(233,162,60,.16), transparent 60%),
+      linear-gradient(95deg, rgba(15,29,56,.88) 0%, rgba(20,36,70,.62) 50%, rgba(15,29,56,.25) 100%)}
   .hero-promo .hero-inner{max-width:700px}
   .hp-pill{display:inline-flex;align-items:center;gap:12px;margin-bottom:1.6rem;background:#fff;border-radius:999px;padding:7px 18px 7px 20px}
   .hp-pill span{font-family:var(--body);font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--navy)}
@@ -238,6 +242,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .hp-stat span{font-family:var(--body);font-size:.95rem;line-height:1.4;font-weight:600;color:#fff}
   .hp-stat small{display:block;font-size:inherit;font-weight:400;color:rgba(255,255,255,.75)}
   .hp-legal{font-family:var(--body);font-size:.82rem;color:rgba(255,255,255,.65);margin-top:1.2rem}
+  .hp-cftna{display:flex;gap:16px;align-items:flex-start;margin-top:1.2rem}
+  .hp-cftna strong{flex:none;font-family:var(--display);font-weight:700;font-size:1.5rem;line-height:1;color:#fff}
+  .hp-cftna p{margin:0;font-size:.72rem;line-height:1.45;color:rgba(255,255,255,.65)}
+  .hp-cftna a{color:rgba(255,255,255,.85)}
   .hc-nav{position:absolute;z-index:3;right:max(28px, calc((100% - 1180px)/2 + 28px));bottom:118px;display:flex;align-items:center;gap:14px}
   .hc-nav[hidden]{display:none}
   .hc-arrow{width:44px;height:44px;border-radius:50%;border:1.6px solid rgba(255,255,255,.7);background:transparent;color:#fff;
@@ -253,6 +261,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .hp-steps{grid-template-columns:1fr;gap:12px}
     .hero-promo .hero-cta{flex-direction:column;align-items:stretch}
     .hero-promo .hero-cta .btn{justify-content:center}
+    .hp-cftna{flex-direction:column;gap:6px}
   }
   @media(prefers-reduced-motion:reduce){.hero-promo,.hero-promo.is-active,.hc-dot{transition:none}}
 
@@ -728,6 +737,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
     </article>
+    <article class="hero-promo hero-promo--cuotas" id="hero-slide-cuotas" aria-label="Promo viernes Galicia · 6 cuotas sin interés" data-promo-track="promo_galicia_viernes_cuotas">
+      <div class="hero-overlay"></div>
+      <div class="wrap">
+        <div class="hero-inner reveal">
+          <div class="hp-pill">
+            <span data-i18n="hero.cuotas.pill">Exclusivo clientes</span>
+            <img src="fotos/galicia-logo.png" alt="Banco Galicia">
+          </div>
+          <h1 data-i18n-html="hero.cuotas.title">6 cuotas <em>sin interés.</em></h1>
+          <p class="lead" data-i18n-html="hero.cuotas.sub">Todos los viernes, con Visa y Mastercard pagando con NAVE.<br>Ahorrá los intereses: pagás lo mismo que de contado.</p>
+          <ol class="hp-steps">
+            <li><b>1</b><span data-i18n="hero.cuotas.paso1">Escribinos por WhatsApp</span></li>
+            <li><b>2</b><span data-i18n="hero.cuotas.paso2">Te enviamos el link de pago</span></li>
+            <li><b>3</b><span data-i18n="hero.cuotas.paso3">Pagalo un viernes</span></li>
+          </ol>
+          <div class="hero-cta">
+            <a class="btn btn-primary" id="promo_galicia_viernes_cuotas" target="_blank" rel="noopener" href="https://wa.me/5492944539672?text=Hola%20Vivir%20Viajes!%20Soy%20cliente%20Galicia%20y%20quiero%20pagar%20en%206%20cuotas%20sin%20inter%C3%A9s%20(promo%20viernes).%20%C2%BFMe%20pasan%20el%20link%20de%20pago%3F">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.1.1.3 0 .5l-.4.5c-.2.2-.3.4-.1.6.6 1 1.3 1.6 2.2 2.1.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.5 0 .8z"/></svg>
+              <span data-i18n="hero.cuotas.cta_wa">Pedir link de pago por WhatsApp</span>
+            </a>
+            <a href="#excursiones" class="btn btn-ghost-light" data-i18n="hero.cta_ver">Ver excursiones</a>
+          </div>
+          <div class="hp-cftna">
+            <strong>CFTNA: 0,0%</strong>
+            <p data-i18n-html="hero.cuotas.cftna">Del 16/10/2026 al 30/11/2026, solo días viernes. Ej.: Precio contado $600.000 – Precio total financiado $600.000 – 6 cuotas de $100.000. TNA 0,0% – TEA 0,0%. <a href="#bases">Ver bases y condiciones.</a></p>
+          </div>
+        </div>
+      </div>
+    </article>
   </div>
   <div class="hc-nav" id="hc-nav">
     <button class="hc-arrow" type="button" data-dir="-1" aria-label="Anterior">&lsaquo;</button>
@@ -760,13 +798,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
   // Carrusel de promos temporales. Cada slide tiene su propia fecha de vencimiento;
   // pasada esa fecha se la saca del carrusel sola, sin tocar nada a mano.
-  // Galicia: vigente 02/10/2026-30/11/2026. Tulipanes: vigente hasta 20/10/2026.
+  // Galicia jueves: vigente 02/10/2026-30/11/2026. Tulipanes: vigente hasta 20/10/2026.
+  // Galicia viernes (6 cuotas): vigente 16/10/2026-30/11/2026.
   // Sin slides vigentes, vuelve el hero de marca de siempre.
   (function(){
     var now = new Date();
     var ALL_SLIDES = [
       { id:'hero-slide-galicia', start:new Date('2026-10-02T00:00:00-03:00'), end:new Date('2026-12-01T00:00:00-03:00') },
-      { id:'hero-slide-tulipanes', start:null, end:new Date('2026-10-21T00:00:00-03:00') }
+      { id:'hero-slide-tulipanes', start:null, end:new Date('2026-10-21T00:00:00-03:00') },
+      { id:'hero-slide-cuotas', start:new Date('2026-10-16T00:00:00-03:00'), end:new Date('2026-12-01T00:00:00-03:00') }
     ];
     var root = document.getElementById('hero-carousel');
     var track = root.querySelector('.hc-track');
@@ -1641,6 +1681,12 @@ const I18N = {
     "hero.tulipanes.stat_label":"Desde 4 pasajeros<small>en la misma reserva</small>",
     "hero.tulipanes.cta_wa":"Consultar por WhatsApp",
     "hero.tulipanes.legal":"Válido hasta el 20/10/2026 para la excursión al Campo de Tulipanes.",
+    "hero.cuotas.pill":"Exclusivo clientes",
+    "hero.cuotas.title":"6 cuotas <em>sin interés.</em>",
+    "hero.cuotas.sub":"Todos los viernes, con Visa y Mastercard pagando con NAVE.<br>Ahorrá los intereses: pagás lo mismo que de contado.",
+    "hero.cuotas.paso1":"Escribinos por WhatsApp", "hero.cuotas.paso2":"Te enviamos el link de pago", "hero.cuotas.paso3":"Pagalo un viernes",
+    "hero.cuotas.cta_wa":"Pedir link de pago por WhatsApp",
+    "hero.cuotas.cftna":"Del 16/10/2026 al 30/11/2026, solo días viernes. Ej.: Precio contado $600.000 – Precio total financiado $600.000 – 6 cuotas de $100.000. TNA 0,0% – TEA 0,0%. <a href=\"#bases\">Ver bases y condiciones.</a>",
     "sec.destacados.title":"Destacados", "sec.destacados.sub":"Nuestras recomendaciones para esta temporada",
     "card.eas.tag":"Clases", "card.eas.title":"Clase de Ski y Snow · Cerro Catedral", "card.eas.desc":"Clases de ski y snowboard en el Cerro Catedral: bautismo, exclusivas y semi exclusivas. Equipo incluido.", "card.eas.meta1":"2 hs", "card.eas.meta2":"Todos los niveles",
     "common.desde":"Desde", "common.reservar":"Reservar",
@@ -1744,6 +1790,12 @@ const I18N = {
     "hero.tulipanes.stat_label":"From 4 passengers<small>on the same booking</small>",
     "hero.tulipanes.cta_wa":"Ask on WhatsApp",
     "hero.tulipanes.legal":"Valid until 10/20/2026 for the Tulip Fields excursion.",
+    "hero.cuotas.pill":"Exclusive for clients",
+    "hero.cuotas.title":"6 interest-free <em>installments.</em>",
+    "hero.cuotas.sub":"Every Friday, with Visa and Mastercard paying through NAVE.<br>Skip the interest: you pay the same as in cash.",
+    "hero.cuotas.paso1":"Message us on WhatsApp", "hero.cuotas.paso2":"We'll send you the payment link", "hero.cuotas.paso3":"Pay it on a Friday",
+    "hero.cuotas.cta_wa":"Request payment link on WhatsApp",
+    "hero.cuotas.cftna":"From 10/16/2026 to 11/30/2026, Fridays only. E.g.: Cash price $600,000 – Total financed price $600,000 – 6 installments of $100,000. TNA 0.0% – TEA 0.0%. <a href=\"#bases\">See terms and conditions.</a>",
     "sec.destacados.title":"Featured", "sec.destacados.sub":"Our picks for this season",
     "card.eas.tag":"Lessons", "card.eas.title":"Ski & Snowboard Lesson · Cerro Catedral", "card.eas.desc":"Ski and snowboard lessons at Cerro Catedral: group lessons for beginners, private and semi-private classes. Equipment included.", "card.eas.meta1":"2 hrs", "card.eas.meta2":"All levels",
     "common.desde":"From", "common.reservar":"Book now",
@@ -1838,6 +1890,12 @@ const I18N = {
     "hero.tulipanes.stat_label":"A partir de 4 passageiros<small>na mesma reserva</small>",
     "hero.tulipanes.cta_wa":"Falar no WhatsApp",
     "hero.tulipanes.legal":"Válido até 20/10/2026 para o passeio ao Campo de Tulipas.",
+    "hero.cuotas.pill":"Exclusivo para clientes",
+    "hero.cuotas.title":"6 parcelas <em>sem juros.</em>",
+    "hero.cuotas.sub":"Todas as sextas-feiras, com Visa e Mastercard pagando com NAVE.<br>Economize os juros: você paga o mesmo que à vista.",
+    "hero.cuotas.paso1":"Mande uma mensagem no WhatsApp", "hero.cuotas.paso2":"Enviamos o link de pagamento", "hero.cuotas.paso3":"Pague numa sexta-feira",
+    "hero.cuotas.cta_wa":"Pedir link de pagamento pelo WhatsApp",
+    "hero.cuotas.cftna":"De 16/10/2026 a 30/11/2026, somente às sextas-feiras. Ex.: Preço à vista $600.000 – Preço total financiado $600.000 – 6 parcelas de $100.000. TNA 0,0% – TEA 0,0%. <a href=\"#bases\">Ver termos e condições.</a>",
     "sec.destacados.title":"Destaques", "sec.destacados.sub":"Nossas recomendações para esta temporada",
     "card.eas.tag":"Aulas", "card.eas.title":"Aula de Esqui e Snow · Cerro Catedral", "card.eas.desc":"Aulas de esqui e snowboard no Cerro Catedral: batismo em grupo, aulas exclusivas e semiexclusivas. Equipamento incluído.", "card.eas.meta1":"2 h", "card.eas.meta2":"Todos os níveis",
     "common.desde":"A partir de", "common.reservar":"Reservar",
