@@ -63,21 +63,40 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   a{color:inherit;text-decoration:none}
   .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
 
-  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-  .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:72px}
-  .nav .brand img{height:42px;display:block}
-  .back{font-weight:600;color:var(--ink-soft);font-size:.92rem;display:inline-flex;align-items:center;gap:.4rem}
-  .back:hover{color:var(--navy)}
+  :root{--hdr-h:84px}
+  header{position:sticky;top:0;z-index:50;background:transparent;padding:10px 0;margin-bottom:calc(-1 * var(--hdr-h));transition:background .3s}
+  body.menu-open header{background:var(--navy-deep)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:64px}
+  header .nav{max-width:1100px;width:calc(100% - 40px);margin:0 auto;padding:0 .55rem 0 1.4rem;
+    background:rgba(15,29,56,.38);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.14);border-radius:18px;transition:background .3s,box-shadow .3s,border-color .3s;
+    position:relative;isolation:isolate}
+  header .nav::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;
+    background:linear-gradient(180deg,#fff 0%,#EEF2F9 100%);opacity:0;transition:opacity .6s ease}
+  header.on-dark .nav::before{opacity:1}
+  header.on-dark .nav{border-color:rgba(22,40,76,.1)}
+  .nav .brand{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:.15rem;line-height:1}
+  .nav .brand img{height:30px;display:block;transition:opacity .6s ease}
+  .nav .brand .logo-dark{position:absolute;top:0;left:0;opacity:0}
+  header.on-dark .brand .logo-dark{opacity:1}
+  header.on-dark .brand .logo-light{opacity:0}
+  .back,.switch,.lang-switch,.lang-switch button,.menu-toggle,.menu-toggle span{transition:color .6s ease,background .6s ease,border-color .6s ease}
+  header.on-dark .back{color:var(--ink-soft)}
+  header.on-dark .menu-toggle{border-color:var(--line)}
+  header.on-dark .menu-toggle span{background:var(--navy)}
+  header.scrolled .nav,body.menu-open header .nav{background:rgba(22,40,76,.94);border-color:rgba(255,255,255,.08);box-shadow:0 14px 34px -18px rgba(5,12,28,.6)}
+  .back{font-weight:600;color:rgba(255,255,255,.8);font-size:.92rem;display:inline-flex;align-items:center;gap:.4rem}
+  .back:hover{color:#fff}
   .switch{font-family:var(--body);font-weight:600;font-size:.9rem;color:var(--navy);border:1.5px solid var(--line);border-radius:10px;padding:.5rem .7rem;background:#fff;cursor:pointer}
   .nav-right{display:flex;align-items:center;gap:.7rem;margin-left:auto}
-  .lang-switch{display:flex;gap:.2rem;background:var(--panel);padding:.22rem;border-radius:999px;flex:0 0 auto}
-  .lang-switch button{font-family:var(--body);font-weight:700;font-size:.76rem;letter-spacing:.02em;border:none;background:transparent;color:var(--ink-soft);padding:.38rem .6rem;border-radius:999px;cursor:pointer;transition:.18s}
-  .lang-switch button.active{background:var(--navy);color:#fff}
-  .lang-switch button:hover:not(.active){color:var(--navy)}
+  .lang-switch{display:flex;gap:.2rem;background:rgba(255,255,255,.08);padding:.22rem;border-radius:999px;flex:0 0 auto}
+  .lang-switch button{font-family:var(--body);font-weight:700;font-size:.76rem;letter-spacing:.02em;border:none;background:transparent;color:rgba(255,255,255,.62);padding:.38rem .6rem;border-radius:999px;cursor:pointer;transition:.18s}
+  .lang-switch button.active{background:#fff;color:var(--navy)}
+  .lang-switch button:hover:not(.active){color:#fff}
   .nav-whatsapp{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:var(--navy);font-family:var(--body);font-weight:700;font-size:.88rem;border-radius:999px;padding:.55rem 1.1rem;white-space:nowrap;transition:.18s}
   .nav-whatsapp:hover{background:var(--gold-dark);transform:translateY(-1px)}
 
-  .banner{background:linear-gradient(120deg,#1A2F58,#0F1D38);color:#fff;padding:1.3rem 0 2.2rem}
+  .banner{background:linear-gradient(120deg,#1A2F58,#0F1D38);color:#fff;padding:calc(1.3rem + var(--hdr-h)) 0 2.2rem}
   .banner-layout{display:flex;flex-direction:column;align-items:flex-start;gap:.6rem}
   .banner-info{flex:1;min-width:240px}
   .banner .tag{display:inline-block;background:rgba(233,162,60,.18);color:var(--gold);font-weight:700;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;padding:.32rem .7rem;border-radius:7px;margin-bottom:.9rem}
@@ -299,8 +318,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
      query para que sus overrides (misma especificidad) ganen por
      orden de cascada.
      ================================================================ */
-  .menu-toggle{display:none;width:44px;height:44px;border:1.5px solid var(--line);border-radius:12px;background:#fff;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;padding:0}
-  .menu-toggle span{width:18px;height:2px;border-radius:2px;background:var(--navy);display:block}
+  .menu-toggle{display:none;width:44px;height:44px;border:1.5px solid rgba(255,255,255,.18);border-radius:12px;background:transparent;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;padding:0}
+  .menu-toggle span{width:18px;height:2px;border-radius:2px;background:#fff;display:block}
   .mobile-menu{display:none}
   .price-row-mobile{display:none}
   .car-back-pill{display:none}
@@ -320,8 +339,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .wrap{padding:0 20px}
 
     /* ---- Header (compartido con home/elcruce) ---- */
-    .nav{height:64px;flex-wrap:nowrap;padding:0}
-    .nav .brand img{height:28px}
+    :root{--hdr-h:64px}
+    header{padding:6px 0}
+    .nav{height:52px;flex-wrap:nowrap;padding:0}
+    header .nav{width:calc(100% - 20px);padding:0 6px 0 14px;border-radius:15px}
+    .nav .brand img{height:26px}
     .back{display:none}
     .switch{display:none}
     #lang-switch{display:none}
@@ -489,7 +511,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <header>
   <div class="wrap nav">
-    <a class="brand" href="index.html"><img src="logo-color.png" alt="Vivir Viajes"></a>
+    <a class="brand" href="index.html"><img class="logo-dark" src="fotos/logo-dark.png" alt="" aria-hidden="true"><img class="logo-light" src="fotos/logo-light.png" alt="Vivir Viajes"></a>
     <a class="back" href="index.html" data-i18n="nav.volver">&larr; Volver a excursiones</a>
     <div class="nav-right">
       <select class="switch" id="switch" title="Cambiar excursion"></select>
@@ -4149,6 +4171,23 @@ initStickyBar();
 initDetalleToggle();
 initMapSheet();
 initStepFlow();
+</script>
+<script>
+// Header pill: "scrolled" al bajar; "on-dark" cuando pasa por una seccion navy (se invierte a pastilla blanca)
+(function(){
+  var h=document.querySelector('header');if(!h)return;
+  var darks=[].slice.call(document.querySelectorAll('.sec-group.is-dark, footer'));
+  var ticking=false;
+  function upd(){
+    ticking=false;
+    h.classList.toggle('scrolled',window.scrollY>8);
+    var y=h.offsetHeight/2;
+    var on=darks.some(function(el){var r=el.getBoundingClientRect();return r.height>0&&r.top<=y&&r.bottom>=y;});
+    h.classList.toggle('on-dark',on);
+  }
+  function req(){if(!ticking){ticking=true;requestAnimationFrame(upd);}}
+  upd();window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);
+})();
 </script>
 </body>
 </html>
