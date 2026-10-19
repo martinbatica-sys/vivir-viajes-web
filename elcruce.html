@@ -1315,7 +1315,10 @@ document.getElementById("btn-pagar").addEventListener("click", async ()=>{
       body: JSON.stringify(payload),
     });
     const data = await resp.json();
-    if (!resp.ok || !data.init_point) throw new Error(data.error || "error");
+    if (!resp.ok || !data.init_point){
+      if (data.detail) console.error("Detalle del rechazo de Mercado Pago:", data.detail);
+      throw new Error(data.error || "error");
+    }
     window.location.href = data.init_point;
   }catch(err){
     alert(t("err.pago") + (err && err.message ? err.message : err));

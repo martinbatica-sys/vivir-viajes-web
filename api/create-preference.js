@@ -165,6 +165,7 @@ export default async function handler(req, res) {
   const data = await mpResp.json();
 
   if (!mpResp.ok) {
+    console.error('Mercado Pago rechazo la preferencia', { externalReference, status: mpResp.status, detail: data });
     return res.status(mpResp.status).json({ error: 'Mercado Pago rechazo la preferencia', detail: data });
   }
 
@@ -306,6 +307,7 @@ async function handleElCruce(req, res, { origin, externalReference, MP_ACCESS_TO
   const data = await mpResp.json();
 
   if (!mpResp.ok) {
+    console.error('Mercado Pago rechazo la preferencia', { externalReference, status: mpResp.status, detail: data });
     return res.status(mpResp.status).json({ error: 'Mercado Pago rechazo la preferencia', detail: data });
   }
 

@@ -3833,7 +3833,10 @@ async function pagarConMercadoPago(){
       body: JSON.stringify(payload),
     });
     const data = await resp.json();
-    if(!resp.ok || !data.init_point) throw new Error(data.error || t("err.pago-generico"));
+    if(!resp.ok || !data.init_point){
+      if(data.detail) console.error("Detalle del rechazo de Mercado Pago:", data.detail);
+      throw new Error(data.error || t("err.pago-generico"));
+    }
     console.log("Mercado Pago init points (para debug manual):", {usado: data.init_point, produccion: data.init_point_prod, sandbox: data.init_point_sandbox});
     window.location.href = data.init_point;
   }catch(err){
