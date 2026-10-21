@@ -298,6 +298,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .btn-go{background:var(--gold);color:var(--navy)}
   .btn-go:hover{background:var(--gold-dark)}
   .btn-go:disabled{background:#E6E9EF;color:#9AA6B8;cursor:not-allowed}
+  .btn-wa-consult{background:#fff;color:var(--navy);border:1.5px solid var(--line);margin-top:.6rem}
+  .btn-wa-consult:hover{border-color:var(--gold)}
+  .btn-wa-consult:disabled{color:#9AA6B8;cursor:not-allowed}
   .mp-note{text-align:center;font-size:.78rem;color:var(--ink-soft);margin-top:.7rem}
 
   footer{background:var(--navy-deep);color:rgba(255,255,255,.7);padding:2.4rem 0}
@@ -457,7 +460,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .resv-body>.tc-field{order:17}
     .resv-body>#hint{order:18}
     .resv-body>#go{order:19}
-    .resv-body>.mp-note{order:20}
+    .resv-body>#go-wa{order:20}
+    .resv-body>.mp-note{order:21}
 
     .btn-continuar-mobile{display:block;width:100%;font-family:var(--body);font-weight:700;font-size:1rem;border:none;cursor:pointer;border-radius:12px;padding:.9rem;background:var(--gold);color:var(--navy);margin-top:.3rem}
     .btn-continuar-mobile:hover{background:var(--gold-dark)}
@@ -728,6 +732,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="hint" id="hint"></div>
           <button class="btn btn-go" id="go" disabled data-i18n="form.reservar">Reservar</button>
+          <button type="button" class="btn btn-wa-consult" id="go-wa" hidden disabled>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.1.1.3 0 .5l-.4.5c-.2.2-.3.4-.1.6.6 1 1.3 1.6 2.2 2.1.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.5 0 .8z"/></svg>
+            <span data-i18n="btn.consultar-whatsapp">Consultar por WhatsApp</span>
+          </button>
           <div class="mp-note" id="mp-note" data-i18n="form.mp-note">Pago 100% seguro con Mercado Pago</div>
         </div>
       </div>
@@ -3379,6 +3387,7 @@ function renderStatic(){
   } else { flf.hidden=true; }
 
   document.getElementById("go").onclick = reservar;
+  document.getElementById("go-wa").onclick = reservarPorWhatsApp;
   ["c-nombre","c-dni","c-email","c-tel","c-hosp"].forEach(fid=>{
     document.getElementById(fid).addEventListener("input", ()=>{
       state.nombre = document.getElementById("c-nombre").value.trim();
@@ -3708,6 +3717,13 @@ function render(){
   if(canPrice && pax>0){ totalEl.textContent=fmt(total); } else { totalEl.textContent="—"; }
 
   const needsPickup = state.con && EXC[id].pickupPoints && EXC[id].pickupPoints.length && !state.pickup;
+  // El boton de consulta por WhatsApp acompana a "Pagar y reservar" en todo
+  // el flujo de pago directo (incluso sin fecha o con datos incompletos).
+  // No aplica a excursiones whatsappOnly (ya usan "go" para eso) ni fuera
+  // de temporada (offSeason tambien convierte "go" en el boton de WhatsApp).
+  const goWa = document.getElementById("go-wa");
+  goWa.hidden = whatsappOnly || offSeason;
+  if(!goWa.hidden) goWa.disabled = pax<=0 || needsPickup || missingContact;
 
   if(noDate){ hint.textContent=""; go.disabled=true; go.textContent=whatsappOnly?t("btn.pedir-cotizacion-wa"):t("btn.pagar-reservar"); }
   else if(beforeStart){ hint.textContent=t("hint.clases-arrancan")+e.startDate.split("-").reverse().join("/")+t("hint.elegi-posterior"); go.disabled=true; go.textContent=whatsappOnly?t("btn.pedir-cotizacion-wa"):t("btn.pagar-reservar"); }
@@ -3722,11 +3738,15 @@ function render(){
     else { hint.textContent=t("hint.whatsapp-instant"); go.disabled=false; }
     go.textContent=t("btn.pedir-cotizacion-wa");
   }
-  else if(pax<=0){ hint.textContent=t("hint.agrega-pasajero"); go.disabled=true; go.textContent=t("btn.pagar-reservar"); }
-  else if(needsPickup){ hint.textContent=t("hint.elegi-pickup"); go.disabled=true; go.textContent=t("btn.pagar-reservar"); }
-  else if(missingContact){ hint.textContent=t("hint.completa-datos"); go.disabled=true; go.textContent=t("btn.pagar-reservar"); }
-  else if(!state.tc){ hint.textContent=t("hint.acepta-tc"); go.disabled=true; go.textContent=t("btn.pagar-reservar"); }
-  else { hint.textContent=""; go.disabled=false; go.textContent=t("btn.pagar-reservar"); }
+  else {
+    // Flujo de pago directo. No exige el checkbox de terminos y condiciones
+    // para el boton de WhatsApp (eso aplica al pago, no a una consulta).
+    if(pax<=0){ hint.textContent=t("hint.agrega-pasajero"); go.disabled=true; go.textContent=t("btn.pagar-reservar"); }
+    else if(needsPickup){ hint.textContent=t("hint.elegi-pickup"); go.disabled=true; go.textContent=t("btn.pagar-reservar"); }
+    else if(missingContact){ hint.textContent=t("hint.completa-datos"); go.disabled=true; go.textContent=t("btn.pagar-reservar"); }
+    else if(!state.tc){ hint.textContent=t("hint.acepta-tc"); go.disabled=true; go.textContent=t("btn.pagar-reservar"); }
+    else { hint.textContent=""; go.disabled=false; go.textContent=t("btn.pagar-reservar"); }
+  }
 
   const btnContinuar = document.getElementById("btn-continuar-mobile");
   if(btnContinuar) btnContinuar.disabled = !step1Ready();
