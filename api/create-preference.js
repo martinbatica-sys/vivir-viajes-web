@@ -191,7 +191,7 @@ export default async function handler(req, res) {
 async function handleElCruce(req, res, { origin, externalReference, MP_ACCESS_TOKEN }) {
   const {
     tramo, sentido, pax, total, nombre, email, telefono, grupo,
-    vueloLlegada, horarioLlegada, vueloRegreso, horarioSalida,
+    vueloLlegada, fechaIn, horarioLlegada, vueloRegreso, fechaOut, horarioSalida,
     utm_source, utm_medium, utm_campaign, utm_term, utm_content, gclid, fbclid,
   } = req.body || {};
 
@@ -212,6 +212,10 @@ async function handleElCruce(req, res, { origin, externalReference, MP_ACCESS_TO
   const validatedTotal = priced.total;
   const excursionLabel = `Traslado El Cruce · ${tramo}`;
   const pasajerosTxt = `${pax} ${Number(pax) === 1 ? 'corredor' : 'corredores'}`;
+  const vuelosNotes = [
+    vueloLlegada ? `IN: vuelo ${vueloLlegada} · ${fechaIn || '-'} ${horarioLlegada || ''}`.trim() : null,
+    vueloRegreso ? `OUT: vuelo ${vueloRegreso} · ${fechaOut || '-'} ${horarioSalida || ''}`.trim() : null,
+  ].filter(Boolean).join(' / ') || null;
 
   try {
     await insertLead({
@@ -228,6 +232,7 @@ async function handleElCruce(req, res, { origin, externalReference, MP_ACCESS_TO
       email,
       telefono,
       hospedaje: null,
+      notes: vuelosNotes,
       utm_source: utm_source || null,
       utm_medium: utm_medium || null,
       utm_campaign: utm_campaign || null,
@@ -264,8 +269,10 @@ async function handleElCruce(req, res, { origin, externalReference, MP_ACCESS_TO
       pax: String(pax),
       grupo,
       vuelo_llegada: vueloLlegada || '',
+      fecha_in: fechaIn || '',
       horario_llegada: horarioLlegada || '',
       vuelo_regreso: vueloRegreso || '',
+      fecha_out: fechaOut || '',
       horario_salida: horarioSalida || '',
       nombre,
       email,
@@ -279,8 +286,10 @@ async function handleElCruce(req, res, { origin, externalReference, MP_ACCESS_TO
         pax: String(pax),
         grupo,
         vuelo_llegada: vueloLlegada || '',
+        fecha_in: fechaIn || '',
         horario_llegada: horarioLlegada || '',
         vuelo_regreso: vueloRegreso || '',
+        fecha_out: fechaOut || '',
         horario_salida: horarioSalida || '',
         total: String(unitPrice),
         nombre,

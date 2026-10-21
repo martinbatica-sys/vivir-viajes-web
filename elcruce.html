@@ -163,6 +163,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .rsv-back:hover{color:var(--gold-dark)}
   .rsv-resumen{background:var(--panel);border-radius:12px;padding:.8rem 1rem;font-size:.9rem;font-weight:600}
   .rsv-row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem;align-items:end}
+  .rsv-row3{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr) minmax(0,.85fr);gap:.7rem;align-items:end}
+  .rsv-row3 input{height:46px}
+  .rsv-row3 input[type=date]{padding:.7rem .5rem;font-size:.95rem}
   .step{display:flex;flex-direction:column;gap:1.1rem}
 
   /* ---------- INFO SECTION ---------- */
@@ -293,6 +296,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     /* ---- Toggle de tramo: sin precio en el label ---- */
     .toggle-price{display:none}
+
+    /* ---- Paso 2: vuelo/fecha/hora a 2 columnas, vuelo ocupa la fila ---- */
+    .rsv-row3{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.7rem}
+    .rsv-row3 .field:first-child{grid-column:1/-1}
 
     /* ---- Paso 2: total a pagar + boton sin monto ---- */
     #pagar-total{display:none}
@@ -431,24 +438,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <input type="text" id="f-nombre">
         </div>
 
-        <div class="rsv-row2" id="f-llegada">
+        <div class="rsv-row3" id="f-llegada">
           <div class="field">
-            <label data-i18n="rsv.vuelo-llegada">Vuelo de llegada</label>
+            <label data-i18n="rsv.vuelo-llegada">Vuelo IN</label>
             <input type="text" id="f-vuelo-llegada">
           </div>
           <div class="field">
-            <label data-i18n="rsv.horario-llegada">Hora de llegada</label>
+            <label data-i18n="rsv.fecha-in">Fecha IN</label>
+            <input type="date" id="f-fecha-in" min="2026-12-01" max="2026-12-15">
+          </div>
+          <div class="field">
+            <label data-i18n="rsv.horario-llegada">Hora</label>
             <input type="time" id="f-horario-llegada">
           </div>
         </div>
 
-        <div class="rsv-row2" id="f-regreso">
+        <div class="rsv-row3" id="f-regreso">
           <div class="field">
-            <label data-i18n="rsv.vuelo-regreso">Vuelo de regreso</label>
+            <label data-i18n="rsv.vuelo-regreso">Vuelo OUT</label>
             <input type="text" id="f-vuelo-regreso">
           </div>
           <div class="field">
-            <label data-i18n="rsv.horario-salida">Hora de salida</label>
+            <label data-i18n="rsv.fecha-out">Fecha OUT</label>
+            <input type="date" id="f-fecha-out" min="2026-12-01" max="2026-12-15">
+          </div>
+          <div class="field">
+            <label data-i18n="rsv.horario-salida">Hora</label>
             <input type="time" id="f-horario-salida">
           </div>
         </div>
@@ -472,6 +487,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <option value="2" data-i18n="rsv.grupo2">Grupo 3 · 7 al 9 dic</option>
             <option value="3" data-i18n="rsv.grupo3">Grupo 4 · 8 al 10 dic</option>
             <option value="4" data-i18n="rsv.grupo4">Grupo 5 · 9 al 11 dic</option>
+            <option value="5" data-i18n="rsv.grupo5">La Etapa · 5 dic</option>
+            <option value="6" data-i18n="rsv.grupo6">La Etapa · 6 dic</option>
           </select>
         </div>
 
@@ -734,9 +751,9 @@ const WHATSAPP = "5492944539672";
 const PRECIOS = { ida: 30000, idavuelta: 60000 };
 const SENTIDOS_TXT = { es:["Aeropuerto → Cerro Catedral","Cerro Catedral → Aeropuerto"], en:["Airport → Cerro Catedral","Cerro Catedral → Airport"], pt:["Aeroporto → Cerro Catedral","Cerro Catedral → Aeroporto"] };
 const GRUPOS_TXT = {
-  es:["Grupo 1 · 5 al 7 dic","Grupo 2 · 6 al 8 dic","Grupo 3 · 7 al 9 dic","Grupo 4 · 8 al 10 dic","Grupo 5 · 9 al 11 dic"],
-  en:["Group 1 · Dec 5-7","Group 2 · Dec 6-8","Group 3 · Dec 7-9","Group 4 · Dec 8-10","Group 5 · Dec 9-11"],
-  pt:["Grupo 1 · 5 a 7 dez","Grupo 2 · 6 a 8 dez","Grupo 3 · 7 a 9 dez","Grupo 4 · 8 a 10 dez","Grupo 5 · 9 a 11 dez"],
+  es:["Grupo 1 · 5 al 7 dic","Grupo 2 · 6 al 8 dic","Grupo 3 · 7 al 9 dic","Grupo 4 · 8 al 10 dic","Grupo 5 · 9 al 11 dic","La Etapa · 5 dic","La Etapa · 6 dic"],
+  en:["Group 1 · Dec 5-7","Group 2 · Dec 6-8","Group 3 · Dec 7-9","Group 4 · Dec 8-10","Group 5 · Dec 9-11","La Etapa · Dec 5","La Etapa · Dec 6"],
+  pt:["Grupo 1 · 5 a 7 dez","Grupo 2 · 6 a 8 dez","Grupo 3 · 7 a 9 dez","Grupo 4 · 8 a 10 dez","Grupo 5 · 9 a 11 dez","La Etapa · 5 dez","La Etapa · 6 dez"],
 };
 
 const UI = {
@@ -753,11 +770,11 @@ const UI = {
     "rsv.tarifa-grupal":"¿Viajás con tu equipo? Consultá tarifa grupal",
     "rsv.volver":"Volver al paso 1",
     "rsv.nombre":"Nombre y Apellido",
-    "rsv.vuelo-llegada":"Vuelo de llegada", "rsv.horario-llegada":"Hora de llegada",
-    "rsv.vuelo-regreso":"Vuelo de regreso", "rsv.horario-salida":"Hora de salida",
+    "rsv.vuelo-llegada":"Vuelo IN", "rsv.fecha-in":"Fecha IN", "rsv.horario-llegada":"Hora",
+    "rsv.vuelo-regreso":"Vuelo OUT", "rsv.fecha-out":"Fecha OUT", "rsv.horario-salida":"Hora",
     "rsv.email":"Email", "rsv.tel":"Teléfono",
     "rsv.grupo":"Tu grupo de carrera",
-    "rsv.grupo0":"Grupo 1 · 5 al 7 dic","rsv.grupo1":"Grupo 2 · 6 al 8 dic","rsv.grupo2":"Grupo 3 · 7 al 9 dic","rsv.grupo3":"Grupo 4 · 8 al 10 dic","rsv.grupo4":"Grupo 5 · 9 al 11 dic",
+    "rsv.grupo0":"Grupo 1 · 5 al 7 dic","rsv.grupo1":"Grupo 2 · 6 al 8 dic","rsv.grupo2":"Grupo 3 · 7 al 9 dic","rsv.grupo3":"Grupo 4 · 8 al 10 dic","rsv.grupo4":"Grupo 5 · 9 al 11 dic","rsv.grupo5":"La Etapa · 5 dic","rsv.grupo6":"La Etapa · 6 dic",
     "rsv.pagar":"Pagar", "rsv.con-mp":"con Mercado Pago", "rsv.consultar-wa":"Consultar por WhatsApp",
     "rsv.reservar-btn":"Reservar",
     "rsv.corredor":"corredor","rsv.corredores-pl":"corredores",
@@ -839,11 +856,11 @@ const UI = {
     "rsv.tarifa-grupal":"Traveling with your team? Ask about group rates",
     "rsv.volver":"Back to step 1",
     "rsv.nombre":"Full name",
-    "rsv.vuelo-llegada":"Arrival flight", "rsv.horario-llegada":"Arrival time",
-    "rsv.vuelo-regreso":"Return flight", "rsv.horario-salida":"Departure time",
+    "rsv.vuelo-llegada":"Flight IN", "rsv.fecha-in":"Date IN", "rsv.horario-llegada":"Time",
+    "rsv.vuelo-regreso":"Flight OUT", "rsv.fecha-out":"Date OUT", "rsv.horario-salida":"Time",
     "rsv.email":"Email", "rsv.tel":"Phone",
     "rsv.grupo":"Your race group",
-    "rsv.grupo0":"Group 1 · Dec 5-7","rsv.grupo1":"Group 2 · Dec 6-8","rsv.grupo2":"Group 3 · Dec 7-9","rsv.grupo3":"Group 4 · Dec 8-10","rsv.grupo4":"Group 5 · Dec 9-11",
+    "rsv.grupo0":"Group 1 · Dec 5-7","rsv.grupo1":"Group 2 · Dec 6-8","rsv.grupo2":"Group 3 · Dec 7-9","rsv.grupo3":"Group 4 · Dec 8-10","rsv.grupo4":"Group 5 · Dec 9-11","rsv.grupo5":"La Etapa · Dec 5","rsv.grupo6":"La Etapa · Dec 6",
     "rsv.pagar":"Pay", "rsv.con-mp":"with Mercado Pago", "rsv.consultar-wa":"Ask on WhatsApp",
     "rsv.reservar-btn":"Book",
     "rsv.corredor":"runner","rsv.corredores-pl":"runners",
@@ -925,11 +942,11 @@ const UI = {
     "rsv.tarifa-grupal":"Viaja com sua equipe? Consulte a tarifa em grupo",
     "rsv.volver":"Voltar ao passo 1",
     "rsv.nombre":"Nome e sobrenome",
-    "rsv.vuelo-llegada":"Voo de chegada", "rsv.horario-llegada":"Hora de chegada",
-    "rsv.vuelo-regreso":"Voo de volta", "rsv.horario-salida":"Hora de saída",
+    "rsv.vuelo-llegada":"Voo IN", "rsv.fecha-in":"Data IN", "rsv.horario-llegada":"Hora",
+    "rsv.vuelo-regreso":"Voo OUT", "rsv.fecha-out":"Data OUT", "rsv.horario-salida":"Hora",
     "rsv.email":"Email", "rsv.tel":"Telefone",
     "rsv.grupo":"Seu grupo de corrida",
-    "rsv.grupo0":"Grupo 1 · 5 a 7 dez","rsv.grupo1":"Grupo 2 · 6 a 8 dez","rsv.grupo2":"Grupo 3 · 7 a 9 dez","rsv.grupo3":"Grupo 4 · 8 a 10 dez","rsv.grupo4":"Grupo 5 · 9 a 11 dez",
+    "rsv.grupo0":"Grupo 1 · 5 a 7 dez","rsv.grupo1":"Grupo 2 · 6 a 8 dez","rsv.grupo2":"Grupo 3 · 7 a 9 dez","rsv.grupo3":"Grupo 4 · 8 a 10 dez","rsv.grupo4":"Grupo 5 · 9 a 11 dez","rsv.grupo5":"La Etapa · 5 dez","rsv.grupo6":"La Etapa · 6 dez",
     "rsv.pagar":"Pagar", "rsv.con-mp":"com Mercado Pago", "rsv.consultar-wa":"Consultar pelo WhatsApp",
     "rsv.reservar-btn":"Reservar",
     "rsv.corredor":"corredor","rsv.corredores-pl":"corredores",
@@ -1005,6 +1022,11 @@ try { lang = localStorage.getItem("vv-lang") || "es"; } catch(e) {}
 if (!UI[lang]) lang = "es";
 function t(key){ return (UI[lang] && UI[lang][key]) ?? UI.es[key]; }
 function fmt(n){ return "$" + Number(n).toLocaleString("es-AR"); }
+function fmtDateDMY(iso){
+  if (!iso) return "";
+  const [y, m, d] = iso.split("-");
+  return d && m && y ? `${d}/${m}/${y}` : iso;
+}
 
 const state = {
   tramo: "idavuelta", // 'ida' | 'idavuelta'
@@ -1212,8 +1234,10 @@ function collectStep2(){
     nombre: document.getElementById("f-nombre").value.trim(),
     hp: document.getElementById("f-website").value.trim(),
     vueloLlegada: document.getElementById("f-vuelo-llegada").value.trim(),
+    fechaIn: document.getElementById("f-fecha-in").value,
     horarioLlegada: document.getElementById("f-horario-llegada").value,
     vueloRegreso: document.getElementById("f-vuelo-regreso").value.trim(),
+    fechaOut: document.getElementById("f-fecha-out").value,
     horarioSalida: document.getElementById("f-horario-salida").value,
     email: document.getElementById("f-email").value.trim(),
     tel: document.getElementById("f-tel").value.trim(),
@@ -1226,8 +1250,8 @@ function validateStep2(d){
   const showRegreso = !isIda || state.sentido === 1;
   if (!d.nombre || !d.email || !d.tel) return t("rsv.hint-datos");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) return t("rsv.hint-email");
-  if (showLlegada && (!d.vueloLlegada || !d.horarioLlegada)) return t("rsv.hint-vuelos");
-  if (showRegreso && (!d.vueloRegreso || !d.horarioSalida)) return t("rsv.hint-vuelos");
+  if (showLlegada && (!d.vueloLlegada || !d.fechaIn || !d.horarioLlegada)) return t("rsv.hint-vuelos");
+  if (showRegreso && (!d.vueloRegreso || !d.fechaOut || !d.horarioSalida)) return t("rsv.hint-vuelos");
   return null;
 }
 
@@ -1239,13 +1263,20 @@ function buildDetalleWa(d){
   lines.push("• " + d.nombre);
   lines.push("• " + (isIda ? sentidoTxt : tramoLabel));
   lines.push("• " + state.pax + " " + (state.pax===1?t("rsv.corredor"):t("rsv.corredores-pl")));
-  if (d.vueloLlegada) lines.push("• " + t("rsv.vuelo-llegada") + ": " + d.vueloLlegada + " (" + d.horarioLlegada + ")");
-  if (d.vueloRegreso) lines.push("• " + t("rsv.vuelo-regreso") + ": " + d.vueloRegreso + " (" + d.horarioSalida + ")");
+  if (d.vueloLlegada) lines.push("• IN: vuelo " + d.vueloLlegada + " · " + fmtDateDMY(d.fechaIn) + " " + d.horarioLlegada);
+  if (d.vueloRegreso) lines.push("• OUT: vuelo " + d.vueloRegreso + " · " + fmtDateDMY(d.fechaOut) + " " + d.horarioSalida);
   lines.push("• " + t("rsv.grupo") + ": " + GRUPOS_TXT[lang][state.grupo]);
   lines.push("• " + t("rsv.email") + ": " + d.email);
   lines.push("• " + t("rsv.tel") + ": " + d.tel);
   lines.push("• " + t("rsv.total") + ": " + fmt(total()));
   return lines.join("\n");
+}
+
+function buildVuelosNotes(d){
+  const parts = [];
+  if (d.vueloLlegada) parts.push("IN: vuelo " + d.vueloLlegada + " · " + fmtDateDMY(d.fechaIn) + " " + d.horarioLlegada);
+  if (d.vueloRegreso) parts.push("OUT: vuelo " + d.vueloRegreso + " · " + fmtDateDMY(d.fechaOut) + " " + d.horarioSalida);
+  return parts.join(" / ");
 }
 
 document.getElementById("btn-wa").addEventListener("click", ()=>{
@@ -1272,6 +1303,7 @@ document.getElementById("btn-wa").addEventListener("click", ()=>{
       email: d.email,
       telefono: d.tel,
       hospedaje: null,
+      notes: buildVuelosNotes(d) || null,
       hp: d.hp,
       ...getTracking(),
     }),
@@ -1302,8 +1334,10 @@ document.getElementById("btn-pagar").addEventListener("click", async ()=>{
     telefono: d.tel,
     grupo: GRUPOS_TXT[lang][state.grupo],
     vueloLlegada: d.vueloLlegada || null,
+    fechaIn: d.fechaIn || null,
     horarioLlegada: d.horarioLlegada || null,
     vueloRegreso: d.vueloRegreso || null,
+    fechaOut: d.fechaOut || null,
     horarioSalida: d.horarioSalida || null,
     ...getTracking(),
   };

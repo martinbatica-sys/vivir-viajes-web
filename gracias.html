@@ -241,15 +241,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       document.getElementById("v-pasajeros").textContent = params.get("pax") || "-";
       document.getElementById("v-nombre").textContent = params.get("nombre") || "-";
 
+      const fmtDateDMY = (iso) => {
+        if(!iso) return "";
+        const [y, m, d] = iso.split("-");
+        return d && m && y ? `${d}/${m}/${y}` : iso;
+      };
       const vLlegada = params.get("vuelo_llegada");
       if(vLlegada){
         document.getElementById("v-llegada-row").hidden = false;
-        document.getElementById("v-llegada").textContent = vLlegada + (params.get("horario_llegada") ? " (" + params.get("horario_llegada") + ")" : "");
+        const fechaIn = fmtDateDMY(params.get("fecha_in"));
+        document.getElementById("v-llegada").textContent = vLlegada
+          + (fechaIn ? " · " + fechaIn : "")
+          + (params.get("horario_llegada") ? " (" + params.get("horario_llegada") + ")" : "");
       }
       const vRegreso = params.get("vuelo_regreso");
       if(vRegreso){
         document.getElementById("v-regreso-row").hidden = false;
-        document.getElementById("v-regreso").textContent = vRegreso + (params.get("horario_salida") ? " (" + params.get("horario_salida") + ")" : "");
+        const fechaOut = fmtDateDMY(params.get("fecha_out"));
+        document.getElementById("v-regreso").textContent = vRegreso
+          + (fechaOut ? " · " + fechaOut : "")
+          + (params.get("horario_salida") ? " (" + params.get("horario_salida") + ")" : "");
       }
 
       document.getElementById("v-pickup-row").hidden = false;
