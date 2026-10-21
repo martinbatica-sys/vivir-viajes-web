@@ -85,13 +85,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .brand small{font-size:.6rem;font-weight:600;color:rgba(255,255,255,.5);white-space:nowrap}
   header.on-dark .brand small{color:var(--ink-soft)}
   .nav-links,.lang-switch,.lang-switch button,.menu-toggle,.menu-toggle span{transition:color .6s ease,background .6s ease,border-color .6s ease}
-  .nav-links{display:flex;gap:1.3rem;align-items:center;font-size:.96rem;font-weight:600;white-space:nowrap}
-  .nav-links a{color:rgba(255,255,255,.74)}
+  .nav-links{display:flex;gap:2.1rem;align-items:center;font-family:var(--body);font-size:.95rem;font-weight:600;white-space:nowrap}
+  .nav-links a{position:relative;color:rgba(255,255,255,.74);transition:color .2s}
   .nav-links a:hover{color:#fff}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--gold);transition:width .25s}
+  .nav-links a:hover::after{width:100%}
   header.on-dark .nav-links a{color:var(--ink-soft)}
   header.on-dark .nav-links a:hover{color:var(--navy)}
   header.on-dark .menu-toggle{border-color:var(--line)}
   header.on-dark .menu-toggle span{background:var(--navy)}
+
+  /* ---------- Nav dropdown (portado de index.html) ---------- */
+  .nav-item{position:relative}
+  .nav-item .dropdown{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(6px);
+    background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow, 0 22px 48px -26px rgba(15,29,56,.5));
+    padding:.5rem;min-width:220px;opacity:0;visibility:hidden;pointer-events:none;transition:.18s;z-index:20}
+  .nav-item:hover .dropdown,.nav-item:focus-within .dropdown{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+  .nav-item .dropdown a{display:block;padding:.6rem .8rem;border-radius:9px;font-size:.9rem;font-weight:600;color:var(--ink);white-space:nowrap}
+  .nav-item .dropdown a::after{display:none}
+  .nav-item .dropdown a:hover{background:var(--panel);color:var(--navy)}
   header.scrolled .nav,body.menu-open header .nav{background:rgba(22,40,76,.94);border-color:rgba(255,255,255,.08);box-shadow:0 14px 34px -18px rgba(5,12,28,.6)}
   .nav-right{display:flex;align-items:center;gap:.7rem}
   .lang-switch{display:flex;gap:.2rem;background:rgba(255,255,255,.08);padding:.22rem;border-radius:999px;flex:0 0 auto}
@@ -354,9 +366,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap nav">
     <a class="brand" href="index.html"><img class="logo-dark" src="fotos/logo-dark.png" alt="" aria-hidden="true"><img class="logo-light" src="fotos/logo-light.png" alt="Vivir Viajes"><small>Legajo N° 11502 Disp. 1816 – EVT</small></a>
     <nav class="nav-links">
-      <a href="index.html#excursiones" data-i18n="nav.destinos">Destinos</a>
-      <a href="index.html#nosotros" data-i18n="nav.nosotros">Nosotros</a>
+      <div class="nav-item">
+        <a href="index.html#excursiones" data-i18n="nav.excursiones">Excursiones</a>
+        <div class="dropdown">
+          <a href="index.html#cat-circuitos" data-i18n="cat.circuitos.title">Circuitos &amp; Miradores</a>
+          <a href="index.html#cat-navegacion" data-i18n="cat.navegacion.title">Navegación Lacustre</a>
+          <a href="index.html#cat-aventura" data-i18n="cat.aventura.title">Aventura</a>
+          <a href="index.html#cat-nieve" data-i18n="cat.nieve.title">Nieve &amp; Montaña</a>
+        </div>
+      </div>
+      <a href="index.html#rentacar" data-i18n="nav.rentacar">Rent a Car</a>
       <a href="index.html#receptivo" data-i18n="nav.agencias">Agencias</a>
+      <a href="index.html#nosotros" data-i18n="nav.nosotros">Nosotros</a>
     </nav>
     <div class="nav-right">
       <div class="lang-switch" id="lang-switch">
@@ -821,7 +842,7 @@ const GRUPOS_TXT = {
 
 const UI = {
   es: {
-    "nav.destinos":"Destinos","nav.nosotros":"Nosotros","nav.agencias":"Agencias",
+    "nav.destinos":"Destinos","nav.excursiones":"Excursiones","nav.nosotros":"Nosotros","nav.agencias":"Agencias",
     "hero.eyebrow":"Transporte oficial · El Cruce 2026",
     "hero.title":'Del aeropuerto a la largada, <em>sin vueltas.</em>',
     "hero.lead":"Traslados regulares entre el Aeropuerto de Bariloche y el Cerro Catedral para corredores de El Cruce.",
@@ -907,7 +928,7 @@ const UI = {
     "rsv.total-pagar":"Total a pagar",
   },
   en: {
-    "nav.destinos":"Destinations","nav.nosotros":"About us","nav.agencias":"Agencies",
+    "nav.destinos":"Destinations","nav.excursiones":"Excursions","nav.nosotros":"About us","nav.agencias":"Agencies",
     "hero.eyebrow":"Official transport · El Cruce 2026",
     "hero.title":'From the airport to the start line, <em>no detours.</em>',
     "hero.lead":"Regular transfers between Bariloche Airport and Cerro Catedral for El Cruce runners.",
@@ -993,7 +1014,7 @@ const UI = {
     "rsv.total-pagar":"Total to pay",
   },
   pt: {
-    "nav.destinos":"Destinos","nav.nosotros":"Sobre nós","nav.agencias":"Agências",
+    "nav.destinos":"Destinos","nav.excursiones":"Passeios","nav.nosotros":"Sobre nós","nav.agencias":"Agências",
     "hero.eyebrow":"Transporte oficial · El Cruce 2026",
     "hero.title":'Do aeroporto até a largada, <em>sem voltas.</em>',
     "hero.lead":"Traslados regulares entre o Aeroporto de Bariloche e o Cerro Catedral para corredores de El Cruce.",
