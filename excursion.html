@@ -3054,10 +3054,16 @@ function updateCarousel(){
   const slides = track.children;
   Array.from(slides).forEach((el,i)=> el.classList.toggle("active", i===carIdx));
 
-  const active = slides[carIdx];
-  if(active){
-    const x = container.clientWidth/2 - (active.offsetLeft + active.offsetWidth/2);
-    track.style.transform = "translateX("+x+"px)";
+  // En mobile el track scrollea nativamente (scroll-snap): aplicar ademas
+  // un transform lo desplaza por duplicado y deja las fotos fuera de vista.
+  if(isMobile()){
+    track.style.transform = "";
+  } else {
+    const active = slides[carIdx];
+    if(active){
+      const x = container.clientWidth/2 - (active.offsetLeft + active.offsetWidth/2);
+      track.style.transform = "translateX("+x+"px)";
+    }
   }
   document.querySelectorAll("#carousel-dots button").forEach((b,i)=>b.classList.toggle("on", i===carIdx));
 
