@@ -350,7 +350,7 @@
         <td>${l.nombre || '<span class="muted">Sin nombre</span>'}${l.dni ? '<br><span class="muted">DNI ' + l.dni + '</span>' : ''}</td>
         <td>${l.telefono || '-'}${l.email ? '<br><span class="muted">' + l.email + '</span>' : ''}</td>
         <td>${originText(l)}</td>
-        <td>${fmtMoney(l.total)}</td>
+        <td>${fmtMoney(l.total)}${l.pasajeros ? '<br><span class="muted">' + l.pasajeros + '</span>' : ''}</td>
         <td>
           ${readOnly
             ? (isAbandonedCheckout(l)
