@@ -137,6 +137,8 @@
           <th>Fecha paseo</th>
           <th>Cliente</th>
           <th>Contacto</th>
+          <th>Hotel</th>
+          <th>Pax</th>
           <th>Origen</th>
           <th>Total</th>
           <th>Estado</th>
@@ -347,10 +349,12 @@
         <td><span class="badge ${channelInfo(l).cls}">${channelInfo(l).label}</span></td>
         <td>${l.excursion || '-'}${l.opcion ? '<br><span class="muted">' + l.opcion + '</span>' : ''}</td>
         <td>${l.fecha || '-'}</td>
-        <td>${l.nombre || '<span class="muted">Sin nombre</span>'}${l.dni ? '<br><span class="muted">DNI ' + l.dni + '</span>' : ''}${l.hospedaje ? '<br><span class="muted">' + l.hospedaje + '</span>' : ''}</td>
+        <td>${l.nombre || '<span class="muted">Sin nombre</span>'}${l.dni ? '<br><span class="muted">DNI ' + l.dni + '</span>' : ''}</td>
         <td>${l.telefono || '-'}${l.email ? '<br><span class="muted">' + l.email + '</span>' : ''}</td>
+        <td>${l.hospedaje || '-'}</td>
+        <td>${l.pasajeros || '-'}</td>
         <td>${originText(l)}</td>
-        <td>${fmtMoney(l.total)}${l.pasajeros ? '<br><span class="muted">' + l.pasajeros + '</span>' : ''}</td>
+        <td>${fmtMoney(l.total)}</td>
         <td>
           ${readOnly
             ? (isAbandonedCheckout(l)
