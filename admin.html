@@ -72,6 +72,13 @@
   .badge.status.ganado{background:#E6F4EC;color:#2E7D4F}
   .badge.status.perdido{background:#FDE9E7;color:#B5462E}
   .badge.abandonado{background:#FFF1DE;color:#B5622E}
+  select.carga{font-family:var(--body);font-weight:700;font-size:.78rem;border-radius:6px;border:1.5px solid var(--line);padding:.3rem .4rem;cursor:pointer}
+  select.carga.cargado{background:#E6F4EC;color:#2E7D4F}
+  select.carga.pendiente{background:#FDE9E7;color:#B5462E}
+  .badge.carga{cursor:default}
+  .badge.carga.cargado{background:#E6F4EC;color:#2E7D4F}
+  .badge.carga.pendiente{background:#FDE9E7;color:#B5462E}
+  .badge.carga.noconfirmado{background:#FFF4CC;color:#8A6D1E}
   .abandonado-hint{display:block;font-size:.7rem;color:#B5622E;font-weight:700;margin-top:.3rem}
   .role-badge{font-size:.72rem;font-weight:700;padding:.2rem .55rem;border-radius:6px;background:rgba(255,255,255,.15);letter-spacing:.02em}
   .notes-input{width:160px;font-family:var(--body);font-size:.8rem;border:1.5px solid var(--line);border-radius:6px;padding:.35rem .5rem}
@@ -142,6 +149,7 @@
           <th>Origen</th>
           <th>Total</th>
           <th>Estado</th>
+          <th>Carga sistema</th>
           <th>Notas</th>
         </tr>
       </thead>
@@ -342,6 +350,7 @@
 
     const readOnly = ROLE === 'viewer';
     const STATUS_LABELS = { nuevo: 'Nuevo', contactado: 'Contactado', cotizado: 'Cotizado', ganado: 'Ganado', perdido: 'Perdido' };
+    const CARGA_LABELS = { cargado: 'Cargado en el sistema', pendiente: 'Pendiente de carga' };
 
     tbody.innerHTML = leads.map(l => `
       <tr data-id="${l.id}">
@@ -369,6 +378,16 @@
           </select>${isAbandonedCheckout(l) ? '<span class="abandonado-hint">⚠ Carrito abandonado</span>' : ''}`}
         </td>
         <td>
+          ${l.status !== 'ganado'
+            ? `<span class="badge carga noconfirmado">No confirmado</span>`
+            : (readOnly
+              ? `<span class="badge carga ${l.carga_sistema || 'pendiente'}">${CARGA_LABELS[l.carga_sistema || 'pendiente']}</span>`
+              : `<select class="carga ${l.carga_sistema || 'pendiente'}" data-field="carga_sistema">
+              <option value="pendiente" ${(l.carga_sistema || 'pendiente') === 'pendiente' ? 'selected' : ''}>Pendiente de carga</option>
+              <option value="cargado" ${l.carga_sistema === 'cargado' ? 'selected' : ''}>Cargado en el sistema</option>
+            </select>`)}
+        </td>
+        <td>
           ${readOnly
             ? (l.notes ? l.notes : '<span class="muted">-</span>')
             : `<input type="text" class="notes-input" data-field="notes" value="${(l.notes || '').replace(/"/g, '&quot;')}" placeholder="Notas...">
@@ -379,6 +398,9 @@
 
     if (!readOnly) {
       tbody.querySelectorAll('select.status').forEach(sel => {
+        sel.addEventListener('change', () => saveField(sel));
+      });
+      tbody.querySelectorAll('select.carga').forEach(sel => {
         sel.addEventListener('change', () => saveField(sel));
       });
       tbody.querySelectorAll('.notes-input').forEach(inp => {
@@ -399,6 +421,11 @@
       const lead = allLeads.find(l => String(l.id) === String(id));
       if (lead) lead.status = value;
     }
+    if (field === 'carga_sistema') {
+      el.className = 'carga ' + value;
+      const lead = allLeads.find(l => String(l.id) === String(id));
+      if (lead) lead.carga_sistema = value;
+    }
 
     try {
       const resp = await apiFetch('/api/admin-update-lead', {
@@ -408,7 +435,7 @@
       const data = await resp.json();
       if (!resp.ok || !data.ok) throw new Error(data.error || 'Error');
       if (hint) { hint.textContent = '✓'; setTimeout(() => { hint.textContent = ''; }, 1500); }
-      if (field === 'status') render();
+      if (field === 'status' || field === 'carga_sistema') render();
     } catch (err) {
       if (hint) hint.textContent = '✗ ' + (err.message || err);
     }
@@ -421,7 +448,8 @@
 
   function exportCsv() {
     const STATUS_LABELS = { nuevo: 'Nuevo', contactado: 'Contactado', cotizado: 'Cotizado', ganado: 'Ganado', perdido: 'Perdido' };
-    const headers = ['Fecha', 'Canal', 'Excursión', 'Opción', 'Fecha del paseo', 'Cliente', 'DNI', 'Teléfono', 'Email', 'Hospedaje', 'Pasajeros', 'Total', 'Estado', 'Origen', 'Notas'];
+    const CARGA_LABELS = { cargado: 'Cargado en el sistema', pendiente: 'Pendiente de carga' };
+    const headers = ['Fecha', 'Canal', 'Excursión', 'Opción', 'Fecha del paseo', 'Cliente', 'DNI', 'Teléfono', 'Email', 'Hospedaje', 'Pasajeros', 'Total', 'Estado', 'Carga sistema', 'Origen', 'Notas'];
     const rows = filteredLeads.map(l => [
       l.created_at ? new Date(l.created_at).toLocaleString('es-AR') : '',
       channelInfo(l).label,
@@ -436,6 +464,7 @@
       l.pasajeros || '',
       l.total || '',
       isAbandonedCheckout(l) ? 'Carrito abandonado' : (STATUS_LABELS[l.status] || l.status || ''),
+      l.status !== 'ganado' ? 'No confirmado' : CARGA_LABELS[l.carga_sistema || 'pendiente'],
       originText(l).replace(/<[^>]+>/g, ''),
       l.notes || '',
     ]);

@@ -9,6 +9,7 @@ import { updateLeadById } from '../lib/supabase.js';
 import { rateLimit } from '../lib/rate-limit.js';
 
 const VALID_STATUSES = ['nuevo', 'contactado', 'cotizado', 'ganado', 'perdido'];
+const VALID_CARGA = ['cargado', 'pendiente'];
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -30,17 +31,21 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'No autorizado' });
   }
 
-  const { id, status, notes } = req.body || {};
+  const { id, status, notes, carga_sistema } = req.body || {};
   if (!id) {
     return res.status(400).json({ error: 'Falta id' });
   }
   if (status !== undefined && !VALID_STATUSES.includes(status)) {
     return res.status(400).json({ error: 'Estado invalido' });
   }
+  if (carga_sistema !== undefined && !VALID_CARGA.includes(carga_sistema)) {
+    return res.status(400).json({ error: 'Valor de carga_sistema invalido' });
+  }
 
   const patch = { updated_at: new Date().toISOString() };
   if (status !== undefined) patch.status = status;
   if (notes !== undefined) patch.notes = notes;
+  if (carga_sistema !== undefined) patch.carga_sistema = carga_sistema;
 
   try {
     const lead = await updateLeadById(id, patch);
