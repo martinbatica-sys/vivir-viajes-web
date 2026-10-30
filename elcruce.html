@@ -564,6 +564,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <div class="field">
+          <label data-i18n="rsv.hotel">Hotel</label>
+          <input type="text" id="f-hotel" placeholder="Hotel / cabaña / alojamiento en Bariloche" data-i18n-placeholder="rsv.hotel-placeholder">
+        </div>
+
+        <div class="field">
           <label data-i18n="rsv.grupo">Tu grupo de carrera</label>
           <select id="f-grupo">
             <option value="0" data-i18n="rsv.grupo0">Grupo 1 · 5 al 7 dic</option>
@@ -857,13 +862,14 @@ const UI = {
     "rsv.vuelo-llegada":"Vuelo IN", "rsv.fecha-in":"Fecha IN", "rsv.elegir-fecha":"Elegir fecha", "rsv.horario-llegada":"Hora",
     "rsv.vuelo-regreso":"Vuelo OUT", "rsv.fecha-out":"Fecha OUT", "rsv.horario-salida":"Hora",
     "rsv.email":"Email", "rsv.tel":"Teléfono",
+    "rsv.hotel":"Hotel", "rsv.hotel-placeholder":"Hotel / cabaña / alojamiento en Bariloche",
     "rsv.grupo":"Tu grupo de carrera",
     "rsv.grupo0":"Grupo 1 · 5 al 7 dic","rsv.grupo1":"Grupo 2 · 6 al 8 dic","rsv.grupo2":"Grupo 3 · 7 al 9 dic","rsv.grupo3":"Grupo 4 · 8 al 10 dic","rsv.grupo4":"Grupo 5 · 9 al 11 dic","rsv.grupo5":"La Etapa · 5 dic","rsv.grupo6":"La Etapa · 6 dic",
     "rsv.pagar":"Pagar", "rsv.con-mp":"con Mercado Pago", "rsv.consultar-wa":"Consultar por WhatsApp",
     "rsv.reservar-btn":"Reservar",
     "rsv.corredor":"corredor","rsv.corredores-pl":"corredores",
     "rsv.hint-vuelos":"Completá los datos de vuelo marcados.",
-    "rsv.hint-datos":"Completá nombre, email y teléfono.",
+    "rsv.hint-datos":"Completá nombre, email, teléfono y hotel.",
     "rsv.hint-email":"Ingresá un email válido.",
     "rsv.redirigiendo":"Redirigiendo...",
     "info.titulo":"Lo que tenés que saber",
@@ -943,13 +949,14 @@ const UI = {
     "rsv.vuelo-llegada":"Flight IN", "rsv.fecha-in":"Date IN", "rsv.elegir-fecha":"Choose date", "rsv.horario-llegada":"Time",
     "rsv.vuelo-regreso":"Flight OUT", "rsv.fecha-out":"Date OUT", "rsv.horario-salida":"Time",
     "rsv.email":"Email", "rsv.tel":"Phone",
+    "rsv.hotel":"Hotel", "rsv.hotel-placeholder":"Hotel / cabin / lodging in Bariloche",
     "rsv.grupo":"Your race group",
     "rsv.grupo0":"Group 1 · Dec 5-7","rsv.grupo1":"Group 2 · Dec 6-8","rsv.grupo2":"Group 3 · Dec 7-9","rsv.grupo3":"Group 4 · Dec 8-10","rsv.grupo4":"Group 5 · Dec 9-11","rsv.grupo5":"La Etapa · Dec 5","rsv.grupo6":"La Etapa · Dec 6",
     "rsv.pagar":"Pay", "rsv.con-mp":"with Mercado Pago", "rsv.consultar-wa":"Ask on WhatsApp",
     "rsv.reservar-btn":"Book",
     "rsv.corredor":"runner","rsv.corredores-pl":"runners",
     "rsv.hint-vuelos":"Fill in the marked flight details.",
-    "rsv.hint-datos":"Fill in your name, email and phone.",
+    "rsv.hint-datos":"Fill in your name, email, phone and hotel.",
     "rsv.hint-email":"Enter a valid email.",
     "rsv.redirigiendo":"Redirecting...",
     "info.titulo":"What you need to know",
@@ -1029,13 +1036,14 @@ const UI = {
     "rsv.vuelo-llegada":"Voo IN", "rsv.fecha-in":"Data IN", "rsv.elegir-fecha":"Escolher data", "rsv.horario-llegada":"Hora",
     "rsv.vuelo-regreso":"Voo OUT", "rsv.fecha-out":"Data OUT", "rsv.horario-salida":"Hora",
     "rsv.email":"Email", "rsv.tel":"Telefone",
+    "rsv.hotel":"Hotel", "rsv.hotel-placeholder":"Hotel / cabana / hospedagem em Bariloche",
     "rsv.grupo":"Seu grupo de corrida",
     "rsv.grupo0":"Grupo 1 · 5 a 7 dez","rsv.grupo1":"Grupo 2 · 6 a 8 dez","rsv.grupo2":"Grupo 3 · 7 a 9 dez","rsv.grupo3":"Grupo 4 · 8 a 10 dez","rsv.grupo4":"Grupo 5 · 9 a 11 dez","rsv.grupo5":"La Etapa · 5 dez","rsv.grupo6":"La Etapa · 6 dez",
     "rsv.pagar":"Pagar", "rsv.con-mp":"com Mercado Pago", "rsv.consultar-wa":"Consultar pelo WhatsApp",
     "rsv.reservar-btn":"Reservar",
     "rsv.corredor":"corredor","rsv.corredores-pl":"corredores",
     "rsv.hint-vuelos":"Preencha os dados de voo marcados.",
-    "rsv.hint-datos":"Preencha nome, email e telefone.",
+    "rsv.hint-datos":"Preencha nome, email, telefone e hotel.",
     "rsv.hint-email":"Digite um email válido.",
     "rsv.redirigiendo":"Redirecionando...",
     "info.titulo":"O que você precisa saber",
@@ -1397,6 +1405,7 @@ function collectStep2(){
     horarioSalida: document.getElementById("f-horario-salida").value,
     email: document.getElementById("f-email").value.trim(),
     tel: document.getElementById("f-tel").value.trim(),
+    hotel: document.getElementById("f-hotel").value.trim(),
   };
 }
 
@@ -1404,7 +1413,7 @@ function validateStep2(d){
   const isIda = state.tramo === "ida";
   const showLlegada = !isIda || state.sentido === 0;
   const showRegreso = !isIda || state.sentido === 1;
-  if (!d.nombre || !d.email || !d.tel) return t("rsv.hint-datos");
+  if (!d.nombre || !d.email || !d.tel || !d.hotel) return t("rsv.hint-datos");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) return t("rsv.hint-email");
   if (showLlegada && (!d.vueloLlegada || !d.fechaIn || !d.horarioLlegada)) return t("rsv.hint-vuelos");
   if (showRegreso && (!d.vueloRegreso || !d.fechaOut || !d.horarioSalida)) return t("rsv.hint-vuelos");
@@ -1422,6 +1431,7 @@ function buildDetalleWa(d){
   if (d.vueloLlegada) lines.push("• IN: vuelo " + d.vueloLlegada + " · " + fmtDateDMY(d.fechaIn) + " " + d.horarioLlegada);
   if (d.vueloRegreso) lines.push("• OUT: vuelo " + d.vueloRegreso + " · " + fmtDateDMY(d.fechaOut) + " " + d.horarioSalida);
   lines.push("• " + t("rsv.grupo") + ": " + GRUPOS_TXT[lang][state.grupo]);
+  lines.push("• " + t("rsv.hotel") + ": " + d.hotel);
   lines.push("• " + t("rsv.email") + ": " + d.email);
   lines.push("• " + t("rsv.tel") + ": " + d.tel);
   lines.push("• " + t("rsv.total") + ": " + fmt(total()));
@@ -1458,7 +1468,7 @@ document.getElementById("btn-wa").addEventListener("click", ()=>{
       dni: null,
       email: d.email,
       telefono: d.tel,
-      hospedaje: null,
+      hospedaje: d.hotel || null,
       notes: buildVuelosNotes(d) || null,
       hp: d.hp,
       ...getTracking(),
@@ -1488,6 +1498,7 @@ document.getElementById("btn-pagar").addEventListener("click", async ()=>{
     nombre: d.nombre,
     email: d.email,
     telefono: d.tel,
+    hospedaje: d.hotel,
     grupo: GRUPOS_TXT[lang][state.grupo],
     vueloLlegada: d.vueloLlegada || null,
     fechaIn: d.fechaIn || null,

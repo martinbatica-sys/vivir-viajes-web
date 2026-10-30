@@ -190,12 +190,12 @@ export default async function handler(req, res) {
 
 async function handleElCruce(req, res, { origin, externalReference, MP_ACCESS_TOKEN }) {
   const {
-    tramo, sentido, pax, total, nombre, email, telefono, grupo,
+    tramo, sentido, pax, total, nombre, email, telefono, grupo, hospedaje,
     vueloLlegada, fechaIn, horarioLlegada, vueloRegreso, fechaOut, horarioSalida,
     utm_source, utm_medium, utm_campaign, utm_term, utm_content, gclid, fbclid,
   } = req.body || {};
 
-  if (!tramo || !pax || !nombre || !email || !telefono || !grupo) {
+  if (!tramo || !pax || !nombre || !email || !telefono || !grupo || !hospedaje) {
     return res.status(400).json({ error: 'Faltan datos de la reserva' });
   }
 
@@ -231,7 +231,7 @@ async function handleElCruce(req, res, { origin, externalReference, MP_ACCESS_TO
       dni: null,
       email,
       telefono,
-      hospedaje: null,
+      hospedaje,
       notes: vuelosNotes,
       utm_source: utm_source || null,
       utm_medium: utm_medium || null,
@@ -277,6 +277,7 @@ async function handleElCruce(req, res, { origin, externalReference, MP_ACCESS_TO
       nombre,
       email,
       telefono,
+      hospedaje,
     },
     back_urls: (() => {
       const voucherParams = new URLSearchParams({

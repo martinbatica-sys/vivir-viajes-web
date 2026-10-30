@@ -63,6 +63,7 @@ export default async function handler(req, res) {
       m.vuelo_regreso ? `Vuelo regreso: ${m.vuelo_regreso} (${m.horario_salida || '-'})` : null,
       `Total pagado: $${payment.transaction_amount}`,
       `Cliente: ${m.nombre || '-'}`,
+      `Hotel: ${m.hospedaje || '-'}`,
       `E-mail: ${m.email || '-'}`,
       `Tel: ${m.telefono || '-'}`,
       `Referencia: ${payment.external_reference || '-'}`,
