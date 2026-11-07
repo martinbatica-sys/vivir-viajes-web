@@ -95,6 +95,9 @@
   .field-input+.field-input{margin-top:.3rem}
   select.field-input{cursor:pointer}
   .save-hint{font-size:.7rem;color:var(--ink-soft);margin-left:.3rem}
+  .delete-btn{border:1.5px solid #E3B0B0;background:#FFF5F5;color:#B5302E;border-radius:6px;padding:.35rem .6rem;font-size:.95rem;cursor:pointer;line-height:1}
+  .delete-btn:hover{background:#FCE3E3}
+  .delete-btn:disabled{opacity:.5;cursor:default}
   .empty{padding:2.5rem;text-align:center;color:var(--ink-soft)}
 </style>
 </head>
@@ -182,6 +185,7 @@
             <span class="col-resizer"></span>
           </th>
           <th data-col="notas">Notas<input type="text" id="cf-notas" placeholder="Filtrar..."><span class="col-resizer"></span></th>
+          <th data-col="acciones">Acciones<span class="col-resizer"></span></th>
         </tr>
       </thead>
       <tbody id="tbody"></tbody>
@@ -617,6 +621,9 @@
             : `<input type="text" class="notes-input" data-field="notes" value="${(l.notes || '').replace(/"/g, '&quot;')}" placeholder="Notas...">
           <span class="save-hint"></span>`}
         </td>
+        <td>
+          ${readOnly ? '' : `<button type="button" class="delete-btn" title="Eliminar">🗑</button>`}
+        </td>
       </tr>
     `).join('');
 
@@ -633,12 +640,38 @@
       tbody.querySelectorAll('.field-input').forEach(el => {
         el.addEventListener('change', () => saveField(el));
       });
+      tbody.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', () => deleteLead(btn));
+      });
     }
 
     if (!colsInitialized) {
       colsInitialized = true;
       initColWidths();
       initColResize();
+    }
+  }
+
+  async function deleteLead(btn) {
+    const tr = btn.closest('tr');
+    const id = tr.dataset.id;
+    const lead = allLeads.find(l => String(l.id) === String(id));
+    const nombre = lead && lead.nombre ? lead.nombre : `lead #${id}`;
+    if (!confirm(`¿Eliminar definitivamente a ${nombre}? Esta acción no se puede deshacer.`)) return;
+
+    btn.disabled = true;
+    try {
+      const resp = await apiFetch('/api/admin-delete-lead', {
+        method: 'POST',
+        body: JSON.stringify({ id }),
+      });
+      const data = await resp.json();
+      if (!resp.ok || !data.ok) throw new Error(data.error || 'Error');
+      allLeads = allLeads.filter(l => String(l.id) !== String(id));
+      render();
+    } catch (err) {
+      alert('No se pudo eliminar: ' + (err.message || err));
+      btn.disabled = false;
     }
   }
 
