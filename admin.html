@@ -48,9 +48,16 @@
   .stat{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.6rem 1rem;font-size:.82rem;color:var(--ink-soft)}
   .stat b{display:block;font-family:var(--display);font-size:1.15rem;color:var(--navy)}
 
-  .table-wrap{padding:1.2rem 1.4rem 2.5rem;overflow-x:auto}
-  table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:.85rem;min-width:1100px}
-  th{text-align:left;background:var(--panel);color:var(--navy);font-weight:700;padding:.6rem .7rem;white-space:nowrap;position:sticky;top:0}
+  .table-wrap{padding:1.2rem 1.4rem 2.5rem;overflow-x:auto;overflow-y:auto;max-height:calc(100vh - 230px)}
+  table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--line);border-radius:12px;font-size:.85rem;min-width:1100px}
+  th{text-align:left;background:var(--panel);color:var(--navy);font-weight:700;padding:.6rem .7rem;white-space:nowrap;position:sticky;top:0;vertical-align:top}
+  thead tr th:first-child{border-top-left-radius:12px}
+  thead tr th:last-child{border-top-right-radius:12px}
+  tbody tr:last-child td:first-child{border-bottom-left-radius:12px}
+  tbody tr:last-child td:last-child{border-bottom-right-radius:12px}
+  th input[type=text],th input[type=date],th select{display:block;margin-top:.35rem;width:100%;min-width:90px;font-family:var(--body);font-weight:400;font-size:.78rem;border:1.5px solid var(--line);border-radius:6px;padding:.3rem .4rem;box-sizing:border-box;background:#fff;color:var(--ink);white-space:normal}
+  th .date-pair{display:flex;gap:.25rem;margin-top:.35rem}
+  th .date-pair input{min-width:0;margin-top:0}
   td{padding:.55rem .7rem;border-top:1px solid var(--line);vertical-align:top}
   tr:hover td{background:#FAFBFE}
   .muted{color:var(--ink-soft)}
@@ -108,26 +115,7 @@
   </header>
 
   <div class="toolbar">
-    <select id="f-status">
-      <option value="">Todos los estados</option>
-      <option value="nuevo">Nuevo</option>
-      <option value="abandonado">Carrito abandonado</option>
-      <option value="contactado">Contactado</option>
-      <option value="cotizado">Cotizado</option>
-      <option value="ganado">Ganado</option>
-      <option value="perdido">Perdido</option>
-    </select>
-    <select id="f-channel">
-      <option value="">Todos los canales</option>
-      <option value="mercadopago">Pago (Mercado Pago)</option>
-      <option value="whatsapp">Consulta (WhatsApp)</option>
-      <option value="receptivo">Agencias (Receptivo)</option>
-      <option value="elcruce">El Cruce</option>
-    </select>
-    <input type="text" id="f-search" placeholder="Buscar por nombre, email o excursión..." autocomplete="off">
-    <input type="date" id="f-from" title="Desde">
-    <input type="date" id="f-to" title="Hasta">
-    <button type="button" id="f-clear-dates">Limpiar fechas</button>
+    <button type="button" id="f-clear-all">✕ Limpiar filtros</button>
     <button type="button" id="refresh-btn">↻ Actualizar</button>
     <button type="button" id="export-btn">⬇ Descargar planilla</button>
   </div>
@@ -138,19 +126,53 @@
     <table id="table" hidden>
       <thead>
         <tr>
-          <th>Fecha</th>
-          <th>Canal</th>
-          <th>Excursión</th>
-          <th>Fecha paseo</th>
-          <th>Cliente</th>
-          <th>Contacto</th>
-          <th>Hotel</th>
-          <th>Pax</th>
-          <th>Origen</th>
-          <th>Total</th>
-          <th>Estado</th>
-          <th>Carga sistema</th>
-          <th>Notas</th>
+          <th>
+            Fecha
+            <div class="date-pair">
+              <input type="date" id="cf-from" title="Desde">
+              <input type="date" id="cf-to" title="Hasta">
+            </div>
+          </th>
+          <th>
+            Canal
+            <select id="cf-channel">
+              <option value="">Todos</option>
+              <option value="mercadopago">Pago (MP)</option>
+              <option value="whatsapp">Consulta (WA)</option>
+              <option value="receptivo">Agencias</option>
+              <option value="elcruce">El Cruce</option>
+            </select>
+          </th>
+          <th>Excursión<input type="text" id="cf-excursion" placeholder="Filtrar..."></th>
+          <th>Fecha paseo<input type="text" id="cf-fechapaseo" placeholder="Filtrar..."></th>
+          <th>Cliente<input type="text" id="cf-cliente" placeholder="Filtrar..."></th>
+          <th>Contacto<input type="text" id="cf-contacto" placeholder="Filtrar..."></th>
+          <th>Hotel<input type="text" id="cf-hotel" placeholder="Filtrar..."></th>
+          <th>Pax<input type="text" id="cf-pax" placeholder="Filtrar..."></th>
+          <th>Origen<input type="text" id="cf-origen" placeholder="Filtrar..."></th>
+          <th>Total<input type="text" id="cf-total" placeholder="Filtrar..."></th>
+          <th>
+            Estado
+            <select id="cf-status">
+              <option value="">Todos</option>
+              <option value="nuevo">Nuevo</option>
+              <option value="abandonado">Carrito abandonado</option>
+              <option value="contactado">Contactado</option>
+              <option value="cotizado">Cotizado</option>
+              <option value="ganado">Ganado</option>
+              <option value="perdido">Perdido</option>
+            </select>
+          </th>
+          <th>
+            Carga sistema
+            <select id="cf-carga">
+              <option value="">Todos</option>
+              <option value="cargado">Cargado en el sistema</option>
+              <option value="pendiente">Pendiente de carga</option>
+              <option value="noconfirmado">No confirmado</option>
+            </select>
+          </th>
+          <th>Notas<input type="text" id="cf-notas" placeholder="Filtrar..."></th>
         </tr>
       </thead>
       <tbody id="tbody"></tbody>
@@ -293,11 +315,20 @@
   }
 
   function render() {
-    const statusF = document.getElementById('f-status').value;
-    const channelF = document.getElementById('f-channel').value;
-    const searchF = document.getElementById('f-search').value.trim().toLowerCase();
-    const fromF = document.getElementById('f-from').value;
-    const toF = document.getElementById('f-to').value;
+    const fromF = document.getElementById('cf-from').value;
+    const toF = document.getElementById('cf-to').value;
+    const channelF = document.getElementById('cf-channel').value;
+    const excursionF = document.getElementById('cf-excursion').value.trim().toLowerCase();
+    const fechaPaseoF = document.getElementById('cf-fechapaseo').value.trim().toLowerCase();
+    const clienteF = document.getElementById('cf-cliente').value.trim().toLowerCase();
+    const contactoF = document.getElementById('cf-contacto').value.trim().toLowerCase();
+    const hotelF = document.getElementById('cf-hotel').value.trim().toLowerCase();
+    const paxF = document.getElementById('cf-pax').value.trim().toLowerCase();
+    const origenF = document.getElementById('cf-origen').value.trim().toLowerCase();
+    const totalF = document.getElementById('cf-total').value.trim().toLowerCase();
+    const statusF = document.getElementById('cf-status').value;
+    const cargaF = document.getElementById('cf-carga').value;
+    const notasF = document.getElementById('cf-notas').value.trim().toLowerCase();
 
     let leads = allLeads.filter(l => {
       if (statusF === 'abandonado' && !isAbandonedCheckout(l)) return false;
@@ -306,16 +337,25 @@
       if (channelF === 'receptivo' && !isReceptivo(l)) return false;
       if (channelF === 'elcruce' && !isElCruce(l)) return false;
       if (channelF && channelF !== 'receptivo' && channelF !== 'elcruce' && (l.channel !== channelF || isReceptivo(l) || isElCruce(l))) return false;
-      if (searchF) {
-        const hay = [l.nombre, l.email, l.excursion, l.telefono].filter(Boolean).join(' ').toLowerCase();
-        if (!hay.includes(searchF)) return false;
-      }
       if (fromF || toF) {
         const created = l.created_at ? l.created_at.slice(0, 10) : '';
         if (!created) return false;
         if (fromF && created < fromF) return false;
         if (toF && created > toF) return false;
       }
+      if (excursionF && !(l.excursion || '').toLowerCase().includes(excursionF)) return false;
+      if (fechaPaseoF && !(l.fecha || '').toLowerCase().includes(fechaPaseoF)) return false;
+      if (clienteF && ![l.nombre, l.dni].filter(Boolean).join(' ').toLowerCase().includes(clienteF)) return false;
+      if (contactoF && ![l.telefono, l.email].filter(Boolean).join(' ').toLowerCase().includes(contactoF)) return false;
+      if (hotelF && !(l.hospedaje || '').toLowerCase().includes(hotelF)) return false;
+      if (paxF && !(l.pasajeros || '').toLowerCase().includes(paxF)) return false;
+      if (origenF && !originText(l).replace(/<[^>]+>/g, '').toLowerCase().includes(origenF)) return false;
+      if (totalF && !String(l.total ?? '').toLowerCase().includes(totalF)) return false;
+      if (cargaF) {
+        const effective = l.status !== 'ganado' ? 'noconfirmado' : (l.carga_sistema || 'pendiente');
+        if (effective !== cargaF) return false;
+      }
+      if (notasF && !(l.notes || '').toLowerCase().includes(notasF)) return false;
       return true;
     });
     filteredLeads = leads;
@@ -482,14 +522,17 @@
   }
 
   document.getElementById('export-btn').addEventListener('click', exportCsv);
-  document.getElementById('f-status').addEventListener('change', render);
-  document.getElementById('f-channel').addEventListener('change', render);
-  document.getElementById('f-search').addEventListener('input', render);
-  document.getElementById('f-from').addEventListener('change', render);
-  document.getElementById('f-to').addEventListener('change', render);
-  document.getElementById('f-clear-dates').addEventListener('click', () => {
-    document.getElementById('f-from').value = '';
-    document.getElementById('f-to').value = '';
+
+  const COLUMN_FILTER_IDS = [
+    'cf-from', 'cf-to', 'cf-channel', 'cf-excursion', 'cf-fechapaseo', 'cf-cliente',
+    'cf-contacto', 'cf-hotel', 'cf-pax', 'cf-origen', 'cf-total', 'cf-status', 'cf-carga', 'cf-notas',
+  ];
+  COLUMN_FILTER_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    el.addEventListener(el.tagName === 'SELECT' || el.type === 'date' ? 'change' : 'input', render);
+  });
+  document.getElementById('f-clear-all').addEventListener('click', () => {
+    COLUMN_FILTER_IDS.forEach(id => { document.getElementById(id).value = ''; });
     render();
   });
   document.getElementById('refresh-btn').addEventListener('click', loadLeads);
