@@ -1121,6 +1121,14 @@ function fmtDateDMY(iso){
   const [y, m, d] = iso.split("-");
   return d && m && y ? `${d}/${m}/${y}` : iso;
 }
+// Fecha IN/OUT reales que completo la persona (no el nombre del grupo),
+// para mostrar en "Fecha paseo" del mini-CRM.
+function fechaPaseoTxt(d){
+  const inTxt = fmtDateDMY(d.fechaIn);
+  const outTxt = fmtDateDMY(d.fechaOut);
+  if (inTxt && outTxt && inTxt !== outTxt) return inTxt + " - " + outTxt;
+  return inTxt || outTxt || "";
+}
 
 // Calendario (portado de index.html / excursion.html), con min y max fijos.
 const MESES_ES = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
@@ -1441,7 +1449,7 @@ function buildDetalleWa(d){
 }
 
 function buildVuelosNotes(d){
-  const parts = [];
+  const parts = [t("rsv.grupo") + ": " + GRUPOS_TXT[lang][state.grupo]];
   if (d.vueloLlegada) parts.push("IN: vuelo " + d.vueloLlegada + " · " + fmtDateDMY(d.fechaIn) + " " + d.horarioLlegada);
   if (d.vueloRegreso) parts.push("OUT: vuelo " + d.vueloRegreso + " · " + fmtDateDMY(d.fechaOut) + " " + d.horarioSalida);
   return parts.join(" / ");
@@ -1464,7 +1472,7 @@ document.getElementById("btn-wa").addEventListener("click", ()=>{
       excursionId: "elcruce",
       excursion: "Traslado El Cruce · " + (state.tramo==="ida" ? t("rsv.ida") : t("rsv.idavuelta")),
       opcion: state.tramo==="ida" ? SENTIDOS_TXT[lang][state.sentido] : null,
-      fecha: GRUPOS_TXT[lang][state.grupo],
+      fecha: fechaPaseoTxt(d),
       pasajeros: state.pax + " " + (state.pax===1?t("rsv.corredor"):t("rsv.corredores-pl")),
       nombre: d.nombre,
       dni: null,

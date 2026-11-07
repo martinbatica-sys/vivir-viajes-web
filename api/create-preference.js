@@ -212,9 +212,16 @@ async function handleElCruce(req, res, { origin, externalReference, MP_ACCESS_TO
   const validatedTotal = priced.total;
   const excursionLabel = `Traslado El Cruce · ${tramo}`;
   const pasajerosTxt = `${pax} ${Number(pax) === 1 ? 'corredor' : 'corredores'}`;
+  const fmtFecha = (iso) => iso ? iso.split('-').reverse().join('/') : null;
+  // "Fecha paseo" del mini-CRM muestra el IN/OUT real que completo la
+  // persona, no el nombre del grupo de carrera (ese se guarda en notes).
+  const fechaPaseoTxt = (fechaIn && fechaOut && fechaIn !== fechaOut)
+    ? `${fmtFecha(fechaIn)} - ${fmtFecha(fechaOut)}`
+    : (fmtFecha(fechaIn) || fmtFecha(fechaOut) || null);
   const vuelosNotes = [
-    vueloLlegada ? `IN: vuelo ${vueloLlegada} · ${fechaIn || '-'} ${horarioLlegada || ''}`.trim() : null,
-    vueloRegreso ? `OUT: vuelo ${vueloRegreso} · ${fechaOut || '-'} ${horarioSalida || ''}`.trim() : null,
+    `Grupo: ${grupo}`,
+    vueloLlegada ? `IN: vuelo ${vueloLlegada} · ${fmtFecha(fechaIn) || '-'} ${horarioLlegada || ''}`.trim() : null,
+    vueloRegreso ? `OUT: vuelo ${vueloRegreso} · ${fmtFecha(fechaOut) || '-'} ${horarioSalida || ''}`.trim() : null,
   ].filter(Boolean).join(' / ') || null;
 
   try {
@@ -224,7 +231,7 @@ async function handleElCruce(req, res, { origin, externalReference, MP_ACCESS_TO
       excursion_id: 'elcruce',
       excursion: excursionLabel,
       opcion: sentido || null,
-      fecha: grupo,
+      fecha: fechaPaseoTxt,
       pasajeros: pasajerosTxt,
       total: validatedTotal,
       nombre,
