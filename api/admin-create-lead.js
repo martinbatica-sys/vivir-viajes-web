@@ -27,6 +27,10 @@ export default async function handler(req, res) {
 
   try {
     const lead = await insertLead({
+      // Prefijo "MANUAL-" en vez de "VV-...": admin.html lo usa para saber
+      // que este lead se cargo a mano (y por eso el Canal se puede editar;
+      // en los leads que vienen del sitio, el Canal ya viene determinado).
+      external_reference: `MANUAL-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
       channel: 'whatsapp',
       status: 'nuevo',
       excursion_id: null,

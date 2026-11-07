@@ -289,6 +289,14 @@
   function isAbandonedCheckout(lead) {
     return lead.channel === 'mercadopago' && lead.status === 'nuevo';
   }
+
+  // Los leads que vienen del sitio ya traen su Canal determinado por el
+  // flujo que los creo (log-lead.js / create-preference.js). Solo los que
+  // se cargan a mano desde "+ Agregar" (admin-create-lead.js, marcados con
+  // external_reference "MANUAL-...") pueden editar ese campo.
+  function isManualLead(lead) {
+    return typeof lead.external_reference === 'string' && lead.external_reference.startsWith('MANUAL-');
+  }
   function channelInfo(lead) {
     if (isReceptivo(lead)) return { cls: 'receptivo', label: 'Agencia' };
     if (isElCruce(lead)) return { cls: 'elcruce', label: 'El Cruce' };
@@ -550,7 +558,7 @@
             : `<input type="datetime-local" class="field-input" data-field="created_at" value="${isoToDatetimeLocal(l.created_at)}">`}
         </td>
         <td>
-          ${readOnly ? `<span class="badge ${channelInfo(l).cls}">${channelInfo(l).label}</span>`
+          ${(readOnly || !isManualLead(l)) ? `<span class="badge ${channelInfo(l).cls}">${channelInfo(l).label}</span>`
             : `<select class="field-input" data-field="channel">
             ${CANAL_OPTIONS.map(o => `<option value="${o.value}" ${l.channel === o.value ? 'selected' : ''}>${o.label}</option>`).join('')}
           </select>`}
