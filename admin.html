@@ -146,7 +146,6 @@
           <th>Excursión<input type="text" id="cf-excursion" placeholder="Filtrar..."></th>
           <th>Fecha paseo<input type="text" id="cf-fechapaseo" placeholder="Filtrar..."></th>
           <th>Cliente<input type="text" id="cf-cliente" placeholder="Filtrar..."></th>
-          <th>Contacto<input type="text" id="cf-contacto" placeholder="Filtrar..."></th>
           <th>Hotel<input type="text" id="cf-hotel" placeholder="Filtrar..."></th>
           <th>Pax<input type="text" id="cf-pax" placeholder="Filtrar..."></th>
           <th>Origen<input type="text" id="cf-origen" placeholder="Filtrar..."></th>
@@ -321,7 +320,6 @@
     const excursionF = document.getElementById('cf-excursion').value.trim().toLowerCase();
     const fechaPaseoF = document.getElementById('cf-fechapaseo').value.trim().toLowerCase();
     const clienteF = document.getElementById('cf-cliente').value.trim().toLowerCase();
-    const contactoF = document.getElementById('cf-contacto').value.trim().toLowerCase();
     const hotelF = document.getElementById('cf-hotel').value.trim().toLowerCase();
     const paxF = document.getElementById('cf-pax').value.trim().toLowerCase();
     const origenF = document.getElementById('cf-origen').value.trim().toLowerCase();
@@ -345,8 +343,7 @@
       }
       if (excursionF && !(l.excursion || '').toLowerCase().includes(excursionF)) return false;
       if (fechaPaseoF && !(l.fecha || '').toLowerCase().includes(fechaPaseoF)) return false;
-      if (clienteF && ![l.nombre, l.dni].filter(Boolean).join(' ').toLowerCase().includes(clienteF)) return false;
-      if (contactoF && ![l.telefono, l.email].filter(Boolean).join(' ').toLowerCase().includes(contactoF)) return false;
+      if (clienteF && ![l.nombre, l.dni, l.telefono, l.email].filter(Boolean).join(' ').toLowerCase().includes(clienteF)) return false;
       if (hotelF && !(l.hospedaje || '').toLowerCase().includes(hotelF)) return false;
       if (paxF && !(l.pasajeros || '').toLowerCase().includes(paxF)) return false;
       if (origenF && !originText(l).replace(/<[^>]+>/g, '').toLowerCase().includes(origenF)) return false;
@@ -398,8 +395,7 @@
         <td><span class="badge ${channelInfo(l).cls}">${channelInfo(l).label}</span></td>
         <td>${l.excursion || '-'}${l.opcion ? '<br><span class="muted">' + l.opcion + '</span>' : ''}</td>
         <td>${l.fecha || '-'}</td>
-        <td>${l.nombre || '<span class="muted">Sin nombre</span>'}${l.dni ? '<br><span class="muted">DNI ' + l.dni + '</span>' : ''}</td>
-        <td>${l.telefono || '-'}${l.email ? '<br><span class="muted">' + l.email + '</span>' : ''}</td>
+        <td>${l.nombre || '<span class="muted">Sin nombre</span>'}${l.dni ? '<br><span class="muted">DNI ' + l.dni + '</span>' : ''}${l.telefono ? '<br><span class="muted">' + l.telefono + '</span>' : ''}${l.email ? '<br><span class="muted">' + l.email + '</span>' : ''}</td>
         <td>${l.hospedaje || '-'}</td>
         <td>${l.pasajeros || '-'}</td>
         <td>${originText(l)}</td>
@@ -525,7 +521,7 @@
 
   const COLUMN_FILTER_IDS = [
     'cf-from', 'cf-to', 'cf-channel', 'cf-excursion', 'cf-fechapaseo', 'cf-cliente',
-    'cf-contacto', 'cf-hotel', 'cf-pax', 'cf-origen', 'cf-total', 'cf-status', 'cf-carga', 'cf-notas',
+    'cf-hotel', 'cf-pax', 'cf-origen', 'cf-total', 'cf-status', 'cf-carga', 'cf-notas',
   ];
   COLUMN_FILTER_IDS.forEach(id => {
     const el = document.getElementById(id);
