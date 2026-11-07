@@ -50,7 +50,9 @@
 
   .table-wrap{padding:1.2rem 1.4rem 2.5rem;overflow-x:auto;overflow-y:auto;max-height:calc(100vh - 230px)}
   table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--line);border-radius:12px;font-size:.85rem;min-width:1100px}
-  th{text-align:left;background:var(--panel);color:var(--navy);font-weight:700;padding:.6rem .7rem;white-space:nowrap;position:sticky;top:0;vertical-align:top}
+  th{text-align:left;background:var(--panel);color:var(--navy);font-weight:700;padding:.6rem .7rem;white-space:normal;position:sticky;top:0;vertical-align:top}
+  .col-resizer{position:absolute;top:0;right:0;width:7px;height:100%;cursor:col-resize;user-select:none;touch-action:none;z-index:2}
+  .col-resizer:hover,.col-resizer.resizing{background:rgba(22,40,76,.18)}
   thead tr th:first-child{border-top-left-radius:12px}
   thead tr th:last-child{border-top-right-radius:12px}
   tbody tr:last-child td:first-child{border-bottom-left-radius:12px}
@@ -126,14 +128,15 @@
     <table id="table" hidden>
       <thead>
         <tr>
-          <th>
+          <th data-col="fecha">
             Fecha
             <div class="date-pair">
               <input type="date" id="cf-from" title="Desde">
               <input type="date" id="cf-to" title="Hasta">
             </div>
+            <span class="col-resizer"></span>
           </th>
-          <th>
+          <th data-col="canal">
             Canal
             <select id="cf-channel">
               <option value="">Todos</option>
@@ -142,15 +145,16 @@
               <option value="receptivo">Agencias</option>
               <option value="elcruce">El Cruce</option>
             </select>
+            <span class="col-resizer"></span>
           </th>
-          <th>Excursión<input type="text" id="cf-excursion" placeholder="Filtrar..."></th>
-          <th>Fecha paseo<input type="text" id="cf-fechapaseo" placeholder="Filtrar..."></th>
-          <th>Cliente<input type="text" id="cf-cliente" placeholder="Filtrar..."></th>
-          <th>Hotel<input type="text" id="cf-hotel" placeholder="Filtrar..."></th>
-          <th>Pax<input type="text" id="cf-pax" placeholder="Filtrar..."></th>
-          <th>Origen<input type="text" id="cf-origen" placeholder="Filtrar..."></th>
-          <th>Total<input type="text" id="cf-total" placeholder="Filtrar..."></th>
-          <th>
+          <th data-col="excursion">Excursión<input type="text" id="cf-excursion" placeholder="Filtrar..."><span class="col-resizer"></span></th>
+          <th data-col="fechapaseo">Fecha paseo<input type="text" id="cf-fechapaseo" placeholder="Filtrar..."><span class="col-resizer"></span></th>
+          <th data-col="cliente">Cliente<input type="text" id="cf-cliente" placeholder="Filtrar..."><span class="col-resizer"></span></th>
+          <th data-col="hotel">Hotel<input type="text" id="cf-hotel" placeholder="Filtrar..."><span class="col-resizer"></span></th>
+          <th data-col="pax">Pax<input type="text" id="cf-pax" placeholder="Filtrar..."><span class="col-resizer"></span></th>
+          <th data-col="origen">Origen<input type="text" id="cf-origen" placeholder="Filtrar..."><span class="col-resizer"></span></th>
+          <th data-col="total">Total<input type="text" id="cf-total" placeholder="Filtrar..."><span class="col-resizer"></span></th>
+          <th data-col="estado">
             Estado
             <select id="cf-status">
               <option value="">Todos</option>
@@ -161,8 +165,9 @@
               <option value="ganado">Ganado</option>
               <option value="perdido">Perdido</option>
             </select>
+            <span class="col-resizer"></span>
           </th>
-          <th>
+          <th data-col="carga">
             Carga sistema
             <select id="cf-carga">
               <option value="">Todos</option>
@@ -170,8 +175,9 @@
               <option value="pendiente">Pendiente de carga</option>
               <option value="noconfirmado">No confirmado</option>
             </select>
+            <span class="col-resizer"></span>
           </th>
-          <th>Notas<input type="text" id="cf-notas" placeholder="Filtrar..."></th>
+          <th data-col="notas">Notas<input type="text" id="cf-notas" placeholder="Filtrar..."><span class="col-resizer"></span></th>
         </tr>
       </thead>
       <tbody id="tbody"></tbody>
@@ -194,6 +200,51 @@
 
   let allLeads = [];
   let filteredLeads = [];
+
+  // Anchos de columna: el usuario los ajusta arrastrando el borde del
+  // header, y quedan guardados por navegador (no son datos del lead).
+  let colWidths = {};
+  try { colWidths = JSON.parse(localStorage.getItem('vv-admin-colwidths') || '{}'); } catch (e) {}
+  let colsInitialized = false;
+
+  function saveColWidths() {
+    try { localStorage.setItem('vv-admin-colwidths', JSON.stringify(colWidths)); } catch (e) {}
+  }
+
+  function initColWidths() {
+    const ths = document.querySelectorAll('thead th[data-col]');
+    ths.forEach(th => {
+      const key = th.dataset.col;
+      const w = colWidths[key] || th.getBoundingClientRect().width;
+      th.style.width = Math.round(w) + 'px';
+    });
+    document.getElementById('table').style.tableLayout = 'fixed';
+  }
+
+  function initColResize() {
+    document.querySelectorAll('thead th[data-col]').forEach(th => {
+      const handle = th.querySelector('.col-resizer');
+      if (!handle) return;
+      handle.addEventListener('mousedown', e => {
+        e.preventDefault();
+        const startX = e.clientX;
+        const startWidth = th.getBoundingClientRect().width;
+        handle.classList.add('resizing');
+        const onMove = e2 => {
+          th.style.width = Math.max(70, startWidth + (e2.clientX - startX)) + 'px';
+        };
+        const onUp = () => {
+          document.removeEventListener('mousemove', onMove);
+          document.removeEventListener('mouseup', onUp);
+          handle.classList.remove('resizing');
+          colWidths[th.dataset.col] = Math.round(th.getBoundingClientRect().width);
+          saveColWidths();
+        };
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
+      });
+    });
+  }
 
   function fmtDate(iso) {
     if (!iso) return '-';
@@ -442,6 +493,12 @@
       tbody.querySelectorAll('.notes-input').forEach(inp => {
         inp.addEventListener('change', () => saveField(inp));
       });
+    }
+
+    if (!colsInitialized) {
+      colsInitialized = true;
+      initColWidths();
+      initColResize();
     }
   }
 
