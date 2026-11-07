@@ -1,10 +1,13 @@
 // Elimina un lead desde el panel admin.html.
 // Protegido con ADMIN_PASSWORD unicamente (header x-admin-key) - igual que
 // admin-update-lead.js, los accesos de solo lectura no pueden borrar leads.
+// Solo se puede borrar un lead cargado a mano (external_reference
+// "MANUAL-...", ver admin-create-lead.js) - los que vienen por formularios
+// o compras del sitio no se pueden eliminar (lib/supabase.js lo valida).
 // Variables de entorno necesarias en Vercel: ADMIN_PASSWORD
 // (+ SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY)
 
-import { deleteLeadById } from '../lib/supabase.js';
+import { deleteManualLeadById } from '../lib/supabase.js';
 import { rateLimit } from '../lib/rate-limit.js';
 
 export default async function handler(req, res) {
@@ -31,7 +34,10 @@ export default async function handler(req, res) {
   }
 
   try {
-    await deleteLeadById(id);
+    const deleted = await deleteManualLeadById(id);
+    if (!deleted) {
+      return res.status(403).json({ ok: false, error: 'Solo se pueden eliminar los leads cargados a mano' });
+    }
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error(err);

@@ -630,7 +630,7 @@
           <span class="save-hint"></span>`}
         </td>
         <td>
-          ${readOnly ? '' : `<button type="button" class="delete-btn" title="Eliminar">🗑</button>`}
+          ${(!readOnly && isManualLead(l)) ? `<button type="button" class="delete-btn" title="Eliminar">🗑</button>` : ''}
         </td>
       </tr>
     `).join('');
