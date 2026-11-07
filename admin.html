@@ -72,12 +72,16 @@
   select.status.nuevo{background:#F0F0F5;color:#4A4A66}
   select.status.contactado{background:#E7F1FB;color:#1E6FA3}
   select.status.cotizado{background:#FBEEDD;color:var(--gold-dark)}
+  select.status.recontactar{background:#F0E6FB;color:#7A4FBF}
+  select.status.pendiente_pago{background:#E1F3F3;color:#1E7A7A}
   select.status.ganado{background:#E6F4EC;color:#2E7D4F}
   select.status.perdido{background:#FDE9E7;color:#B5462E}
   .badge.status{cursor:default}
   .badge.status.nuevo{background:#F0F0F5;color:#4A4A66}
   .badge.status.contactado{background:#E7F1FB;color:#1E6FA3}
   .badge.status.cotizado{background:#FBEEDD;color:var(--gold-dark)}
+  .badge.status.recontactar{background:#F0E6FB;color:#7A4FBF}
+  .badge.status.pendiente_pago{background:#E1F3F3;color:#1E7A7A}
   .badge.status.ganado{background:#E6F4EC;color:#2E7D4F}
   .badge.status.perdido{background:#FDE9E7;color:#B5462E}
   .badge.abandonado{background:#FFF1DE;color:#B5622E}
@@ -169,6 +173,8 @@
               <option value="abandonado">Carrito abandonado</option>
               <option value="contactado">Contactado</option>
               <option value="cotizado">Cotizado</option>
+              <option value="recontactar">Recontactar</option>
+              <option value="pendiente_pago">Pendiente de pago</option>
               <option value="ganado">Ganado</option>
               <option value="perdido">Perdido</option>
             </select>
@@ -520,7 +526,7 @@
     filteredLeads = leads;
 
     const stats = document.getElementById('stats');
-    const counts = { nuevo: 0, contactado: 0, cotizado: 0, ganado: 0, perdido: 0 };
+    const counts = { nuevo: 0, contactado: 0, cotizado: 0, recontactar: 0, pendiente_pago: 0, ganado: 0, perdido: 0 };
     let abandonados = 0;
     allLeads.forEach(l => {
       if (counts[l.status] != null) counts[l.status]++;
@@ -530,7 +536,7 @@
       <div class="stat"><b>${allLeads.length}</b>Total</div>
       <div class="stat"><b>${counts.nuevo - abandonados}</b>Nuevos</div>
       <div class="stat"><b>${abandonados}</b>Carritos abandonados</div>
-      <div class="stat"><b>${counts.contactado + counts.cotizado}</b>En proceso</div>
+      <div class="stat"><b>${counts.contactado + counts.cotizado + counts.recontactar + counts.pendiente_pago}</b>En proceso</div>
       <div class="stat"><b>${counts.ganado}</b>Ganados</div>
       <div class="stat"><b>${counts.perdido}</b>Perdidos</div>
     `;
@@ -548,7 +554,7 @@
     empty.hidden = true;
 
     const readOnly = ROLE === 'viewer';
-    const STATUS_LABELS = { nuevo: 'Nuevo', contactado: 'Contactado', cotizado: 'Cotizado', ganado: 'Ganado', perdido: 'Perdido' };
+    const STATUS_LABELS = { nuevo: 'Nuevo', contactado: 'Contactado', cotizado: 'Cotizado', recontactar: 'Recontactar', pendiente_pago: 'Pendiente de pago', ganado: 'Ganado', perdido: 'Perdido' };
     const CARGA_LABELS = { cargado: 'Cargado en el sistema', pendiente: 'Pendiente de carga' };
 
     tbody.innerHTML = leads.map(l => `
@@ -609,6 +615,8 @@
             <option value="nuevo" ${l.status === 'nuevo' ? 'selected' : ''}>Nuevo</option>
             <option value="contactado" ${l.status === 'contactado' ? 'selected' : ''}>Contactado</option>
             <option value="cotizado" ${l.status === 'cotizado' ? 'selected' : ''}>Cotizado</option>
+            <option value="recontactar" ${l.status === 'recontactar' ? 'selected' : ''}>Recontactar</option>
+            <option value="pendiente_pago" ${l.status === 'pendiente_pago' ? 'selected' : ''}>Pendiente de pago</option>
             <option value="ganado" ${l.status === 'ganado' ? 'selected' : ''}>Ganado</option>
             <option value="perdido" ${l.status === 'perdido' ? 'selected' : ''}>Perdido</option>
           </select>${isAbandonedCheckout(l) ? '<span class="abandonado-hint">⚠ Carrito abandonado</span>' : ''}`}
@@ -753,7 +761,7 @@
   }
 
   function exportCsv() {
-    const STATUS_LABELS = { nuevo: 'Nuevo', contactado: 'Contactado', cotizado: 'Cotizado', ganado: 'Ganado', perdido: 'Perdido' };
+    const STATUS_LABELS = { nuevo: 'Nuevo', contactado: 'Contactado', cotizado: 'Cotizado', recontactar: 'Recontactar', pendiente_pago: 'Pendiente de pago', ganado: 'Ganado', perdido: 'Perdido' };
     const CARGA_LABELS = { cargado: 'Cargado en el sistema', pendiente: 'Pendiente de carga' };
     const headers = ['Fecha', 'Canal', 'Excursión', 'Opción', 'Fecha del paseo', 'Cliente', 'DNI', 'Teléfono', 'Email', 'Hospedaje', 'Pasajeros', 'Total', 'Estado', 'Carga sistema', 'Origen', 'Notas'];
     const rows = filteredLeads.map(l => [

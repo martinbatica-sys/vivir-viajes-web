@@ -8,7 +8,7 @@
 import { updateLeadById } from '../lib/supabase.js';
 import { rateLimit } from '../lib/rate-limit.js';
 
-const VALID_STATUSES = ['nuevo', 'contactado', 'cotizado', 'ganado', 'perdido'];
+const VALID_STATUSES = ['nuevo', 'contactado', 'cotizado', 'recontactar', 'pendiente_pago', 'ganado', 'perdido'];
 const VALID_CARGA = ['cargado', 'pendiente'];
 const VALID_CHANNELS = ['mercadopago', 'whatsapp'];
 
