@@ -91,6 +91,9 @@
   .abandonado-hint{display:block;font-size:.7rem;color:#B5622E;font-weight:700;margin-top:.3rem}
   .role-badge{font-size:.72rem;font-weight:700;padding:.2rem .55rem;border-radius:6px;background:rgba(255,255,255,.15);letter-spacing:.02em}
   .notes-input{width:160px;font-family:var(--body);font-size:.8rem;border:1.5px solid var(--line);border-radius:6px;padding:.35rem .5rem}
+  .field-input{display:block;width:100%;max-width:170px;font-family:var(--body);font-size:.8rem;border:1.5px solid var(--line);border-radius:6px;padding:.35rem .5rem;box-sizing:border-box;background:#fff;color:var(--ink)}
+  .field-input+.field-input{margin-top:.3rem}
+  select.field-input{cursor:pointer}
   .save-hint{font-size:.7rem;color:var(--ink-soft);margin-left:.3rem}
   .empty{padding:2.5rem;text-align:center;color:var(--ink-soft)}
 </style>
@@ -117,6 +120,7 @@
   </header>
 
   <div class="toolbar">
+    <button type="button" id="add-lead-btn">+ Agregar</button>
     <button type="button" id="f-clear-all">✕ Limpiar filtros</button>
     <button type="button" id="refresh-btn">↻ Actualizar</button>
     <button type="button" id="export-btn">⬇ Descargar planilla</button>
@@ -257,6 +261,10 @@
     return '$' + Number(n).toLocaleString('es-AR');
   }
 
+  function esc(v) {
+    return String(v == null ? '' : v).replace(/"/g, '&quot;');
+  }
+
   // Los leads de Receptivo se identifican por excursion, no por channel: la
   // columna channel en Supabase solo acepta 'whatsapp' / 'mercadopago', asi
   // que estos leads viajan como channel:'whatsapp' con esta excursion fija.
@@ -290,6 +298,95 @@
     if (lead.gclid) parts.push('Google Ads');
     if (lead.fbclid) parts.push('Meta Ads');
     return parts.length ? parts.join(' · ') : '<span class="muted">Directo / orgánico</span>';
+  }
+
+  // Lista fija para el desplegable de "Excursion" al editar/agregar a mano:
+  // los 25 ids de excursion.html + El Cruce + Rent a Car + Receptivo.
+  // "excursion" es el texto que ya guardan los leads reales de cada canal.
+  const EXCURSION_OPTIONS = [
+    { id: 'la-cueva', excursion: 'La Cueva · Motos de nieve' },
+    { id: 'eas', excursion: 'Clases de Ski & Snowboard' },
+    { id: 'roca-negra', excursion: 'Roca Negra · Refugio' },
+    { id: 'san-ramon', excursion: 'Cabalgata La Fragua' },
+    { id: 'cabalgata-wesley', excursion: 'Cabalgata Wesley' },
+    { id: 'neumeyer', excursion: 'Refugio Neumeyer' },
+    { id: 'circuito-chico', excursion: 'Circuito Chico y Colonia Suiza' },
+    { id: 'circuito-chico-campanario', excursion: 'Circuito Chico - Cerro Campanario' },
+    { id: 'villa-bayo', excursion: 'Villa La Angostura y Cerro Bayo' },
+    { id: 'campo-tulipanes', excursion: 'Visita al Campo de Tulipanes' },
+    { id: 'san-martin', excursion: 'San Martin de los Andes - 7 Lagos' },
+    { id: 'circuito-grande', excursion: 'Circuito Grande - Villa Traful' },
+    { id: 'bolson-lago-puelo', excursion: 'El Bolsón y Lago Puelo' },
+    { id: 'rafting-frontera', excursion: 'Rafting Frontera' },
+    { id: 'rafting-villegas', excursion: 'Rafting Villegas' },
+    { id: 'kayak', excursion: 'Kayak' },
+    { id: 'tronador', excursion: 'Cerro Tronador y Ventisquero Negro' },
+    { id: 'isla-victoria', excursion: 'Isla Victoria y Bosque de Arrayanes' },
+    { id: 'puerto-blest', excursion: 'Puerto Blest y Cascada Los Cántaros' },
+    { id: 'mini-cat', excursion: 'Navegación Privada · Lago Moreno' },
+    { id: 'cerro-catedral', excursion: 'Cerro Catedral' },
+    { id: 'beer-experience-clasico', excursion: 'Bariloche Beer Experience · Clásico' },
+    { id: 'beer-experience-sunset', excursion: 'Bariloche Beer Experience · Patagonia Sunset' },
+    { id: 'nieve-al-limite', excursion: 'Nieve al Límite' },
+    { id: 'cerro-otto', excursion: 'Cerro Otto' },
+    { id: 'elcruce', excursion: 'Traslado El Cruce · Ida' },
+    { id: 'elcruce', excursion: 'Traslado El Cruce · Ida y vuelta' },
+    { id: null, excursion: 'Rent a Car' },
+    { id: null, excursion: 'Receptivo & Agencias' },
+  ];
+
+  const CANAL_OPTIONS = [
+    { value: 'mercadopago', label: 'Pago (Mercado Pago)' },
+    { value: 'whatsapp', label: 'Consulta (WhatsApp)' },
+  ];
+
+  const ORIGEN_OPTIONS = [
+    { value: 'directo', label: 'Directo / orgánico' },
+    { value: 'google', label: 'Google Ads' },
+    { value: 'meta', label: 'Meta Ads' },
+  ];
+  function origenValue(lead) {
+    if (lead.gclid) return 'google';
+    if (lead.fbclid) return 'meta';
+    return 'directo';
+  }
+  // Setea/limpia utm_source, utm_campaign, gclid y fbclid segun la opcion
+  // elegida a mano: son los mismos campos que ya usa originText() para
+  // calcular el origen automaticamente a partir de datos reales de tracking.
+  function origenPatch(value) {
+    const patch = { utm_source: null, utm_campaign: null, gclid: null, fbclid: null };
+    if (value === 'google') patch.gclid = 'manual';
+    if (value === 'meta') patch.fbclid = 'manual';
+    return patch;
+  }
+
+  // Conversion entre el <input type="datetime-local"> (hora local del
+  // navegador, sin zona) y el ISO con zona que guarda Supabase.
+  function isoToDatetimeLocal(iso) {
+    if (!iso) return '';
+    const d = new Date(iso);
+    if (isNaN(d)) return '';
+    const pad = n => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  }
+  function datetimeLocalToIso(val) {
+    if (!val) return null;
+    const d = new Date(val);
+    return isNaN(d) ? null : d.toISOString();
+  }
+
+  // "Fecha paseo" es texto libre (a veces un rango, a veces el nombre de un
+  // grupo en leads viejos de El Cruce); el selector de calendario solo puede
+  // precargar un valor cuando el texto guardado es una fecha DD/MM/AAAA
+  // simple. Al guardar siempre se escribe en ese mismo formato.
+  function fechaPaseoToDateInput(txt) {
+    const m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec((txt || '').trim());
+    return m ? `${m[3]}-${m[2]}-${m[1]}` : '';
+  }
+  function dateInputToFechaPaseo(val) {
+    if (!val) return null;
+    const [y, m, d] = val.split('-');
+    return `${d}/${m}/${y}`;
   }
 
   async function apiFetch(path, options = {}) {
@@ -341,6 +438,7 @@
     gate.style.display = 'none';
     app.style.display = 'block';
     document.getElementById('role-badge').hidden = ROLE !== 'viewer';
+    document.getElementById('add-lead-btn').hidden = ROLE === 'viewer';
     render();
     if (!autoRefreshStarted) {
       autoRefreshStarted = true;
@@ -360,6 +458,7 @@
     allLeads = data.leads || [];
     ROLE = data.role || 'admin';
     document.getElementById('role-badge').hidden = ROLE !== 'viewer';
+    document.getElementById('add-lead-btn').hidden = ROLE === 'viewer';
     document.getElementById('last-update').textContent = 'Actualizado ' + new Date().toLocaleTimeString('es-AR');
     render();
   }
@@ -442,15 +541,53 @@
 
     tbody.innerHTML = leads.map(l => `
       <tr data-id="${l.id}">
-        <td>${fmtDate(l.created_at)}</td>
-        <td><span class="badge ${channelInfo(l).cls}">${channelInfo(l).label}</span></td>
-        <td>${l.excursion || '-'}${l.opcion ? '<br><span class="muted">' + l.opcion + '</span>' : ''}</td>
-        <td>${l.fecha || '-'}</td>
-        <td>${l.nombre || '<span class="muted">Sin nombre</span>'}${l.dni ? '<br><span class="muted">DNI ' + l.dni + '</span>' : ''}${l.telefono ? '<br><span class="muted">' + l.telefono + '</span>' : ''}${l.email ? '<br><span class="muted">' + l.email + '</span>' : ''}</td>
-        <td>${l.hospedaje || '-'}</td>
-        <td>${l.pasajeros || '-'}</td>
-        <td>${originText(l)}</td>
-        <td>${fmtMoney(l.total)}</td>
+        <td>
+          ${readOnly ? fmtDate(l.created_at)
+            : `<input type="datetime-local" class="field-input" data-field="created_at" value="${isoToDatetimeLocal(l.created_at)}">`}
+        </td>
+        <td>
+          ${readOnly ? `<span class="badge ${channelInfo(l).cls}">${channelInfo(l).label}</span>`
+            : `<select class="field-input" data-field="channel">
+            ${CANAL_OPTIONS.map(o => `<option value="${o.value}" ${l.channel === o.value ? 'selected' : ''}>${o.label}</option>`).join('')}
+          </select>`}
+        </td>
+        <td>
+          ${readOnly ? (l.excursion || '-') + (l.opcion ? '<br><span class="muted">' + l.opcion + '</span>' : '')
+            : `<select class="field-input" data-field="excursion_combo">
+            <option value="" ${!l.excursion ? 'selected' : ''}>— Sin excursión —</option>
+            ${EXCURSION_OPTIONS.map(o => `<option value="${esc(o.excursion)}" ${l.excursion === o.excursion ? 'selected' : ''}>${o.excursion}</option>`).join('')}
+          </select>`}
+        </td>
+        <td>
+          ${readOnly ? (l.fecha || '-')
+            : `<input type="date" class="field-input" data-field="fecha" value="${fechaPaseoToDateInput(l.fecha)}">`}
+        </td>
+        <td>
+          ${readOnly
+            ? (l.nombre || '<span class="muted">Sin nombre</span>') + (l.dni ? '<br><span class="muted">DNI ' + l.dni + '</span>' : '') + (l.telefono ? '<br><span class="muted">' + l.telefono + '</span>' : '') + (l.email ? '<br><span class="muted">' + l.email + '</span>' : '')
+            : `<input type="text" class="field-input cliente-input" data-field="nombre" value="${esc(l.nombre)}" placeholder="Nombre">
+          <input type="text" class="field-input cliente-input" data-field="dni" value="${esc(l.dni)}" placeholder="DNI">
+          <input type="text" class="field-input cliente-input" data-field="telefono" value="${esc(l.telefono)}" placeholder="Teléfono">
+          <input type="text" class="field-input cliente-input" data-field="email" value="${esc(l.email)}" placeholder="Email">`}
+        </td>
+        <td>
+          ${readOnly ? (l.hospedaje || '-')
+            : `<input type="text" class="field-input" data-field="hospedaje" value="${esc(l.hospedaje)}" placeholder="Hotel">`}
+        </td>
+        <td>
+          ${readOnly ? (l.pasajeros || '-')
+            : `<input type="text" class="field-input" data-field="pasajeros" value="${esc(l.pasajeros)}" placeholder="Pax">`}
+        </td>
+        <td>
+          ${readOnly ? originText(l)
+            : `<select class="field-input" data-field="origen_combo">
+            ${ORIGEN_OPTIONS.map(o => `<option value="${o.value}" ${origenValue(l) === o.value ? 'selected' : ''}>${o.label}</option>`).join('')}
+          </select>`}
+        </td>
+        <td>
+          ${readOnly ? fmtMoney(l.total)
+            : `<input type="number" class="field-input" data-field="total" value="${l.total ?? ''}" placeholder="Total">`}
+        </td>
         <td>
           ${readOnly
             ? (isAbandonedCheckout(l)
@@ -493,6 +630,9 @@
       tbody.querySelectorAll('.notes-input').forEach(inp => {
         inp.addEventListener('change', () => saveField(inp));
       });
+      tbody.querySelectorAll('.field-input').forEach(el => {
+        el.addEventListener('change', () => saveField(el));
+      });
     }
 
     if (!colsInitialized) {
@@ -508,27 +648,59 @@
     const field = el.dataset.field;
     const value = el.value;
     const hint = tr.querySelector('.save-hint');
+    const lead = allLeads.find(l => String(l.id) === String(id));
+
+    let patch;
+    let needsRerender = false;
 
     if (field === 'status') {
       el.className = 'status ' + value;
-      const lead = allLeads.find(l => String(l.id) === String(id));
       if (lead) lead.status = value;
-    }
-    if (field === 'carga_sistema') {
+      patch = { status: value };
+      needsRerender = true;
+    } else if (field === 'carga_sistema') {
       el.className = 'carga ' + value;
-      const lead = allLeads.find(l => String(l.id) === String(id));
       if (lead) lead.carga_sistema = value;
+      patch = { carga_sistema: value };
+      needsRerender = true;
+    } else if (field === 'created_at') {
+      const iso = datetimeLocalToIso(value);
+      if (lead) lead.created_at = iso;
+      patch = { created_at: iso };
+    } else if (field === 'fecha') {
+      const txt = dateInputToFechaPaseo(value);
+      if (lead) lead.fecha = txt;
+      patch = { fecha: txt };
+    } else if (field === 'excursion_combo') {
+      const opt = EXCURSION_OPTIONS.find(o => o.excursion === value);
+      const excursion = opt ? opt.excursion : null;
+      const excursion_id = opt ? opt.id : null;
+      if (lead) { lead.excursion = excursion; lead.excursion_id = excursion_id; }
+      patch = { excursion, excursion_id };
+      needsRerender = true;
+    } else if (field === 'origen_combo') {
+      patch = origenPatch(value);
+      if (lead) Object.assign(lead, patch);
+      needsRerender = true;
+    } else if (field === 'total') {
+      const n = value === '' ? null : Number(value);
+      if (lead) lead.total = n;
+      patch = { total: n };
+    } else {
+      // channel, nombre, dni, telefono, email, hospedaje, pasajeros, notes
+      if (lead) lead[field] = value;
+      patch = { [field]: value };
     }
 
     try {
       const resp = await apiFetch('/api/admin-update-lead', {
         method: 'POST',
-        body: JSON.stringify({ id, [field]: value }),
+        body: JSON.stringify({ id, ...patch }),
       });
       const data = await resp.json();
       if (!resp.ok || !data.ok) throw new Error(data.error || 'Error');
       if (hint) { hint.textContent = '✓'; setTimeout(() => { hint.textContent = ''; }, 1500); }
-      if (field === 'status' || field === 'carga_sistema') render();
+      if (needsRerender) render();
     } catch (err) {
       if (hint) hint.textContent = '✗ ' + (err.message || err);
     }
@@ -589,6 +761,21 @@
     render();
   });
   document.getElementById('refresh-btn').addEventListener('click', loadLeads);
+  document.getElementById('add-lead-btn').addEventListener('click', async () => {
+    const btn = document.getElementById('add-lead-btn');
+    btn.disabled = true;
+    try {
+      const resp = await apiFetch('/api/admin-create-lead', { method: 'POST' });
+      const data = await resp.json();
+      if (!resp.ok || !data.ok) throw new Error(data.error || 'Error');
+      allLeads.unshift(data.lead);
+      render();
+    } catch (err) {
+      alert('No se pudo agregar la fila: ' + (err.message || err));
+    } finally {
+      btn.disabled = false;
+    }
+  });
 
   (async function init() {
     if (ADMIN_KEY) {
