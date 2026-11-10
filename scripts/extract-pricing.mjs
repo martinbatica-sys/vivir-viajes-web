@@ -67,6 +67,8 @@ for (const [excId, exc] of Object.entries(EXC)) {
   if (Object.keys(opciones).length === 0) continue;
 
   pricing[excId] = {
+    // cerrada temporalmente: el servidor rechaza el pago (ver lib/pricing.js)
+    ...(exc.cerrado ? { cerrado: true } : {}),
     seasonal: !!exc.seasonal,
     temporadas: exc.seasonal ? (exc.temporadas || []).map(t => ({ key: t.key, rangos: t.rangos })) : null,
     traslado: !!exc.traslado,
