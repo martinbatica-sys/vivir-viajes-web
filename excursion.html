@@ -108,6 +108,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   .promo-banner{display:flex;align-items:center;gap:.9rem;flex-wrap:wrap;background:linear-gradient(95deg,#FBEFDA,#F7E3C2);border:1px solid rgba(201,133,42,.3);border-radius:14px;padding:.9rem 1.2rem;margin:1.2rem 0}
   .promo-banner[hidden]{display:none}
+  .cerrado-banner{display:flex;align-items:flex-start;gap:.8rem;background:#FDE9E7;border:1px solid rgba(181,70,46,.35);border-left:5px solid #B5462E;border-radius:14px;padding:.95rem 1.2rem;margin:1.2rem 0;color:#7A2C1B}
+  .cerrado-banner[hidden]{display:none}
+  .cerrado-banner .cb-icon{font-size:1.35rem;line-height:1.2;flex:none}
+  .cerrado-banner b{display:block;font-family:var(--display);font-size:1.05rem;color:#B5462E}
+  .cerrado-banner span{font-size:.9rem}
+  .resv-cerrado{padding:1.4rem;text-align:center;color:#7A2C1B}
+  .resv-cerrado[hidden]{display:none}
+  .resv-cerrado b{display:block;font-family:var(--display);font-size:1.1rem;color:#B5462E;margin-bottom:.4rem}
+  .resv-cerrado span{font-size:.9rem}
+  body.exc-cerrado #resv-body{display:none !important}
+  body.exc-cerrado .btn-sm-gold:disabled{background:#E6E9EF;color:#9AA6B8;cursor:not-allowed}
   .pb-badge{flex:none;background:var(--gold);color:var(--navy);font-family:var(--display);font-weight:700;font-size:1.1rem;padding:.3rem .75rem;border-radius:9px;letter-spacing:-.01em}
   .pb-text{flex:1;min-width:180px;font-family:var(--body);font-weight:600;font-size:.95rem;color:var(--navy)}
   .pb-cta{flex:none;display:inline-flex;align-items:center;gap:.4rem;background:var(--navy);color:#fff;font-family:var(--body);font-weight:700;font-size:.88rem;border-radius:999px;padding:.6rem 1.1rem;white-space:nowrap;transition:.18s}
@@ -606,6 +617,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="pb-text" id="pb-text"></span>
     <a class="pb-cta" id="pb-cta" target="_blank" rel="noopener"></a>
   </div>
+  <div class="cerrado-banner" id="cerrado-banner" role="alert" hidden>
+    <span class="cb-icon" aria-hidden="true">&#9888;&#65039;</span>
+    <div><b data-i18n="cerrado.titulo">Cerrado temporalmente</b><span data-i18n="cerrado.texto">Esta excursión no está disponible por el momento. No se pueden realizar reservas hasta nuevo aviso.</span></div>
+  </div>
   <div class="price-row-mobile" id="price-row-mobile">
     <div>
       <span class="pr-label" id="pr-label" data-i18n="gallery.desde">DESDE</span>
@@ -664,6 +679,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <aside>
       <div class="resv">
         <div class="resv-head">&#128197; <span data-i18n="form.reservar-online">Reservar online</span><span class="resv-step-label" id="resv-step-label"></span></div>
+        <div class="resv-cerrado" id="resv-cerrado" hidden>
+          <b>&#9888;&#65039; <span data-i18n="cerrado.titulo">Cerrado temporalmente</span></b>
+          <span data-i18n="cerrado.texto">Esta excursión no está disponible por el momento. No se pueden realizar reservas hasta nuevo aviso.</span>
+        </div>
         <div class="resv-body" id="resv-body" data-step="1">
           <button type="button" class="resv-back-mobile" id="resv-back-mobile">&larr; <span data-i18n="gallery.volver-paso1">Volver al paso 1</span></button>
           <div class="resv-resumen-mobile" id="resv-resumen-mobile"></div>
@@ -2115,6 +2134,11 @@ const EXC = {
    incluye:["Traslado ida y vuelta con pick up y drop off en tu hospedaje","Guía en español"],
    notas:["Horario de Pick Up (estimado): 09:00 hs.","Horario de Drop Off (estimado): 18:00 hs.","Recomendamos averiguar previamente el valor del ingreso a Parques Nacionales. Se abona el día de la excursión, previo a llegar a Pampa Linda. Residentes argentinos tienen descuento presentando el DNI. Es importante contar con efectivo para realizar dicho pago, ya que no hay señal para pagos digitales.","Dia completo.","Reservas con mínimo 24 hs de anticipación."],
    seasonal:false, traslado:false, horario:"09:00 hs",
+   // cerrado:true muestra el aviso "Cerrado temporalmente" y deshabilita la
+   // reserva (web y servidor). Para reabrir: borrar esta linea y volver a
+   // correr node scripts/extract-pricing.mjs. En index.html, sacar la clase
+   // "cerrado" y el aviso de la tarjeta.
+   cerrado:true,
    ruta:{
      route:[[-41.13361,-71.31032],[-41.13996,-71.31088],[-41.14109,-71.31345],[-41.14228,-71.31369],[-41.14729,-71.31297],[-41.15721,-71.31794],[-41.16039,-71.31754],[-41.16658,-71.32212],[-41.16886,-71.32627],[-41.18087,-71.3701],[-41.18503,-71.37994],[-41.18681,-71.38792],[-41.18913,-71.39101],[-41.19358,-71.39333],[-41.1982,-71.39757],[-41.21347,-71.40285],[-41.21637,-71.40638],[-41.21784,-71.40959],[-41.22114,-71.41258],[-41.22384,-71.41315],[-41.22733,-71.41557],[-41.22931,-71.42034],[-41.23301,-71.42258],[-41.23487,-71.43137],[-41.24003,-71.43474],[-41.24181,-71.43772],[-41.24512,-71.44033],[-41.25077,-71.45184],[-41.2517,-71.45681],[-41.25855,-71.47426],[-41.26123,-71.48825],[-41.26403,-71.49362],[-41.26941,-71.49696],[-41.28127,-71.49804],[-41.29713,-71.49226],[-41.30662,-71.49162],[-41.31097,-71.49221],[-41.319,-71.49614],[-41.32546,-71.49752],[-41.33543,-71.50267],[-41.34389,-71.50559],[-41.3561,-71.51482],[-41.35567,-71.51549],[-41.35341,-71.51618],[-41.35375,-71.52075],[-41.3531,-71.52179],[-41.35141,-71.52197],[-41.3531,-71.52179],[-41.35375,-71.52075],[-41.35519,-71.52267],[-41.35453,-71.52498],[-41.35559,-71.52915],[-41.35665,-71.52992],[-41.35668,-71.53632],[-41.35912,-71.54241],[-41.36067,-71.54888],[-41.36018,-71.55026],[-41.36167,-71.55159],[-41.36239,-71.55863],[-41.36021,-71.5647],[-41.35769,-71.56657],[-41.35721,-71.56989],[-41.35774,-71.57238],[-41.36011,-71.57191],[-41.36111,-71.57343],[-41.35869,-71.5782],[-41.35496,-71.59091],[-41.35314,-71.59255],[-41.35312,-71.59725],[-41.35157,-71.60383],[-41.34863,-71.60871],[-41.34916,-71.61323],[-41.35076,-71.61379],[-41.3505,-71.61597],[-41.35347,-71.62063],[-41.35123,-71.64041],[-41.34935,-71.64181],[-41.34965,-71.64885],[-41.34786,-71.653],[-41.34924,-71.6608],[-41.34869,-71.66317],[-41.35044,-71.66949],[-41.34826,-71.6735],[-41.34815,-71.68641],[-41.34942,-71.69202],[-41.34913,-71.69546],[-41.35269,-71.70089],[-41.35675,-71.71042],[-41.35757,-71.711],[-41.35886,-71.70891],[-41.36153,-71.71062],[-41.3655,-71.71752],[-41.36699,-71.72298],[-41.36602,-71.72486],[-41.36668,-71.72838],[-41.36607,-71.73357],[-41.36848,-71.74108],[-41.36462,-71.74407],[-41.36106,-71.74532],[-41.35539,-71.74568],[-41.35259,-71.7516],[-41.35085,-71.75314],[-41.34407,-71.75189],[-41.3397,-71.75369],[-41.33532,-71.75395]],
      totalKm:62.5, totalMin:100, dur:16000,
@@ -2739,6 +2763,7 @@ const UI = {
     "pb.subtotal":"Subtotal", "pb.descuento":"Descuento grupo familiar (", "pb.pax-suffix":"+ pax)",
     "hint.clases-arrancan":"Disponible a partir del ", "hint.elegi-posterior":". Elegí una fecha posterior.",
     "hint.fuera-temporada":"Esa fecha está fuera de temporada. Escribinos para ver disponibilidad.",
+    "cerrado.titulo":"Cerrado temporalmente", "cerrado.texto":"Esta excursión no está disponible por el momento. No se pueden realizar reservas hasta nuevo aviso.",
     "hint.agrega-pasajero":"Agregá al menos un pasajero.", "hint.elegi-pickup":"Seleccioná tu punto de pick up.",
     "hint.completa-datos":"Completá tus datos de contacto para reservar.", "hint.acepta-tc":"Aceptá los términos y condiciones para continuar.",
     "hint.elegi-fecha-cotizar":"Elegi una fecha para pedir tu cotizacion.", "hint.agrega-pasajero-cotizar":"Agrega al menos un pasajero.",
@@ -2829,6 +2854,7 @@ const UI = {
     "pb.subtotal":"Subtotal", "pb.descuento":"Family/group discount (", "pb.pax-suffix":"+ pax)",
     "hint.clases-arrancan":"Available from ", "hint.elegi-posterior":". Choose a later date.",
     "hint.fuera-temporada":"That date is off season. Message us to check availability.",
+    "cerrado.titulo":"Temporarily closed", "cerrado.texto":"This excursion is currently unavailable. Bookings can't be made until further notice.",
     "hint.agrega-pasajero":"Add at least one traveler.", "hint.elegi-pickup":"Select your pick-up point.",
     "hint.completa-datos":"Fill in your contact details to book.", "hint.acepta-tc":"Accept the terms and conditions to continue.",
     "hint.elegi-fecha-cotizar":"Choose a date to request your quote.", "hint.agrega-pasajero-cotizar":"Add at least one traveler.",
@@ -2919,6 +2945,7 @@ const UI = {
     "pb.subtotal":"Subtotal", "pb.descuento":"Desconto grupo/família (", "pb.pax-suffix":"+ pax)",
     "hint.clases-arrancan":"Disponível a partir de ", "hint.elegi-posterior":". Escolha uma data posterior.",
     "hint.fuera-temporada":"Essa data está fora de temporada. Fale com a gente para checar disponibilidade.",
+    "cerrado.titulo":"Fechado temporariamente", "cerrado.texto":"Este passeio não está disponível no momento. Não é possível fazer reservas até novo aviso.",
     "hint.agrega-pasajero":"Adicione pelo menos um passageiro.", "hint.elegi-pickup":"Selecione seu ponto de embarque.",
     "hint.completa-datos":"Preencha seus dados de contato para reservar.", "hint.acepta-tc":"Aceite os termos e condições para continuar.",
     "hint.elegi-fecha-cotizar":"Escolha uma data para pedir seu orçamento.", "hint.agrega-pasajero-cotizar":"Adicione pelo menos um passageiro.",
@@ -3353,6 +3380,7 @@ function renderStatic(){
   document.title=t("title.reservar")+trE("nombre")+t("title.suffix");
 
   renderPriceRow();
+  renderCerrado();
   renderPromoBanner();
   buildCarousel();
   startAutoplay();
@@ -3782,6 +3810,7 @@ function render(){
 
 function reservar(){
   const e=EXC[id];
+  if(e.cerrado) return;
   const sk=seasonKeyFor(e,state.fecha);
   const offSeason = e.seasonal && state.fecha && sk==="__off__";
   if(e.cotizar || e.whatsappOnly || offSeason){
@@ -3958,6 +3987,21 @@ function renderPriceRow(){
       amountEl.textContent = t("gallery.consultar");
       if(suffixEl) suffixEl.hidden = true;
     }
+  });
+}
+
+// Excursion cerrada temporalmente (EXC[id].cerrado): muestra el aviso, oculta
+// el formulario de reserva y deshabilita los botones "Reservar".
+function renderCerrado(){
+  const cerrado = !!EXC[id].cerrado;
+  document.body.classList.toggle("exc-cerrado", cerrado);
+  document.getElementById("cerrado-banner").hidden = !cerrado;
+  document.getElementById("resv-cerrado").hidden = !cerrado;
+  if(!cerrado) return;
+  [document.getElementById("pr-reservar-btn"), document.getElementById("sb-reservar-btn")].forEach(btn=>{
+    if(!btn) return;
+    btn.disabled = true;
+    btn.textContent = t("cerrado.titulo");
   });
 }
 

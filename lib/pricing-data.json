@@ -277,7 +277,7 @@
         "groupDiscount": {
           "minPax": 4,
           "pct": 0.1,
-          "end": "2026-10-21T00:00:00-03:00"
+          "end": "2027-10-21T00:00:00-03:00"
         }
       }
     }
@@ -418,6 +418,7 @@
     }
   },
   "tronador": {
+    "cerrado": true,
     "seasonal": false,
     "temporadas": null,
     "traslado": false,
