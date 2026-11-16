@@ -3183,6 +3183,9 @@ function closeCal(){
   document.getElementById("date-trigger").classList.remove("open");
 }
 
+// Fechas sin salida para todas las excursiones (se suman a exc.blockedDates).
+const GLOBAL_BLOCKED_DATES = ["2026-12-25", "2027-01-01"];
+
 function renderCal(){
   document.getElementById("cal-month").textContent = t("months")[calMonth]+" "+calYear;
   const grid = document.getElementById("cal-days");
@@ -3230,7 +3233,7 @@ function renderCal(){
     const afterEnd = exc.endDate && dateStr > exc.endDate;
     const isClosedDow = exc.closedDow && exc.closedDow.includes(new Date(calYear, calMonth, d).getDay());
     const isNotAllowed = exc.allowedDates && !exc.allowedDates.includes(dateStr);
-    const isBlocked = exc.blockedDates && exc.blockedDates.includes(dateStr);
+    const isBlocked = GLOBAL_BLOCKED_DATES.includes(dateStr) || (exc.blockedDates && exc.blockedDates.includes(dateStr));
 
     if(isPast || beforeStart || afterEnd || isClosedDow || isNotAllowed || isBlocked){
       btn.disabled = true;
